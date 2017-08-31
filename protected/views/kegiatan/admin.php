@@ -39,23 +39,39 @@ $('.search-form form').submit(function(){
 	'id'=>'kegiatan-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+
+'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
+				            'pager'=>array(
+				                'header'=>Yii::t('penerjemah','Ke halaman : '),
+				                'prevPageLabel'=>Yii::t('penerjemah','Sebelumnya'),
+				                'nextPageLabel'=>Yii::t('penerjemah','Selanjutnya'),
+				                'firstPageLabel'=>Yii::t('penerjemah','Pertama'),
+				                'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
+				                ),
+				                
 	'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
 	'columns'=>array(
 		//'id',
 		'kegiatan',
 		array(
 			'name'		=>'unit_kerja',
-			'value'		=>'$data->unitKerja->name',
+				                        'type'=>'raw',
+			'value'		=> function($data){ return $data->unitKerja->name; },
+			//'$data->unitKerja->name',
 			'filter'	=>CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>'1')),'id','name'),
 		),
 		array(
 			'name'		=>'start_date',
-			'value'		=>'HelpMe::HrDate($data->start_date)',
+			'type'      =>'raw',
+			'value'		=> function($data){ return HelpMe::HrDate($data->start_date); },
+// 			'value'		=>'HelpMe::HrDate($data->start_date)',
 			'filter'	=>'',
 		),
 		array(
 			'name'		=>'end_date',
-			'value'		=>'HelpMe::HrDate($data->end_date)',
+// 			'value'		=>'HelpMe::HrDate($data->end_date)',
+			'type'      =>'raw',
+			'value'		=> function($data){ return HelpMe::HrDate($data->end_date); },
 			'filter'	=>'',
 		),
 		//'created_time',
@@ -66,19 +82,22 @@ $('.search-form form').submit(function(){
 		*/
 		array(
 			'header'	=>'Progress',
-			'type'		=>'raw',
-			'value'		=>'$data->progressValue." %"',
+			'type'      =>'raw',
+			'value'		=> function($data){ return $data->progressValue." %"; },
+// 			'value'		=>'$data->progressValue." %"',
 		),
 		array(
 			'header'	=>'',
 			'type'		=>'raw',
-			'value'		=>'CHtml::link("Progress",array("kegiatan/progress","id"=>$data->id))',
+			'value'		=> function($data){ return CHtml::link("Progress",array("kegiatan/progress","id"=>$data->id)); },
+// 			'value'		=>'CHtml::link("Progress",array("kegiatan/progress","id"=>$data->id))',
 		),
-       array(
+      array(
             'header'    =>'Delete',
             'type'      =>'raw',
-            'value'     =>'(HelpMe::isAuthorizeUnitKerja($data->unit_kerja)) ? CHtml::link( "Delete",array("kegiatan/delete","id"=>$data->id),array("confirm"=>"Anda yakin ingin menghapus kegiatan ini?")) : "Tidak berhak"', 
-       ),
+			'value'		=> function($data){ return (HelpMe::isAuthorizeUnitKerja($data->unit_kerja)) ? CHtml::link( "Delete",array("kegiatan/delete","id"=>$data->id),array("confirm"=>"Anda yakin ingin menghapus kegiatan ini?")) : "Tidak berhak"; },
+            // 'value'     =>'(HelpMe::isAuthorizeUnitKerja($data->unit_kerja)) ? CHtml::link( "Delete",array("kegiatan/delete","id"=>$data->id),array("confirm"=>"Anda yakin ingin menghapus kegiatan ini?")) : "Tidak berhak"', 
+      ),
 		array(
 			'class'=>'CButtonColumn',
             'template'=>'{update}',

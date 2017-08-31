@@ -1,3 +1,4 @@
+
 <style>
     @import url('<?php echo Yii::app()->theme->baseUrl.'/css/baru/jadwal.css';?>');
 </style>
@@ -13,7 +14,6 @@ $this->breadcrumbs=array(
 ?>
 
 <h2><?php echo $model->name; ?></h2>
-
 <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'method'=>'get',
@@ -70,6 +70,15 @@ $this->widget('ext.groupgridview.GroupGridView', array(
       'id' => 'grid1',
       'dataProvider' => $data,
       'mergeColumns' => array('bulan'),  
+      
+'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
+				            'pager'=>array(
+				                'header'=>Yii::t('penerjemah','Ke halaman : '),
+				                'prevPageLabel'=>Yii::t('penerjemah','Sebelumnya'),
+				                'nextPageLabel'=>Yii::t('penerjemah','Selanjutnya'),
+				                'firstPageLabel'=>Yii::t('penerjemah','Pertama'),
+				                'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
+				                ),
       'columns' => array(
         array(
             'header'        =>'Bulan',
@@ -79,12 +88,13 @@ $this->widget('ext.groupgridview.GroupGridView', array(
             'header'        =>'Kegiatan',
             'name'          =>'kegiatan',
             'type'          =>'raw',
-            'value'         =>'CHtml::link($data["kegiatan"],array("kegiatan/progress","id"=>$data["id"]))'
+            'value'         =>function($data) { return CHtml::link($data["kegiatan"],array("kegiatan/progress","id"=>$data["id"])); }
         ),
         array(
             'header'        =>'Tanggal Berakhir',
             'name'          =>'end_date',
-            'value'         =>'date("d M Y",strtotime($data["end_date"]))',
+            'type'          =>'raw',
+            'value'         =>function($data){ return date("d M Y",strtotime($data["end_date"])); },
         ),
         array(
             'header'        =>'Target',
@@ -101,6 +111,7 @@ $this->widget('ext.groupgridview.GroupGridView', array(
 
 <script>
 $(document).ready(function() {
+    console.log("hai");
     
     var divElement = $('div'); //log all div elements
 

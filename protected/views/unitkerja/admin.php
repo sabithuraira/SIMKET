@@ -40,6 +40,15 @@ $('.search-form form').submit(function(){
 	'id'=>'unit-kerja-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	
+'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
+				            'pager'=>array(
+				                'header'=>Yii::t('penerjemah','Ke halaman : '),
+				                'prevPageLabel'=>Yii::t('penerjemah','Sebelumnya'),
+				                'nextPageLabel'=>Yii::t('penerjemah','Selanjutnya'),
+				                'firstPageLabel'=>Yii::t('penerjemah','Pertama'),
+				                'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
+				                ),
 	'columns'=>array(
 		'id',
 		'code',
@@ -52,8 +61,11 @@ $('.search-form form').submit(function(){
 		'updated_time',
 		'jenis',
 		*/
+		
 		array(
-			'class'=>'CButtonColumn',
+			'header'	=>'',
+			'type'		=>'raw',
+			'value'		=> function($data){ return CHtml::link("Update",array("unitkerja/update","id"=>$data->id)); }
 		),
 	),
 )); ?>
