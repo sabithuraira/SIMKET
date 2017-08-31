@@ -431,8 +431,8 @@ class Kegiatan extends HelpAr
                 $sql_tanggal="SELECT * FROM mongkia.value_kegiatan 
                     WHERE kegiatan=15 AND unit_kerja=4 ORDER BY tanggal_pengumpulan DESC LIMIT 1";
 
-                $hasil_tanggal=Yii::app()->db->createCommand($sql_tanggal)->queryRow()['tanggal_pengumpulan'];
-                $hasil_tanggal=date('Y-m-d',strtotime($hasil_tanggal));
+                $hasil_tanggal=Yii::app()->db->createCommand($sql_tanggal)->queryRow();
+                $hasil_tanggal=date('Y-m-d',strtotime($hasil_tanggal['tanggal_pengumpulan']));
                 if($hasil_tanggal<=$this->end_date){
                     $result='<b style="color:green">OK</b>';
                 }else{

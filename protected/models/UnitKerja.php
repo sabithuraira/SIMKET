@@ -121,7 +121,7 @@ class UnitKerja extends HelpAr
 	{
 		$daftar=array();
 		$sql="SELECT * FROM kegiatan WHERE 
-			unit_kerja IN(SELECT id FROM mongkia.unit_kerja WHERE parent={$this->id}) AND end_date<DATE(NOW()) 
+			unit_kerja IN(SELECT id FROM unit_kerja WHERE parent={$this->id}) AND end_date<DATE(NOW()) 
 			AND YEAR(end_date)={$tahun};";
 
 		$data=Yii::app()->db->createCommand($sql)->query();
