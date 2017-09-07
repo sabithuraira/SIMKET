@@ -143,24 +143,8 @@ class HelpMe
         $result=array();
         $all=UnitKerja::model()->findAllByAttributes(array('jenis'=>1,'parent'=>1));
         foreach ($all as $key => $value)
-        {
-            /*
-            $cur_result=array();
-            $all_child=UnitKerja::model()->findAllByAttributes(array('parent'=>$value['id']));
-            if(count($all_child)>0)
-            {
-                foreach ($all_child as $ckey => $cvalue)
-                {
-                    $cur_result[]=array('label'=>$cvalue['name'],'url'=>'#');
-                }
-            }
-            */
-            //if(count($cur_result)<=0)
-                $result[]=array('label'=>$value['name'],'url'=>array('site/bidang','id'=>$value['id']));
-            //else
-            //    $result[]=array('label'=>$value['name'],'url'=>'#',
-            //        'item'=>$cur_result);
-        }
+            $result[]=array('label'=>$value['name'],'url'=>array('site/bidang','id'=>$value['id']), 'id'=>$value['id']);
+        
         return $result;
     }
 
@@ -169,7 +153,7 @@ class HelpMe
         $result=array();
         $all=UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'));
         foreach ($all as $key => $value) {
-            $result[]=array('label'=>$value['name'],'url'=>array('report/kabupaten','id'=>$value['id']));
+            $result[]=array('label'=>$value['name'],'url'=>array('report/kabupaten','id'=>$value['id']), 'id'=>$value['id']);
         }
         return $result;
     }
