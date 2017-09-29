@@ -64,7 +64,7 @@
               $list_kabupaten=HelpMe::getListKabupaten();
 
               foreach($list_kabupaten as $row){
-                echo '<li><a href="'.Yii::app()->createUrl('report/kabupten',array('id'=> $row['id'])).'"><i class="fa fa fa-circle-o"></i> '.$row['label'].'</a></li>';
+                echo '<li><a href="'.Yii::app()->createUrl('report/kabupaten',array('id'=> $row['id'])).'"><i class="fa fa fa-circle-o"></i> '.$row['label'].'</a></li>';
               }
             ?>
           </ul>
