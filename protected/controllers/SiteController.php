@@ -107,6 +107,22 @@ class SiteController extends Controller
 		));
 	}
 
+	public function actionTagihan(){
+
+		$tahun=date('Y');
+		$kegiatan=Kegiatan::model()->getTop5();
+		$model=new Kegiatan;
+
+		if(isset($_POST['tahun']))
+			$tahun=$_POST['tahun'];
+
+		$this->render('tagihan',array(
+			'kegiatan'		=>$kegiatan,
+			'model'			=>$model,
+			'tahun'			=>$tahun,
+		));
+	}
+
 	public function actionKabupaten($id)
 	{
 		$this->layout='//layouts/column1';

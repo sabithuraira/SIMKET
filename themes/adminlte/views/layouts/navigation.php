@@ -12,7 +12,9 @@
 
       <ul class="sidebar-menu">
         <li class="header">SIMKET</li>
-        <li><a href="pages/calendar.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <?php 
+          echo '<li><a href="'.Yii::app()->createUrl('site/index').'"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>';
+        ?>
 
         <li class="treeview">
           <a href="#">
