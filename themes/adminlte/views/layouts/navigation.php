@@ -25,8 +25,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Tagihan Kerja</a></li>
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Kalender Kegiatan</a></li>
+            <?php 
+              echo '<li><a href="'.Yii::app()->createUrl('site/tagihan').'"><i class="fa fa fa-circle-o"></i> Tagihan Kerja</a></li>';
+              echo '<li><a href="'.Yii::app()->createUrl('site/calendar').'"><i class="fa fa fa-circle-o"></i> Kalender Kegiatan</a></li>';
+            ?>
             
             <?php 
               $list_provinsi=HelpMe::getListProvinsi();
@@ -47,8 +49,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Kabupaten/Kota</a></li>
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Kabupaten/Kota Bulanan</a></li>
+          <?php 
+              echo '<li><a href="'.Yii::app()->createUrl('site/peringkat').'"><i class="fa fa fa-circle-o"></i> Kabupaten/Kota</a></li>';
+              echo '<li><a href="'.Yii::app()->createUrl('site/peringkat_month').'"><i class="fa fa fa-circle-o"></i> Kabupaten/Kota Bulanan</a></li>';
+            ?>
           </ul>
         </li>
 

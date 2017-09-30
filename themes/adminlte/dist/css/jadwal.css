@@ -1,0 +1,19 @@
+.eventColor1,.eventColor1 a {
+   
+    border-color: #7A7A7A;
+    background: #007F0E;
+    
+   /* color: yellow; */
+}
+.eventColor2,.eventColor2 a {
+    background: #FFD800; 
+    border-color: #FFD800; 
+    color : #000;
+   /* color: yellow; */
+}
+.eventColor3, .eventColor3 a {
+    background: #FF0000; 
+    border-color: #FF0000;     
+   /* color: yellow; */
+}
+
