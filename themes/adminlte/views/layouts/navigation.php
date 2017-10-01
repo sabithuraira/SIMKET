@@ -34,7 +34,7 @@
               $list_provinsi=HelpMe::getListProvinsi();
 
               foreach($list_provinsi as $row){
-                echo '<li><a href="'.Yii::app()->createUrl('report/bidang',array('id'=> $row['id'])).'"><i class="fa fa fa-circle-o"></i> '.$row['label'].'</a></li>';
+                echo '<li><a href="'.Yii::app()->createUrl('site/bidang',array('id'=> $row['id'])).'"><i class="fa fa fa-circle-o"></i> '.$row['label'].'</a></li>';
               }
             ?>
           </ul>
