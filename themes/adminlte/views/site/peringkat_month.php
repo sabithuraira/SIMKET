@@ -42,7 +42,7 @@ $this->breadcrumbs=array(
                         <?php echo CHtml::dropDownList('bidang',$bidang,HelpMe::getBidangBosList()); ?>
                         <?php echo CHtml::dropDownList('year',$year, HelpMe::getYearForFilter()); ?>
                         <?php echo CHtml::dropDownList('month',$month, HelpMe::getMonthList()); ?>
-                        <?php echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success')); ?>
+                        <?php echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success btn-xs btn-flat')); ?>
                     </div>
 
                 <?php $this->endWidget(); ?>

@@ -59,3 +59,19 @@ table.small-font{
     vertical-align: top;
     border-top: 0px solid #fff;
 }
+
+
+td.bpsbad
+{
+  background-color: #FF3835;
+}
+
+td.bpsmedium
+{
+  background-color: #FFF138;
+}
+
+td.bpsgood
+{
+  background-color: #4CFF00;
+}

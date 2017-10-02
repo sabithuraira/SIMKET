@@ -17,7 +17,7 @@
                         <div class="center row">
                             <?php echo "<b>Tampilkan Data Tahun : </b>"; ?>
                             <?php echo CHtml::dropDownList('tahun',$tahun,HelpMe::getYearForFilter()); ?>
-                            <?php echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success')); ?>
+                            <?php echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success btn-xs btn-flat')); ?>
                         </div>
 
                     <?php $this->endWidget(); ?>

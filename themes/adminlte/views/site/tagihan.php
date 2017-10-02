@@ -1,5 +1,5 @@
 <style>
-    @import url('<?php echo Yii::app()->theme->baseUrl.'/css/baru/jadwal.css';?>');
+    @import url('<?php echo Yii::app()->theme->baseUrl.'/dist/css/jadwal.css';?>');
 </style>
 <?php
 /* @var $this KegiatanController */
@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
                         echo "Tampilkan Data Tahun : "; 
                         echo CHtml::dropDownList('tahun',$tahun,HelpMe::getYearForFilter());
                         echo ' ';
-                        echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success'));
+                        echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success btn-xs btn-flat'));
                         echo "</div>";
                     ?>
                 <?php $this->endWidget(); ?>
@@ -67,14 +67,7 @@ $this->breadcrumbs=array(
                             echo '<td></td>';
                             
                             echo '<td colspan="6">';
-                            $this->widget('CStarRating',array(
-                                        'name'  =>'kirim_'.$uvalue->id,
-                                        'value'=>10,
-                                        'minRating'=>1,
-                                        'maxRating'=>10,
-                                        'starCount'=>10,
-                                        'readOnly' =>true,
-                                    ));
+                            for($i=0;$i<5;++$i) echo '<i class="fa fa-star text-yellow"></i>';
                             echo ' <b>  [ Terima kasih telah menyelesaikan pekerjaan tepat pada waktunya ]</b></td>';
                             echo '</tr>';   
                         }
