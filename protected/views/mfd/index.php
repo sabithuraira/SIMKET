@@ -53,26 +53,20 @@
                         <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                         </button>
                       </th>
-                      <td></td>
-                      <td>Title</td>
-                      <td>Category</td>
-                      <td>Billing</td>
-                      <td>Paying</td>
-                      <td>Residual Bill</td>
+                      <td>Nama</td>
+                      <td>NIP</td>
+                      <td>Tanggal</td>
+                      <td>Kegiatan</td>
                       <td>Action</td>
                     </tr>
                   </thead>
                    <tbody v-for="row in data">
                     <tr>
                       <td><input type="checkbox"></td>
+                      <td>{{ row.nama }}</td>
+                      <td>{{ row.nip }}</td>
                       <td>{{ row.date }}</td>
-                      <td>{{ row.note }}</td>
-                      <td>{{ row.category_label }}</td>
-                      <td>{{ row.currency }} {{ row.amount }}</td>
-                      <td>{{ row.currency }} {{ row.paying }}</td>
-                      <td>
-                        <span v-if="row.residual<=0" class="description-percentage text-green"><i class="fa fa-caret-up"></i> {{ row.currency }} {{ row.residual }}</span>
-                        <span v-if="row.residual>0" class="description-percentage text-red"><i class="fa fa-caret-down"></i> {{ row.currency }} {{ row.residual }}</span>   
+                      <td>{{ row.kegiatan }}</td>
                       <td>
                         <a :id="'update'+row.id" class="btn btn-default btn-sm toggle-event" href="#" data-id="adddata"><i class="fa fa-plus-square-o"></i> Update</a>
                         <a :id="'paying'+row.id" class="btn btn-default btn-sm toggle-event" href="#" data-id="addtransaction"><i class="fa fa-plus-square-o"></i> Add Paying</a>

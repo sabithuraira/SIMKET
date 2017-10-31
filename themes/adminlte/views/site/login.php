@@ -8,20 +8,7 @@ $this->breadcrumbs=array(
 	'Login',
 );
 ?>
-<div class="page-header">
-	<h1>Login <small>to your account</small></h1>
-</div>
-<div class="row-fluid">
-	
-    <div class="span6 offset3">
-<?php
-	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>"Private access",
-	));
-	
-?>
-    <p>Please fill out the following form with your login credentials:</p>
-    
+
     <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'login-form',
@@ -34,13 +21,11 @@ $this->breadcrumbs=array(
         <p class="note">Fields with <span class="required">*</span> are required.</p>
     
         <div class="row">
-            <?php echo $form->labelEx($model,'username'); ?>
             <?php echo $form->textField($model,'username'); ?>
             <?php echo $form->error($model,'username'); ?>
         </div>
     
         <div class="row">
-            <?php echo $form->labelEx($model,'password'); ?>
             <?php echo $form->passwordField($model,'password'); ?>
             <?php echo $form->error($model,'password'); ?>
             <p class="hint">
@@ -61,8 +46,32 @@ $this->breadcrumbs=array(
     <?php $this->endWidget(); ?>
     </div><!-- form -->
 
-<?php $this->endWidget();?>
 
+
+<!--
+<form action="../../index2.html" method="post">
+    <div class="form-group has-feedback">
+    <input type="email" class="form-control" placeholder="Email">
+    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+    </div>
+    <div class="form-group has-feedback">
+    <input type="password" class="form-control" placeholder="Password">
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    </div>
+    <div class="row">
+    <div class="col-xs-8">
+        <div class="checkbox icheck">
+        <label>
+            <input type="checkbox"> Remember Me
+        </label>
+        </div>
     </div>
 
-</div>
+    <div class="col-xs-4">
+        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+    </div>
+
+    </div>
+</form>
+
+-->

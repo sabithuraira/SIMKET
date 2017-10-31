@@ -110,6 +110,7 @@
         </li>
 
         <li class="header">TUGAS DAN DINAS LUAR</li>
+        <li><a href="pages/calendar.html"><i class="fa fa-bicycle"></i><span> Buat Surat Tugas</span></a></li>
         <li><a href="pages/calendar.html"><i class="fa fa-bicycle"></i><span> Manajemen Surat Tugas</span></a></li>
         <li><a href="pages/calendar.html"><i class="fa fa-bicycle"></i><span> Kalender Tugas dan DL</span></a></li>
         <li class="header">WILAYAH</li>
