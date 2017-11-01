@@ -57,7 +57,7 @@ class Pegawai extends HelpAr
 	public function attributeLabels()
 	{
 		return array(
-			'nip' => 'Nip',
+			'nip' => 'NIP',
 			'nama' => 'Nama',
 			'unit_kerja' => 'Unit Kerja',
 			'golongan' => 'Golongan',

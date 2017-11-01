@@ -9,7 +9,6 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'List Pegawai', 'url'=>array('index')),
-	array('label'=>'Manage Pegawai', 'url'=>array('admin')),
 );
 ?>
 

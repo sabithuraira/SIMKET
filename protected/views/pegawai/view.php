@@ -12,7 +12,6 @@ $this->menu=array(
 	array('label'=>'Create Pegawai', 'url'=>array('create')),
 	array('label'=>'Update Pegawai', 'url'=>array('update', 'id'=>$model->nip)),
 	array('label'=>'Delete Pegawai', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->nip),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Pegawai', 'url'=>array('admin')),
 );
 ?>
 

@@ -12,7 +12,6 @@ $this->menu=array(
 	array('label'=>'List Pegawai', 'url'=>array('index')),
 	array('label'=>'Create Pegawai', 'url'=>array('create')),
 	array('label'=>'View Pegawai', 'url'=>array('view', 'id'=>$model->nip)),
-	array('label'=>'Manage Pegawai', 'url'=>array('admin')),
 );
 ?>
 
