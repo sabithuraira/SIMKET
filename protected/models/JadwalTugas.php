@@ -33,12 +33,12 @@ class JadwalTugas extends HelpAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, nama_kegiatan, tanggal_mulai, tanggal_berakhir, pegawai_id, penjelasan, created_time, updated_time, created_by, updated_by', 'required'),
-			array('id, created_by, updated_by', 'numerical', 'integerOnly'=>true),
+			array('nama_kegiatan, tanggal_mulai, tanggal_berakhir, pegawai_id, penjelasan, created_time, updated_time, created_by, updated_by', 'required'),
+			array('created_by, updated_by', 'numerical', 'integerOnly'=>true),
 			array('pegawai_id', 'length', 'max'=>18),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nama_kegiatan, tanggal_mulai, tanggal_berakhir, pegawai_id, penjelasan, created_time, updated_time, created_by, updated_by', 'safe', 'on'=>'search'),
+			array('nama_kegiatan, tanggal_mulai, tanggal_berakhir, pegawai_id, penjelasan, created_time, updated_time, created_by, updated_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,6 +50,7 @@ class JadwalTugas extends HelpAR
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'pegawai' => array(self::BELONGS_TO, 'Pegawai', 'pegawai_id'),
 		);
 	}
 

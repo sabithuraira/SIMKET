@@ -33,8 +33,11 @@ $('.search-form form').submit(function(){
 				'nama_kegiatan',
 				'tanggal_mulai',
 				'tanggal_berakhir',
-				'pegawai_id',
-				'penjelasan',
+				array(
+					'name' 	=>'pegawai_id',
+					'value' =>'$data->pegawai_id." - ".$data->pegawai->nama'
+				),
+				// 'penjelasan',
 				/*
 				'created_time',
 				'updated_time',
