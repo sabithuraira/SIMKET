@@ -12,14 +12,13 @@ $this->breadcrumbs=array(
 
 <div class="box box-info">
 	<div class="mailbox-controls">
-		Pegawai
+		<b>Tambah Pegawai</b>
 		<div class="pull-right">
 			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Pegawai", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
 		</div>
-		<!-- /.pull-right -->
 	</div>
 
-	<h1>Create Pegawai</h1>
-
-	<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	<div class="box-body">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
 </div>

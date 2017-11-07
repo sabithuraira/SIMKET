@@ -19,50 +19,41 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'nip'); ?>
-		<?php echo $form->textField($model,'nip',array('size'=>18,'maxlength'=>18)); ?>
+		<?php echo $form->textField($model,'nip',array('size'=>18,'maxlength'=>18, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'nip'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'nama'); ?>
-		<?php echo $form->textField($model,'nama',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'nama',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'nama'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'unit_kerja'); ?>
-		<?php echo $form->textField($model,'unit_kerja'); ?>
+		<?php echo $form->dropDownList($model,'unit_kerja',
+				CHtml::listData(UnitKerja::model()->findAll(),'id','name'),
+				array('empty'=>'- Pilih Unit Kerja-', 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'unit_kerja'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'golongan'); ?>
-		<?php echo $form->textField($model,'golongan',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'golongan',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'golongan'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'jabatan'); ?>
-		<?php echo $form->textField($model,'jabatan',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'jabatan',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'jabatan'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'created_time'); ?>
-		<?php echo $form->textField($model,'created_time'); ?>
-		<?php echo $form->error($model,'created_time'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'updated_time'); ?>
-		<?php echo $form->textField($model,'updated_time'); ?>
-		<?php echo $form->error($model,'updated_time'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="box-footer">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>"btn btn-info pull-right")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

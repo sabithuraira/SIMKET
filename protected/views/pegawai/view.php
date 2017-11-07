@@ -6,26 +6,33 @@ $this->breadcrumbs=array(
 	'Pegawais'=>array('index'),
 	$model->nip,
 );
-
-$this->menu=array(
-	array('label'=>'List Pegawai', 'url'=>array('index')),
-	array('label'=>'Create Pegawai', 'url'=>array('create')),
-	array('label'=>'Update Pegawai', 'url'=>array('update', 'id'=>$model->nip)),
-	array('label'=>'Delete Pegawai', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->nip),'confirm'=>'Are you sure you want to delete this item?')),
-);
 ?>
 
-<h1>View Pegawai #<?php echo $model->nip; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'nip',
-		'nama',
-		'unit_kerja',
-		'golongan',
-		'jabatan',
-		'created_time',
-		'updated_time',
-	),
-)); ?>
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b><?php echo $model->nama; ?></b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Pegawai", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-pencil'></i> Perbaharui", array('update', 'id'=>$model->nip), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-trash'></i> Hapus", "#", array("submit"=>array('delete', 'id'=>$model->nip), 'confirm' => 'Anda yakin ingin menghapus data ini?', 'class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+	</div>
+
+	<div class="box-body">
+
+		<?php $this->widget('zii.widgets.CDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				'nip',
+				'nama',
+				'unit_kerja',
+				'golongan',
+				'jabatan',
+				'created_time',
+				'updated_time',
+			),
+		)); ?>
+	</div>
+</div>
