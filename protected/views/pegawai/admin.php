@@ -7,10 +7,6 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-$this->menu=array(
-	array('label'=>'Create Pegawai', 'url'=>array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
@@ -25,31 +21,36 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Data Pegawai</h1>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'pegawai-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'nip',
-		'nama',
-		'unit_kerja',
-		'golongan',
-		'jabatan',
-		// 'created_time',
-		/*
-		'updated_time',
-		*/
-		array(
-			'class'=>'CButtonColumn',
+
+
+<div class="box box-info">
+	<div class="mailbox-controls">
+		Pegawai
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Pegawai", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+		<!-- /.pull-right -->
+	</div>
+		  
+	<?php $this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'pegawai-grid',
+		'dataProvider'=>$model->search(),
+		'filter'=>$model,
+		'columns'=>array(
+			'nip',
+			'nama',
+			'unit_kerja',
+			'golongan',
+			'jabatan',
+			// 'created_time',
+			/*
+			'updated_time',
+			*/
+			array(
+				'class'=>'CButtonColumn',
+			),
 		),
-	),
-)); ?>
+	)); ?>
+</div>

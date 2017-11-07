@@ -19,65 +19,74 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'kegiatan'); ?>
-		<?php echo $form->textField($model,'kegiatan',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'kegiatan',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'kegiatan'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'unit_kerja'); ?>
 		<?php 
 			echo $form->dropDownList($model,'unit_kerja',
-					//CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>1)),'id','name'),
 					HelpMe::ListAuthorizeUnitKerja(),
-					array('empty'=>'- Pilih Unit Kerja-')); 
+					array('empty'=>'- Pilih Unit Kerja-', 'class'=>"form-control")); 
 		?>
 		<?php echo $form->error($model,'unit_kerja'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'jenis_kegiatan'); ?>
 		<?php 
 			echo $form->dropDownList($model,'jenis_kegiatan',
 					HelpMe::getJenisData(),
-					array('empty'=>'- Pilih Jenis Kegiatan -')); 
+					array('empty'=>'- Pilih Jenis Kegiatan -', 'class'=>"form-control")); 
 		?>
 		<?php echo $form->error($model,'unit_kerja'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'start_date'); ?>
-		<?php 
-			$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-				'model'=>$model,
-				'attribute'=>'start_date',
-				'options' => array(
-					'dateFormat'=>'yy-mm-dd',
-					'changeYear'=>true,
-					'changeMonth'=>true,
-				),
-			));
-		?>
-		<?php echo $form->error($model,'start_date'); ?>
-	</div>
-	
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'end_date'); ?>
-		<?php 
-			$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-				'model'=>$model,
-				'attribute'=>'end_date',
-				'options' => array(
-					'dateFormat'=>'yy-mm-dd',
-					'changeYear'=>true,
-					'changeMonth'=>true,
-				   ),
-			));
-		?>
-		<?php echo $form->error($model,'end_date'); ?>
-	</div>
+	<table class="table table-hover table-striped table-bordered">
+		<tr>
+			<th><?php echo $form->labelEx($model,'start_date'); ?></td>
+			<th><?php echo $form->labelEx($model,'end_date'); ?></td>
+		</tr>
+		
+		<tr>
+			<td>
+			<?php
+				$this->widget('zii.widgets.jui.CJuiDatePicker', 
+					array(
+						'model'=>$model,
+						'attribute'=>'start_date',
+						'options' => array(
+							'dateFormat'=>'yy-mm-dd',
+							'changeYear'=>true,
+							'changeMonth'=>true
+						)
+					)
+				);
+			?>
+			</td>
+
+			<td>
+
+			<?php
+				$this->widget('zii.widgets.jui.CJuiDatePicker', 
+					array(
+						'model'=>$model,
+						'attribute'=>'end_date',
+						'options' => array(
+							'dateFormat'=>'yy-mm-dd',
+							'changeYear'=>true,
+							'changeMonth'=>true
+						)
+					)
+				);
+			?>
+			</td>
+		</tr>
+	</table>
 
 	<!--
 	<table class="table table-hover table-striped table-bordered table-condensed">

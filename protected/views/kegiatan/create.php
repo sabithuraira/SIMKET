@@ -6,12 +6,19 @@ $this->breadcrumbs=array(
 	'Kegiatan'=>array('index'),
 	'Tambah',
 );
-
-$this->menu=array(
-	array('label'=>'<i class="icon-th-list"></i>  List Kegiatan', 'url'=>array('index')),
-);
 ?>
 
-<h1>Tambah Kegiatan</h1>
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Tambah Kegiatan</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Pegawai", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+		<!-- /.pull-right -->
+	</div>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	<div class="box-body">
+
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>
