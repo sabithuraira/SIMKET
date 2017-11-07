@@ -19,68 +19,73 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
-
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'nama_kegiatan'); ?>
-		<?php echo $form->textArea($model,'nama_kegiatan',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textArea($model,'nama_kegiatan',array('form-groups'=>6, 'cols'=>50, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'nama_kegiatan'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'tanggal_mulai'); ?>
-		<?php echo $form->textField($model,'tanggal_mulai'); ?>
-		<?php echo $form->error($model,'tanggal_mulai'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'tanggal_berakhir'); ?>
-		<?php echo $form->textField($model,'tanggal_berakhir'); ?>
-		<?php echo $form->error($model,'tanggal_berakhir'); ?>
-	</div>
+	<table class="table table-hover table-striped table-bordered">
+		<tr>
+			<th><?php echo $form->labelEx($model,'tanggal_mulai'); ?></td>
+			<th><?php echo $form->labelEx($model,'tanggal_berakhir'); ?></td>
+		</tr>
+		
+		<tr>
+			<td>
+			<?php
+				$this->widget('zii.widgets.jui.CJuiDatePicker', 
+					array(
+						'model'=>$model,
+						'attribute'=>'tanggal_mulai',
+						'options' => array(
+							'dateFormat'=>'yy-mm-dd',
+							'changeYear'=>true,
+							'changeMonth'=>true
+						)
+					)
+				);
+			?>
+			</td>
 
-	<div class="row">
+			<td>
+
+			<?php
+				$this->widget('zii.widgets.jui.CJuiDatePicker', 
+					array(
+						'model'=>$model,
+						'attribute'=>'tanggal_berakhir',
+						'options' => array(
+							'dateFormat'=>'yy-mm-dd',
+							'changeYear'=>true,
+							'changeMonth'=>true
+						)
+					)
+				);
+			?>
+			</td>
+		</tr>
+	</table>
+
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'pegawai_id'); ?>
-		<?php echo $form->textField($model,'pegawai_id',array('size'=>18,'maxlength'=>18)); ?>
+		<?php echo $form->dropDownList($model,'pegawai_id',
+				CHtml::listData(Pegawai::model()->findAll(),'nip','nama'),
+				array('empty'=>'- Pilih Pegawai-', 'class'=>"form-control")); ?>
+		
+
 		<?php echo $form->error($model,'pegawai_id'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'penjelasan'); ?>
-		<?php echo $form->textArea($model,'penjelasan',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textArea($model,'penjelasan',array('form-groups'=>6, 'cols'=>50, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'penjelasan'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'created_time'); ?>
-		<?php echo $form->textField($model,'created_time'); ?>
-		<?php echo $form->error($model,'created_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'updated_time'); ?>
-		<?php echo $form->textField($model,'updated_time'); ?>
-		<?php echo $form->error($model,'updated_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'created_by'); ?>
-		<?php echo $form->textField($model,'created_by'); ?>
-		<?php echo $form->error($model,'created_by'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'updated_by'); ?>
-		<?php echo $form->textField($model,'updated_by'); ?>
-		<?php echo $form->error($model,'updated_by'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="box-footer">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>"btn btn-info pull-right")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -1,21 +1,14 @@
-<?php
-/* @var $this JadwalTugasController */
-/* @var $model JadwalTugas */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Update Jadwal Tugas</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Jadwal Tugas", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-search'></i> Detail", array('view', "id"=>$model->nip), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+	</div>
 
-$this->breadcrumbs=array(
-	'Jadwal Tugases'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List JadwalTugas', 'url'=>array('index')),
-	array('label'=>'Create JadwalTugas', 'url'=>array('create')),
-	array('label'=>'View JadwalTugas', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage JadwalTugas', 'url'=>array('admin')),
-);
-?>
-
-<h1>Update JadwalTugas <?php echo $model->id; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	<div class="box-body">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>

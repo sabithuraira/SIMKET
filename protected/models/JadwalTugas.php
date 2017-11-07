@@ -15,7 +15,7 @@
  * @property integer $created_by
  * @property integer $updated_by
  */
-class JadwalTugas extends CActiveRecord
+class JadwalTugas extends HelpAR
 {
 	/**
 	 * @return string the associated database table name
