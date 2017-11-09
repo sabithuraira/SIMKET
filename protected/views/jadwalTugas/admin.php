@@ -27,15 +27,24 @@ $('.search-form form').submit(function(){
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'jadwal-tugas-grid',
 			'dataProvider'=>$model->search(),
-			'filter'=>$model,
+			//'filter'=>$model,
 			'columns'=>array(
 				// 'id',
 				'nama_kegiatan',
-				'tanggal_mulai',
-				'tanggal_berakhir',
+				array(
+					'name' =>'Tanggal',
+					'value'	=>'"$data->tanggal_mulai  sd  $data->tanggal_berakhir"',
+				),
+				// 'tanggal_mulai',
+				// 'tanggal_berakhir',
 				array(
 					'name' 	=>'pegawai_id',
 					'value' =>'$data->pegawai_id." - ".$data->pegawai->nama'
+				),
+				array(
+					'name'	=>'Cetak',
+					'type' 	=>'raw',
+					'value'	=>'"[".CHtml::link("Surat Tugas",array("stugas"))."] - [".CHtml::link("SPPD", array("sppd"))."]"'
 				),
 				// 'penjelasan',
 				/*
