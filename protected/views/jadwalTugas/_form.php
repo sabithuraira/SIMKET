@@ -25,6 +25,16 @@
 		<?php echo $form->error($model,'nama_kegiatan'); ?>
 	</div>
 
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'pegawai_id'); ?>
+		<?php echo $form->dropDownList($model,'pegawai_id',
+				CHtml::listData(Pegawai::model()->findAll(),'nip','nama'),
+				array('empty'=>'- Pilih Pegawai-', 'class'=>"form-control")); ?>
+		
+
+		<?php echo $form->error($model,'pegawai_id'); ?>
+	</div>
+
 
 	<table class="table table-hover table-striped table-bordered">
 		<tr>
@@ -67,16 +77,6 @@
 			</td>
 		</tr>
 	</table>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'pegawai_id'); ?>
-		<?php echo $form->dropDownList($model,'pegawai_id',
-				CHtml::listData(Pegawai::model()->findAll(),'nip','nama'),
-				array('empty'=>'- Pilih Pegawai-', 'class'=>"form-control")); ?>
-		
-
-		<?php echo $form->error($model,'pegawai_id'); ?>
-	</div>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'penjelasan'); ?>

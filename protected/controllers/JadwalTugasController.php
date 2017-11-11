@@ -36,7 +36,7 @@ class JadwalTugasController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','delete'),
+				'actions'=>array('index','delete', 'stugas'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -47,6 +47,12 @@ class JadwalTugasController extends Controller
 
 	public function actionCalendar(){
 		$this->render('calendar');
+	}
+
+
+	public function actionStugas(){
+		$this->layout='//layouts/print';
+		$this->render('surat_tugas');
 	}
 
 	/**
