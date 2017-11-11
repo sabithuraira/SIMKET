@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+<div class="form" id="jadwal_tag">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'jadwal-tugas-form',
@@ -78,6 +78,12 @@
 		</tr>
 	</table>
 
+
+	<div class="alert alert-danger alert-dismissible">
+		Tanggal terpilih sudah dijadwalkan dengan kegiatan lain, lihat kalender berikut untuk memilih tanggal yang tepat.
+		<div id="calendar"></div>
+	</div>
+
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'penjelasan'); ?>
 		<?php echo $form->textArea($model,'penjelasan',array('form-groups'=>6, 'cols'=>50, 'class'=>"form-control")); ?>
@@ -91,3 +97,9 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<?php $baseUrl = Yii::app()->theme->baseUrl; ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="<?php echo $baseUrl;?>/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="<?php echo $baseUrl;?>/dist/js/vue_page/jadwal_tugas.js"></script>

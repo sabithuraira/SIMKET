@@ -39,6 +39,11 @@ class JadwalTugasController extends Controller
 				'actions'=>array('index','delete', 'stugas'),
 				'users'=>array('@'),
 			),
+
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			'actions'=>array('jadwalpegawai'),
+			'users'=>array('*'),
+		),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -47,6 +52,31 @@ class JadwalTugasController extends Controller
 
 	public function actionCalendar(){
 		$this->render('calendar');
+	}
+
+	public function actionJadwalpegawai($id)
+	{
+	   	$models = JadwalTugas::model()->searchByPegawai($id);
+		// print_r($models);die();
+
+		$data = array();
+		foreach($models as $value){
+			// print_r($value);die();
+			$data[] = array(
+				'title'=> $value['nama_kegiatan'],
+				'start'=> $value['tanggal_mulai'],
+				'end'=> $value['tanggal_berakhir'],
+				'backgroundColor'=> "#f56954",
+				'borderColor' => "#f56954"
+			);
+		}
+
+		echo CJSON::encode(array
+		(
+			'data'=>$data
+		));
+
+		Yii::app()->end();
 	}
 
 

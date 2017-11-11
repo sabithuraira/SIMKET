@@ -107,6 +107,17 @@ class JadwalTugas extends HelpAR
 		));
 	}
 
+	public function searchByPegawai($id){
+		$curr_year=date('Y');
+
+		$sql="SELECT * FROM jadwal_tugas WHERE pegawai_id=".$id." 
+			AND (YEAR(tanggal_mulai)=".$curr_year." OR YEAR(tanggal_berakhir)=".$curr_year.") LIMIT 365;";
+
+		$dataProvider=new CSqlDataProvider($sql);
+
+		return $dataProvider->getData();
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

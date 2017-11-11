@@ -44,25 +44,3 @@
 
 <?php $baseUrl = Yii::app()->theme->baseUrl; ?>
 <script src="<?php echo $baseUrl;?>/dist/js/vue_page/calendar_tugas.js"></script>
-
-<!-- 
-<tr>
-                  <td>1.</td>
-                  <td class="red">Update software</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-red">55%</span></td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>Clean database</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-yellow">70%</span></td>
-                </tr> -->

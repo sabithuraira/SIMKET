@@ -109,3 +109,8 @@ td.bpsgood
 .nama-ttd{
   margin-top:60px;
 }
+
+#calendar{
+  background-color: #fff;
+  color: #000000 !important;
+}
