@@ -1,21 +1,92 @@
 var vm = new Vue({  
     el: "#jadwal_tag",
     data: {
-        events: [{"title":"Task Force SE2016","start":"2017-11-07","end":"2017-11-09","backgroundColor":"#f56954","borderColor":"#f56954"}]
+        // events: [{"title":"Task Force SE2016","start":"2017-11-07","end":"2017-11-10","backgroundColor":"#f56954","borderColor":"#f56954"}]
     },
 });
 
+var loading = $("#loading");
+var jadwal_success = $("#jadwal-success");
+var jadwal_error = $("#jadwal-error");
+var pegawai = $("#JadwalTugas_pegawai_id");
+var tstart = $("#JadwalTugas_tanggal_mulai");
+var tend = $("#JadwalTugas_tanggal_berakhir");
+
+var pathname = window.location.pathname;
+
+
 $(document).ready(function() {
-    setCalendar();
+    // setCalendar();
+});
+
+pegawai.change(function() {
+    checkCalendar();
+});
+
+tstart.change(function() {
+    checkCalendar();
+});
+
+tend.change(function() {
+    checkCalendar();
 });
 
 
-function setCalendar(){
-    //Date for the calendar events (dummy data)
-    var date = new Date();
-    var d = date.getDate(),
-        m = date.getMonth(),
-        y = date.getFullYear();
+function checkCalendar(){
+
+    if(pegawai.val().length && tstart.val().length && tend.val().length){
+        loading.css("display", "block");
+
+        $.ajax({
+            url: pathname+"?r=jadwalTugas/checkjadwal&id="+pegawai.val()+"&tstart="+tstart.val()+"&tend="+tend.val(),
+            dataType: 'json',
+            // type: "POST",
+            // data: {
+            //     tstart: tstart.val(),
+            //     tend: tend.val()
+            // },
+            success: function(data) {
+                loading.css("display", "none");
+                if(data==0)
+                {
+                    jadwal_success.css("display", "block");
+                    jadwal_error.css("display", "none");
+                }
+                else{
+                    refreshCalenderData(pegawai.val());
+                }
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.log(xhr);
+                loading.css("display", "none");
+                alert("Terjadi kesalahan pada internet, harap refresh halaman");
+                // refreshCalenderData(pegawai.val());
+            }.bind(this)
+        });
+
+    }
+}
+
+//param is pegawai_id
+function refreshCalenderData($id){
+    $.ajax({
+        url: pathname+"?r=jadwalTugas/jadwalpegawai&id="+$id,
+        dataType: 'json',
+        type: "GET",
+        success: function(data) {
+            // vm.events = data;
+            jadwal_success.css("display", "none");
+            jadwal_error.css("display", "block");
+            setCalendar(data.data);
+        }.bind(this),
+        error: function(xhr, status, err) {
+            alert("Terjadi kesalahan pada internet, harap refresh halaman");
+        }.bind(this)
+    });
+}
+
+function setCalendar(list_data){
+    console.log(list_data);
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -28,80 +99,6 @@ function setCalendar(){
         week: 'week',
         day: 'day'
       },
-      //Random default events
-    //   events: [
-    //     {
-    //       title: 'All Day Event',
-    //       start: new Date(y, m, 1),
-    //       backgroundColor: "#f56954", //red
-    //       borderColor: "#f56954" //red
-    //     },
-    //     {
-    //       title: 'Long Event',
-    //       start: new Date(y, m, d - 5),
-    //       end: new Date(y, m, d - 2),
-    //       backgroundColor: "#f39c12", //yellow
-    //       borderColor: "#f39c12" //yellow
-    //     },
-    //     {
-    //       title: 'Meeting',
-    //       start: new Date(y, m, d, 10, 30),
-    //       allDay: false,
-    //       backgroundColor: "#0073b7", //Blue
-    //       borderColor: "#0073b7" //Blue
-    //     },
-    //     {
-    //       title: 'Lunch',
-    //       start: new Date(y, m, d, 12, 0),
-    //       end: new Date(y, m, d, 14, 0),
-    //       allDay: false,
-    //       backgroundColor: "#00c0ef", //Info (aqua)
-    //       borderColor: "#00c0ef" //Info (aqua)
-    //     },
-    //     {
-    //       title: 'Birthday Party',
-    //       start: new Date(y, m, d + 1, 19, 0),
-    //       end: new Date(y, m, d + 1, 22, 30),
-    //       allDay: false,
-    //       backgroundColor: "#00a65a", //Success (green)
-    //       borderColor: "#00a65a" //Success (green)
-    //     },
-    //     {
-    //       title: 'Click for Google',
-    //       start: new Date(y, m, 28),
-    //       end: new Date(y, m, 29),
-    //       url: 'http://google.com/',
-    //       backgroundColor: "#3c8dbc", //Primary (light-blue)
-    //       borderColor: "#3c8dbc" //Primary (light-blue)
-    //     }
-    //   ],
-      events: vm.events,
-      editable: true,
-      droppable: true, // this allows things to be dropped onto the calendar !!!
-      drop: function (date, allDay) { // this function is called when something is dropped
-
-        // retrieve the dropped element's stored Event Object
-        var originalEventObject = $(this).data('eventObject');
-
-        // we need to copy it, so that multiple events don't have a reference to the same object
-        var copiedEventObject = $.extend({}, originalEventObject);
-
-        // assign it the date that was reported
-        copiedEventObject.start = date;
-        copiedEventObject.allDay = allDay;
-        copiedEventObject.backgroundColor = $(this).css("background-color");
-        copiedEventObject.borderColor = $(this).css("border-color");
-
-        // render the event on the calendar
-        // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-        // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove();
-        }
-
-      }
+      events: list_data
     });
 }

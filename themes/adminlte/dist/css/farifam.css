@@ -114,3 +114,7 @@ td.bpsgood
   background-color: #fff;
   color: #000000 !important;
 }
+
+#loading, #jadwal-success, #jadwal-error{
+  display: none;
+}

@@ -77,9 +77,16 @@
 			</td>
 		</tr>
 	</table>
+	
+	<div class="alert alert-info text-center" id="loading">
+		<i class="fa fa-spin fa-refresh"></i>&nbsp; Mengecek ketersediaan jadwal, harap tunggu..
+	</div>
 
+	<div class="alert alert-success text-center" id="jadwal-success">
+		Jadwal yang dimasukkan tersedia, silahkan simpan setelah melengkapi isian data!
+	</div>
 
-	<div class="alert alert-danger alert-dismissible">
+	<div class="alert alert-danger alert-dismissible" id="jadwal-error">
 		Tanggal terpilih sudah dijadwalkan dengan kegiatan lain, lihat kalender berikut untuk memilih tanggal yang tepat.
 		<div id="calendar"></div>
 	</div>

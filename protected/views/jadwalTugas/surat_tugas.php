@@ -27,7 +27,6 @@
     4.	Peraturan Menteri Keuangan Nomor 113/PMK.05/2012, Tentang Perjalanan Dinas Jabatan Dalam Negeri Bagi Pejabat Negara, Pegawai Negeri, dan Pegawai Tidak Tetap beserta perubahannya;<br/>
     5.	Peraturan Kepala Badan Pusat Statistik Nomor 7 Tahun 2008, Tentang Organisasi dan Tata Kerja Badan Pusat Statistik;<br/>
     6.	Keputusan Kepala Badan Pusat Statistik No. 121 Tahun 2001, Tentang Organisasi dan Tata Kerja Perwakilan BPS di Daerah;<br/>
-
     </div>
   </div>
 

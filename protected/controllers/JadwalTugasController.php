@@ -41,7 +41,7 @@ class JadwalTugasController extends Controller
 			),
 
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-			'actions'=>array('jadwalpegawai'),
+			'actions'=>array('jadwalpegawai', 'checkjadwal'),
 			'users'=>array('*'),
 		),
 			array('deny',  // deny all users
@@ -52,6 +52,19 @@ class JadwalTugasController extends Controller
 
 	public function actionCalendar(){
 		$this->render('calendar');
+	}
+
+	public function actionCheckjadwal($id, $tstart, $tend){
+		$data = -1;
+		// print_r($_POST);
+		if(isset($tstart, $tend)){
+			$data = JadwalTugas::model()->isAvailable($id, $tstart, $tend);
+		}
+
+		print_r($data);
+		// die();
+
+		return $data;
 	}
 
 	public function actionJadwalpegawai($id)
@@ -65,7 +78,7 @@ class JadwalTugasController extends Controller
 			$data[] = array(
 				'title'=> $value['nama_kegiatan'],
 				'start'=> $value['tanggal_mulai'],
-				'end'=> $value['tanggal_berakhir'],
+				'end'=> date('Y-m-d', strtotime($value['tanggal_berakhir'] . ' +1 day')),
 				'backgroundColor'=> "#f56954",
 				'borderColor' => "#f56954"
 			);

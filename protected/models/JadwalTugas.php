@@ -110,12 +110,24 @@ class JadwalTugas extends HelpAR
 	public function searchByPegawai($id){
 		$curr_year=date('Y');
 
-		$sql="SELECT * FROM jadwal_tugas WHERE pegawai_id=".$id." 
-			AND (YEAR(tanggal_mulai)=".$curr_year." OR YEAR(tanggal_berakhir)=".$curr_year.") LIMIT 365;";
+		$sql="SELECT * FROM jadwal_tugas WHERE pegawai_id='".$id."' 
+			AND (YEAR(tanggal_mulai)='".$curr_year."' OR YEAR(tanggal_berakhir)='".$curr_year."') LIMIT 365;";
 
 		$dataProvider=new CSqlDataProvider($sql);
 
 		return $dataProvider->getData();
+	}
+
+	public function isAvailable($id, $tstart, $tend){
+		$sql="SELECT count(*) FROM jadwal_tugas WHERE pegawai_id='".$id."' 
+			AND (('".$tstart."' BETWEEN tanggal_mulai AND tanggal_berakhir) OR 
+			('".$tend."' BETWEEN tanggal_mulai AND tanggal_berakhir) OR 
+			(tanggal_mulai>'".$tstart."' AND tanggal_berakhir<'".$tend."'))";
+
+		$connection = Yii::app()->db;
+
+		$command = $connection->createCommand($sql);
+		return $command->queryScalar();
 	}
 
 	/**
