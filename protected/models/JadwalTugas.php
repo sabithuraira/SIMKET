@@ -119,6 +119,40 @@ class JadwalTugas extends HelpAR
 		return $dataProvider->getData();
 	}
 
+	public function listKegiatanByMonth($month){
+		$curr_year=date('Y');
+
+		$sql="SELECT j.id, j.pegawai_id, p.nama, DAY(tanggal_mulai) as mulai, 
+			DAY(tanggal_berakhir) as berakhir, j.nama_kegiatan
+			FROM jadwal_tugas j, pegawai p 
+			WHERE 
+			(YEAR(tanggal_mulai)='".$curr_year."' OR YEAR(tanggal_berakhir)='".$curr_year."') AND 
+			(MONTH(tanggal_mulai)='".$month."' OR MONTH(tanggal_berakhir)='".$month."') AND 
+			j.pegawai_id=p.nip 
+			ORDER BY tanggal_berakhir, tanggal_mulai 
+			LIMIT 1000;";
+
+		$dataProvider=new CSqlDataProvider($sql);
+
+		$data = array();
+
+		foreach($dataProvider->getData() as $val){
+			$data[] = array(
+				'id'	=>$val['id'],
+				'nip'	=>$val['pegawai_id'],
+				'name'	=>$val['nama'],
+				'start_date'	=>$val['mulai'],
+				'end_date'	=> $val['berakhir'],
+				'judul'	=>$val['nama_kegiatan']
+			);
+		}
+
+
+		// {id: 1, nip: "198908232012111001",  name: "Sabit Huraira", start_date: 20, end_date: 22, judul: "Task Force SE UMB UMK"},
+
+		return $data;
+	}
+
 	public function isAvailable($id, $tstart, $tend){
 		$sql="SELECT count(*) FROM jadwal_tugas WHERE pegawai_id='".$id."' 
 			AND (('".$tstart."' BETWEEN tanggal_mulai AND tanggal_berakhir) OR 

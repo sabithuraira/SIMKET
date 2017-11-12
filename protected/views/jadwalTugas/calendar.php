@@ -22,13 +22,19 @@
 
 <div class="box box-info" id="calendar_tag">
 	<div class="mailbox-controls">
-		<b>Kalender Jadwal Tugas - September</b>
+        <b>Kalender Jadwal Tugas - </b>
+        <?php echo CHtml::dropDownList('monthid','',HelpMe::getMonthList_singleNumber()); ?>
+
 		<div class="pull-right">
 			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Jadwal Tugas", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
 		</div>
 		<!-- /.pull-right -->
 	</div>
 
+	<div class="alert alert-info text-center" id="loading">
+		<i class="fa fa-spin fa-refresh"></i>&nbsp; Loading...
+    </div>
+    
 	<div class="box-body">
         <div class="scrollme"> 
             <table class="table table-bordered">

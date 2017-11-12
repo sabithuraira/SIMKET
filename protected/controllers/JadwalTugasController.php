@@ -41,7 +41,8 @@ class JadwalTugasController extends Controller
 			),
 
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-			'actions'=>array('jadwalpegawai', 'checkjadwal'),
+			'actions'=>array('jadwalpegawai', 'checkjadwal', 
+				'listpegawai', 'listkegiatan'),
 			'users'=>array('*'),
 		),
 			array('deny',  // deny all users
@@ -52,6 +53,36 @@ class JadwalTugasController extends Controller
 
 	public function actionCalendar(){
 		$this->render('calendar');
+	}
+
+	public function actionListpegawai(){
+		$datas = Pegawai::model()->findAll();
+		$data = array();
+
+		foreach($datas as $val){
+			$data[] = array(
+				'id'=>$val['nip'],
+				'name'=>$val['nama']
+			);
+		}
+
+		echo CJSON::encode(array
+		(
+			'data'=>$data
+		));
+
+		Yii::app()->end();
+	}
+
+	public function actionListkegiatan($id){
+		$data = JadwalTugas::model()->listKegiatanByMonth($id);
+
+		echo CJSON::encode(array
+		(
+			'data'=>$data
+		));
+
+		Yii::app()->end();
 	}
 
 	public function actionCheckjadwal($id, $tstart, $tend){

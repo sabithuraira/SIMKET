@@ -47,6 +47,25 @@ class HelpMe
         return CHtml::listData($arr,'id','label');
     }
 
+    public static function getMonthList_singleNumber()
+    {
+        $arr=array();
+        $arr[]=array('id'=>1,'label'=>'Januari');
+        $arr[]=array('id'=>2,'label'=>'Februari');
+        $arr[]=array('id'=>3,'label'=>'Maret');
+        $arr[]=array('id'=>4,'label'=>'April');
+        $arr[]=array('id'=>5,'label'=>'Mei');
+        $arr[]=array('id'=>6,'label'=>'Juni');
+        $arr[]=array('id'=>7,'label'=>'Juli');
+        $arr[]=array('id'=>8,'label'=>'Agustus');
+        $arr[]=array('id'=>9,'label'=>'September');
+        $arr[]=array('id'=>10,'label'=>'Oktober');
+        $arr[]=array('id'=>11,'label'=>'November');
+        $arr[]=array('id'=>12,'label'=>'Desember');
+
+        return CHtml::listData($arr,'id','label');
+    }
+
 
     public static function getMonthListArr()
     {
