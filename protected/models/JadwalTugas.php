@@ -36,6 +36,7 @@ class JadwalTugas extends HelpAR
 			array('nama_kegiatan, tanggal_mulai, tanggal_berakhir, pegawai_id, penjelasan, created_time, updated_time, created_by, updated_by', 'required'),
 			array('created_by, updated_by', 'numerical', 'integerOnly'=>true),
 			array('pegawai_id', 'length', 'max'=>18),
+			array('pegawai_id', 'validasiIsAvailable','message'=>'Tanggal sudah digunakan, silahkan gunakan tanggal lain'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('nama_kegiatan, tanggal_mulai, tanggal_berakhir, pegawai_id, penjelasan, created_time, updated_time, created_by, updated_by', 'safe', 'on'=>'search'),
@@ -129,6 +130,29 @@ class JadwalTugas extends HelpAR
 		$command = $connection->createCommand($sql);
 		return $command->queryScalar();
 	}
+
+	public function validasiIsAvailable()
+	{
+		if($this->tanggal_mulai!=null && $this->tanggal_berakhir!=null && $this->pegawai_id!=null){
+			$sql="SELECT count(*) FROM jadwal_tugas WHERE pegawai_id='".$this->pegawai_id."' 
+				AND (('".$this->tanggal_mulai."' BETWEEN tanggal_mulai AND tanggal_berakhir) OR 
+				('".$this->tanggal_berakhir."' BETWEEN tanggal_mulai AND tanggal_berakhir) OR 
+				(tanggal_mulai>'".$this->tanggal_mulai."' AND tanggal_berakhir<'".$this->tanggal_berakhir."'))";
+
+			$connection = Yii::app()->db;
+			$command = $connection->createCommand($sql);
+
+			if($command->queryScalar()==1){
+				return false;
+			}
+		}
+
+	//   if($this->$attribute==$params['isi'])
+	//   {
+	// 	 $this->addError('nama', $params['message']);
+	// 	 return false;
+	//    }
+   }
 
 	/**
 	 * Returns the static model of the specified AR class.

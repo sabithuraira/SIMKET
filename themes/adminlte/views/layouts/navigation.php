@@ -112,7 +112,7 @@
         <li class="header">TUGAS DAN DINAS LUAR</li>
         <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/create'); ?>"><i class="fa fa-bicycle"></i><span> Buat Surat Tugas</span></a></li>
         <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/index'); ?>"><i class="fa fa-bicycle"></i><span> Manajemen Surat Tugas</span></a></li>
-        <li><a href="pages/calendar.html"><i class="fa fa-bicycle"></i><span> Kalender Tugas dan DL</span></a></li>
+        <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/calendar'); ?>"><i class="fa fa-bicycle"></i><span> Kalender Tugas dan DL</span></a></li>
         <li class="header">WILAYAH</li>
           <?php 
             echo '<li><a href="'.Yii::app()->createUrl('mfd/index').'"><i class="fa fa-map-o"></i> Wilayah Sumatera Selatan</a></li>';

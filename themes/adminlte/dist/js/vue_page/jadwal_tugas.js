@@ -24,12 +24,34 @@ pegawai.change(function() {
 });
 
 tstart.change(function() {
-    checkCalendar();
+    if(isDateConsistent()){
+        checkCalendar();
+    }
+    else{
+        alert("'Tanggal mulai' tidak boleh lebih besar dari 'Tanggal berakhir'!");
+        tstart.val('');
+    }
 });
 
 tend.change(function() {
-    checkCalendar();
+    if(isDateConsistent()){
+        checkCalendar();
+    }
+    else{
+        alert("'Tanggal mulai' tidak boleh lebih besar dari 'Tanggal berakhir'!");
+        tend.val('');
+    }
 });
+
+function isDateConsistent(){
+    
+    if(tstart.val().length && tend.val().length){
+        if(tstart.val()>tend.val())
+            return false;
+    }
+
+    return true;
+}
 
 
 function checkCalendar(){
@@ -40,11 +62,6 @@ function checkCalendar(){
         $.ajax({
             url: pathname+"?r=jadwalTugas/checkjadwal&id="+pegawai.val()+"&tstart="+tstart.val()+"&tend="+tend.val(),
             dataType: 'json',
-            // type: "POST",
-            // data: {
-            //     tstart: tstart.val(),
-            //     tend: tend.val()
-            // },
             success: function(data) {
                 loading.css("display", "none");
                 if(data==0)
