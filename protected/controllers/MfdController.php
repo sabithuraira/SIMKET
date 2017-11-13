@@ -31,6 +31,10 @@ class MfdController extends Controller
 				'actions'=>array('index'),
 				'users'=>array('*'),
 			),
+			array('allow',
+				'actions'=>array('form'),
+				'users'=>array('@'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -40,5 +44,9 @@ class MfdController extends Controller
     public function actionIndex(){
         
         $this->render('index');
-    }
+	}
+	
+	public function actionForm(){
+        $this->render('form');
+	}
 }

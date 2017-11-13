@@ -92,14 +92,14 @@ function setCellJadwal(data){
         start_cell.addClass("red");
         start_cell.append(data.judul);
         
-        for(var d=data.start_date+1;d<=data.end_date;++d){
+        for(var d=parseInt(data.start_date)+1;d<=parseInt(data.end_date);++d){
              $("#id"+data.nip+" td").eq(d+1).remove();
         }
     }
 }
 
 function generateHeader(){
-    var str_head ='<th style="width: 20px">#</th><th></th>';
+    var str_head ='<th style="width: 20px"></th><th></th>';
 
     for(var i=1;i<=vm.total_day;++i){
         str_head += '<th style="width: 30px">'+i+'</th>';

@@ -33,7 +33,7 @@
         <div class="wrapper">
             <section class="invoice">
                 
-                <div class="row invoice-info">
+                <div class="row row-print invoice-info">
                     <div class="col-sm-2 invoice-col">
                         <img class="header-logo" src="<?php echo $baseUrl;?>/dist/img/logo_bps.png" style="width:100px;height:100px;">
                     </div>

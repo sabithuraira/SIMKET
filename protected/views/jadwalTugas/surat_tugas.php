@@ -4,7 +4,7 @@
 </div>
 
 
-  <div class="row sub-header">
+  <div class="row row-print sub-header">
     <div class="col-xs-4">Menimbang</div>
 
     <div class="col-xs-1">:</div>
@@ -16,7 +16,7 @@
 
 
 
-  <div class="row sub-header">
+  <div class="row row-print sub-header">
     <div class="col-xs-4">Mengingat</div>
 
     <div class="col-xs-1">:</div>
@@ -37,7 +37,7 @@
 
 
 
-  <div class="row sub-header">
+  <div class="row row-print sub-header">
     <div class="col-xs-4">Kepada</div>
 
     <div class="col-xs-1">:</div>
@@ -48,7 +48,7 @@
   </div>
 
 
-  <div class="row sub-header">
+  <div class="row row-print sub-header">
     <div class="col-xs-4">Pangkat / Golongan</div>
 
     <div class="col-xs-1">:</div>
@@ -59,7 +59,7 @@
 
 
 
-  <div class="row sub-header">
+  <div class="row row-print sub-header">
     <div class="col-xs-4">Untuk</div>
 
     <div class="col-xs-1">:</div>
@@ -70,7 +70,7 @@
   </div>
 
 
-  <div class="row sub-header">
+  <div class="row row-print sub-header">
     <div class="col-xs-4">Pada Tanggal</div>
 
     <div class="col-xs-1">:</div>
@@ -81,7 +81,7 @@
 
 
 
-  <div class="row sub-header">
+  <div class="row row-print sub-header">
     <div class="col-xs-8"></div>
 
     <div class="col-xs-4 text-center">

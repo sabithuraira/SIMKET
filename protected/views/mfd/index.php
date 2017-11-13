@@ -1,20 +1,8 @@
+<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
 <div id="mfd_tag">
     <!-- Main content -->
     <section class="content">
-      <!-- Info boxes -->
-      <div class="row">
-        <div class="col-md-12">
-
-          <div class="info-box bg-aqua">
-            <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Billing on {{ hello }}</span>
-              
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- /.row -->
 
       <div class="row">
@@ -33,7 +21,9 @@
                 </div>
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <a id="add" class="btn btn-default btn-sm toggle-event" href="#" data-id="adddata"><i class="fa fa-plus"></i> Add Bill</a>
+                
+                <b>&nbsp Master File Desa</b>
+                
                 <div class="pull-right">
                   1-50/200
                   <div class="btn-group">
