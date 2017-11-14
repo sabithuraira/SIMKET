@@ -22,7 +22,7 @@
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                 
-                <b>&nbsp Master File Desa</b>
+                <b>&nbsp Master Blok Sensus</b>
                 
                 <div class="pull-right">
                   1-50/200
@@ -40,29 +40,38 @@
                   <thead>
                     <tr>
                       <th>
-                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                        </button>
                       </th>
-                      <td>Nama</td>
-                      <td>NIP</td>
+                      <!-- <td>NIP</td>
                       <td>Tanggal</td>
                       <td>Kegiatan</td>
-                      <td>Action</td>
+                      <td>Action</td> -->
                     </tr>
                   </thead>
                    <tbody v-for="row in data">
                     <tr>
-                      <td><input type="checkbox"></td>
-                      <td>{{ row.nama }}</td>
-                      <td>{{ row.nip }}</td>
-                      <td>{{ row.date }}</td>
-                      <td>{{ row.kegiatan }}</td>
                       <td>
-                        <a :id="'update'+row.id" class="btn btn-default btn-sm toggle-event" href="#" data-id="adddata"><i class="fa fa-plus-square-o"></i> Update</a>
-                        <a :id="'paying'+row.id" class="btn btn-default btn-sm toggle-event" href="#" data-id="addtransaction"><i class="fa fa-plus-square-o"></i> Add Paying</a>
-                        <a :id="'detail'+row.id" class="btn btn-default btn-sm toggle-event" href="#" data-id="detail"><i class="fa fa-search"></i> Detail</a>
+                        <div class="product-info">
+
+                          <a class="product-title">{{ row.prov_no }}{{ row.kab_no}}{{ row.kec_no }}{{ row.desa_no}} {{ row.blok_sensus}}  
+                            </a><br/>
+
+                            <span class="product-description">({{ row.prov_no }}) {{row.prov_nama }}
+                              <span class="text-muted pull-right">Jumlah KK: {{ row.kk }}, Jumlah BSBTT/BSBTK: {{ row.bsbtt }}</span> 
+                            </span><br/>
+                            
+                            <span class="product-description">Kabupaten/Kota: ({{ row.kab_no }}) {{ row.kab_nama }}
+                              <span class="text-muted pull-right">Muatan Dominan: {{ row.muatan_dominan }}</span>  
+                            </span><br/>
+
+                            <span class="product-description">Kecamatan: ({{ row.kec_no }}) {{ row.kec_nama }}
+                              <span class="text-muted pull-right">Ruta Biasa: {{ row.ruta_biasa }}, Ruta Khusus: {{ row.ruta_khusus }}</span>  
+                            </span><br/>
+
+                            <span class="product-description">Desa/Kelurahan: ({{ row.desa_no}}) {{row.desa_nama}}
+                              <span class="text-muted pull-right">ART Laki-laki: {{ row.art_laki }}, ART Perempuan: {{ row.art_perempuan }}</span>  
+                            </span>
+                        </div>
                       </td>
-                      
                     </tr>
                   </tbody>
                     

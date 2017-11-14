@@ -1,3 +1,6 @@
+<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+
 <div id="mfdform_tag">
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -147,7 +150,7 @@
             </div>
 
             <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" id="btn-submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>
