@@ -17,7 +17,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo $baseUrl;?>/dist/css/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo $baseUrl;?>/dist/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?php echo $baseUrl;?>/dist/css/ionicons/css/ionicons.min.css">
   <!-- jvectormap -->
   <link rel="stylesheet" href="<?php echo $baseUrl;?>/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Theme style -->
