@@ -43,7 +43,8 @@
 			'nama',
 			array(
 				'name'	=>'unit_kerja',
-				'value' => '$data->unitKerja->name',
+				'type'=>'raw',
+				'value'		=> function($data){ return $data->unitKerja->name; },
 				'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
 			),
 			'golongan',

@@ -43,19 +43,22 @@ $('.search-form form').submit(function(){
 				// 'id',
 				'nama_kegiatan',
 				array(
-					'name' =>'Tanggal',
-					'value'	=>'"$data->tanggal_mulai  sd  $data->tanggal_berakhir"',
+					'name' 		=>'Tanggal',
+					'type'		=>'raw',
+					'value'		=> function($data){ return $data->tanggal_mulai." sd ".$data->tanggal_berakhir; },
 				),
 				// 'tanggal_mulai',
 				// 'tanggal_berakhir',
 				array(
 					'name' 	=>'pegawai_id',
-					'value' =>'$data->pegawai_id." - ".$data->pegawai->nama'
+					'type'		=>'raw',
+					'value'		=> function($data){ return $data->pegawai_id." - ".$data->pegawai->nama; },
 				),
 				array(
 					'name'	=>'Cetak',
 					'type' 	=>'raw',
-					'value'	=>'"[".CHtml::link("Surat Tugas",array("stugas"))."] - [".CHtml::link("SPPD", array("sppd"))."]"'
+
+					'value'		=> function($data){ return "[".CHtml::link("Surat Tugas",array("stugas"))."] - [".CHtml::link("SPPD", array("sppd"))."]"; },
 				),
 				// 'penjelasan',
 				/*
