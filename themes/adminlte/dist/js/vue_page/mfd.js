@@ -6,7 +6,7 @@ var vm = new Vue({
     },
 });
 
-
+var loading = $("#loading");
 
 firebase.initializeApp({
     apiKey: "AIzaSyAzSb1P0Rq3r74dvSVxZXViidt2nULUtX4",
@@ -21,6 +21,8 @@ firebase.initializeApp({
 var db = firebase.firestore();
 
 $(document).ready(function() {
+    loading.css("display", "block");
+
     db.collection("datas").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             var cur_data={
@@ -43,10 +45,9 @@ $(document).ready(function() {
                 ruta_khusus: doc.data().art_khusus
             };
             vm.data.push(cur_data);
-            console.log(vm.data);
         });
+        loading.css("display", "none");
     }); 
-
 
     // for(var i=0;i<data_list.length;++i){
     //     // batch.add(coll, data_list[i]);

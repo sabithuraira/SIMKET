@@ -9,7 +9,10 @@
         <div class="col-md-12">
 
           <div id="flash-message"></div>
-          <div class="loader"></div>
+
+          <div class="alert alert-info text-center" id="loading">
+            <i class="fa fa-spin fa-refresh"></i>&nbsp; Mengambil data, harap tunggu...
+          </div>
 
           <div class="box box-info">
               <div class="mailbox-controls">
