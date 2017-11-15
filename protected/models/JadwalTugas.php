@@ -15,7 +15,7 @@
  * @property integer $created_by
  * @property integer $updated_by
  */
-class JadwalTugas extends HelpAR
+class JadwalTugas extends HelpAr
 {
 	/**
 	 * @return string the associated database table name
