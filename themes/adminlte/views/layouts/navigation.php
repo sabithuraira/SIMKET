@@ -11,6 +11,7 @@
       </form>
 
       <ul class="sidebar-menu">
+<!--         
         <li class="header">SIMKET</li>
         <?php 
           echo '<li><a href="'.Yii::app()->createUrl('site/index').'"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>';
@@ -107,16 +108,23 @@
             <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Per Kegiatan</a></li>
             <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Bulanan</a></li>
           </ul>
-        </li>
+        </li> -->
 
-        <li class="header">TUGAS DAN DINAS LUAR</li>
+        <?php if(Yii::app()->user->getUnitKerja()==26){ ?>
+        
+          <li class="header">TUGAS DAN DINAS LUAR</li>
         <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/create'); ?>"><i class="fa fa-bicycle"></i><span> Buat Surat Tugas</span></a></li>
         <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/index'); ?>"><i class="fa fa-bicycle"></i><span> Manajemen Surat Tugas</span></a></li>
         <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/calendar'); ?>"><i class="fa fa-bicycle"></i><span> Kalender Tugas dan DL</span></a></li>
+        
+        <?php
+          }else{
+        ?>
         <li class="header">WILAYAH</li>
           <?php 
             echo '<li><a href="'.Yii::app()->createUrl('mfd/index').'"><i class="fa fa-map-o"></i> Wilayah Sumatera Selatan</a></li>';
           ?>
+        <?php } ?>
         <li class="header">LAINNYA</li>
         <li class="treeview">
           <a href="#">
