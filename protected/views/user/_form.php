@@ -19,35 +19,45 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'username',array('size'=>45,'maxlength'=>45, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
-	<div class="row">
+	<?php if(Yii::app()->user->getLevel()==1){ ?>
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'unit_kerja'); ?>
 		<?php echo $form->dropDownList($model,'unit_kerja',
 				CHtml::listData(UnitKerja::model()->findAll(),'id','name'),
-				array('empty'=>'- Pilih Unit Kerja-')); ?>
+				array('empty'=>'- Pilih Unit Kerja-', 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'unit_kerja'); ?>
 	</div>
 
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'type_user'); ?>
+		<?php echo $form->dropDownList($model,'type_user',
+				HelpMe::getTypeUser(),
+				array('empty'=>'- Pilih Jenis User-', 'class'=>"form-control")); ?>
+		<?php echo $form->error($model,'type_user'); ?>
+	</div>
+	<?php } ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+
+	<div class="box-footer">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>"btn btn-info pull-right")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

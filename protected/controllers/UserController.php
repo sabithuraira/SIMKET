@@ -28,16 +28,12 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'expression'=>'$user->getUnitKerja()==1',
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'expression'=>'$user->getUnitKerja()==1',
+				'actions'=>array('index','view', 'create', 'update'),
+				'expression'=>'$user->getLevel()==1 || $user->getLevel()==2',
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'expression'=>'$user->getUnitKerja()==1',
+				'actions'=>array('delete'),
+				'expression'=>'$user->getLevel()==1',
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('cp'),
@@ -107,6 +103,15 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+			
+			if(Yii::app()->user->getLevel()==2){
+				$model->type_user=0;
+				$model->unit_kerja=Yii::app()->user->getUnitKerja();
+			}
+			else{
+				$model->type_user=$_POST['User']['type_user'];
+			}
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -131,6 +136,15 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+			
+			if(Yii::app()->user->getLevel()==2){
+				$model->type_user=0;
+				$model->unit_kerja=Yii::app()->user->getUnitKerja();
+			}
+			else{
+				$model->type_user=$_POST['User']['type_user'];
+			}
+			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

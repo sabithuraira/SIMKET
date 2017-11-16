@@ -11,11 +11,12 @@ class EWebUser extends CWebUser{
         return $this->_model;
     }
     
+    //1=top admin, 2=admin kabupaten, 0=member
     function getLevel()
     {
         $user=$this->loadUser();
         if($user)
-            return $user->level_id;
+            return $user->type_user;
         return 100;
     }
 

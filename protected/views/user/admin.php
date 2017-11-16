@@ -1,58 +1,65 @@
-<?php
-/* @var $this UserController */
-/* @var $model User */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>User</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah User", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+		<!-- /.pull-right -->
+	</div>
 
-$this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#user-grid').yiiGridView('update', {
-		data: $(this).serialize()
+	<?php
+	Yii::app()->clientScript->registerScript('search', "
+	$('.search-button').click(function(){
+		$('.search-form').toggle();
+		return false;
 	});
-	return false;
-});
-");
-?>
+	$('.search-form form').submit(function(){
+		$('#user-grid').yiiGridView('update', {
+			data: $(this).serialize()
+		});
+		return false;
+	});
+	");
+	?>
 
-<h1>Manage Users</h1>
+		<?php $this->widget('zii.widgets.grid.CGridView', array(
+			'id'=>'user-grid',
+			'dataProvider'=>$model->search(),
+			'filter'=>$model,
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+			'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
+			'pager'=>array(
+				'header'=>Yii::t('penerjemah','Ke halaman : '),
+				'prevPageLabel'=>Yii::t('penerjemah','Sebelumnya'),
+				'nextPageLabel'=>Yii::t('penerjemah','Selanjutnya'),
+				'firstPageLabel'=>Yii::t('penerjemah','Pertama'),
+				'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
+			),
+			
+			'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
+			
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'user-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'username',
-		'email',
-		'password',
-		array(
-			'value'=>'$data->unitKerja->name'
-		),
-		'created_time',
-		/*
-		'last_login',
-		*/
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+			'columns'=>array(
+				'username',
+				'email',
+				// 'password',
+				// array(
+				// 	'value'=>'$data->unitKerja->name'
+				// ),
+
+				array(
+					'name'	=>'unit_kerja',
+					'type'=>'raw',
+					'value'		=> function($data){ return $data->unitKerja->name; },
+					'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
+				),
+				'created_time',
+				/*
+				'last_login',
+				*/
+				array(
+					'class'=>'CButtonColumn',
+				),
+			),
+		)); ?>
+</div>

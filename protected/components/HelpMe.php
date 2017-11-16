@@ -66,6 +66,17 @@ class HelpMe
         return CHtml::listData($arr,'id','label');
     }
 
+    
+    //return list of user type in CHtml::listData for dropdownlist
+    public static function getTypeUser()
+    {
+        $arr=array();
+        $arr[]=array('id'=>0,'label'=>'Pemantau');
+        $arr[]=array('id'=>1,'label'=>'Top Admin');
+        $arr[]=array('id'=>2,'label'=>'Admin Kabupaten/Kota');
+
+        return CHtml::listData($arr,'id','label');
+    }
 
     public static function getMonthListArr()
     {
