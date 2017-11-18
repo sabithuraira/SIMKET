@@ -115,10 +115,11 @@
           <li class="header">TUGAS DAN DINAS LUAR</li>
         <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/create'); ?>"><i class="fa fa-bicycle"></i><span> Buat Surat Tugas</span></a></li>
         <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/index'); ?>"><i class="fa fa-bicycle"></i><span> Manajemen Surat Tugas</span></a></li>
-        <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/calendar'); ?>"><i class="fa fa-bicycle"></i><span> Kalender Tugas dan DL</span></a></li>
+        <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/calendar'); ?>"><i class="fa fa-calendar"></i><span> Kalender Tugas dan DL</span></a></li>
+        <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/single_calendar'); ?>"><i class="fa fa-calendar-plus-o"></i><span> Kalender Pegawai</span></a></li>
         
         <?php
-          }else{
+          }else if(Yii::app()->user->getUnitKerja()==27){
         ?>
         <li class="header">WILAYAH</li>
           <?php 

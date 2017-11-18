@@ -28,7 +28,7 @@ class JadwalTugasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view', 'calendar'),
+				'actions'=>array('view', 'calendar', 'single_calendar'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -49,6 +49,10 @@ class JadwalTugasController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionSingle_calendar(){
+		$this->render('single_calendar');
 	}
 
 	public function actionCalendar(){
