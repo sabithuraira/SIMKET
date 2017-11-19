@@ -42,8 +42,8 @@
 
     <div class="col-xs-1">:</div>
     <div class="col-xs-7">
-        <b>Sulaiman.S / KSK seberang Ulu I </b><br/>
-        BPS Kota Palembang Provinsi Sumatera Selatan"
+        <b><?php echo $model->pegawai->nama ?> / <?php echo $model->pegawai->jabatan ?> </b><br/>
+        <?php echo $model->pegawai->unitKerja->name; ?>
     </div>
   </div>
 
@@ -53,7 +53,7 @@
 
     <div class="col-xs-1">:</div>
     <div class="col-xs-7">
-        Pengatur Muda Tk.1 / II.b
+        <?php echo $model->pegawai->jabatan; ?> / <?php echo $model->pegawai->golongan; ?>
     </div>
   </div>
 
@@ -64,8 +64,8 @@
 
     <div class="col-xs-1">:</div>
     <div class="col-xs-7">
-        Ke Kelurahan 15 Ulu, Kecamatan Seberang Ulu I, Kota Palembang<br/>
-        Dalam Rangka <b>Pemutakhiran Peta Wilkerstat Tahun 2017</b>. Program Penyediaan dan Pelayanan Informasi Statistik. Tahun Anggaran 2017.
+        <?php echo $model->penjelasan; ?><br/>
+        Dalam Rangka <b><?php echo $model->nama_kegiatan; ?></b>. Program Penyediaan dan Pelayanan Informasi Statistik. Tahun Anggaran 2017.
     </div>
   </div>
 
@@ -75,7 +75,7 @@
 
     <div class="col-xs-1">:</div>
     <div class="col-xs-7">
-        17 s.d 30 Juli 2017
+        <?php echo date("d M Y",strtotime($model->tanggal_mulai)); ?> s.d <?php echo date("d M Y",strtotime($model->tanggal_berakhir)); ?>
     </div>
   </div>
 

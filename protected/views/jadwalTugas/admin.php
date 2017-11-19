@@ -58,7 +58,7 @@ $('.search-form form').submit(function(){
 					'name'	=>'Cetak',
 					'type' 	=>'raw',
 
-					'value'		=> function($data){ return "[".CHtml::link("Surat Tugas",array("stugas"))."] - [".CHtml::link("SPPD", array("sppd"))."]"; },
+					'value'		=> function($data){ return "[".CHtml::link("Surat Tugas",array("stugas","id"=>$data->id))."] - [".CHtml::link("SPPD", array("sppd"))."]"; },
 				),
 				// 'penjelasan',
 				/*
