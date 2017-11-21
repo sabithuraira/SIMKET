@@ -6,9 +6,10 @@
   <title>SIMKET | Sistem Informasi Kegiatan Terpadu</title>
 	<?php
 	  $baseUrl = Yii::app()->theme->baseUrl; 
-	  $cs = Yii::app()->getClientScript();
-	  Yii::app()->clientScript->registerCoreScript('jquery');
+	  // $cs = Yii::app()->getClientScript();
+	  // Yii::app()->clientScript->registerCoreScript('jquery');
 	?>
+  <script src="<?php echo $baseUrl;?>/dist/js/jquery-1.9.1.js"></script>
   <script src="https://unpkg.com/vue"></script>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">

@@ -9,7 +9,7 @@
 
     <div class="col-xs-1">:</div>
     <div class="col-xs-7">
-        a. Bahwa dalam rangka Pemutakhiran Peta Wilayah Kerja Statistik maka dipandang perlu Kasi, Staf dan Mitra di lingkungan Badan Pusat Statistik Kota Palembang Provinsi Sumatera Selatan untuk melaksanakan kegiatan dimaksud. 
+        a. Bahwa dalam rangka <?php echo $model->nama_kegiatan; ?> maka dipandang perlu Kasi, Staf dan Mitra di lingkungan Badan Pusat Statistik Kota Palembang Provinsi Sumatera Selatan untuk melaksanakan kegiatan dimaksud. 
 
     </div>
   </div>
@@ -31,7 +31,7 @@
   </div>
 
   <div class="sub-header text-center">
-        Memberi Tugas:
+        Memberi Tugas :
     </div>
 
 
@@ -85,7 +85,7 @@
     <div class="col-xs-8"></div>
 
     <div class="col-xs-4 text-center">
-        Palembang, 13 Juli 2017<br/>
+        Palembang, <?php echo date("d M Y") ?><br/>
         Kepala Badan Pusat Statistik<br/>
         Kota Palembang<br/>
 

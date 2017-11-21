@@ -34,16 +34,16 @@
             <section class="invoice">
                 
                 <div class="row row-print invoice-info">
-                    <div class="col-sm-2 invoice-col">
-                        <img class="header-logo" src="<?php echo $baseUrl;?>/dist/img/logo_bps.png" style="width:100px;height:100px;">
+                    <div class="col-sm-12 invoice-col">
+                        <img class="header-logo" src="<?php echo $baseUrl;?>/dist/img/logo-surat.png" style="width:auto;height:80px;">
                     </div>
                     <!-- /.col -->
-                    <div class="col-sm-10 invoice-col">
+                    <!-- <div class="col-sm-10 invoice-col">
                         <div>
                             <div class="header-bps">BADAN PUSAT STATISTIK</div>
                             <div class="header-unit">KOTA PALEMBANG</div>
                         </div> 
-                    </div>
+                    </div> -->
                     <!-- /.col -->
                     <!-- /.col -->
                 </div>
