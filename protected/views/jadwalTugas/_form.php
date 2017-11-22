@@ -1,3 +1,5 @@
+<?php $baseUrl = Yii::app()->theme->baseUrl; ?>
+<link rel="stylesheet" href="<?php echo $baseUrl;?>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <?php
 /* @var $this JadwalTugasController */
 /* @var $model JadwalTugas */
@@ -91,10 +93,11 @@
 		<div id="calendar"></div>
 	</div>
 
+
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'penjelasan'); ?>
-		<?php echo $form->textArea($model,'penjelasan',array('form-groups'=>6, 'cols'=>50, 'class'=>"form-control")); ?>
-		<?php echo $form->error($model,'penjelasan'); ?>
+		<?php echo $form->textArea($model,'penjelasan',array('form-groups'=>6, 'class'=>"textarea", 'style'=>"width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;")); ?>
+		<?php echo $form->error($model,'penjelasan'); ?>		
 	</div>
 
 	<div class="box-footer">
@@ -105,8 +108,14 @@
 
 </div><!-- form -->
 
-<?php $baseUrl = Yii::app()->theme->baseUrl; ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="<?php echo $baseUrl;?>/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script src="<?php echo $baseUrl;?>/dist/js/vue_page/jadwal_tugas.js"></script>
+<script src="<?php echo $baseUrl;?>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script>
+  $(function () {
+    //bootstrap WYSIHTML5 - text editor
+    $("#JadwalTugas_penjelasan").wysihtml5();
+  });
+</script>

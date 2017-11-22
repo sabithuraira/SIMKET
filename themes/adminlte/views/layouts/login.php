@@ -39,7 +39,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <b>Sistem Pengelolaan Surat Tugas dan Perjalanan Dinas</b> BPS Kota Palembang
+    <b>Sistem Pengelolaan Surat Tugas dan Perjalanan Dinas</b> 
+    BPS Kota Palembang
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
