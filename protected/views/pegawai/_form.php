@@ -39,6 +39,15 @@
 		<?php echo $form->error($model,'unit_kerja'); ?>
 	</div>
 
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'unit_kerja_kab'); ?>
+		<?php echo $form->dropDownList($model,'unit_kerja_kab',
+				CHtml::listData(UnitKerjaDaerah::model()->findAll(),'id','nama'),
+				array('empty'=>'- Pilih Jabatan -', 'class'=>"form-control")); ?>
+		<?php echo $form->error($model,'unit_kerja'); ?>
+	</div>
+
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'golongan'); ?>
 		<?php echo $form->textField($model,'golongan',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>

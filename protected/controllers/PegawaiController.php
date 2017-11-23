@@ -70,6 +70,7 @@ class PegawaiController extends Controller
 		if(isset($_POST['Pegawai']))
 		{
 			$model->attributes=$_POST['Pegawai'];
+			$model->unit_kerja_kab=$_POST['Pegawai']['unit_kerja_kab'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->nip));
 		}
@@ -94,6 +95,7 @@ class PegawaiController extends Controller
 		if(isset($_POST['Pegawai']))
 		{
 			$model->attributes=$_POST['Pegawai'];
+			$model->unit_kerja_kab = $_POST['Pegawai']['unit_kerja_kab'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->nip));
 		}

@@ -61,6 +61,7 @@ class Pegawai extends HelpAr
 			'nip' => 'NIP',
 			'nama' => 'Nama',
 			'unit_kerja' => 'Unit Kerja',
+			'unit_kerja_kab' => 'Jabatan Struktural',
 			'golongan' => 'Golongan',
 			'jabatan' => 'Jabatan',
 			'created_time' => 'Created Time',
