@@ -1,15 +1,3 @@
-<?php
-/* @var $this PegawaiController */
-/* @var $model Pegawai */
-
-$this->breadcrumbs=array(
-	'Pegawais'=>array('index'),
-	$model->nip=>array('view','id'=>$model->nip),
-	'Update',
-);
-?>
-
-
 <div class="box box-info">
 	<div class="mailbox-controls">
 		<b>Update Pegawai <?php echo $model->nama; ?></b>
