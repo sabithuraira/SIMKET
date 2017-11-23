@@ -33,7 +33,7 @@ $(document).ready(function() {
                 bsbtt: doc.data().bsbtt,
                 desa_nama: doc.data().desa_nama,
                 desa_no: doc.data().desa_no,
-                kab_nama: doc.data().kab_nama,
+                kab_nama: doc.data().kab_nam,
                 kab_no: doc.data().kab_no,
                 kec_nama: doc.data().kec_nama,
                 kec_no: doc.data().kec_no,
