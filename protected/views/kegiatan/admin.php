@@ -103,7 +103,32 @@ $('.search-form form').submit(function(){
 		),
 			array(
 				'class'=>'CButtonColumn',
-				'template'=>'{update}',
+				'template' => '{view} {update} {delete}',
+				'htmlOptions' => array('width' => 20),
+				// 'viewButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-view.png',
+				// 'updateButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-update.png',
+				// 'deleteButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-delete.png',
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>function($data){
+								return Yii::app()->createUrl("kegiatan/update", array("id"=>$data->id));
+						},
+					),
+					'view'=>array(
+							'url'=>function($data){
+								return Yii::app()->createUrl("kegiatan/view", array("id"=>$data->id));
+						},
+					),
+					'delete'=>array(
+						'url'=>function($data){
+								return Yii::app()->createUrl("kegiatan/view", array("id"=>$data->id));
+						},
+						// 'visible'=>function ($row, $data){
+						// 		return $data->judul_ind == NULL AND $data->judul_eng == NULL;
+						// },
+						'label'=>'Hapus',
+					),
+				),
 			),
 		),
 	)); ?>

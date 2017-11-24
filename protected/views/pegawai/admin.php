@@ -55,6 +55,26 @@
 			*/
 			array(
 				'class'=>'CButtonColumn',
+				'template' => '{view} {update} {delete}',
+				'htmlOptions' => array('width' => 20),
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>function($data){
+							return Yii::app()->createUrl("pegawai/update", array("id"=>$data->nip));
+						},
+					),
+					'view'=>array(
+						'url'=>function($data){
+							return Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip));
+						},
+					),
+					'delete'=>array(
+						'url'=>function($data){
+							return Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip));
+						},
+						'label'=>'Hapus',
+					),
+				),
 			),
 		),
 	)); ?>
