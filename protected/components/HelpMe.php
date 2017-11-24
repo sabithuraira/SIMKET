@@ -65,7 +65,6 @@ class HelpMe
 
         return CHtml::listData($arr,'id','label');
     }
-
     
     //return list of user type in CHtml::listData for dropdownlist
     public static function getTypeUser()

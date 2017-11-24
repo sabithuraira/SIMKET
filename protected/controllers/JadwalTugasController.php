@@ -28,7 +28,8 @@ class JadwalTugasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view', 'calendar', 'single_calendar'),
+				'actions'=>array('view', 'calendar', 'single_calendar',
+					'review'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -132,6 +133,11 @@ class JadwalTugasController extends Controller
 		$this->layout='//layouts/print';
 		
 		$this->render('surat_tugas',array(
+			'model'=>$this->loadModel($id),
+		));
+	}
+	public function actionReview($id){
+		$this->render('review',array(
 			'model'=>$this->loadModel($id),
 		));
 	}

@@ -73,3 +73,4 @@ ALTER TABLE `unit_kerja_daerah`
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ALTER TABLE `pegawai` ADD `unit_kerja_kab` INT NULL AFTER `jabatan`;
+ALTER TABLE `jadwal_tugas` ADD `print_no` VARCHAR(255) NULL AFTER `updated_by`, ADD `print_unit_kerja` VARCHAR(10) NULL AFTER `print_no`, ADD `print_ttd` INT NULL AFTER `print_unit_kerja`;
