@@ -70,7 +70,7 @@
 					),
 					'delete'=>array(
 						'url'=>function($data){
-							return Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip));
+							return Yii::app()->createUrl("pegawai/delete", array("id"=>$data->nip));
 						},
 						'label'=>'Hapus',
 					),

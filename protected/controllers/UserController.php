@@ -29,11 +29,13 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view', 'create', 'update'),
-				'expression'=>'$user->getLevel()==1 || $user->getLevel()==2',
+				// 'expression'=>'$user->getLevel()==1 || $user->getLevel()==2',
+				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('delete'),
-				'expression'=>'$user->getLevel()==1',
+				// 'expression'=>'$user->getLevel()==1',
+				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('cp'),

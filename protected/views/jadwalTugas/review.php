@@ -1,4 +1,4 @@
-<div id="calendar_tag">
+<div id="review_tag">
     <div class="col-md-3">
 
         <div class="box box-solid clearfix">
@@ -43,4 +43,4 @@
 </div>
 
 <?php $baseUrl = Yii::app()->theme->baseUrl; ?>
-<script src="<?php echo $baseUrl;?>/dist/js/vue_page/calendar_tugas.js"></script>
+<script src="<?php echo $baseUrl;?>/dist/js/vue_page/review_tugas.js"></script>
