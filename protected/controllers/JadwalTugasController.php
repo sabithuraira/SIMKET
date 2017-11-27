@@ -194,7 +194,7 @@ class JadwalTugasController extends Controller
 	public function actionStugas($id){
 		$this->layout='//layouts/print';
 		
-		$this->render('surat_tugas',array(
+		$this->render('cetak',array(
 			'model'=>$this->loadModel($id),
 		));
 	}

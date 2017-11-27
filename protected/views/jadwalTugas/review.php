@@ -27,7 +27,7 @@
                 </p>
 
                 <p>
-                <button type="button" id="btn-print" class="btn bg-green btn-flat form-control" v-bind:class="{ disabled: is_allow_simpan }">Cetak Surat</button>
+                    <button type="button" id="btn-print" class="btn bg-green btn-flat form-control" v-bind:class="{ disabled: is_allow_simpan }">Cetak Surat</button>
                 </p>
             </div>
 

@@ -6,6 +6,7 @@
 	//   $cs = Yii::app()->getClientScript();
 	//   Yii::app()->clientScript->registerCoreScript('jquery');
 	?>
+    <script src="https://unpkg.com/vue"></script>
     <script src="<?php echo $baseUrl;?>/dist/js/jquery-1.9.1.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

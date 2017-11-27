@@ -85,7 +85,7 @@ btn_save.click(function(){
 
 btn_print.click(function(){
     if(!vm.is_allow_simpan){
-
+        window.location.href = pathname+"?r=jadwalTugas/stugas&id="+id_jadwal.val();
     }
 })
 

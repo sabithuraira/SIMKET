@@ -1,6 +1,4 @@
-<?php
-  $baseUrl = Yii::app()->theme->baseUrl; 
-?>
+<?php $baseUrl = Yii::app()->theme->baseUrl; ?>
 <div class="wrapper">
     <section class="invoice">
         
@@ -8,16 +6,7 @@
             <div class="col-sm-12 invoice-col">
                 <img class="header-logo" src="<?php echo $baseUrl;?>/dist/img/logo-surat.png" style="width:auto;height:80px;">
             </div>
-            <!-- /.col -->
-            <!-- <div class="col-sm-10 invoice-col">
-                <div>
-                    <div class="header-bps">BADAN PUSAT STATISTIK</div>
-                    <div class="header-unit">KOTA PALEMBANG</div>
-                </div> 
-            </div> -->
-            <!-- /.col -->
-            <!-- /.col -->
-
+        </div>
 
             <div class="sub-header text-center">
                 <u>SURAT TUGAS</u><br/>
@@ -26,10 +15,10 @@
 
 
               <div class="row row-print sub-header">
-                <div class="col-xs-4">Menimbang</div>
+                <div class="col-xs-3">Menimbang</div>
 
                 <div class="col-xs-1">:</div>
-                <div class="col-xs-7">
+                <div class="col-xs-8">
                     Bahwa dalam rangka <?php echo $model->nama_kegiatan; ?> maka dipandang perlu menugaskan pegawai di lingkungan Badan Pusat Statistik Kota Palembang Provinsi Sumatera Selatan untuk melaksanakan kegiatan dimaksud. 
 
                 </div>
@@ -38,10 +27,10 @@
 
 
               <div class="row row-print sub-header">
-                <div class="col-xs-4">Mengingat</div>
+                <div class="col-xs-3">Mengingat</div>
 
                 <div class="col-xs-1">:</div>
-                <div class="col-xs-7">
+                <div class="col-xs-8">
 
                   <ol>
                     <li>Undang-undang No. 16 Tahun 1997 Tentang Statistik;</li>
@@ -66,10 +55,10 @@
 
 
               <div class="row row-print sub-header">
-                <div class="col-xs-4">Kepada</div>
+                <div class="col-xs-3">Kepada</div>
 
                 <div class="col-xs-1">:</div>
-                <div class="col-xs-7">
+                <div class="col-xs-8">
                     <b><?php echo $model->pegawai->nama ?> / <?php echo $model->pegawai->jabatan ?> </b><br/>
                     <?php echo $model->pegawai->unitKerja->name; ?>
                 </div>
@@ -77,10 +66,10 @@
 
 
               <div class="row row-print sub-header">
-                <div class="col-xs-4">Pangkat / Golongan</div>
+                <div class="col-xs-3">Pangkat / Golongan</div>
 
                 <div class="col-xs-1">:</div>
-                <div class="col-xs-7">
+                <div class="col-xs-8">
                     <?php echo $model->pegawai->golongan; ?>
                 </div>
               </div>
@@ -88,10 +77,10 @@
 
 
               <div class="row row-print sub-header">
-                <div class="col-xs-4">Untuk</div>
+                <div class="col-xs-3">Untuk</div>
 
                 <div class="col-xs-1">:</div>
-                <div class="col-xs-7">
+                <div class="col-xs-8">
                     <?php echo $model->penjelasan; ?><br/>
                     Dalam Rangka <b><?php echo $model->nama_kegiatan; ?></b>. Program Penyediaan dan Pelayanan Informasi Statistik. <br/>
                     Tahun Anggaran <?php echo date('Y') ?>
@@ -100,10 +89,10 @@
 
 
               <div class="row row-print sub-header">
-                <div class="col-xs-4">Pada Tanggal</div>
+                <div class="col-xs-3">Pada Tanggal</div>
 
                 <div class="col-xs-1">:</div>
-                <div class="col-xs-7">
+                <div class="col-xs-8">
                     <?php echo date("d M Y",strtotime($model->tanggal_mulai)); ?> s.d <?php echo date("d M Y",strtotime($model->tanggal_berakhir)); ?>
                 </div>
               </div>
@@ -120,8 +109,8 @@
                     Kota Palembang<br/>
 
 
-                    <div class="nama-ttd">{{ nama_ttd }}</div><br/>
-                    <div>{{ nip_ttd }}</div>
+                    <div class="nama-ttd">{{ nama_ttd }}</div>
+                    <div>NIP: {{ nip_ttd }}</div>
                 </div>
               </div>
 
