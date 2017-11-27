@@ -74,3 +74,5 @@ ALTER TABLE `unit_kerja_daerah`
 
 ALTER TABLE `pegawai` ADD `unit_kerja_kab` INT NULL AFTER `jabatan`;
 ALTER TABLE `jadwal_tugas` ADD `print_no` VARCHAR(255) NULL AFTER `updated_by`, ADD `print_unit_kerja` VARCHAR(10) NULL AFTER `print_no`, ADD `print_ttd` INT NULL AFTER `print_unit_kerja`;
+
+ALTER TABLE `jadwal_tugas` ADD `print_is_kepala` INT(1) NULL AFTER `print_ttd`;

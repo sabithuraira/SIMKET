@@ -21,7 +21,7 @@
 
             <div class="sub-header text-center">
                 <u>SURAT TUGAS</u><br/>
-                Nomor : 151/9286/07/2017
+                Nomor : {{ no_surat }}
             </div>
 
 
@@ -63,8 +63,6 @@
               <div class="sub-header text-center">
                     Memberi Tugas :
                 </div>
-
-
 
 
               <div class="row row-print sub-header">
@@ -117,11 +115,13 @@
 
                 <div class="col-xs-4 text-center">
                     Palembang, <?php echo date("d M Y") ?><br/>
-                    Kepala Badan Pusat Statistik<br/>
+                    <div v-if="is_kepala">Kepala Badan Pusat Statistik<br/></div>
+                    <div v-if="!is_kepala">an Kepala Badan Pusat Statistik<br/></div>
                     Kota Palembang<br/>
 
 
-                    <div class="nama-ttd">Ir. Taupiq Hidayat N.R, M.M</div>
+                    <div class="nama-ttd">{{ nama_ttd }}</div><br/>
+                    <div>{{ nip_ttd }}</div>
                 </div>
               </div>
 

@@ -7,6 +7,7 @@
  * @property string $nip
  * @property string $nama
  * @property integer $unit_kerja
+ * @property integer $unit_kerja_kab
  * @property string $golongan
  * @property string $jabatan
  * @property string $created_time
@@ -36,7 +37,7 @@ class Pegawai extends HelpAr
 			array('nama, golongan, jabatan', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('nip, nama, unit_kerja, golongan, jabatan, created_time, updated_time', 'safe', 'on'=>'search'),
+			array('nip, nama, unit_kerja, unit_kerja_kab, golongan, jabatan, created_time, updated_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -90,6 +91,7 @@ class Pegawai extends HelpAr
 		$criteria->compare('nip',$this->nip,true);
 		$criteria->compare('nama',$this->nama,true);
 		$criteria->compare('unit_kerja',$this->unit_kerja);
+		$criteria->compare('unit_kerja_kab',$this->unit_kerja_kab);
 		$criteria->compare('golongan',$this->golongan,true);
 		$criteria->compare('jabatan',$this->jabatan,true);
 		$criteria->compare('created_time',$this->created_time,true);

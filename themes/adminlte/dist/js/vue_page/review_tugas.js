@@ -4,125 +4,119 @@ var vm = new Vue({
     el: "#review_tag",
     data: {
         hello: "Hello world",
-        list_name: [],
-        data : [],
+        no_surat: '',
+        nama_ttd : '',
+        nip_ttd: '',
+        is_kepala: true,
+        is_allow_simpan: true,
         total_day: 30,
         month: d.getMonth() + 1,
+        year: d.getFullYear(),
     },
 });
 
-var month_id = $("#monthid");
-var thead = $("#tablehead");
-var tbody = $("#tablebody");
+var ttd = $("#ttd");
+var btn_save = $("#btn-save");
+var btn_print = $("#btn-print");
+var id_jadwal = $("#id-jadwal");
+var no_jadwal = $("#no-jadwal");
 var loading = $("#loading");
 
 var pathname = window.location.pathname;
 
 $(document).ready(function() {
-    month_id.val(vm.month);
-
-    grabListName();
-});
-
-month_id.change(function() {
-    vm.month = month_id.val();
-    grabListName();
-});
-
-function generateTable(){
-    generateHeader();
-    generateBody();
-    setJadwal();
-}
-
-function grabListName(){
-    thead.children().remove();
-    tbody.children().remove();
-
-    loading.css("display", "block");
-    $.ajax({
-        url: pathname+"?r=jadwalTugas/listpegawai",
-        dataType: 'json',
-        success: function(data) {
-            vm.list_name=data.data;
-            console.log(JSON.stringify(vm.list_name))
-            grabDatas();
-        }.bind(this),
-        error: function(xhr, status, err) {
-            console.log(xhr);
-        }.bind(this)
-    });
-}
-
-function grabDatas()
-{
-    $.ajax({
-        url: pathname+"?r=jadwalTugas/listkegiatan&id="+vm.month,
-        dataType: 'json',
-        success: function(data) {
-            vm.data=data.data;
-            generateTable();
-
-            loading.css("display", "none");
-        }.bind(this),
-        error: function(xhr, status, err) {
-            console.log(xhr);
-        }.bind(this)
-    });
-}
-
-function setJadwal(){
-    for(var i=0;i<vm.data.length;++i){
-        setCellJadwal(vm.data[i]);
-    }
-}
-
-function setCellJadwal(data){
-    if(data.start_date==data.end_date){
-        $("#id"+data.nip+" td").eq(data.start_date+1).addClass("red");
+    if(no_jadwal.val().length==0){
+        vm.is_allow_simpan=true;
     }
     else{
-        var total_jadwal = data.end_date - data.start_date + 1;
-        var start_cell= $("#id"+data.nip+" td").eq(parseInt(data.start_date)+1);
-        
-        start_cell.attr('colspan',total_jadwal);
-        start_cell.addClass("red");
-        start_cell.append(data.judul);
-        
-        for(var d=parseInt(data.start_date)+1;d<=parseInt(data.end_date);++d){
-             $("#id"+data.nip+" td").eq(d+1).remove();
+        vm.is_allow_simpan=false;
+    }
+
+    loadDefaultData();
+});
+
+function loadDefaultData(){
+    $.ajax({
+        url: pathname+"?r=jadwalTugas/api_view&id="+id_jadwal.val(),
+        dataType: 'json',
+        success: function(data) {
+            vm.no_surat= data.no_surat;
+            vm.nip_ttd= data.nip_ttd;
+            vm.nama_ttd = data.nama_ttd;
+            vm.is_kepala = data.is_kepala;
+        }.bind(this),
+        error: function(xhr, status, err) {
+            console.log(JSON.stringify(xhr));
+        }.bind(this)
+    });
+}
+
+function saveDataSurat(){
+    $.ajax({
+        url: pathname+"?r=jadwalTugas/enter_surat&id="+id_jadwal.val(),
+        dataType: 'json',
+        method: "POST",
+        data: { no_surat: vm.no_surat, nama_ttd: vm.nama_ttd , nip_ttd: vm.nip_ttd, is_kepala: vm.is_kepala },
+        success: function(data) {
+            if(data=="true"){
+                alert("Sukses menyimpan data");
+                vm.is_allow_simpan=false;
+            }
+            else{
+                alert("Gagal menyimpan data, refresh halaman dan ulangi kembali.");
+            }
+        }.bind(this),
+        error: function(xhr, status, err) {
+            console.log(JSON.stringify(xhr));
+        }.bind(this)
+    });
+}
+
+btn_save.click(function(){
+    if(vm.is_allow_simpan){
+        if(vm.no_surat=='' || vm.no_surat==null){
+            alert("Pejabat dan unit kerja yang dipilih tidak valid");
+        }
+        else{
+            saveDataSurat();
         }
     }
-}
+});
 
-function generateHeader(){
-    var str_head ='<th style="width: 20px"></th><th></th>';
+btn_print.click(function(){
+    if(!vm.is_allow_simpan){
 
-    for(var i=1;i<=vm.total_day;++i){
-        str_head += '<th style="width: 30px">'+i+'</th>';
     }
+})
 
-    thead.append(str_head);
-}
+ttd.change(function() {
+    if(ttd.val()==1)
+        vm.is_kepala=true;
+    else 
+        vm.is_kepala=false;
+    
 
-function generateBody(){
-    var tbody = $("#tablebody");
-    // console.log(vm.list_name);
-    for(var i=0 ;i < vm.list_name.length; ++i){
-        var str_body = '<tr id="id'+vm.list_name[i].id+'"><td>'+(i+1)+'.</td>';
-        str_body += '<td class="gray">'+vm.list_name[i].name+'</td>';
-        str_body += generateEmptyTd();
-        str_body += '</tr>';
+    $.ajax({
+        url: pathname+"?r=jadwalTugas/api_pejabat&id="+ttd.val(),
+        dataType: 'json',
+        success: function(data) {
+            if(data.nama==''){
+                vm.no_surat="";
+                alert("Tidak ada pejabat pada seksi tersebut");
+            }
+            else{
+                vm.no_surat="B-20/BPS1671/"+data.seksi+"/"+vm.month+"/"+vm.year;
+            }
+            vm.nama_ttd=data.nama;
+            vm.nip_ttd = data.nip;
+        }.bind(this),
+        error: function(xhr, status, err) {
+            console.log(JSON.stringify(xhr));
 
-        tbody.append(str_body);
-    }
-}
-
-function generateEmptyTd(){
-    str_result="";
-    for(var i=1;i<=vm.total_day;++i){
-        str_result += '<td></td>';
-    }
-
-    return str_result;
-}
+            vm.no_surat="";
+            vm.nama_ttd="";
+            vm.nip_ttd = "";
+            alert("Tidak ada pejabat pada seksi tersebut");
+        }.bind(this)
+    });
+});

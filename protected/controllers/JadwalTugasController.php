@@ -37,7 +37,8 @@ class JadwalTugasController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','delete', 'stugas'),
+				'actions'=>array('index','delete', 'stugas', 
+					'api_pejabat', 'enter_surat', 'api_view'),
 				'users'=>array('@'),
 			),
 
@@ -50,6 +51,67 @@ class JadwalTugasController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionApi_view($id)
+	{
+	   	$model = $this->loadModel($id);
+
+		echo CJSON::encode(array(
+			'no_surat'=>$model->print_no,
+			'nip_ttd'	=>$model->print_ttd_nip,
+			'nama_ttd'	=>$model->print_ttd,
+			'is_kepala'	=>$model->print_is_kepala
+		));
+
+		Yii::app()->end();
+	}
+
+	public function actionEnter_surat($id){
+		$result = "false";
+		if(isset($_POST['no_surat'], $_POST['nama_ttd'], $_POST['nip_ttd'], $_POST['is_kepala'])){
+			$model = $this->loadModel($id);
+			$model->print_no=$_POST['no_surat'];
+			$model->print_ttd=$_POST['nama_ttd'];
+			$model->print_ttd_nip=$_POST['nip_ttd'];
+			$model->print_is_kepala=$_POST['is_kepala'];
+			if($model->save()){
+				$result="true";
+			}
+		}
+
+		echo CJSON::encode($result);
+		Yii::app()->end();
+	}
+
+	public function actionApi_pejabat($id)
+	{
+	   	$model = Pegawai::model()->findByAttributes(array(
+			   'unit_kerja' =>Yii::app()->user->getUnitKerja(),
+			   'unit_kerja_kab' =>$id
+		   ));
+
+		$seksi = UnitKerjaDaerah::model()->findByPk($id);
+
+		$result=array();
+		if($model==null){
+			$result=array(
+				'nama'=>'',
+				'nip'	=>'',
+				'seksi'	=>'',
+			);
+		}
+		else{
+			$result=array(
+				'nama'=>$model->nama,
+				'nip'	=>$model->nip,
+				'seksi'	=>$seksi->kode,
+			);
+		}
+
+		echo CJSON::encode($result);
+
+		Yii::app()->end();
 	}
 
 	public function actionSingle_calendar(){
