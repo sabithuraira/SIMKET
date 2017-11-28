@@ -9,6 +9,7 @@ var vm = new Vue({
 var loading = $("#loading");
 var search = $("#search");
 var search_type = $("#search_type");
+var download_excel = $("#download-excel");
 
 firebase.initializeApp({
     apiKey: "AIzaSyAzSb1P0Rq3r74dvSVxZXViidt2nULUtX4",
@@ -24,17 +25,6 @@ var db = firebase.firestore();
 
 $(document).ready(function() {
     refreshData();
-
-    // for(var i=0;i<data_list.length;++i){
-    //     // batch.add(coll, data_list[i]);
-    //     db.collection("datas").add(data_list[i])
-    //     .then(function(docRef) {
-    //         console.log("Document written with ID: ", docRef.id);
-    //     })
-    //     .catch(function(error) {
-    //         console.error("Error adding document: ", error);
-    //     });
-    // }
 });
 
 
@@ -85,30 +75,36 @@ function refreshData(){
     }); 
 }
 
-function tableToExcel(){
-    var uri = "data:application/vnd.ms-excel;base64,",
-    template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http:\/\/www.w3.org\/TR\/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}<\/x:Name><x:WorksheetOptions><x:DisplayGridlines\/><\/x:WorksheetOptions><\/x:ExcelWorksheet><\/x:ExcelWorksheets><\/x:ExcelWorkbook><\/xml><![endif]--><\/head><body><table>{table}<\/table><\/body><\/html>',
-    base64 = function(s) {
-        return window.btoa(unescape(encodeURIComponent(s)));
-    },
-    format = function(s, c) {
-        return s.replace(/{(\w+)}/g, function(m, p) {
-            return c[p];
-        });
-    };
 
-    return function() {
-        table = 'initabel';
-        fileName = 'mfd1673.xls';
-        if (!table.nodeType) table = document.getElementById(table)
-        var ctx = {
-            worksheet: fileName || 'Worksheet', 
-            table: table.innerHTML
-        }
+// download_excel.click(function(){
+//     console.log("masuk downloat");
+//     tableToExcel();
+// });
 
-        $("<a id='dlink'  style='display:none;'></a>").appendTo("body");
-            document.getElementById("dlink").href = uri + base64(format(template, ctx))
-            document.getElementById("dlink").download = fileName;
-            document.getElementById("dlink").click();
-}
-}
+// function tableToExcel(){
+//     var uri = "data:application/vnd.ms-excel;base64,",
+//     template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http:\/\/www.w3.org\/TR\/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}<\/x:Name><x:WorksheetOptions><x:DisplayGridlines\/><\/x:WorksheetOptions><\/x:ExcelWorksheet><\/x:ExcelWorksheets><\/x:ExcelWorkbook><\/xml><![endif]--><\/head><body><table>{table}<\/table><\/body><\/html>',
+//     base64 = function(s) {
+//         return window.btoa(unescape(encodeURIComponent(s)));
+//     },
+//     format = function(s, c) {
+//         return s.replace(/{(\w+)}/g, function(m, p) {
+//             return c[p];
+//         });
+//     };
+
+//     return function() {
+//         table = 'tabletoexcel';
+//         fileName = 'mfd1673.xls';
+//         if (!table.nodeType) table = document.getElementById(table)
+//         var ctx = {
+//             worksheet: fileName || 'Worksheet', 
+//             table: table.innerHTML
+//         }
+
+//         $("<a id='dlink'  style='display:none;'></a>").appendTo("body");
+//             document.getElementById("dlink").href = uri + base64(format(template, ctx))
+//             document.getElementById("dlink").download = fileName;
+//             document.getElementById("dlink").click();
+//     }
+// }

@@ -18,7 +18,7 @@
               <div class="mailbox-controls">
                 <!-- Check all button -->
                 <div class="btn-group">
-                  <button id="download-excel" type="button" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"> Download Excel</i></button>
+                  <button id="download-excel" type="button" class="btn btn-default btn-sm" onclick="tableToExcel();"><i class="fa fa-file-excel-o"> Download Excel</i></button>
                 </div>
                 
                 <b>&nbsp Master Blok Sensus</b>
@@ -109,6 +109,60 @@
                     
                 </table>
               </div>
+
+
+
+              <div class="table-responsive mailbox-messages">
+                <table id="tabletoexcel" class="table table-border table-hover table-striped table-hidden">
+                  <thead>
+                    <tr>
+                      <th>Kode Provinsi</th>
+                      <th>Nama Provinsi</th>
+                      <th>Kode Kabupaten</th>
+                      <th>Nama Kabupaten</th>
+                      <th>Kode Kecamatan</th>
+                      <th>Nama Kecamatan</th>
+                      <th>Kode Desa</th>
+                      <th>Nama Desa</th>
+                      <th>Blok Sensus</th>
+                      <th>Jumlah KK</th>
+                      <th>Jumlah BSBTT</th>
+                      <th>Muatan Dominan</th>
+                      <th>Jumlah Ruta Biasa</th>
+                      <th>Jumlah Ruta Khusus</th>
+                      <th>Jumlah ART Laki</th>
+                      <th>Jumlah ART Perempuan</th>
+                    </tr>
+                  </thead>
+                   <tbody v-for="row in data">
+                    <tr>
+                  
+                      <td>{{ row.prov_no }}   </td>
+                      <td>{{ row.prov_nama }}</td>
+                      <td>{{ row.kab_no}}</td>
+                      <td>{{ row.kab_nama }}</td>
+                      <td>{{ row.kec_no }}</td>
+                      <td>{{ row.kec_nama }}</td>
+                      <td>{{ row.desa_no}}</td>
+                      <td>{{ row.desa_nama}}</td>
+                      <td>{{ row.blok_sensus}}</td>
+                      <td>{{ row.kk }}</td>
+                      <td>{{ row.bsbtt }}</td>
+                      <td>{{ row.muatan_dominan }}</td>
+                      <td>{{ row.ruta_biasa }}</td>
+                      <td>{{ row.ruta_khusus }}</td>
+                      <td>{{ row.art_laki }}</td>
+                      <td>{{ row.art_perempuan }}</td>
+                    </tr>
+                  </tbody>
+                    
+                </table>
+              </div>
+
+
+
+
+
           </div>
         </div>
       </div>
@@ -120,3 +174,35 @@
 
 <?php $baseUrl = Yii::app()->theme->baseUrl; ?>
 <script src="<?php echo $baseUrl;?>/dist/js/vue_page/mfd.js"></script>
+
+<script>
+    var tableToExcel = (function() {   
+        
+        var uri = "data:application/vnd.ms-excel;base64,",
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http:\/\/www.w3.org\/TR\/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}<\/x:Name><x:WorksheetOptions><x:DisplayGridlines\/><\/x:WorksheetOptions><\/x:ExcelWorksheet><\/x:ExcelWorksheets><\/x:ExcelWorkbook><\/xml><![endif]--><\/head><body><table>{table}<\/table><\/body><\/html>',
+            base64 = function(s) {
+                return window.btoa(unescape(encodeURIComponent(s)));
+            },
+            format = function(s, c) {
+                return s.replace(/{(\w+)}/g, function(m, p) {
+                    return c[p];
+                });
+            };
+
+        return function() {
+            table = 'tabletoexcel';
+            fileName = 'mfd1673.xls';
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {
+                worksheet: fileName || 'Worksheet', 
+                table: table.innerHTML
+            }
+
+            $("<a id='dlink'  style='display:none;'></a>").appendTo("body");
+                document.getElementById("dlink").href = uri + base64(format(template, ctx))
+                document.getElementById("dlink").download = fileName;
+                document.getElementById("dlink").click();
+        }
+
+    })();  
+</script>

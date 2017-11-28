@@ -115,6 +115,6 @@ td.bpsgood
   color: #000000 !important;
 }
 
-#loading, #jadwal-success, #jadwal-error{
+#loading, #jadwal-success, #jadwal-error, .table-hidden{
   display: none;
 }
