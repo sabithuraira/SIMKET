@@ -18,25 +18,54 @@
               <div class="mailbox-controls">
                 <!-- Check all button -->
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+                  <button id="download-excel" type="button" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"> Download Excel</i></button>
                 </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                 
                 <b>&nbsp Master Blok Sensus</b>
-                
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
               </div>
+
+
+              <div class="mailbox-controls">
+                <form role="search">
+                  <div class="form-group">
+
+                    <div class="row">
+                      <div class="col-xs-3">
+
+                        <?php
+                          $listData = array(
+                            'prov_nama' =>'Nama Provinsi',
+                            'prov_no' =>'Kode Provinsi',
+                            'kab_nam' =>'Nama Kabupaten',
+                            'kab_no' =>'Kode Kabupaten',
+                            'kec_nama' =>'Nama Kecamatan',
+                            'kec_no' =>'Kode Kecamatan',
+                            'desa_nama' =>'Nama Desa',
+                            'desa_no' =>'Kode Desa',
+                            'blok_sensus' => 'blok_sensus'
+                          );
+
+                          echo CHtml::dropDownList('search_type', '', 
+                              $listData,
+                              array('class'=>'form-control'));
+                        ?>  
+                      </div>
+
+                      <div class="col-xs-9">
+                        
+                        <input type="text" class="form-control" id="search" placeholder="Enter keyword for search">
+                      </div>
+                    </div>
+
+
+                  </div>
+                </form>
+              </div>
+
+              <!-- <div class="loading">
+                <img class="loading_image"  height="50" width="50" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/loading.gif" /><br/>
+                <b class="loading_message">Loading...</b>
+              </div> -->
 
               <div class="table-responsive mailbox-messages">
                 <table class="table table-border table-hover table-striped">
