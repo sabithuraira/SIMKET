@@ -126,9 +126,10 @@ class PegawaiController extends Controller
 	{
 		$model=new Pegawai('search');
 		$model->unsetAttributes();  // clear any default values
-		$model->unit_kerja = 26;
 		if(isset($_GET['Pegawai']))
 			$model->attributes=$_GET['Pegawai'];
+
+		$model->unit_kerja = 26;
 
 		$this->render('admin',array(
 			'model'=>$model,
