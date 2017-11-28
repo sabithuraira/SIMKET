@@ -67,8 +67,29 @@ $('.search-form form').submit(function(){
 				'created_by',
 				'updated_by',
 				*/
+
 				array(
 					'class'=>'CButtonColumn',
+					'template' => '{view} {update} {delete}',
+					'htmlOptions' => array('width' => 20),
+					'buttons'=>array(
+						'update'=>array(
+							'url'=>function($data){
+								return Yii::app()->createUrl("jadwalTugas/update", array("id"=>$data->id));
+							},
+						),
+						'view'=>array(
+							'url'=>function($data){
+								return Yii::app()->createUrl("jadwalTugas/view", array("id"=>$data->id));
+							},
+						),
+						'delete'=>array(
+							'url'=>function($data){
+								return Yii::app()->createUrl("jadwalTugas/delete", array("id"=>$data->id));
+							},
+							'label'=>'Hapus',
+						),
+					),
 				),
 			),
 		)); ?>

@@ -53,6 +53,11 @@
 			/*
 			'updated_time',
 			*/
+			// array(
+			// 	'header'	=>'',
+			// 	'type' 	=>'raw',
+			// 	'value'		=> function($data){ return "[".CHtml::link("Update",array("update","id"=>$data->nip))."] [".CHtml::link("Delete",array("delete","id"=>$data->nip))."]"; },
+			// ),
 			array(
 				'class'=>'CButtonColumn',
 				'template' => '{view} {update} {delete}',
