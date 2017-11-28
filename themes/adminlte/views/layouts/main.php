@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SIMKET | Sistem Informasi Kegiatan Terpadu</title>
+  <title>Sistem Terintegrasi BPS Kota Palembang</title>
 	<?php
 	  $baseUrl = Yii::app()->theme->baseUrl; 
 	  // $cs = Yii::app()->getClientScript();
