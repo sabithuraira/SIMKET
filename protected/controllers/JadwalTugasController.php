@@ -38,7 +38,8 @@ class JadwalTugasController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index','delete', 'stugas', 
-					'api_pejabat', 'enter_surat', 'api_view'),
+					'api_pejabat', 'enter_surat', 'api_view',
+					'last_number'),
 				'users'=>array('@'),
 			),
 
@@ -51,6 +52,13 @@ class JadwalTugasController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionLast_number()
+	{
+		$result = JadwalTugas::model()->lastNumber();
+		echo CJSON::encode($result);
+		Yii::app()->end();
 	}
 
 	public function actionApi_view($id)
@@ -92,10 +100,14 @@ class JadwalTugasController extends Controller
 		   ));
 
 		$seksi = UnitKerjaDaerah::model()->findByPk($id);
+		$last_number = JadwalTugas::model()->lastNumber();
+		$explode_number = explode("/", $last_number);
+		$just_number = explode("-", $explode_number[0]);
 
 		$result=array();
 		if($model==null){
 			$result=array(
+				'last_number'=>'',
 				'nama'=>'',
 				'nip'	=>'',
 				'seksi'	=>'',
@@ -103,6 +115,7 @@ class JadwalTugasController extends Controller
 		}
 		else{
 			$result=array(
+				'last_number' =>($just_number[1]+1),
 				'nama'=>$model->nama,
 				'nip'	=>$model->nip,
 				'seksi'	=>$seksi->kode,

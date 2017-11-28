@@ -105,7 +105,7 @@ ttd.change(function() {
                 alert("Tidak ada pejabat pada seksi tersebut");
             }
             else{
-                vm.no_surat="B-20/BPS1671/"+data.seksi+"/"+vm.month+"/"+vm.year;
+                vm.no_surat="B-" + data.last_number + "/BPS1671/"+data.seksi+"/"+vm.month+"/"+vm.year;
             }
             vm.nama_ttd=data.nama;
             vm.nip_ttd = data.nip;

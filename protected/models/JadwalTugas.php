@@ -108,6 +108,11 @@ class JadwalTugas extends HelpAr
 		));
 	}
 
+	public function lastNumber(){
+		$sql="SELECT print_no FROM `jadwal_tugas` order by print_no DESC LIMIT 1";
+		return Yii::app()->db->createCommand($sql)->queryScalar();
+	}
+
 	public function searchByPegawai($id){
 		$curr_year=date('Y');
 
