@@ -134,7 +134,7 @@ class JadwalTugas extends HelpAr
 			(YEAR(tanggal_mulai)='".$curr_year."' OR YEAR(tanggal_berakhir)='".$curr_year."') AND 
 			(MONTH(tanggal_mulai)='".$month."' OR MONTH(tanggal_berakhir)='".$month."') AND 
 			j.pegawai_id=p.nip 
-			ORDER BY tanggal_berakhir, tanggal_mulai 
+			ORDER BY tanggal_berakhir DESC, tanggal_mulai DESC 
 			LIMIT 1000;";
 
 		$dataProvider=new CSqlDataProvider($sql);
