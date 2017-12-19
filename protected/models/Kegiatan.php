@@ -306,7 +306,7 @@ class Kegiatan extends HelpAr
                 $sql2="SELECT IF(end_date<NOW(), 0, 1) AS val FROM kegiatan WHERE id={$id}";
                 $hasil2=Yii::app()->db->createCommand($sql2)->queryScalar();
                 if($hasil2==0)
-                    $hasil='<b style="color:red">TIDAK DILAPORKAN OPERATOR PROVINSI</b>';
+                    $hasil='<span class="text-red">TIDAK DILAPORKAN OPERATOR PROVINSI</span>';
             }
             else if($hasil<$this->getTarget()){
                 $hasil='<span class="label label-danger">'.$hasil.'</span>';

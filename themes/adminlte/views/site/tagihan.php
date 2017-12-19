@@ -30,8 +30,8 @@ $this->breadcrumbs=array(
                         echo "<div class='form-group' >";
                         echo "Tampilkan Data Tahun : "; 
                         echo CHtml::dropDownList('tahun',$tahun,HelpMe::getYearForFilter());
-                        echo ' ';
-                        echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success btn-xs btn-flat'));
+                        echo '  &nbsp&nbsp';
+                        echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success btn-sm'));
                         echo "</div>";
                     ?>
                 <?php $this->endWidget(); ?>
