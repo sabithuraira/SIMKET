@@ -10,9 +10,8 @@
         </div>
       </form>
 
-      <ul class="sidebar-menu">
-<!--         
-        <li class="header">SIMKET</li>
+      <ul class="sidebar-menu">         
+        <li class="header">MONITORING</li>
         <?php 
           echo '<li><a href="'.Yii::app()->createUrl('site/index').'"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>';
         ?>
@@ -108,7 +107,7 @@
             <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Per Kegiatan</a></li>
             <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Bulanan</a></li>
           </ul>
-        </li> -->
+        </li>
 
         <?php if(Yii::app()->user->getUnitKerja()==26){ ?>
         
