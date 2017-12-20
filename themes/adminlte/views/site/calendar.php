@@ -58,7 +58,7 @@ foreach($model as $i=>$ii)
 
 
 <div class="box box-primary">
-    <div class="box-body no-padding">
+    <div class="box-body">
         <!-- THE CALENDAR -->
         <div id="calendar"></div>
     </div>
