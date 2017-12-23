@@ -428,7 +428,7 @@ class Kegiatan extends HelpAr
                 $result='<b style="color:red">T</b>';
             }
             else{
-                $sql_tanggal="SELECT * FROM mongkia.value_kegiatan 
+                $sql_tanggal="SELECT * FROM value_kegiatan 
                     WHERE kegiatan=15 AND unit_kerja=4 ORDER BY tanggal_pengumpulan DESC LIMIT 1";
 
                 $hasil_tanggal=Yii::app()->db->createCommand($sql_tanggal)->queryRow();

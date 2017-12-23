@@ -1,6 +1,6 @@
   <aside class="main-sidebar">
     <section class="sidebar">
-      <form action="#" method="get" class="sidebar-form">
+      <!-- <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
@@ -8,7 +8,7 @@
                 </button>
               </span>
         </div>
-      </form>
+      </form> -->
 
       <ul class="sidebar-menu">         
         <li class="header">MONITORING</li>
@@ -77,7 +77,7 @@
         </li>
 
 
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-money"></i>
             <span>Anggaran</span>
@@ -92,7 +92,7 @@
             <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Kelola Anggaran</a></li>
             <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Import Data</a></li>
           </ul>
-        </li>
+        </li> -->
 
 
         <li class="treeview">
@@ -104,8 +104,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Per Kegiatan</a></li>
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa fa-circle-o"></i> Bulanan</a></li>
+            <?php
+              echo '<li><a href="'.Yii::app()->createUrl('report/index').'"><i class="fa fa fa-circle-o"></i> Per Kegiatan</a></li>';
+              echo '<li><a href="'.Yii::app()->createUrl('report/rekap').'"><i class="fa fa fa-circle-o"></i> Bulanan</a></li>';
+            ?>
           </ul>
         </li>
 
