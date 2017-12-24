@@ -2,8 +2,8 @@
 
     <!-- Logo -->
     <a href="index2.html" class="logo">
-      <!-- <span class="logo-mini"><b>S</b>KT</span>
-      <span class="logo-lg"><b>SIMKET</b></span> -->
+      <span class="logo-mini"><b>S</b>KT</span>
+      <span class="logo-lg"><b>SIMKET</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
