@@ -204,6 +204,7 @@ class KegiatanController extends Controller
 						$participant->kegiatan=$model->primaryKey;
 						$participant->unitkerja=$value['id'];
 						$participant->target=$_POST['target_'.$value['id']];
+						$participant->target_anggaran=$_POST['anggaran_'.$value['id']];
 						$participant->save();
 					}
 				}

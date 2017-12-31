@@ -169,6 +169,45 @@
                 </table>
 
 
+                <table class="table table-hover table-bordered table-condensed">
+                    <tr>
+                        <th>No. </th>
+                        <th>Unit Kerja </th>
+                        <th>Target </th>
+                        <th>Realisasi</th>
+                        <th>Selisih</th>
+                    </tr>
+
+                    <?php
+                        foreach (Participant::model()->PerKegiatan($model->id)->data as $key => $value)
+                        {
+                            echo '<tr>';
+
+                                echo '<td>'.($key+1).'</td>';
+                                echo '<td>'.$value->unitkerja0->name.'</td>';
+                                echo '<td>'.$value->target_anggaran.'</td>';
+                            
+                                echo '<td>'.$value->getListProgressDelivery().'</td>';
+                                echo '<td class="'.$value->getClassProgress(2).'">'.$value->getPercentageProgress(2).' % </td>';
+                                ?>
+                                
+                                <?php
+                            echo '</tr>';
+                            
+                        }
+
+                        echo '<tr>';
+
+                                echo '<td colspan="2"><h4>Total</h4></td>';
+                                echo '<td><h4>'.$model->getTarget().'</h4></td>';
+                            
+                                echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
+                                echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+                            echo '</tr>';
+                    ?>
+                </table>
+
+
 
                 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-header">
