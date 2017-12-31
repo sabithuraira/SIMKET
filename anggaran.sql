@@ -1,0 +1,1 @@
+ALTER TABLE `participant` ADD `target_anggaran` FLOAT NULL AFTER `timelines_point`;

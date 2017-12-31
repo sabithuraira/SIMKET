@@ -88,188 +88,11 @@
 		</tr>
 	</table>
 
-	<!--
-	<table class="table table-hover table-striped table-bordered table-condensed">
-		<tr>
-			<th>Kategori Response Rate</th>
-			<th>Nilai <i>(isikan nilai minimal 0 maksimal 100)</i></th>
-
-			<th>Kategori Timelines</th>
-			<th>Tanggal Mulai</th>
-			<th>Tanggal Akhir</th>
-		</tr>
-
-		<tr>
-			<td>A</td>
-			<td><?php echo $form->textField($model,'response_a',array('maxlength'=>2)); ?></td>
-			<td>A</td>
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_a_start',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_a_end',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-		</tr>
-
-		<tr>
-			<td>B</td>
-			<td><?php echo $form->textField($model,'response_b',array('maxlength'=>2)); ?></td>
-			<td>B</td>
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_b_start',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_b_end',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-		</tr>
-
-		<tr>
-			<td>C</td>
-			<td><?php echo $form->textField($model,'response_c',array('maxlength'=>2)); ?></td>
-			<td>C</td>
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_c_start',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_c_end',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-		</tr>
-
-		<tr>
-			<td>D</td>
-			<td><?php echo $form->textField($model,'response_d',array('maxlength'=>2)); ?></td>
-			<td>D</td>
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_d_start',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_d_end',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-		</tr>
-
-		<tr>
-			<td>E</td>
-			<td><?php echo $form->textField($model,'response_e',array('maxlength'=>2)); ?></td>
-			<td>E</td>
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_e_start',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-
-			<td>
-			<?php 
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-					'model'=>$model,
-					'attribute'=>'timeline_e_end',
-					'options' => array(
-						'dateFormat'=>'yy-mm-dd',
-						'changeYear'=>true,
-						'changeMonth'=>true,
-					   ),
-				));
-			?>
-			</td>
-		</tr>
-	</table>
--->
-
 	<table class="table table-hover table-striped table-bordered table-condensed">
 		<tr>
 			<th>Kabupaten</th>
 			<th>Target</th>
+			<th>Anggaran</th>
 		</tr>
 		<?php
 			foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
@@ -282,25 +105,23 @@
 					echo '<tr>';
 
 				//echo '<td>'.CHtml::checkBox('id_'.$value['id']).'</td>';
-				echo '<td>'.CHtml::label($value['name'], 'id_'.$value['id']).'</td>';
+				// echo '<td>'.CHtml::label($value['name'], 'id_'.$value['id']).'</td>';
+				echo '<td>'.$value['name'].'</td>';
 				echo '<td>'.CHtml::textField('target_'.$value['id'],($modelpart!==null ? $modelpart->target : '')).'</td>';
+				echo '<td>'.CHtml::textField('anggaran_'.$value['id'],($modelpart!==null ? $modelpart->target : '')).'</td>';
 
 				//if($key%2!==0)
 					echo '</tr>';
 				
 			}
-			/*
-			echo '<tr>';
-			echo '<td>'.CHtml::label($value['name'], 'id_'.$value['id']).'</td>';
-			echo '<td>'.CHtml::textField('target_'.$value['id']).'</td>';
-			echo '</tr>';
-			*/
 		?>
 	</table>
 
-	<div class="row buttons">
+
+	<div class="box-footer">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
+
 
 <?php $this->endWidget(); ?>
 
