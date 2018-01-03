@@ -121,14 +121,7 @@
                                 ?>
                                 <td>
                                     <?php
-                                        $this->widget('CStarRating',array(
-                                            'name'  =>'kirim_'.$value->id,
-                                            'value'=>$value->getTimelinesSkor(2),
-                                            'minRating'=>1,
-                                            'maxRating'=>5,
-                                            'starCount'=>5,
-                                            'readOnly' =>true,
-                                        ));
+                                        $this->widget('Star', array('starNumber'=>$value->getTimelinesSkor(2)));
                                     ?>
                                 </td>
                                 <?php
@@ -137,14 +130,7 @@
                                 ?>
                                 <td>
                                     <?php
-                                        $this->widget('CStarRating',array(
-                                            'name'  =>'terima_'.$value->id,
-                                            'value'=>$value->getTimelinesSkor(1),
-                                            'minRating'=>1,
-                                            'maxRating'=>5,
-                                            'starCount'=>5,
-                                            'readOnly' =>true,
-                                        ));
+                                        $this->widget('Star', array('starNumber'=>$value->getTimelinesSkor(1)));
                                     ?>
                                 </td>
                                 <?php
