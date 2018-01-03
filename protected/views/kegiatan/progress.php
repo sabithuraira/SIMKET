@@ -36,163 +36,141 @@
                         //'end_date',
                     ),
                 )); ?>
-                <!--            
-                <table class="table table-hover table-striped table-bordered table-condensed">
-                    <tr>
-                        <th rowspan="2">No. </th>
-                        <th rowspan="2">Kabupaten/Kota </th>
-                        <th rowspan="2">Target </th>
-                        <th colspan="2">TW1</th>
-                        <th colspan="2">TW2</th>
-                        <th colspan="2">TW3</th>
-                        <th colspan="2">TW4</th>
-                    </tr>
-                    <tr>
-                        <?php for($i=1;$i<=4;++$i) { ?>
-                            <th>In</th>
-                            <th>%</th>
-                        <?php } ?>
-                    </tr>
-                    <?php
-                        foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2')) as $key => $value)
-                        {
-                            echo '<tr>';
 
-                            echo '<td>'.($key+1).'</td>';
-                            echo '<td>'.CHtml::label($value['name'], 'id_'.$value['id']).'</td>';
-                            $total_ran=rand(10,50);
-                            echo '<td>'.$total_ran.'</td>';
-                            for($i=1;$i<=4;++$i)
-                            {
-                                $val_ran=rand(0,10);
-                                echo '<td>'.$val_ran.'</td>';
-                                echo '<td>'.floor($val_ran/$total_ran*100).' %</td>';
-                            }
+                <br/>
+
+
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_progress" data-toggle="tab">Progress</a></li>
+                        <li><a href="#tab_anggaran" data-toggle="tab">Anggaran</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_progress">
+
+                            <?php if(HelpMe::isKabupaten() || HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
+                            <a href="#myModal2" role="button" class="btn" data-toggle="modal">Tambah Pengiriman</a>
+                            <?php }if(HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
+                            <a href="#myModal" role="button" class="btn" data-toggle="modal">Konfirmasi Penerimaan</a>
+                            <?php echo CHtml::link('Cetak Surat',array('kegiatan/pdfinfo','id'=>$model->id),array('class'=>'btn')); ?>
+                            <?php } ?>
+
+                            <div class="alert alert-info">
+                            <strong>Ket !</strong> [ RR= Response Rate, kuantitas dokumen/pekerjaan yang dikumpulkan ] |
+                            [ Timelines= Ketepatan waktu pengumpulan dokumen/pekerjaan ]<br/>
+
+                            </div>
+
+                            <table class="table table-hover table-bordered table-condensed">
+                                <tr>
+                                    <th rowspan="2">No. </th>
+                                    <th rowspan="2">Unit Kerja </th>
+                                    <th rowspan="2">Target </th>
+                                    <th colspan="3">Pengiriman</th>
+                                    <th colspan="3">Penerimaan</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>RR (%)</th>
+                                    <th>Ketepatan Waktu</th>
+                                    <th></th>
+                                    <th>RR (%)</th>
+                                    <th>Ketepatan Waktu</th>
+                                </tr>
+                                <?php
+                                    //foreach (Participant::model()->findAllByAttributes(array('kegiatan'=>$model->id)) as $key => $value)
+                                    foreach (Participant::model()->PerKegiatan($model->id)->data as $key => $value)
+                                    {
+                                        echo '<tr>';
+
+                                            echo '<td>'.($key+1).'</td>';
+                                            echo '<td>'.$value->unitkerja0->name.'</td>';
+                                            echo '<td>'.$value->target.'</td>';
+                                        
+                                            echo '<td>'.$value->getListProgressDelivery().'</td>';
+                                            echo '<td class="'.$value->getClassProgress(2).'">'.$value->getPercentageProgress(2).' % </td>';
+                                            ?>
+                                            <td>
+                                                <?php
+                                                    $this->widget('Star', array('starNumber'=>$value->getTimelinesSkor(2)));
+                                                ?>
+                                            </td>
+                                            <?php
+                                            echo '<td>'.$value->getListProgressAcceptance().'</td>';
+                                            echo '<td class="'.$value->getClassProgress(1).'">'.$value->getPercentageProgress(1).' % </td>';
+                                            ?>
+                                            <td>
+                                                <?php
+                                                    $this->widget('Star', array('starNumber'=>$value->getTimelinesSkor(1)));
+                                                ?>
+                                            </td>
+                                            <?php
+                                        echo '</tr>';
+                                        
+                                    }
+
+                                    echo '<tr>';
+
+                                            echo '<td colspan="2"><h4>Total</h4></td>';
+                                            echo '<td><h4>'.$model->getTarget().'</h4></td>';
+                                        
+                                            echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
+                                            echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+                                            echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+
+                                            echo '<td><h4>'.$model->getPercentageProgress(1).'</h4></td>';
+                                            echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
+                                            echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
+                                        echo '</tr>';
+                                ?>
+                            </table>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_anggaran">
                         
-                            echo '</tr>';
-                            
-                        }
-                    ?>
-                </table>
-                -->
 
+                            <table class="table table-hover table-bordered table-condensed">
+                                <tr>
+                                    <th>No. </th>
+                                    <th>Unit Kerja </th>
+                                    <th>Target </th>
+                                    <th>Realisasi</th>
+                                    <th>Selisih</th>
+                                </tr>
 
-                <?php if(HelpMe::isKabupaten() || HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
-                <a href="#myModal2" role="button" class="btn" data-toggle="modal">Tambah Pengiriman</a>
-                <?php }if(HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
-                <a href="#myModal" role="button" class="btn" data-toggle="modal">Konfirmasi Penerimaan</a>
-                <?php echo CHtml::link('Cetak Surat',array('kegiatan/pdfinfo','id'=>$model->id),array('class'=>'btn')); ?>
-                <?php } ?>
+                                <?php
+                                    foreach (Participant::model()->PerKegiatan($model->id)->data as $key => $value)
+                                    {
+                                        echo '<tr>';
 
-                <div class="alert alert-info">
-                <strong>Ket !</strong> [ RR= Response Rate, kuantitas dokumen/pekerjaan yang dikumpulkan ] |
-                [ Timelines= Ketepatan waktu pengumpulan dokumen/pekerjaan ]<br/>
+                                            echo '<td>'.($key+1).'</td>';
+                                            echo '<td>'.$value->unitkerja0->name.'</td>';
+                                            echo '<td>'.$value->target_anggaran.'</td>';
+                                        
+                                            echo '<td>'.$value->getListProgressDelivery().'</td>';
+                                            echo '<td class="'.$value->getClassProgress(2).'">'.$value->getPercentageProgress(2).' % </td>';
+                                            ?>
+                                            
+                                            <?php
+                                        echo '</tr>';
+                                        
+                                    }
 
+                                    echo '<tr>';
+
+                                            echo '<td colspan="2"><h4>Total</h4></td>';
+                                            echo '<td><h4>'.$model->getTarget().'</h4></td>';
+                                        
+                                            echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
+                                            echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+                                        echo '</tr>';
+                                ?>
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <!-- /.tab-content -->
                 </div>
-
-                <table class="table table-hover table-bordered table-condensed">
-                    <tr>
-                        <th rowspan="2">No. </th>
-                        <th rowspan="2">Unit Kerja </th>
-                        <th rowspan="2">Target </th>
-                        <th colspan="3">Pengiriman</th>
-                        <th colspan="3">Penerimaan</th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th>RR (%)</th>
-                        <th>Ketepatan Waktu</th>
-                        <th></th>
-                        <th>RR (%)</th>
-                        <th>Ketepatan Waktu</th>
-                    </tr>
-                    <?php
-                        //foreach (Participant::model()->findAllByAttributes(array('kegiatan'=>$model->id)) as $key => $value)
-                        foreach (Participant::model()->PerKegiatan($model->id)->data as $key => $value)
-                        {
-                            echo '<tr>';
-
-                                echo '<td>'.($key+1).'</td>';
-                                echo '<td>'.$value->unitkerja0->name.'</td>';
-                                echo '<td>'.$value->target.'</td>';
-                            
-                                echo '<td>'.$value->getListProgressDelivery().'</td>';
-                                echo '<td class="'.$value->getClassProgress(2).'">'.$value->getPercentageProgress(2).' % </td>';
-                                ?>
-                                <td>
-                                    <?php
-                                        $this->widget('Star', array('starNumber'=>$value->getTimelinesSkor(2)));
-                                    ?>
-                                </td>
-                                <?php
-                                echo '<td>'.$value->getListProgressAcceptance().'</td>';
-                                echo '<td class="'.$value->getClassProgress(1).'">'.$value->getPercentageProgress(1).' % </td>';
-                                ?>
-                                <td>
-                                    <?php
-                                        $this->widget('Star', array('starNumber'=>$value->getTimelinesSkor(1)));
-                                    ?>
-                                </td>
-                                <?php
-                            echo '</tr>';
-                            
-                        }
-
-                        echo '<tr>';
-
-                                echo '<td colspan="2"><h4>Total</h4></td>';
-                                echo '<td><h4>'.$model->getTarget().'</h4></td>';
-                            
-                                echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
-                                echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
-                                echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
-
-                                echo '<td><h4>'.$model->getPercentageProgress(1).'</h4></td>';
-                                echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
-                                echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
-                            echo '</tr>';
-                    ?>
-                </table>
-
-
-                <table class="table table-hover table-bordered table-condensed">
-                    <tr>
-                        <th>No. </th>
-                        <th>Unit Kerja </th>
-                        <th>Target </th>
-                        <th>Realisasi</th>
-                        <th>Selisih</th>
-                    </tr>
-
-                    <?php
-                        foreach (Participant::model()->PerKegiatan($model->id)->data as $key => $value)
-                        {
-                            echo '<tr>';
-
-                                echo '<td>'.($key+1).'</td>';
-                                echo '<td>'.$value->unitkerja0->name.'</td>';
-                                echo '<td>'.$value->target_anggaran.'</td>';
-                            
-                                echo '<td>'.$value->getListProgressDelivery().'</td>';
-                                echo '<td class="'.$value->getClassProgress(2).'">'.$value->getPercentageProgress(2).' % </td>';
-                                ?>
-                                
-                                <?php
-                            echo '</tr>';
-                            
-                        }
-
-                        echo '<tr>';
-
-                                echo '<td colspan="2"><h4>Total</h4></td>';
-                                echo '<td><h4>'.$model->getTarget().'</h4></td>';
-                            
-                                echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
-                                echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
-                            echo '</tr>';
-                    ?>
-                </table>
-
 
 
                 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
