@@ -287,7 +287,7 @@ class Kegiatan extends HelpAr
 	}
 
 	
-	// get target from all participant
+	// get target kegiatan from all participant
 	public function getTarget()
 	{
 		$id=$this->id;
@@ -295,7 +295,23 @@ class Kegiatan extends HelpAr
 		return Yii::app()->db->createCommand($sql)->queryScalar();
 	}
 
-	// get percentage progress from kegiatan
+	// get target anggaran from all participant
+	public function getTotalTargetAnggaran()
+	{
+		$id=$this->id;
+		$sql="SELECT IF(SUM(target_anggaran) IS NULL, 0, SUM(target_anggaran)) AS val FROM participant WHERE kegiatan=$id";
+		return Yii::app()->db->createCommand($sql)->queryScalar();
+	}
+
+	// get total realisasi anggaran from all participant
+	public function getTotalRealisasiAnggaran()
+	{
+		$id=$this->id;
+		$sql="SELECT IF(SUM(jumlah) IS NULL, 0, SUM(jumlah)) AS val FROM value_anggaran WHERE kegiatan=$id";
+		return Yii::app()->db->createCommand($sql)->queryScalar();
+	}
+
+	// get percentage progress kegiatan from kegiatan
 	public function getPercentageProgress($jenis)
 	{
 		$id=$this->id;

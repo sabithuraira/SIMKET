@@ -139,6 +139,7 @@
                                     <th>Unit Kerja </th>
                                     <th>Target </th>
                                     <th>Realisasi</th>
+                                    <th>Total Realisasi</th>
                                     <th>Selisih</th>
                                 </tr>
 
@@ -149,15 +150,17 @@
                                             echo '<td>'.$value->unitkerja0->name.'</td>';
                                             echo '<td>'.$value->target_anggaran.'</td>';
                                         
-                                            echo '<td>'.$value->getListProgressDelivery().'</td>';
-                                            echo '<td class="'.$value->getClassProgress(2).'">'.$value->getPercentageProgress(2).' % </td>';
+                                            echo '<td>'.$value->getListProgressAnggaran().'</td>';
+                                            echo '<td>'.$value->getTotalAnggaran().'</td>';
+                                            echo '<td>'.$value->getSelisihAnggaran().'</td>';
                                         echo '</tr>';
                                     }
 
                                     echo '<tr><td colspan="2"><h4>Total</h4></td>';
-                                    echo '<td><h4>'.$model->getTarget().'</h4></td>';
-                                    echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
-                                    echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+                                    echo '<td><h4>'.$model->getTotalTargetAnggaran().'</h4></td>';
+                                    echo '<td></td>';
+                                    echo '<td><h4>'.$model->getTotalRealisasiAnggaran().'</h4></td>';
+                                    echo '<td><h4> '.($model->getTotalTargetAnggaran() - $model->getTotalRealisasiAnggaran()).'</h4></td>';
                                     echo '</tr>';
                                 ?>
                             </table>

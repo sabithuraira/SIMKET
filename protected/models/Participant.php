@@ -158,7 +158,6 @@ class Participant extends HelpAr
 		return $str_result;
 	}
 
-
 	// get all list progress delivery by kegiatan and unitkerja
 	public function getListProgressDelivery()
 	{
@@ -181,6 +180,55 @@ class Participant extends HelpAr
 			}
 		}
 		return $str_result;
+	}
+
+
+
+	// get all list progress anggaran by kegiatan and unitkerja
+	public function getListProgressAnggaran()
+	{
+		$str_result='';
+		$model_kegiatan=Kegiatan::model()->findByPk($this->kegiatan);
+		foreach (ValueAnggaran::model()->findAllByAttributes(array('unit_kerja'=>$this->unitkerja,'kegiatan'=>$this->kegiatan)) as $key => $value)
+		{
+			if(HelpMe::isAuthorizeUnitKerja($model_kegiatan->unit_kerja)){
+				$str_result.=('- [ <a href="#myModal" role="button" class="update_terima" 
+					data-id="'.$value->id.'" 
+					data-unitkerja="'.$value->unit_kerja.'" 
+					data-tanggal="'.date("Y-m-d",strtotime($value->tanggal_realiasasi)).'" 
+					data-jumlah="'.$value->jumlah.'"
+					data-toggle="modal">Update</a> ] '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> <br/>');
+			}
+			else
+			{
+				$str_result.=('- '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b><br/>');
+			}
+		}
+		return $str_result;
+	}
+
+	// get total anggaran by kegiatan and unitkerja
+	public function getTotalAnggaran()
+	{
+		$unitkerja=$this->unitkerja;
+		$kegiatan=$this->kegiatan;
+
+		$sql="SELECT IF(SUM(jumlah) IS NULL, 0, SUM(jumlah)) AS val FROM value_anggaran WHERE unit_kerja=$unitkerja AND kegiatan=$kegiatan";
+		$total=Yii::app()->db->createCommand($sql)->queryScalar();
+		
+		return floor($total);
+	}
+
+	// get selisih anggaran between target & realisasi by kegiatan and unitkerja
+	public function getSelisihAnggaran()
+	{
+		$unitkerja=$this->unitkerja;
+		$kegiatan=$this->kegiatan;
+
+		$sql="SELECT IF(SUM(jumlah) IS NULL, 0, SUM(jumlah)) AS val FROM value_anggaran WHERE unit_kerja=$unitkerja AND kegiatan=$kegiatan";
+		$total=Yii::app()->db->createCommand($sql)->queryScalar();
+		
+		return floor($this->target_anggaran - $total);
 	}
 
 	// get percentage progress by kegiatan and unitkerja
