@@ -31,7 +31,8 @@ class KegiatanController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','insert_progress',
-						'insert_pengiriman','activecalendar'),
+						'insert_pengiriman','activecalendar',
+						'listkegiatan'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -47,6 +48,28 @@ class KegiatanController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionListkegiatan(){
+		$model=Kegiatan::model()->getKegiatan2017Plus();
+
+		$data = array();
+		foreach($model as $value){
+			$data[] = array(
+				'title'=> $value['kegiatan'],
+				'start'=> $value['start_date'],
+				'end'=> $value['end_date'],
+				'backgroundColor'=> "#f56954",
+				'borderColor' => "#f56954"
+			);
+		}
+
+		echo CJSON::encode(array
+		(
+			'data'=>$data
+		));
+
+		Yii::app()->end();
 	}
 
 	public function actionPdfinfo($id)

@@ -271,6 +271,14 @@ class Kegiatan extends HelpAr
 		));
 	}
 
+	public function getKegiatan2017Plus()
+	{
+		$sql="SELECT * FROM kegiatan WHERE YEAR(start_date)>=2018 OR YEAR(end_date)>=2018";
+		$return_value=Yii::app()->db->createCommand($sql)->queryAll();
+
+		return $return_value;
+	}
+
 	public function getTop5()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.

@@ -24,10 +24,7 @@ class SiteController extends Controller
 
 	public function actionCalendar()
 	{
-		$model=Kegiatan::model()->findAll();
-		$this->render('calendar',array(
-			'model'			=>$model,
-		));
+		$this->render('calendar');
 	}
 
 	public function actionPeringkat()
