@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sistem Terintegrasi BPS Kota Palembang</title>
+  <title>SIMKET | Sistem Monitoring Kegiatan Terpadu</title>
 	<?php
 	  $baseUrl = Yii::app()->theme->baseUrl; 
 	  // $cs = Yii::app()->getClientScript();
@@ -40,8 +40,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <b>Sistem Pengelolaan Surat Tugas dan Perjalanan Dinas</b> 
-    BPS Kota Palembang
+    <b>SIMKET</b> 
+    Sistem Monitoring Kegiatan Terpadu
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

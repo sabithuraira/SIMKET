@@ -31,12 +31,19 @@ class EWebUser extends CWebUser{
     function isKabupaten()
     {
         $result=0;
-        $id=$this->id;
-        $sql="SELECT uk.jenis FROM mem_user u, unit_kerja uk WHERE u.unit_kerja=uk.id AND u.id={$id}";
-        $return_val=Yii::app()->db->createCommand($sql)->queryScalar();
 
-        if($return_val==2)
-            $result=1;
+        if(!Yii::app()->user->isGuest){
+            $id=$this->id;
+            $sql="SELECT uk.jenis FROM mem_user u, unit_kerja uk WHERE u.unit_kerja=uk.id AND u.id={$id}";
+            $return_val=Yii::app()->db->createCommand($sql)->queryScalar();
+
+            if($return_val==2)
+                $result=1;
+        }
+        else{
+            //mean not login
+            $result = 100;
+        }
 
         return $result;
     }

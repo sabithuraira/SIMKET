@@ -131,6 +131,15 @@
 
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_anggaran">
+
+                            <center>
+                            <?php if(HelpMe::isKabupaten() || HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
+                            <a href="#myModal2" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Masukkan Target</a>
+                            <?php }if(HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
+                            <a href="#myModal" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Tambah Realisasi</a>
+                            <?php } ?>
+                            </center>
+                            <br/>
                         
 
                             <table class="table table-hover table-bordered table-condensed">

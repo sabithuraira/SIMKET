@@ -104,28 +104,30 @@
         <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/single_calendar'); ?>"><i class="fa fa-calendar-plus-o"></i><span> Kalender Pegawai</span></a></li>
         
         <li class="header">WILAYAH</li>
-          <?php 
-            echo '<li><a href="'.Yii::app()->createUrl('mfd/index').'"><i class="fa fa-map-o"></i> Wilayah Sumatera Selatan</a></li>';
-          ?>
-        <li class="header">LAINNYA</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-align-justify"></i>
-            <span>Master Data</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <?php 
-              echo '<li><a href="'.Yii::app()->createUrl('user/index').'"><i class="fa fa-user"></i> User</a></li>';
-              echo '<li><a href="'.Yii::app()->createUrl('pegawai/index').'"><i class="fa fa-user-plus"></i> Pegawai</a></li>';
-              echo '<li><a href="'.Yii::app()->createUrl('unitdaerah/index').'"><i class="fa  fa-bookmark-o"></i> Unit Kerja Kab/Kota</a></li>';
-              echo '<li><a href="'.Yii::app()->createUrl('kegiatan/index').'"><i class="fa fa-cube"></i> Kegiatan</a></li>';
-              echo '<li><a href="'.Yii::app()->createUrl('unitkerja/index').'"><i class="fa fa-building-o"></i> Unit Kerja</a></li>';
-            ?>
-          </ul>
-        </li>
+        <?php 
+          echo '<li><a href="'.Yii::app()->createUrl('mfd/index').'"><i class="fa fa-map-o"></i> Wilayah Sumatera Selatan</a></li>';
+        ?>
+        <?php if(Yii::app()->user->isKabupaten()==0){ ?>
+          <li class="header">LAINNYA</li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-align-justify"></i>
+              <span>Master Data</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <?php 
+                echo '<li><a href="'.Yii::app()->createUrl('user/index').'"><i class="fa fa-user"></i> User</a></li>';
+                echo '<li><a href="'.Yii::app()->createUrl('pegawai/index').'"><i class="fa fa-user-plus"></i> Pegawai</a></li>';
+                echo '<li><a href="'.Yii::app()->createUrl('unitdaerah/index').'"><i class="fa  fa-bookmark-o"></i> Unit Kerja Kab/Kota</a></li>';
+                echo '<li><a href="'.Yii::app()->createUrl('kegiatan/index').'"><i class="fa fa-cube"></i> Kegiatan</a></li>';
+                echo '<li><a href="'.Yii::app()->createUrl('unitkerja/index').'"><i class="fa fa-building-o"></i> Unit Kerja</a></li>';
+              ?>
+            </ul>
+          </li>
+        <?php } ?>
 
       </ul>
     </section>
