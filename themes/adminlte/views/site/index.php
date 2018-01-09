@@ -1,4 +1,4 @@
-
+<div id="dashboard_tag">
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-3 col-xs-6">
@@ -418,8 +418,7 @@
               <!-- tools box -->
               <div class="pull-right box-tools">
                 
-                <button type="button" class="btn btn-success btn-sm">Selengkapnya
-                </button>
+                <a type="button" href="<?php echo Yii::app()->createUrl('site/calendar'); ?>" class="btn btn-success btn-sm">Selengkapnya</a>
               </div>
               <!-- /. tools -->
             </div>
@@ -436,6 +435,7 @@
         <!-- right col -->
       </div>
       <!-- /.row (main row) -->
+</div>
 
       
 <?php $baseUrl = Yii::app()->theme->baseUrl; ?>

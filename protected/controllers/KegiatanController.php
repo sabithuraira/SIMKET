@@ -31,10 +31,13 @@ class KegiatanController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','insert_progress',
-						'insert_pengiriman','activecalendar',
-						'listkegiatan'),
+						'insert_pengiriman','activecalendar'),
 				'users'=>array('@'),
 			),
+			array('allow',
+			'actions'=>array('listkegiatan'),
+			'users'=>array('*'),
+		),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('progress'),
 				'users'=>array('@'),

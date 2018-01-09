@@ -1,6 +1,6 @@
 
 var vm = new Vue({  
-    el: "#calendar_kegiatan_tag",
+    el: "#dashboard_tag",
     data: {},
 });
 
