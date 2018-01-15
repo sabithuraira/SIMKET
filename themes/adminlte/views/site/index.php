@@ -62,188 +62,26 @@
         </div>
         <!-- ./col -->
       </div>
-      <!-- /.row -->
+      
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
         <section class="col-lg-7 connectedSortable">
-          
-        <div class="box box-widget widget-user">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-aqua-active">
-              <h3 class="widget-user-username">Alexander Pierce</h3>
-              <h5 class="widget-user-desc">Founder &amp; CEO</h5>
-            </div>
-            <div class="widget-user-image">
-              <img class="img-circle" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/logo_bps.png" ?>" alt="User Avatar">
-            </div>
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">3,200</h5>
-                    <span class="description-text">SALES</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">FOLLOWERS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">PRODUCTS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
-
-
-
-          <div class="box box-widget widget-user">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-green-active">
-              <h3 class="widget-user-username">Alexander Pierce</h3>
-              <h5 class="widget-user-desc">Founder &amp; CEO</h5>
-            </div>
-            <div class="widget-user-image">
-              <img class="img-circle" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/logo_bps.png" ?>" alt="User Avatar">
-            </div>
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">3,200</h5>
-                    <span class="description-text">SALES</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">FOLLOWERS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">PRODUCTS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
+        <?php
+          $this->widget('WJuara', array(
+            'kab_name'    =>  $peringkat1tahun['name'],
+            'title_name'  =>  'Peringkat 1 Tahun '.date('Y'),
+            'color'       =>  'aqua',
+            'kegiatan'    =>  $peringkat1tahun['jumlah_kegiatan'],
+            'target'      =>  $peringkat1tahun['jumlah_target'],
+            'point'       =>  $peringkat1tahun['point']
+          ));
+        ?>
 
         </section>
         <!-- /.Left col -->
         <!-- right col (We are only adding the ID to make the widgets sortable)-->
         <section class="col-lg-5 connectedSortable">
-
-          <!-- Map box -->
-          <div class="box box-solid bg-light-blue-gradient">
-            <div class="box-header">
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range">
-                  <i class="fa fa-calendar"></i></button>
-                <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
-                  <i class="fa fa-minus"></i></button>
-              </div>
-              <!-- /. tools -->
-
-              <i class="fa fa-map-marker"></i>
-
-              <h3 class="box-title">
-                Visitors
-              </h3>
-            </div>
-            <div class="box-body">
-              <div id="world-map" style="height: 250px; width: 100%;"></div>
-            </div>
-            <!-- /.box-body-->
-            <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <div id="sparkline-1"></div>
-                  <div class="knob-label">Visitors</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <div id="sparkline-2"></div>
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                  <div id="sparkline-3"></div>
-                  <div class="knob-label">Exists</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
-          <!-- /.box -->
-
-          <!-- solid sales graph -->
-          <div class="box box-solid bg-teal-gradient">
-            <div class="box-header">
-              <i class="fa fa-th"></i>
-
-              <h3 class="box-title">Sales Graph</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body border-radius-none">
-              <div class="chart" id="line-chart" style="height: 250px;"></div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Mail-Orders</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                  <div class="knob-label">In-Store</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
 
           <!-- Calendar -->
           <div class="box box-solid bg-green-gradient">

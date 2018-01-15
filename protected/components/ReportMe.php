@@ -25,6 +25,19 @@ class ReportMe
         return Yii::app()->db->createCommand($sql)->queryAll();
     }
 
+    public static function Peringkat1Tahunan($tahun)
+    {
+        $sql="SELECT COUNT(p.id) as jumlah_kegiatan, SUM(timelines_point) as jumlah_point, SUM(target) as jumlah_target ,
+                (SUM(timelines_point)/COUNT(p.id)) as point, unitkerja, u.name FROM `participant` p, unit_kerja u, kegiatan k 
+                WHERE u.id=p.unitkerja AND k.id=p.kegiatan 
+                AND YEAR(end_date)={$tahun} AND end_date<=DATE(NOW()) 
+                GROUP BY unitkerja
+                ORDER BY point DESC, jumlah_target DESC, jumlah_kegiatan DESC 
+                LIMIT 1";
+
+        return Yii::app()->db->createCommand($sql)->queryRow();
+    }
+
     public static function ValuePerKabBidang($bidang,$kab,$tahun)
     {
         $label_where="";

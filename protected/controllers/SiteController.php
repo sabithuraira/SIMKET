@@ -87,20 +87,10 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		//Participant::model()->UpdateAllSkor();
-		$tahun=date('Y');
-		$kegiatan=Kegiatan::model()->getTop5();
-		$model=new Kegiatan;
-
-		if(isset($_POST['tahun']))
-			$tahun=$_POST['tahun'];
+		$peringkat1tahun=ReportMe::Peringkat1Tahunan(2016);
 
 		$this->render('index',array(
-			'kegiatan'		=>$kegiatan,
-			'model'			=>$model,
-			'tahun'			=>$tahun,
+			'peringkat1tahun'	=>$peringkat1tahun,
 		));
 	}
 
