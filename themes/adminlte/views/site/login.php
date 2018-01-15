@@ -34,7 +34,9 @@ $this->breadcrumbs=array(
         </div>
 
         <div class="row">
-            <div class="col-xs-8">
+        
+            <div class="col-xs-1"></div>
+            <div class="col-xs-7">
                 <div class="checkbox icheck">
                 <label>
                     <?php echo $form->checkBox($model,'rememberMe'); ?>
