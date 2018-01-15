@@ -88,9 +88,11 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		$peringkat1tahun=ReportMe::Peringkat1Tahunan(2016);
+		$peringkat1bulan=ReportMe::Peringkat1Bulanan(2016,3);
 
 		$this->render('index',array(
 			'peringkat1tahun'	=>$peringkat1tahun,
+			'peringkat1bulan'	=>$peringkat1bulan,
 		));
 	}
 
