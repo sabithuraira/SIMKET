@@ -35,9 +35,9 @@ class KegiatanController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow',
-			'actions'=>array('listkegiatan'),
-			'users'=>array('*'),
-		),
+				'actions'=>array('listkegiatan'),
+				'users'=>array('*'),
+			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('progress'),
 				'users'=>array('@'),
