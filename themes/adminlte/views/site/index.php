@@ -1,33 +1,94 @@
 <div id="dashboard_tag">
       <!-- Main row -->
       <div class="row">
+        
+
         <!-- Left col -->
         <section class="col-lg-7 connectedSortable">
-        <?php
-          $this->widget('WJuara', array(
-            'kab_name'    =>  $peringkat1tahun['name'],
-            'title_name'  =>  'Peringkat 1 Tahun '.date('Y'),
-            'color'       =>  'aqua',
-            'kegiatan'    =>  $peringkat1tahun['jumlah_kegiatan'],
-            'target'      =>  $peringkat1tahun['jumlah_target'],
-            'point'       =>  $peringkat1tahun['point']
-          ));
 
 
-          $this->widget('WJuara', array(
-            'kab_name'    =>  $peringkat1bulan['name'],
-            'title_name'  =>  'Peringkat 1 Bulan '.date('F').' Tahun '.date('Y'),
-            'color'       =>  'green',
-            'kegiatan'    =>  $peringkat1bulan['jumlah_kegiatan'],
-            'target'      =>  $peringkat1bulan['jumlah_target'],
-            'point'       =>  $peringkat1bulan['point']
-          ));
-        ?>
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Resume Kegiatan <?php echo date('Y'); ?></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="chart-responsive">
+                    <canvas id="pieChart" height="150"></canvas>
+                  </div>
+                  <!-- ./chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">
+                  <ul class="chart-legend clearfix">
+                    <li><i class="fa fa-circle-o text-red"></i> Terlambat</li>
+                    <li><i class="fa fa-circle-o text-green"></i> Tepat Waktu</li>
+                    <li><i class="fa fa-circle-o text-yellow"></i> Belum Selesai</li>
+                  </ul>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
+                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+                  <div class="knob-label">% Realisasi Response Rate</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
+                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+                  <div class="knob-label">% Realisasi Anggaran</div>
+                </div>
+                <!-- ./col -->
+              </div>
+            </div>
+            <!-- /.footer -->
+          </div>
+
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">% Realisasi Bulanan <?php echo date('Y') ?></h3>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="barChart" style="height:230px"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
 
         </section>
         <!-- /.Left col -->
         <!-- right col (We are only adding the ID to make the widgets sortable)-->
         <section class="col-lg-5 connectedSortable">
+
+          <?php
+            $this->widget('WJuara', array(
+              'kab_name'    =>  $peringkat1tahun['name'],
+              'title_name'  =>  'Peringkat 1 Tahun '.date('Y'),
+              'color'       =>  'aqua',
+              'kegiatan'    =>  $peringkat1tahun['jumlah_kegiatan'],
+              'target'      =>  $peringkat1tahun['jumlah_target'],
+              'point'       =>  $peringkat1tahun['point']
+            ));
+
+
+            $this->widget('WJuara', array(
+              'kab_name'    =>  $peringkat1bulan['name'],
+              'title_name'  =>  'Peringkat 1 Bulan '.date('F').' Tahun '.date('Y'),
+              'color'       =>  'green',
+              'kegiatan'    =>  $peringkat1bulan['jumlah_kegiatan'],
+              'target'      =>  $peringkat1bulan['jumlah_target'],
+              'point'       =>  $peringkat1bulan['point']
+            ));
+          ?>
 
           <!-- Calendar -->
           <div class="box box-solid bg-green-gradient">
@@ -59,6 +120,8 @@
 
       
 <?php $baseUrl = Yii::app()->theme->baseUrl; ?>
+<script src="<?php echo $baseUrl;?>/plugins/knob/jquery.knob.js"></script>
+<script src="<?php echo $baseUrl;?>/plugins/chartjs/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="<?php echo $baseUrl;?>/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script src="<?php echo $baseUrl;?>/dist/js/vue_page/site/dashboard.js"></script>
