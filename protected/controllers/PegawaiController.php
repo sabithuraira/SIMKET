@@ -28,16 +28,14 @@ class PegawaiController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view'),
+				'actions'=>array('view', 'index'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','delete'),
-				'users'=>array('@'),
+				'actions'=>array('create','update','delete'),
+				'expression'=> function($user){
+					return $user->getLevel()<=2;
+				},
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

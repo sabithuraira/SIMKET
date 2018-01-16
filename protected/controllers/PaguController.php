@@ -28,16 +28,12 @@ class PaguController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'expression'=>'$user->getUnitKerja()==1',
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'expression'=>'$user->getUnitKerja()==1',
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'expression'=>'$user->getUnitKerja()==1',
+				'actions'=>array('index','view',
+					'create','update',
+					'admin','delete'),
+				'expression'=> function($user){
+					return $user->getUnitKerja()==1;
+				},
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

@@ -28,17 +28,13 @@ class AnggaranController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','satker'),
-				'expression'=>'$user->getUnitKerja()==1',
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','import','selecttab',
-					'importkab','selectkab','kab'),
-				'expression'=>'$user->getUnitKerja()==1',
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','fromto','validatefrom'),
-				'expression'=>'$user->getUnitKerja()==1',
+				'actions'=>array('index','view','satker',
+					'create','update','import','selecttab',
+					'importkab','selectkab','kab',
+					'admin','delete','fromto','validatefrom'),
+				'expression'=>function($user){
+					return $user->getUnitKerja()==1;
+				},
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

@@ -31,13 +31,12 @@ class UnitkerjaController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('@'),
+				'actions'=>array('admin','delete',
+					'create','update'),
+				'expression'=> function($user){
+					return $user->getLevel()==1;
+				},
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
