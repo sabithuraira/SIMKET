@@ -48,12 +48,12 @@
 
 	<table class="table table-hover table-striped table-bordered">
 		<tr>
-			<th><?php echo $form->labelEx($model,'start_date'); ?></td>
-			<th><?php echo $form->labelEx($model,'end_date'); ?></td>
+			<th class="text-center"><?php echo $form->labelEx($model,'start_date'); ?></td>
+			<th class="text-center"><?php echo $form->labelEx($model,'end_date'); ?></td>
 		</tr>
 		
 		<tr>
-			<td>
+			<td class="text-center">
 			<?php
 				$this->widget('zii.widgets.jui.CJuiDatePicker', 
 					array(
@@ -69,7 +69,7 @@
 			?>
 			</td>
 
-			<td>
+			<td class="text-center">
 
 			<?php
 				$this->widget('zii.widgets.jui.CJuiDatePicker', 
@@ -91,8 +91,8 @@
 	<table class="table table-hover table-striped table-bordered table-condensed">
 		<tr>
 			<th>Kabupaten</th>
-			<th>Target</th>
-			<th>Anggaran</th>
+			<th class="text-center">Target</th>
+			<th class="text-center">Anggaran</th>
 		</tr>
 		<?php
 			foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
@@ -107,8 +107,8 @@
 				//echo '<td>'.CHtml::checkBox('id_'.$value['id']).'</td>';
 				// echo '<td>'.CHtml::label($value['name'], 'id_'.$value['id']).'</td>';
 				echo '<td>'.$value['name'].'</td>';
-				echo '<td>'.CHtml::textField('target_'.$value['id'],($modelpart!==null ? $modelpart->target : '')).'</td>';
-				echo '<td>'.CHtml::textField('anggaran_'.$value['id'],($modelpart!==null ? $modelpart->target : '')).'</td>';
+				echo '<td class="text-center">'.CHtml::textField('target_'.$value['id'],($modelpart!==null ? $modelpart->target : '')).'</td>';
+				echo '<td class="text-center">'.CHtml::textField('anggaran_'.$value['id'],($modelpart!==null ? $modelpart->target : '')).'</td>';
 
 				//if($key%2!==0)
 					echo '</tr>';

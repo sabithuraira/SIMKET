@@ -1,5 +1,4 @@
 <div class="row">
-
     <div class="col-md-12">
 
         <div class="box box-info">
@@ -13,13 +12,11 @@
                 <?php $this->widget('zii.widgets.CDetailView', array(
                     'data'=>$model,
                     'attributes'=>array(
-                        //'id',
                         'kegiatan',
                         array(
                             'name'  =>'unit_kerja',
                             'value' =>$model->unitKerja->name
                         ),
-
                         array(
                             'name'  =>'jenis_kegiatan',
                             'value' =>$model->jenisKegiatan,
@@ -32,13 +29,10 @@
                             'name'  =>'end_date',
                             'value' =>HelpMe::HrDate($model->end_date),
                         ),
-                        //'start_date',
-                        //'end_date',
                     ),
                 )); ?>
 
                 <br/>
-
 
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
@@ -49,12 +43,15 @@
                         <div class="tab-pane active" id="tab_progress">
                             
                             <center>
-                            <?php if(HelpMe::isKabupaten() || HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
-                            <a href="#myModal2" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Tambah Pengiriman</a>
-                            <?php }if(HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
-                            <a href="#myModal" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Konfirmasi Penerimaan</a>
-                            <?php echo CHtml::link('Cetak Surat',array('kegiatan/pdfinfo','id'=>$model->id),array('class'=>'btn btn-flat btn-primary')); ?>
-                            <?php } ?>
+                                <?php if(HelpMe::isKabupaten() || HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
+                                    <!-- <a href="#myModal2" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Tambah Pengiriman</a> -->
+                                    <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#myModal2">
+                                        Launch demo modal
+                                    </button>
+                                <?php }if(HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
+                                    <a href="#myModal" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Konfirmasi Penerimaan</a>
+                                    <?php echo CHtml::link('Cetak Surat',array('kegiatan/pdfinfo','id'=>$model->id),array('class'=>'btn btn-flat btn-primary')); ?>
+                                <?php } ?>
                             </center>
                             <br/>
 
@@ -180,139 +177,140 @@
                 </div>
 
 
-                <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel">Konfirmasi Penerimaan</h3>
-                    </div>
-                    
-                    <div class="modal-body">
-                        <form id="InfroText" method="POST">
-                
-                            <input name="InfroText" value="1" type="hidden">
-                    
-                            <table>
-                                <tbody>
-                                
-                                    <tr>
-                                        <td>Kabupaten/Kota</td>
-                                        <td>
-                                            <?php 
-                                                echo CHtml::dropDownList('unit_kerja','',
-                                                        CHtml::listData(Participant::model()->PerKegiatan($model->id)->data,
-                                                            'unitkerja','unitkerja0.name'),
-                                                        array('empty'=>'- Pilih Unit Kerja-')); 
-                                            ?>
-                                        </td>  
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <span id="myModalLabel">Konfirmasi Penerimaan</span>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <form id="InfroText" method="POST">
+                        
+                                    <input name="InfroText" value="1" type="hidden">
+                            
+                                    <table class="table table-hover table-striped table-bordered table-condensed">
+                                        <tbody>
+                                        
+                                            <tr>
+                                                <td>Kabupaten/Kota</td>
+                                                <td>
+                                                    <?php 
+                                                        echo CHtml::dropDownList('unit_kerja','',
+                                                                CHtml::listData(Participant::model()->PerKegiatan($model->id)->data,
+                                                                    'unitkerja','unitkerja0.name'),
+                                                                array('empty'=>'- Pilih Unit Kerja-')); 
+                                                    ?>
+                                                </td>  
 
-                                    </tr>
+                                            </tr>
 
-                                    <tr>
-                                        <td>Tanggal Penerimaan</td>
-                                        <td>
-                                            <?php 
-                                                $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                                    'name'=>'tanggal',
-                                                    'options' => array(
-                                                        'dateFormat'=>'yy-mm-dd',
-                                                        //'changeYear'=>true,
-                                                        //'changeMonth'=>true,
-                                                    ),
-                                                ));
-                                            ?>
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Jumlah</td>
-                                        <td>
-                                            <?php echo CHtml::textField('jumlah',''); ?>
-                                        </td>
-                                    </tr>
+                                            <tr>
+                                                <td>Tanggal Penerimaan</td>
+                                                <td>
+                                                    <?php 
+                                                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                                            'name'=>'tanggal',
+                                                            'options' => array(
+                                                                'dateFormat'=>'yy-mm-dd',
+                                                                //'changeYear'=>true,
+                                                                //'changeMonth'=>true,
+                                                            ),
+                                                        ));
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>Jumlah</td>
+                                                <td>
+                                                    <?php echo CHtml::textField('jumlah',''); ?>
+                                                </td>
+                                            </tr>
 
-                                    <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
-                                    <input id="vid2" type="hidden" value="">
-                                </tbody>
-                            </table>
-                    </form>
-                    </div>
-                    
-                    <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button class="btn btn-primary" data-dismiss="modal" id="InfroTextSubmit">Save changes</button>
+                                            <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
+                                            <input id="vid2" type="hidden" value="">
+                                        </tbody>
+                                    </table>
+                            </form>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                <button class="btn btn-primary" data-dismiss="modal" id="InfroTextSubmit">Save changes</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel">Tambah Pengiriman</h3>
-                    </div>
-                    
-                    <div class="modal-body">
-                        <form id="InfroText2" method="POST">
-                
-                            <input name="InfroText" value="1" type="hidden">
-                    
-                            <table>
-                                <tbody>
-                                    <?php if(!HelpMe::isKabupaten()){ ?>
-                                    <tr>
-                                        <td>Kabupaten/Kota</td>
-                                        <td>
-                                            <?php 
-                                                echo CHtml::dropDownList('unit_kerja2','',
-                                                        CHtml::listData(Participant::model()->PerKegiatan($model->id)->data,
-                                                            'unitkerja','unitkerja0.name'),
-                                                        array('empty'=>'- Pilih Unit Kerja-')); 
-                                            ?>
-                                        </td>  
+                <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <span id="myModalLabel">Tambah Pengiriman</span>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <form id="InfroText2" method="POST">
+                                    <input name="InfroText" value="1" type="hidden">
+                            
+                                    <table class="table table-hover table-striped table-bordered table-condensed">
+                                        <tbody>
+                                            <?php if(!HelpMe::isKabupaten()){ ?>
+                                            <tr>
+                                                <td>Kabupaten/Kota</td>
+                                                <td>
+                                                    <?php 
+                                                        echo CHtml::dropDownList('unit_kerja2','',
+                                                                CHtml::listData(Participant::model()->PerKegiatan($model->id)->data,
+                                                                    'unitkerja','unitkerja0.name'),
+                                                                array('empty'=>'- Pilih Unit Kerja-','class'=>'form-control')); 
+                                                    ?>
+                                                </td>  
 
-                                    </tr>
-                                    <?php }else{ echo CHtml::hiddenField('unit_kerja2',Yii::app()->user-> getUnitKerja()); } ?>
+                                            </tr>
+                                            <?php }else{ echo CHtml::hiddenField('unit_kerja2',Yii::app()->user-> getUnitKerja()); } ?>
 
-                                    <tr>
-                                        <td>Tanggal Pengiriman</td>
-                                        <td>
-                                            <?php 
-                                                $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                                    'name'=>'tanggal2',
-                                                    'options' => array(
-                                                        'dateFormat'=>'yy-mm-dd',
-                                                        //'changeYear'=>true,
-                                                        //'changeMonth'=>true,
-                                                    ),
-                                                ));
-                                            ?>
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Jumlah</td>
-                                        <td>
-                                            <?php echo CHtml::textField('jumlah2',''); ?>
-                                        </td>
-                                    </tr>
+                                            <tr>
+                                                <td>Tanggal Pengiriman</td>
+                                                <td>
+                                                    <?php 
+                                                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                                            'name'=>'tanggal2',
+                                                            'options' => array(
+                                                                'dateFormat'=>'yy-mm-dd',
+                                                                //'changeYear'=>true,
+                                                                //'changeMonth'=>true,
+                                                            ),
+                                                        ));
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>Jumlah</td>
+                                                <td><?php echo CHtml::textField('jumlah2','', array('class'=>'form-control')); ?></td>
+                                            </tr>
 
+                                            <tr>
+                                                <td>Dikirim melalui</td>
+                                                <td><?php echo CHtml::textField('via','', array('class'=>'form-control')); ?></td>
+                                            </tr>
 
-                                    <tr>
-                                        <td>Dikirim melalui</td>
-                                        <td>
-                                            <?php echo CHtml::textField('via',''); ?>
-                                        </td>
-                                    </tr>
-
-                                    <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
-                                    <input id="vid" type="hidden" value="">
-                                
-                                </tbody>
-                            </table>
-                    </form>
-                    </div>
-                    
-                    <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button class="btn btn-primary" data-dismiss="modal" id="InfroTextSubmit2">Save changes</button>
+                                            <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
+                                            <input id="vid" type="hidden" value="">    
+                                        </tbody>
+                                    </table>
+                            </form>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                <button class="btn btn-primary" data-dismiss="modal" id="InfroTextSubmit2">Save changes</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 

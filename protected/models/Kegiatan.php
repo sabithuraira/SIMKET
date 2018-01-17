@@ -163,30 +163,8 @@ class Kegiatan extends HelpAr
 			$criteria->AddCondition("YEAR(start_date)=".$this->filter_tahun." OR YEAR(end_date)=".$this->filter_tahun);
 		}
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('kegiatan',$this->kegiatan,true);
 		$criteria->compare('unit_kerja',$this->unit_kerja);
-		$criteria->compare('start_date',$this->start_date,true);
-		$criteria->compare('end_date',$this->end_date,true);
-		$criteria->compare('created_time',$this->created_time,true);
-		$criteria->compare('created_by',$this->created_by);
-		$criteria->compare('updated_time',$this->updated_time,true);
-		$criteria->compare('updated_by',$this->updated_by);
-		$criteria->compare('response_a',$this->response_a);
-		$criteria->compare('response_b',$this->response_b);
-		$criteria->compare('response_c',$this->response_c);
-		$criteria->compare('response_d',$this->response_d);
-		$criteria->compare('response_e',$this->response_e);
-		$criteria->compare('timeline_a_start',$this->timeline_a_start,true);
-		$criteria->compare('timeline_a_end',$this->timeline_a_end,true);
-		$criteria->compare('timeline_b_start',$this->timeline_b_start,true);
-		$criteria->compare('timeline_c_start',$this->timeline_c_start,true);
-		$criteria->compare('timeline_c_end',$this->timeline_c_end,true);
-		$criteria->compare('timeline_d_start',$this->timeline_d_start,true);
-		$criteria->compare('timeline_d_end',$this->timeline_d_end,true);
-		$criteria->compare('timeline_e_start',$this->timeline_e_start,true);
-		$criteria->compare('timeline_e_end',$this->timeline_e_end,true);
-		$criteria->compare('timeline_b_end',$this->timeline_b_end,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
