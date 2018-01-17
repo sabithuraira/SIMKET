@@ -165,29 +165,6 @@ class KegiatanController extends Controller
         	 'satu'=>$satu,
         ));
         Yii::app()->end();
-		/*
-		$satu='';
-		
-		$model=new ValueKegiatan;
-		$model->unit_kerja = $_POST['unitkerja'];
-		$model->kegiatan = $_POST['idnya'];
-		$model->tanggal_pengumpulan = $_POST['tanggal'];
-		$model->jumlah = $_POST['jumlah'];
-		$model->ketarangan = $_POST['via'];
-		$model->jenis=2;
-		
-		if($model->save())
-		{
-        	$satu=$this->createUrl('site/kabupaten',array('id'=>$model->unit_kerja));
-		}
-		
-		
-		echo CJSON::encode(array
-     	(
-        	 'satu'=>$satu,
-        ));
-        Yii::app()->end();
-        */
 	}
 
 	public function actionProgress($id)
@@ -320,13 +297,20 @@ class KegiatanController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$tahun = date('Y');
 		$model=new Kegiatan('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes(); 
+
+		if(isset($_POST['tahun']))
+			$tahun=$_POST['tahun'];
+
+		$model->filter_tahun = $tahun;
 		if(isset($_GET['Kegiatan']))
 			$model->attributes=$_GET['Kegiatan'];
 
 		$this->render('admin',array(
 			'model'=>$model,
+			'tahun'=>$tahun,
 		));
 	}
 

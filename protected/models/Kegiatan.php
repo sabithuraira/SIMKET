@@ -36,6 +36,7 @@
  */
 class Kegiatan extends HelpAr
 {
+	public $filter_tahun="";
 	/**
 	 * @return string the associated database table name
 	 */
@@ -157,6 +158,10 @@ class Kegiatan extends HelpAr
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
+
+		if(strlen($this->filter_tahun)>0){
+			$criteria->AddCondition("YEAR(start_date)=".$this->filter_tahun." OR YEAR(end_date)=".$this->filter_tahun);
+		}
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('kegiatan',$this->kegiatan,true);

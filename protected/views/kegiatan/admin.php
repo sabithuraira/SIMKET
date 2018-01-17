@@ -28,7 +28,7 @@ $('.search-form form').submit(function(){
 <div class="box box-info">
 	<div class="mailbox-controls">
 		<b>Kegiatan</b>
-		
+
 		<?php if(!HelpMe::isKabupaten()){ ?>
 
 			<div class="pull-right">
@@ -36,6 +36,23 @@ $('.search-form form').submit(function(){
 			</div>
 
 		<?php } ?>
+
+
+		<?php $form=$this->beginWidget('CActiveForm', array(
+				'id'=>'kegiatan-form',
+				'enableAjaxValidation'=>false,
+		)); ?>
+			<?php 
+				echo "<div class='form-group' >";
+				echo "Tampilkan Data Tahun : "; 
+				echo CHtml::dropDownList('tahun',$tahun,HelpMe::getYearForFilter());
+				echo '  &nbsp&nbsp';
+				echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success btn-sm'));
+				echo "</div>";
+			?>
+		<?php $this->endWidget(); ?>
+		
+		
 	</div>
 
 
