@@ -44,10 +44,7 @@
                             
                             <center>
                                 <?php if(HelpMe::isKabupaten() || HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
-                                    <!-- <a href="#myModal2" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Tambah Pengiriman</a> -->
-                                    <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#myModal2">
-                                        Launch demo modal
-                                    </button>
+                                    <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#myModal2">Tambah Pengiriman</button>
                                 <?php }if(HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
                                     <a href="#myModal" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Konfirmasi Penerimaan</a>
                                     <?php echo CHtml::link('Cetak Surat',array('kegiatan/pdfinfo','id'=>$model->id),array('class'=>'btn btn-flat btn-primary')); ?>
