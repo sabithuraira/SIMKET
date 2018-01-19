@@ -47,6 +47,7 @@ var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
 var pathname = window.location.pathname;
 
 $(document).ready(function() {
+    $(".knob").knob();
     loadChart();
 });
 
@@ -88,8 +89,6 @@ function setDataReportSeries(data){
     var dataprogress = data.dataprogress;
     for(var i=0;i<dataprogress.length;++i){
         datas[parseInt(dataprogress[i]['bulan']) - 1] = dataprogress[i]['nilai'];
-        console.log((  parseInt(dataprogress[i]['bulan']) - 1 ))
-        console.log(dataprogress[i]['nilai'])
     }
 
     areaChartData = {

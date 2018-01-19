@@ -45,20 +45,12 @@
 
                 <div class="row-fluid">
                     <?php foreach (UnitKerja::model()->findAllByAttributes(array('parent'=>1,'jenis'=>1)) as $key => $value) { ?> 
-                    <div class="span2 ">
-                        <div class="stat-block">
-                        <ul>
-                            <li class="stat-count">
-                                <span>
-                                    <?php echo ReportMe::ValuePerKabBidang($value->id,$model->id,$tahun) ?>
-                                </span>
-                                <span>
-                                    <?php echo $value->name; ?>
-                                </span>
-                            </li>
-                        </ul>
+                        <div class="col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
+                            <input type="text" class="knob" data-readonly="true" value="<?php echo ReportMe::ValuePerKabBidang($value->id,$model->id,$tahun); ?>" data-max="5" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+                            <div class="knob-label"><?php echo $value->name; ?></div>
                         </div>
-                    </div>
+                    
                     <?php } ?>
 
                 </div>
@@ -113,5 +105,6 @@
 
 
 <?php $baseUrl = Yii::app()->theme->baseUrl; ?>
+<script src="<?php echo $baseUrl;?>/plugins/knob/jquery.knob.js"></script>
 <script src="<?php echo $baseUrl;?>/plugins/chartjs/Chart.min.js"></script>
 <script src="<?php echo $baseUrl;?>/dist/js/vue_page/report/kabupaten.js"></script>
