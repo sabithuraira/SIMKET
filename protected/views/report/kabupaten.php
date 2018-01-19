@@ -18,6 +18,7 @@
                         )); ?>
                             <div class="center">
                                 <?php echo "<b>Tampilkan Data Tahun : </b>"; ?>
+                                <input type="hidden" id="id" value="<?php echo $model->id ?>" />
                                 <?php echo CHtml::dropDownList('tahun',$tahun,HelpMe::getYearForFilter()); ?>
                                 <?php echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success')); ?>
                             </div>
@@ -34,7 +35,10 @@
                         ));
                         
                     ?>
-                        <div id="areaChart" style="height: 150px;width:100%;margin-top:15px; margin-bottom:15px;"></div>
+
+                    <div class="chart">
+                        <canvas id="areaChart" style="height:250px"></canvas>
+                    </div>
                     <?php $this->endWidget();?>
                 </div>
                 </div>

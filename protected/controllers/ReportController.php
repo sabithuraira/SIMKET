@@ -86,7 +86,7 @@ class ReportController extends Controller
         ));
     }
 
-    public function actionApi_report_kabupaten($tahun){
+    public function actionApi_report_kabupaten($id, $tahun){
         $dataprogress=ReportMe::KabupatenPerMonth($id,$tahun);
 
 		echo CJSON::encode(array

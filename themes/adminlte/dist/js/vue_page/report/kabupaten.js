@@ -42,6 +42,8 @@ var areaChartOptions = {
     //Boolean - whether to make the chart responsive to window resizing
     responsive: true
   };
+
+var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
 var pathname = window.location.pathname;
 
 $(document).ready(function() {
@@ -49,11 +51,12 @@ $(document).ready(function() {
 });
 
 function loadChart(){
-    var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
     
     // loading.css("display", "block");
+    var tahun = $('#tahun').val();
+    var id = $('#id').val();
     $.ajax({
-        url: pathname+"?r=report/api_report_kabupaten",
+        url: pathname+"?r=report/api_report_kabupaten&id="+id+"&tahun="+tahun,
         dataType: 'json',
         type: "GET",
         success: function(data) {
@@ -65,17 +68,9 @@ function loadChart(){
             alert("Terjadi kesalahan pada internet, harap refresh halaman");
         }.bind(this)
     });
-
-
-    var areaChart = new Chart(areaChartCanvas);
-
-    var areaChartData = null;
-
-    //Create the line chart
-    areaChart.Line(areaChartData, areaChartOptions);
 }
 
-function setDataReportSeries(){
+function setDataReportSeries(data){
 
     // var d1=[];
     // <?php 
@@ -83,25 +78,38 @@ function setDataReportSeries(){
     //     foreach ($dataprogress as $key => $value) { ?>
     //     d1[d1.length]=[gd(<?php echo $tahun; ?>,<?php echo $value['bulan']-1 ?>,1),<?php echo $value['nilai'] ?>];
     // <?php } ?>
+    
+    var areaChart = new Chart(areaChartCanvas);
+    var areaChartData = null;
 
     var labels = ["January", "February", "March", "April", "May", "June", "July", "Agustus", "September", "Oktober", "November", "Desember"];
-    var datas = array();
+    var datas = [0, 0, 0,0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0];
 
+    var dataprogress = data.dataprogress;
+    for(var i=0;i<dataprogress.length;++i){
+        datas[parseInt(dataprogress[i]['bulan']) - 1] = dataprogress[i]['nilai'];
+        console.log((  parseInt(dataprogress[i]['bulan']) - 1 ))
+        console.log(dataprogress[i]['nilai'])
+    }
 
-
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-      {
-        label: "Electronics",
-        fillColor: "rgba(210, 214, 222, 1)",
-        strokeColor: "rgba(210, 214, 222, 1)",
-        pointColor: "rgba(210, 214, 222, 1)",
-        pointStrokeColor: "#c1c7d1",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)",
-        data: [65, 59, 80, 81, 56, 55, 40]
-      }
-    ]
+    areaChartData = {
+        labels: labels,
+        datasets: [
+          {
+            label: "Nilai",
+            fillColor: "rgba(60,141,188,0.9)",
+            strokeColor: "rgba(60,141,188,0.8)",
+            pointColor: "#3b8bba",
+            pointStrokeColor: "rgba(60,141,188,1)",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(60,141,188,1)",
+            data: datas
+          }
+        ]
+    };
+    
+    //Create the line chart
+    areaChart.Line(areaChartData, areaChartOptions);
 }
 
 function gd(year, month, day) {
