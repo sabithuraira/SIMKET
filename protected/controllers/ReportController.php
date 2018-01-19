@@ -24,7 +24,7 @@ class ReportController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions'=>array('index','kabupaten','rekap'),
+                'actions'=>array('index','kabupaten','rekap', 'api_report_kabupaten'),
                 'users'=>array('*'),
             ),
           
@@ -78,13 +78,22 @@ class ReportController extends Controller
 
         $data=ReportMe::KegiatanKabupaten($id,$tahun);
         $model=UnitKerja::model()->findByPk($id);
-        $dataprogress=ReportMe::KabupatenPerMonth($id,$tahun);
 
         $this->render('kabupaten',array(
             'data'          =>$data,
             'model'         =>$model,
-            'dataprogress'  =>$dataprogress,
             'tahun'         =>$tahun,
         ));
     }
+
+    public function actionApi_report_kabupaten($tahun){
+        $dataprogress=ReportMe::KabupatenPerMonth($id,$tahun);
+
+		echo CJSON::encode(array
+		(
+			'dataprogress'=>$dataprogress
+		));
+
+		Yii::app()->end();
+	}
 }

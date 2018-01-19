@@ -255,6 +255,7 @@ class KegiatanController extends Controller
 					$modelpart->kegiatan 	=$id;
 					$modelpart->unitkerja 	=$value['id'];
 					$modelpart->target 		=$_POST['target_'.$value['id']];
+					$modelpart->target_anggaran=$_POST['anggaran_'.$value['id']];
 					$modelpart->save();
 				}
 			}

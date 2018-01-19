@@ -108,7 +108,7 @@
 				// echo '<td>'.CHtml::label($value['name'], 'id_'.$value['id']).'</td>';
 				echo '<td>'.$value['name'].'</td>';
 				echo '<td class="text-center">'.CHtml::textField('target_'.$value['id'],($modelpart!==null ? $modelpart->target : '')).'</td>';
-				echo '<td class="text-center">'.CHtml::textField('anggaran_'.$value['id'],($modelpart!==null ? $modelpart->target : '')).'</td>';
+				echo '<td class="text-center">'.CHtml::textField('anggaran_'.$value['id'],($modelpart!==null ? $modelpart->target_anggaran : '')).'</td>';
 
 				//if($key%2!==0)
 					echo '</tr>';
