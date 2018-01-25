@@ -73,8 +73,8 @@ class ReportController extends Controller
     {
         $tahun=date('Y');
 
-        if(isset($_GET['tahun']))
-            $tahun=$_GET['tahun'];
+        if(isset($_POST['tahun']))
+            $tahun=$_POST['tahun'];
 
         $data=ReportMe::KegiatanKabupaten($id,$tahun);
         $model=UnitKerja::model()->findByPk($id);
