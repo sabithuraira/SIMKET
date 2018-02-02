@@ -15,7 +15,7 @@
  * @property integer $created_by
  * @property string $updated_by
  */
-class MitraBps extends CActiveRecord
+class MitraBps extends HelpAr
 {
 	/**
 	 * @return string the associated database table name
