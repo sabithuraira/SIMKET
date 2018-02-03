@@ -33,8 +33,8 @@ class MitraBps extends HelpAr
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama, nomor_telepon, jk, created_time, updated_time, created_by, updated_by', 'required'),
-			array('jk, created_by', 'numerical', 'integerOnly'=>true),
+			array('nama, kab_id, nomor_telepon, jk, created_time, updated_time, created_by, updated_by', 'required'),
+			array('jk, kab_id, created_by', 'numerical', 'integerOnly'=>true),
 			array('nama', 'length', 'max'=>255),
 			array('nomor_telepon', 'length', 'max'=>15),
 			array('alamat, tanggal_lahir', 'safe'),
@@ -52,6 +52,7 @@ class MitraBps extends HelpAr
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'kabupaten' => array(self::BELONGS_TO, 'UnitKerja', 'kab_id'),
 		);
 	}
 
@@ -63,6 +64,7 @@ class MitraBps extends HelpAr
 		return array(
 			'id' => 'ID',
 			'nama' => 'Nama',
+			'kab_id' => 'Kabupaten',
 			'nomor_telepon' => 'Nomor Telepon',
 			'alamat' => 'Alamat',
 			'tanggal_lahir' => 'Tanggal Lahir',
@@ -94,6 +96,7 @@ class MitraBps extends HelpAr
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('nama',$this->nama,true);
+		$criteria->compare('kab_id',$this->kab_id);
 		$criteria->compare('nomor_telepon',$this->nomor_telepon,true);
 		$criteria->compare('alamat',$this->alamat,true);
 		$criteria->compare('tanggal_lahir',$this->tanggal_lahir,true);

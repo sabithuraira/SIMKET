@@ -27,6 +27,12 @@
 		'filter'=>$model,
 		'columns'=>array(
 			'nama',
+			array(
+				'name'	=>'kab_id',
+				'type'=>'raw',
+				'value'		=> function($data){ return $data->kabupaten->name; },
+				'filter' => CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>2)), 'id', 'name')
+			),
 			'nomor_telepon',
 			'alamat',
 			'tanggal_lahir',
