@@ -1,18 +1,12 @@
-<?php
-/* @var $this MitrabpsController */
-/* @var $model MitraBps */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Tambah Mitra BPS</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Mitra BPS", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+	</div>
 
-$this->breadcrumbs=array(
-	'Mitra Bps'=>array('index'),
-	'Create',
-);
-
-$this->menu=array(
-	array('label'=>'List MitraBps', 'url'=>array('index')),
-	array('label'=>'Manage MitraBps', 'url'=>array('admin')),
-);
-?>
-
-<h1>Create MitraBps</h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	<div class="box-body">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>

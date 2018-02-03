@@ -1,9 +1,3 @@
-<?php
-/* @var $this MitrabpsController */
-/* @var $model MitraBps */
-/* @var $form CActiveForm */
-?>
-
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -19,62 +13,52 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'nama'); ?>
-		<?php echo $form->textField($model,'nama',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'nama',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'nama'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'nomor_telepon'); ?>
-		<?php echo $form->textField($model,'nomor_telepon',array('size'=>15,'maxlength'=>15)); ?>
+		<?php echo $form->textField($model,'nomor_telepon',array('size'=>15,'maxlength'=>15, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'nomor_telepon'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'alamat'); ?>
-		<?php echo $form->textArea($model,'alamat',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textArea($model,'alamat',array('rows'=>6, 'cols'=>50, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'alamat'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'tanggal_lahir'); ?>
-		<?php echo $form->textField($model,'tanggal_lahir'); ?>
+		<?php
+			$this->widget('zii.widgets.jui.CJuiDatePicker', 
+				array(
+					'model'=>$model,
+					'attribute'=>'tanggal_lahir',
+					'options' => array(
+						'dateFormat'=>'yy-mm-dd',
+						'changeYear'=>true,
+						'changeMonth'=>true,
+					)
+				)
+			);
+		?>
 		<?php echo $form->error($model,'tanggal_lahir'); ?>
 	</div>
 
-	<div class="row">
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'jk'); ?>
-		<?php echo $form->textField($model,'jk'); ?>
+		<?php echo $form->dropDownList($model,'jk',
+				array(1=>'Laki-laki', 2=> 'Perempuan'),
+				array('empty'=>'- Jenis Kelamin -', 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'jk'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'created_time'); ?>
-		<?php echo $form->textField($model,'created_time'); ?>
-		<?php echo $form->error($model,'created_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'updated_time'); ?>
-		<?php echo $form->textField($model,'updated_time'); ?>
-		<?php echo $form->error($model,'updated_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'created_by'); ?>
-		<?php echo $form->textField($model,'created_by'); ?>
-		<?php echo $form->error($model,'created_by'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'updated_by'); ?>
-		<?php echo $form->textField($model,'updated_by'); ?>
-		<?php echo $form->error($model,'updated_by'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="box-footer">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>"btn btn-info pull-right")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

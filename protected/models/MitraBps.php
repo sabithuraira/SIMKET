@@ -66,7 +66,7 @@ class MitraBps extends HelpAr
 			'nomor_telepon' => 'Nomor Telepon',
 			'alamat' => 'Alamat',
 			'tanggal_lahir' => 'Tanggal Lahir',
-			'jk' => 'Jk',
+			'jk' => 'Jenis Kelamin',
 			'created_time' => 'Created Time',
 			'updated_time' => 'Updated Time',
 			'created_by' => 'Created By',
