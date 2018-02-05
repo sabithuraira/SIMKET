@@ -1,35 +1,37 @@
-<?php
-/* @var $this MitrabpsController */
-/* @var $model MitraBps */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b><?php echo $model->nama; ?></b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Mitra", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-pencil'></i> Perbaharui", array('update', 'id'=>$model->id), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-trash'></i> Hapus", "#", array("submit"=>array('delete', 'id'=>$model->id), 'confirm' => 'Anda yakin ingin menghapus data ini?', 'class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+	</div>
 
-$this->breadcrumbs=array(
-	'Mitra Bps'=>array('index'),
-	$model->id,
-);
+	<div class="box-body">
 
-$this->menu=array(
-	array('label'=>'List MitraBps', 'url'=>array('index')),
-	array('label'=>'Create MitraBps', 'url'=>array('create')),
-	array('label'=>'Update MitraBps', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete MitraBps', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage MitraBps', 'url'=>array('admin')),
-);
-?>
-
-<h1>View MitraBps #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'nama',
-		'nomor_telepon',
-		'alamat',
-		'tanggal_lahir',
-		'jk',
-		'created_time',
-		'updated_time',
-		'created_by',
-		'updated_by',
-	),
-)); ?>
+		<?php $this->widget('zii.widgets.CDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				'id',
+				'nama',
+				array(
+					'name'=>'kab_id',
+					'value'=> $model->kabupaten->name,
+				),
+				'nomor_telepon',
+				'alamat',
+				'tanggal_lahir',
+				array(
+					'name'=>'jk',
+					'value'=> ($model->jk == 1) ? "Laki-laki" : "Perempuan",
+				),
+				'created_time',
+				'updated_time',
+				// 'created_by',
+				// 'updated_by',
+			),
+		)); ?>
+	</div>
+</div>
