@@ -1,7 +1,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?php echo Yii::app()->createUrl('site/index') ?>" class="logo">
       <span class="logo-mini"><b>S</b>KT</span>
       <span class="logo-lg"><b>SIMKET</b></span>
     </a>

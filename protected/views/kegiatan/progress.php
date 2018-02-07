@@ -341,8 +341,10 @@
         var jumlah=$('#jumlah2').val();
         var via=$('#via').val();
         var idnya=$('#idnya').val();
+        var pathname = window.location.pathname;
+
          $.ajax({
-            url: "<?php echo Yii::app()->createUrl('kegiatan/insert_pengiriman'); ?>",
+            url: pathname+"?r=kegiatan/insert_pengiriman",
             type:"post",
             dataType :"json",
             data:{"tanggal":tanggal,
@@ -375,8 +377,11 @@
         var tanggal=$('#tanggal').val();
         var jumlah=$('#jumlah').val();
         var idnya=$('#idnya').val();
+
+        var pathname = window.location.pathname;
+
         $.ajax({
-            url: "<?php echo Yii::app()->createUrl('kegiatan/insert_progress'); ?>",
+            url: pathname+"?r=kegiatan/insert_progress",
             type:"post",
             dataType :"json",
             data:{"unitkerja":unitkerja,
