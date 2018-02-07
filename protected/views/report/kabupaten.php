@@ -13,7 +13,6 @@
                     <div class="pad margin no-print">
                         <div class="form">
                             <?php $form=$this->beginWidget('CActiveForm', array(
-                                'method'=>'get',
                                 'id'=>'kegiatan-form',
                                 'enableAjaxValidation'=>false,
                             )); ?>

@@ -4,7 +4,6 @@
 		<div class="pull-right">
 			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Pegawai", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
 		</div>
-		<!-- /.pull-right -->
 	</div>
 		  
 	<?php
