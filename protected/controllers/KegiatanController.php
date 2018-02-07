@@ -128,7 +128,7 @@ class KegiatanController extends Controller
 		
 		if($model->save())
 		{
-        	$satu=$this->createUrl('progress',array('id'=>$model->kegiatan));
+        	$satu=$model->kegiatan; //$this->createUrl('progress',array('id'=>$model->kegiatan));
 		}
 
 		
@@ -156,7 +156,7 @@ class KegiatanController extends Controller
 		
 		if($model->save())
 		{
-        	$satu=$this->createUrl('progress',array('id'=>$model->kegiatan));
+        	$satu= $model->kegiatan; //$this->createUrl('progress',array('id'=>$model->kegiatan));
 		}
 
 		

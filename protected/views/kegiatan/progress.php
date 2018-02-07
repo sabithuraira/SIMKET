@@ -358,7 +358,7 @@
                 {
                     if(data.satu.length >0)
                     {
-                        window.location.href=data.satu;
+                        window.location.href=pathname+ "?r=kegiatan/progress&id="+data.satu
                     }
                     else
                     {
@@ -394,7 +394,7 @@
                 {
                     if(data.satu.length >0)
                     {
-                        window.location.href=data.satu;
+                        window.location.href=pathname+ "?r=kegiatan/progress&id="+data.satu
                     }
                     else
                     {
