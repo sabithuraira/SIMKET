@@ -17,7 +17,7 @@
         <ul class="nav navbar-nav">
           
           <li class="dropdown messages-menu">
-            <a href="<?php echo Yii::app()->getBaseUrl()."/coba.html" ?>" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="<?php echo Yii::app()->getBaseUrl()."/manual.pdf" ?>" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-file-pdf-o"></i>
               Panduan Penggunaan
               <span class="label label-success">&#8730;</span>
