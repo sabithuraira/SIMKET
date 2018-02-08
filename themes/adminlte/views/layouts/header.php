@@ -15,7 +15,16 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
+          
+          <li class="dropdown messages-menu">
+            <a href="<?php echo Yii::app()->getBaseUrl()."/coba.html" ?>" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-file-pdf-o"></i>
+              Panduan Penggunaan
+              <span class="label label-success">&#8730;</span>
+            </a>
+          </li>
+
+
           <li class="dropdown user user-menu">
             <?php 
               if(Yii::app()->user->isGuest){ 
@@ -26,6 +35,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="hidden-xs">Hallo <?php echo Yii::app()->user->name; ?> !</span>
               </a>
+              
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
