@@ -1,46 +1,39 @@
- <?php
-/* @var $this UserController */
-/* @var $model User */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Change Password</b>
+	</div>
 
-$this->breadcrumbs=array(
-    'Change Password',
-);
+	<div class="box-body">
+        <div class="form">
 
-?>
+        
+            <?php $form=$this->beginWidget('CActiveForm', array(
+                'id'=>'user-form',
+                'enableAjaxValidation'=>true,
+            )); ?>
 
-<h1>Change Password</h1>
+                <?php echo $form->errorSummary($data); ?>
 
-<div>
-<?php $form=$this->beginWidget('CActiveForm', array(
-    'id'=>'user-form',
-    'enableAjaxValidation'=>true,
-)); ?>
+                <div class="form-group">
+                    <?php echo "Password Sekarang"; ?>
+                    <?php echo CHtml::passwordField('old','',array('size'=>50,'maxlength'=>50, 'class'=>"form-control")); ?>
+                </div>
 
-    <?php echo $form->errorSummary($data); ?>
-    <table>
-        <tr>
-            <td><?php echo 'Your Current Password :'; ?></td>
-            <td>
-                <?php echo CHtml::passwordField('old','',array('size'=>50,'maxlength'=>50)); ?>
-            </td>
-        </tr>
-        <tr>
-            <td><?php echo 'New Password :'; ?></td>
-            <td>
-                <?php echo CHtml::passwordField('baru1','',array('size'=>50,'maxlength'=>50)); ?>
-            </td>
-        </tr>
-        <tr>
-            <td><?php echo 'Confirmation Your New Password :'; ?></td>
-            <td>
-                <?php echo CHtml::passwordField('baru2','',array('size'=>50,'maxlength'=>50)); ?>
-            </td>
-        </tr>
-    </table>
+                <div class="form-group">
+                    <?php echo "Password Baru"; ?>
+                    <?php echo CHtml::passwordField('baru1','',array('size'=>50,'maxlength'=>50, 'class'=>"form-control")); ?>
+                </div>
 
-    <div>
-        <?php echo CHtml::submitButton('Change Password'); ?>
-    </div>
+                <div class="form-group">
+                    <?php echo "Password Konfirmasi"; ?>
+                    <?php echo CHtml::passwordField('baru2','',array('size'=>50,'maxlength'=>50, 'class'=>"form-control")); ?>
+                </div>
 
-<?php $this->endWidget(); ?>
-</div><!-- form -->
+                <div class="box-footer">
+                    <?php echo CHtml::submitButton('Save', array('class'=>"btn btn-info pull-right")); ?>
+                </div>
+
+            <?php $this->endWidget(); ?>
+        </div><!-- form -->
+	</div>
+</div>
