@@ -32,7 +32,7 @@ class KegiatanController extends Controller
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','insert_progress',
 						'insert_pengiriman','activecalendar',
-						'insert_anggaran_real'),
+						'insert_anggaran_real', 'insert_anggaran_target'),
 				'users'=>array('@'),
 			),
 			array('allow',
@@ -108,6 +108,32 @@ class KegiatanController extends Controller
         }
 
         echo json_encode($result);
+	}
+
+
+	public function actionInsert_anggaran_target()
+	{
+		$satu='';
+
+
+		if(strlen($_POST['unitkerja'])>0 && strlen($_POST['idnya'])>0){
+			$model=Participant::model()->findByAttributes(array('kegiatan'=>$_POST['idnya'], 'unitkerja'=>$_POST['unitkerja']));
+			
+			if($model!=null){
+				$model->target_anggaran=$_POST['jumlah'];
+				
+				if($model->save(false))
+				{
+					$satu= $_POST['idnya'];
+				}
+			}
+		}
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu'=>$satu,
+        ));
+        Yii::app()->end();
 	}
 
 	public function actionInsert_anggaran_real()

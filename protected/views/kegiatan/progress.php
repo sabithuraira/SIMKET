@@ -328,6 +328,23 @@
                                     <table class="table table-hover table-striped table-bordered table-condensed">
                                         <tbody>
 
+                                            <?php if(!HelpMe::isKabupaten()){ ?>
+                                            <tr>
+                                                <td>Kabupaten/Kota</td>
+                                                <td>
+                                                    <?php 
+                                                        echo CHtml::dropDownList('unit_kerja_anggaran_real','',
+                                                                CHtml::listData(Participant::model()->PerKegiatan($model->id)->data,
+                                                                    'unitkerja','unitkerja0.name'),
+                                                                array('empty'=>'- Pilih Unit Kerja-','class'=>'form-control')); 
+                                                    ?>
+                                                </td>  
+
+                                            </tr>
+                                            <?php }else{ 
+                                                echo CHtml::hiddenField('unit_kerja_anggaran_real',Yii::app()->user-> getUnitKerja()); } 
+                                            ?>
+
                                             <tr>
                                                 <td>Tanggal Penerimaan</td>
                                                 <td>
@@ -359,7 +376,6 @@
 
                                             <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
                                             <input id="vid_anggaran_real" type="hidden" value="">
-                                            <?php echo CHtml::hiddenField('unit_kerja_anggaran_real',Yii::app()->user-> getUnitKerja()); ?>
                                         </tbody>
                                     </table>
                             </form>
@@ -373,6 +389,59 @@
                     </div>
                 </div>
 
+
+
+                <div id="myModalAnggaranTarget" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <span id="myModalLabel">Target Angaran</span>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <form id="InfroText" method="POST">
+                                    <input name="InfroText" value="1" type="hidden">
+                                    <table class="table table-hover table-striped table-bordered table-condensed">
+                                        <tbody>
+
+                                        
+                                            <?php if(!HelpMe::isKabupaten()){ ?>
+                                            <tr>
+                                                <td>Kabupaten/Kota</td>
+                                                <td>
+                                                    <?php 
+                                                        echo CHtml::dropDownList('unit_kerja_anggaran_target','',
+                                                                CHtml::listData(Participant::model()->PerKegiatan($model->id)->data,
+                                                                    'unitkerja','unitkerja0.name'),
+                                                                array('empty'=>'- Pilih Unit Kerja-','class'=>'form-control')); 
+                                                    ?>
+                                                </td>  
+                                            </tr>
+                                            <?php }else{ 
+                                                echo CHtml::hiddenField('unit_kerja_anggaran_target',Yii::app()->user-> getUnitKerja()); } 
+                                            ?>
+                                            
+                                            <tr>
+                                                <td>Jumlah</td>
+                                                <td>
+                                                    <?php echo CHtml::textField('jumlah_anggaran_target','', array('class'=>'form-control')); ?>
+                                                </td>
+                                            </tr>
+
+                                            <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
+                                        </tbody>
+                                    </table>
+                            </form>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                <button class="btn btn-primary" data-dismiss="modal" id="InfroTextSubmitAnggaranTarget">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
                 
@@ -491,6 +560,38 @@
                     "ket"   :ket,
                     "idnya":idnya,
                     "vid":vid,
+                },
+                success : function(data)
+                {
+                    if(data.satu.length >0)
+                    {
+                        window.location.href=pathname+ "?r=kegiatan/progress&id="+data.satu
+                    }
+                    else
+                    {
+                        alert('Data gagal disimpan, refresh halaman anda dan ulangi lagi');
+                    }
+                }
+            }
+        );
+
+    });
+
+    
+    $('#InfroTextSubmitAnggaranTarget').click(function(){
+        var jumlah  =$('#jumlah_anggaran_target').val();
+        var idnya   =$('#idnya').val();
+        var unitkerja=$('#unit_kerja_anggaran_target').val();
+
+        var pathname = window.location.pathname;
+
+        $.ajax({
+            url: pathname+"?r=kegiatan/insert_anggaran_target",
+            type:"post",
+            dataType :"json",
+            data:{"unitkerja":unitkerja,
+                    "jumlah":jumlah,
+                    "idnya":idnya,
                 },
                 success : function(data)
                 {
