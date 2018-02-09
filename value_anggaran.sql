@@ -30,14 +30,13 @@ CREATE TABLE `value_anggaran` (
   `id` int(11) NOT NULL,
   `unit_kerja` int(11) NOT NULL,
   `kegiatan` int(11) NOT NULL,
-  `seri_kegiatan` varchar(255) NOT NULL,
+  `seri_kegiatan` varchar(255) DEFAULT NULL,
   `tanggal_realisasi` datetime NOT NULL,
   `jumlah` decimal(20,0) NOT NULL,
   `created_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
   `updated_time` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
-  `jenis` int(11) NOT NULL,
   `keterangan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

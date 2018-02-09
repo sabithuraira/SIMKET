@@ -31,7 +31,8 @@ class KegiatanController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','insert_progress',
-						'insert_pengiriman','activecalendar'),
+						'insert_pengiriman','activecalendar',
+						'insert_anggaran_real'),
 				'users'=>array('@'),
 			),
 			array('allow',
@@ -106,10 +107,35 @@ class KegiatanController extends Controller
             $result[]=$event_array;
         }
 
-      
-
         echo json_encode($result);
-    }
+	}
+
+	public function actionInsert_anggaran_real()
+	{
+		$satu='';
+		
+		$model=new ValueAnggaran;
+		if(strlen($_POST['vid'])>0)
+			$model=ValueAnggaran::model()->findByPk($_POST['vid']);
+
+		$model->kegiatan=$_POST['idnya'];
+		$model->unit_kerja = $_POST['unitkerja'];
+		$model->tanggal_realisasi = $_POST['tanggal'];
+		$model->jumlah = $_POST['jumlah'];
+		$model->keterangan = $_POST['via'];
+		
+		if($model->save())
+		{
+        	$satu= $model->kegiatan; //$this->createUrl('progress',array('id'=>$model->kegiatan));
+		}
+
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu'=>$satu,
+        ));
+        Yii::app()->end();
+	}
 
 	public function actionInsert_progress()
 	{
@@ -210,7 +236,6 @@ class KegiatanController extends Controller
 						$participant->kegiatan=$model->primaryKey;
 						$participant->unitkerja=$value['id'];
 						$participant->target=$_POST['target_'.$value['id']];
-						$participant->target_anggaran=$_POST['anggaran_'.$value['id']];
 						$participant->save();
 					}
 				}
@@ -255,7 +280,6 @@ class KegiatanController extends Controller
 					$modelpart->kegiatan 	=$id;
 					$modelpart->unitkerja 	=$value['id'];
 					$modelpart->target 		=$_POST['target_'.$value['id']];
-					$modelpart->target_anggaran=$_POST['anggaran_'.$value['id']];
 					$modelpart->save();
 				}
 			}

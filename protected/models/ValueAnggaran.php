@@ -14,10 +14,9 @@
  * @property integer $created_by
  * @property string $updated_time
  * @property integer $updated_by
- * @property integer $jenis
  * @property string $keterangan
  */
-class ValueAnggaran extends CActiveRecord
+class ValueAnggaran extends HelpAr
 {
 	/**
 	 * @return string the associated database table name
@@ -35,13 +34,13 @@ class ValueAnggaran extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('unit_kerja, kegiatan, seri_kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by, jenis', 'required'),
-			array('unit_kerja, kegiatan, created_by, updated_by, jenis', 'numerical', 'integerOnly'=>true),
+			array('unit_kerja, kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by', 'required'),
+			array('unit_kerja, kegiatan, created_by, updated_by', 'numerical', 'integerOnly'=>true),
 			array('seri_kegiatan, keterangan', 'length', 'max'=>255),
 			array('jumlah', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, unit_kerja, kegiatan, seri_kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by, jenis, keterangan', 'safe', 'on'=>'search'),
+			array('id, unit_kerja, kegiatan, seri_kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by, keterangan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,7 +71,6 @@ class ValueAnggaran extends CActiveRecord
 			'created_by' => 'Created By',
 			'updated_time' => 'Updated Time',
 			'updated_by' => 'Updated By',
-			'jenis' => 'Jenis',
 			'keterangan' => 'Keterangan',
 		);
 	}
@@ -105,7 +103,6 @@ class ValueAnggaran extends CActiveRecord
 		$criteria->compare('created_by',$this->created_by);
 		$criteria->compare('updated_time',$this->updated_time,true);
 		$criteria->compare('updated_by',$this->updated_by);
-		$criteria->compare('jenis',$this->jenis);
 		$criteria->compare('keterangan',$this->keterangan,true);
 
 		return new CActiveDataProvider($this, array(

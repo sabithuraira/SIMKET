@@ -127,10 +127,10 @@
                         <div class="tab-pane" id="tab_anggaran">
 
                             <center>
-                            <?php if(HelpMe::isKabupaten() || HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
-                            <a href="#myModal2" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Masukkan Target</a>
-                            <?php }if(HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
-                            <a href="#myModal" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Tambah Realisasi</a>
+                            <?php if(HelpMe::isKabupaten()){ ?>
+                            <a href="#myModalAnggaranTarget" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Masukkan Target</a>
+                            <?php }if(HelpMe::isKabupaten()){ ?>
+                            <a href="#myModalAnggaranReal" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Tambah Realisasi</a>
                             <?php } ?>
                             </center>
                             <br/>
@@ -310,6 +310,71 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
+                <div id="myModalAnggaranReal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <span id="myModalLabel">Realisasi Angaran</span>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <form id="InfroText" method="POST">
+                                    <input name="InfroText" value="1" type="hidden">
+                                    <table class="table table-hover table-striped table-bordered table-condensed">
+                                        <tbody>
+
+                                            <tr>
+                                                <td>Tanggal Penerimaan</td>
+                                                <td>
+                                                    <?php 
+                                                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                                            'name'=>'tanggal_anggaran_real',
+                                                            'options' => array(
+                                                                'dateFormat'=>'yy-mm-dd',
+                                                                //'changeYear'=>true,
+                                                                //'changeMonth'=>true,
+                                                            ),
+                                                        ));
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>Jumlah</td>
+                                                <td>
+                                                    <?php echo CHtml::textField('jumlah_anggaran_real','', array('class'=>'form-control')); ?>
+                                                </td>
+                                            </tr>
+
+                                            
+                                            <tr>
+                                                <td>Keterangan tambahan</td>
+                                                <td><?php echo CHtml::textField('ket_anggaran_real','', array('class'=>'form-control')); ?></td>
+                                            </tr>
+
+                                            <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
+                                            <input id="vid_anggaran_real" type="hidden" value="">
+                                            <?php echo CHtml::hiddenField('unit_kerja_anggaran_real',Yii::app()->user-> getUnitKerja()); ?>
+                                        </tbody>
+                                    </table>
+                            </form>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                <button class="btn btn-primary" data-dismiss="modal" id="InfroTextSubmitAnggaranReal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 
             </div>
         </div>
@@ -387,6 +452,43 @@
             data:{"unitkerja":unitkerja,
                     "tanggal":tanggal,
                     "jumlah":jumlah,
+                    "idnya":idnya,
+                    "vid":vid,
+                },
+                success : function(data)
+                {
+                    if(data.satu.length >0)
+                    {
+                        window.location.href=pathname+ "?r=kegiatan/progress&id="+data.satu
+                    }
+                    else
+                    {
+                        alert('Data gagal disimpan, refresh halaman anda dan ulangi lagi');
+                    }
+                }
+            }
+        );
+    });
+
+    
+    $('#InfroTextSubmitAnggaranReal').click(function(){
+        var vid     =$("#vid_anggaran_real").val();
+        var ket     =$('#ket_anggaran_real').val();
+        var jumlah  =$('#jumlah_anggaran_real').val();
+        var tanggal =$('#tanggal_anggaran_real').val();
+        var idnya   =$('#idnya').val();
+        var unitkerja=$('#unit_kerja_anggaran_real').val();
+
+        var pathname = window.location.pathname;
+
+        $.ajax({
+            url: pathname+"?r=kegiatan/insert_anggaran_real",
+            type:"post",
+            dataType :"json",
+            data:{"unitkerja":unitkerja,
+                    "tanggal":tanggal,
+                    "jumlah":jumlah,
+                    "ket"   :ket,
                     "idnya":idnya,
                     "vid":vid,
                 },
