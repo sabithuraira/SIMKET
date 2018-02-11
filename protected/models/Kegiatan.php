@@ -182,6 +182,35 @@ class Kegiatan extends HelpAr
 		return parent::model($className);
 	}
 
+	public function CalendarClassByDate($id)
+	{
+		$data = $this->findByPk($id);
+		$kelas="1";
+		$now = time(); // or your date as well
+     	$data_date = strtotime($data['end_date']);
+     	$datediff = $data_date-$now;
+     	$total_day=floor($datediff/(60*60*24));
+     	//1 hijau, 2 kuning, 3 merah
+
+     	if($total_day>7)
+     	{
+     		$kelas=1;
+     	}
+     	else if($total_day<=7 && $total_day>=1)
+     	{
+     		$kelas=2;
+     	}
+     	else
+     	{
+     		if($data->getProgressValue()==100)
+     			$kelas=1;
+     		else
+     			$kelas=3;
+     	}
+
+		return $kelas;
+	}
+
 	public function CalendarClass()
 	{
 		$kelas="1";

@@ -65,8 +65,9 @@ class KegiatanController extends Controller
 				'title'=> $value['kegiatan'],
 				'start'=> $value['start_date'],
 				'end'=> $value['end_date'],
-				'backgroundColor'=> "#f56954",
-				'borderColor' => "#f56954"
+				// 'backgroundColor'=> "#f56954",
+				// 'borderColor' => "#f56954",
+				'className'=>"eventColor".Kegiatan::model()->CalendarClassByDate($value['id'])
 			);
 		}
 
