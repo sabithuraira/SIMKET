@@ -1,3 +1,7 @@
+<?php $baseUrl = Yii::app()->theme->baseUrl; ?>
+<style>
+    @import url('<?php echo $baseUrl.'/dist/css/jadwal.css';?>');
+</style>
 <div id="dashboard_tag">
       <!-- Main row -->
       <div class="row">
@@ -119,7 +123,6 @@
 </div>
 
       
-<?php $baseUrl = Yii::app()->theme->baseUrl; ?>
 <script src="<?php echo $baseUrl;?>/plugins/knob/jquery.knob.js"></script>
 <script src="<?php echo $baseUrl;?>/plugins/chartjs/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
