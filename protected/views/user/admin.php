@@ -22,10 +22,14 @@
 	");
 	?>
 
+	<?php $this->renderPartial('_search',array(
+		'model'=>$model,
+	)); ?>
+
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'user-grid',
 			'dataProvider'=>$model->search(),
-			'filter'=>$model,
+			// 'filter'=>$model,
 
 			'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
 			'pager'=>array(
@@ -51,7 +55,7 @@
 					'name'	=>'unit_kerja',
 					'type'=>'raw',
 					'value'		=> function($data){ return $data->unitKerja->name; },
-					'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
+					'filter' => CHtml::listData(UnitKerja::model()->findAll(array('order'=>'jenis, code')), 'id', 'name')
 				),
 				'created_time',
 				/*
