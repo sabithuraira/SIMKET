@@ -34,7 +34,7 @@ class UserController extends Controller
 				},
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('delete'),
+				'actions'=>array('delete', 'cpadmin'),
 				'expression'=> function($user){
 					return $user->getLevel()==1;
 				},
@@ -78,6 +78,31 @@ class UserController extends Controller
         }
 
         $this->render('cp',array(
+            'data'=>$data,
+        ));
+	}
+	
+	public function actionCpadmin($id)
+    {
+        $data=$this->loadModel($id);
+        if(isset($_POST['baru1'],$_POST['baru2'])) 
+        {
+            if($_POST['baru1']!==$_POST['baru2'])
+            {
+                $data->addError('username','Your New Password Not Match'); 
+            }
+            else
+            {
+				// $dua=$_POST['baru1'];
+				$data->password=CPasswordHelper::hashPassword($_POST['baru1']);
+				if($data->save())
+				{
+					$this->redirect(array('/site'));    
+				}
+            }
+        }
+
+        $this->render('cpadmin',array(
             'data'=>$data,
         ));
     }

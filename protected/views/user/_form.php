@@ -31,11 +31,13 @@
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
+	<?php if($model->isNewRecord){ ?>
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
+	<?php } ?>
 
 	<?php if(Yii::app()->user->getLevel()==1){ ?>
 	<div class="form-group">
