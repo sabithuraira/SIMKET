@@ -62,11 +62,10 @@ class KegiatanController extends Controller
 		$data = array();
 		foreach($model as $value){
 			$data[] = array(
+				'url'=>$this->createUrl('kegiatan/progress',array('id'=>$value['id'])),
 				'title'=> $value['kegiatan'],
 				'start'=> $value['start_date'],
 				'end'=> $value['end_date'],
-				// 'backgroundColor'=> "#f56954",
-				// 'borderColor' => "#f56954",
 				'className'=>"eventColor".Kegiatan::model()->CalendarClassByDate($value['id'])
 			);
 		}
