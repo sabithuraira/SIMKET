@@ -24,7 +24,11 @@ class SiteController extends Controller
 
 	public function actionCalendar()
 	{
-		$this->render('calendar');
+		$bidang=1;
+
+		$this->render('calendar',array(
+			'bidang'=>$bidang
+		));
 	}
 
 	public function actionPeringkat()

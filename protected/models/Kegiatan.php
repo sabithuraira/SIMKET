@@ -283,9 +283,14 @@ class Kegiatan extends HelpAr
 		));
 	}
 
-	public function getKegiatan2017Plus()
+	public function getKegiatan2017Plus($id)
 	{
-		$sql="SELECT * FROM kegiatan WHERE YEAR(start_date)>=2018 OR YEAR(end_date)>=2018";
+		if($id!=1){
+            $listbidang=HelpMe::ListBidangCode($id);
+			$label_where=" AND unit_kerja IN({$listbidang})";
+		}
+
+		$sql="SELECT * FROM kegiatan WHERE (YEAR(start_date)>=2018 OR YEAR(end_date)>=2018) $label_where";
 		$return_value=Yii::app()->db->createCommand($sql)->queryAll();
 
 		return $return_value;

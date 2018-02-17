@@ -1,4 +1,3 @@
-
 var vm = new Vue({  
     el: "#calendar_kegiatan_tag",
     data: {},
@@ -6,19 +5,25 @@ var vm = new Vue({
 
 var loading = $("#loading");
 var calendar = $("#calendar");
+var bidang = $("#bidang");
 var pathname = window.location.pathname;
 
 var is_first=0;
 
 
 $(document).ready(function() {
-    refreshCalenderData();
+    refreshCalenderData(bidang.val());
 });
 
-function refreshCalenderData(){
+
+bidang.change(function() {
+    refreshCalenderData(bidang.val());
+});
+
+function refreshCalenderData($id){
     loading.css("display", "block");
     $.ajax({
-        url: pathname+"?r=kegiatan/listkegiatan",
+        url: pathname+"?r=kegiatan/listkegiatan&id="+$id,
         dataType: 'json',
         type: "GET",
         success: function(data) {
@@ -28,6 +33,7 @@ function refreshCalenderData(){
                 is_first=1;
             }
             else{
+                console.log(JSON.stringify(data.data));
                 $('#calendar').fullCalendar('removeEvents');
                 $('#calendar').fullCalendar('addEventSource', data.data);         
                 $('#calendar').fullCalendar('rerenderEvents' );

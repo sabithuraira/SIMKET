@@ -56,13 +56,13 @@ class KegiatanController extends Controller
 		);
 	}
 
-	public function actionListkegiatan(){
-		$model=Kegiatan::model()->getKegiatan2017Plus();
+	public function actionListkegiatan($id){
+		$model=Kegiatan::model()->getKegiatan2017Plus($id);
 
 		$data = array();
 		foreach($model as $value){
 			$data[] = array(
-				'url'=>$this->createUrl('kegiatan/progress',array('id'=>$value['id'])),
+				'url'=> "index.php?r=kegiatan/progress&id=".$value['id'],
 				'title'=> $value['kegiatan'],
 				'start'=> $value['start_date'],
 				'end'=> $value['end_date'],

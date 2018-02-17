@@ -139,7 +139,7 @@ function pieChartPersentage(){
 function refreshCalenderData(){
     loading.css("display", "block");
     $.ajax({
-        url: pathname+"?r=kegiatan/listkegiatan",
+        url: pathname+"?r=kegiatan/listkegiatan&id=1",
         dataType: 'json',
         type: "GET",
         success: function(data) {
