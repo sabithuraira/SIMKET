@@ -183,8 +183,6 @@ class UserController extends Controller
 		if(isset($_GET['User']))
 			$model->attributes=$_GET['User'];
 
-		$model->unit_kerja = 26;
-
 		$this->render('admin',array(
 			'model'=>$model,
 		));
