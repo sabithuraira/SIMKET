@@ -53,10 +53,17 @@
               echo '<li><a href="'.Yii::app()->createUrl('site/peringkat').'"><i class="fa fa fa-circle-o"></i> Peringkat Tahunan</a></li>';
               echo '<li><a href="'.Yii::app()->createUrl('site/peringkat_month').'"><i class="fa fa fa-circle-o"></i> Peringkat Bulanan</a></li>';
 
+              echo '<li class="treeview"><a href="#"><i class="fa fa-circle-o"></i> Nilai Kabupaten/Kota
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>';
+              echo '<ul class="treeview-menu">';
               $list_kabupaten=HelpMe::getListKabupaten();              
               foreach($list_kabupaten as $row){
                 echo '<li><a href="'.Yii::app()->createUrl('report/kabupaten',array('id'=> $row['id'])).'"><i class="fa fa fa-circle-o"></i> '.$row['label'].'</a></li>';
               }
+              echo '</ul></li>';
             ?>
           </ul>
         </li>

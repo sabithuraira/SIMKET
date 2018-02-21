@@ -33,7 +33,6 @@ function refreshCalenderData($id){
                 is_first=1;
             }
             else{
-                console.log(JSON.stringify(data.data));
                 $('#calendar').fullCalendar('removeEvents');
                 $('#calendar').fullCalendar('addEventSource', data.data);         
                 $('#calendar').fullCalendar('rerenderEvents' );
