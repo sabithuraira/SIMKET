@@ -24,6 +24,62 @@ ALTER TABLE `value_anggaran` ADD `jenis` INT NOT NULL AFTER `kegiatan`;
 
 
 
+
+CREATE TABLE `induk_kegiatan` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `induk_kegiatan`
+--
+ALTER TABLE `induk_kegiatan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `induk_kegiatan`
+--
+ALTER TABLE `induk_kegiatan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+
+
+CREATE TABLE `kegiatan_for_anggaran` (
+  `id` int(11) NOT NULL,
+  `id_induk` int(11) NOT NULL,
+  `tahun` int(11) NOT NULL,
+  `jenis` int(11) NOT NULL,
+  `keterangan` text NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `kegiatan_for_anggaran`
+--
+ALTER TABLE `kegiatan_for_anggaran`
+  ADD PRIMARY KEY (`id`);
+
+
 CREATE TABLE `value_anggaran_target` (
   `id` int(11) NOT NULL,
   `unit_kerja` int(11) NOT NULL,
