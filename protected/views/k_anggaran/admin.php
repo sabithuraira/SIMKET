@@ -27,13 +27,20 @@
 			'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
 			
 			'columns'=>array(
-				'id',
-				'id_induk',
+				array(
+					'name'	=>'id_induk',
+					'type'	=>'raw',
+					'value'	=> function($data){ return $data->indukKegiatan->name; },
+				),
 				'tahun',
-				'jenis',
+				array(
+					'name'	=>'jenis',
+					'type'	=>'raw',
+					'value'	=> function($data){ return HelpMe::showJenisData($data->jenis); },
+				),
 				'keterangan',
-				'created_by',
 				/*
+				'created_by',
 				'created_time',
 				'updated_by',
 				'updated_time',

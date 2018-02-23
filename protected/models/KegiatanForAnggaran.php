@@ -48,6 +48,7 @@ class KegiatanForAnggaran extends HelpAR
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'indukKegiatan' => array(self::BELONGS_TO, 'IndukKegiatan', 'id_induk'),
 		);
 	}
 

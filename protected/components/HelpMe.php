@@ -187,8 +187,7 @@ class HelpMe
         return $result;
     }
 
-    public static function getJenisData()
-    {
+    public static function getRawJenisData(){
         $result=array();
         $result[]=array('id'=>1,'label'=>'Bulanan');
         $result[]=array('id'=>2,'label'=>'Triwulanan');
@@ -196,7 +195,21 @@ class HelpMe
         $result[]=array('id'=>4,'label'=>'Tahunan');
         $result[]=array('id'=>5,'label'=>'Subround');
 
-        return CHtml::listData($result,'id','label');   
+        return $result;
+    }
+
+    public static function showJenisData($value){
+        foreach(self::getRawJenisData() as $curr) {
+            if($curr['id'] == $value) {
+                return $curr['label'];
+            }
+        }
+    }
+    
+
+    public static function getJenisData()
+    {
+        return CHtml::listData(self::getRawJenisData(),'id','label');   
     }
 
     //check if current user authorize for unit kerja
