@@ -1,21 +1,14 @@
-<?php
-/* @var $this IndukkegiatanController */
-/* @var $model IndukKegiatan */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Update Induk Kegiatan</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Induk Kegiatan", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-search'></i> Detail", array('view', "id"=>$model->id), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+	</div>
 
-$this->breadcrumbs=array(
-	'Induk Kegiatans'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List IndukKegiatan', 'url'=>array('index')),
-	array('label'=>'Create IndukKegiatan', 'url'=>array('create')),
-	array('label'=>'View IndukKegiatan', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage IndukKegiatan', 'url'=>array('admin')),
-);
-?>
-
-<h1>Update IndukKegiatan <?php echo $model->id; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	<div class="box-body">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>

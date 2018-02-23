@@ -22,6 +22,7 @@
 	");
 	?>
 
+	<div class="box-body">
 	<?php $this->renderPartial('_search',array(
 		'model'=>$model,
 	)); ?>
@@ -65,9 +66,6 @@
 					'class'=>'CButtonColumn',
 					'template' => '{view} {update} {delete}',
 					'htmlOptions' => array('width' => 20),
-					// 'viewButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-view.png',
-					// 'updateButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-update.png',
-					// 'deleteButtonImageUrl' => Yii::app()->baseUrl . '/css/gridViewStyle/images/' . 'gr-delete.png',
 					'buttons'=>array(
 						'update'=>array(
 							'url'=>function($data){
@@ -92,4 +90,5 @@
 				),
 			),
 		)); ?>
+	</div>
 </div>

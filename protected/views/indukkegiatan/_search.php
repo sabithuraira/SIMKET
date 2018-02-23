@@ -1,50 +1,21 @@
-<?php
-/* @var $this IndukkegiatanController */
-/* @var $model IndukKegiatan */
-/* @var $form CActiveForm */
-?>
+<div class="box-body">
+	<div class="form">
 
-<div class="wide form">
+	<?php $form=$this->beginWidget('CActiveForm', array(
+		'action'=>Yii::app()->createUrl($this->route),
+		'method'=>'get',
+	)); ?>
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl($this->route),
-	'method'=>'get',
-)); ?>
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'name'); ?>
+			<?php echo $form->textField($model,'name',array('size'=>45,'maxlength'=>45, 'class'=>"form-control")); ?>
+		</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
+		<div class="box-footer">
+			<?php echo CHtml::submitButton('Search', array('class'=>"btn btn-info pull-right")); ?>
+		</div>
+
+	<?php $this->endWidget(); ?>
+
 	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'created_by'); ?>
-		<?php echo $form->textField($model,'created_by'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'created_time'); ?>
-		<?php echo $form->textField($model,'created_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'updated_by'); ?>
-		<?php echo $form->textField($model,'updated_by'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'updated_time'); ?>
-		<?php echo $form->textField($model,'updated_time'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- search-form -->
+</div>

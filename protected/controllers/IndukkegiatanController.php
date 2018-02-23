@@ -27,17 +27,11 @@ class IndukkegiatanController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('index','view', 'create','update','delete'),
+				'expression'=> function($user){
+					return $user->getLevel()==1;
+				},
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -71,7 +65,7 @@ class IndukkegiatanController extends Controller
 		{
 			$model->attributes=$_POST['IndukKegiatan'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index'));
 		}
 
 		$this->render('create',array(
@@ -95,7 +89,7 @@ class IndukkegiatanController extends Controller
 		{
 			$model->attributes=$_POST['IndukKegiatan'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
@@ -121,17 +115,6 @@ class IndukkegiatanController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('IndukKegiatan');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
 	{
 		$model=new IndukKegiatan('search');
 		$model->unsetAttributes();  // clear any default values

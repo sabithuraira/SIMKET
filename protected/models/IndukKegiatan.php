@@ -11,7 +11,7 @@
  * @property integer $updated_by
  * @property string $updated_time
  */
-class IndukKegiatan extends CActiveRecord
+class IndukKegiatan extends HelpAR
 {
 	/**
 	 * @return string the associated database table name

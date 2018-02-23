@@ -1,58 +1,63 @@
-<?php
-/* @var $this IndukkegiatanController */
-/* @var $model IndukKegiatan */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Kelola Induk Kegiatan</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Induk Kegiatan", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+	</div>
 
-$this->breadcrumbs=array(
-	'Induk Kegiatans'=>array('index'),
-	'Manage',
-);
+	<div class="box-body">
+		<?php $this->renderPartial('_search',array(
+			'model'=>$model,
+		)); ?>
 
-$this->menu=array(
-	array('label'=>'List IndukKegiatan', 'url'=>array('index')),
-	array('label'=>'Create IndukKegiatan', 'url'=>array('create')),
-);
+		<?php $this->widget('zii.widgets.grid.CGridView', array(
+			'id'=>'induk-kegiatan-grid',
+			'dataProvider'=>$model->search(),
+			// 'filter'=>$model,
+			'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
+			'pager'=>array(
+				'header'=>Yii::t('penerjemah','Ke halaman : '),
+				'prevPageLabel'=>Yii::t('penerjemah','Sebelumnya'),
+				'nextPageLabel'=>Yii::t('penerjemah','Selanjutnya'),
+				'firstPageLabel'=>Yii::t('penerjemah','Pertama'),
+				'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
+			),
+			
+			'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
+			
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#induk-kegiatan-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
-?>
-
-<h1>Manage Induk Kegiatans</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'induk-kegiatan-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'name',
-		'created_by',
-		'created_time',
-		'updated_by',
-		'updated_time',
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+			'columns'=>array(
+				// 'id',
+				'name',
+				// 'created_by',
+				// 'created_time',
+				// 'updated_by',
+				// 'updated_time',
+				array(
+					'class'=>'CButtonColumn',
+					'template' => '{view} {update} {delete}',
+					'htmlOptions' => array('width' => 20),
+					'buttons'=>array(
+						'update'=>array(
+							'url'=>function($data){
+									return Yii::app()->createUrl("indukkegiatan/update", array("id"=>$data->id));
+							},
+						),
+						'view'=>array(
+								'url'=>function($data){
+									return Yii::app()->createUrl("indukkegiatan/view", array("id"=>$data->id));
+							},
+						),
+						'delete'=>array(
+							'url'=>function($data){
+									return Yii::app()->createUrl("indukkegiatan/delete", array("id"=>$data->id));
+							},
+							'label'=>'Hapus',
+						),
+					),
+				),
+			),
+		)); ?>
+	</div>
+</div>

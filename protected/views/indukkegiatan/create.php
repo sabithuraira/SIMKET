@@ -1,18 +1,12 @@
-<?php
-/* @var $this IndukkegiatanController */
-/* @var $model IndukKegiatan */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Tambah Induk Kegiatan</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Induk Kegiatan", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+	</div>
 
-$this->breadcrumbs=array(
-	'Induk Kegiatans'=>array('index'),
-	'Create',
-);
-
-$this->menu=array(
-	array('label'=>'List IndukKegiatan', 'url'=>array('index')),
-	array('label'=>'Manage IndukKegiatan', 'url'=>array('admin')),
-);
-?>
-
-<h1>Create IndukKegiatan</h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	<div class="box-body">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>
