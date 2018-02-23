@@ -14,7 +14,7 @@
  * @property integer $updated_by
  * @property string $updated_time
  */
-class KegiatanForAnggaran extends CActiveRecord
+class KegiatanForAnggaran extends HelpAR
 {
 	/**
 	 * @return string the associated database table name
@@ -58,7 +58,7 @@ class KegiatanForAnggaran extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'id_induk' => 'Id Induk',
+			'id_induk' => 'Induk Kegiatan',
 			'tahun' => 'Tahun',
 			'jenis' => 'Jenis',
 			'keterangan' => 'Keterangan',

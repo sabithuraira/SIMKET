@@ -28,16 +28,16 @@ class K_anggaranController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'actions'=>array('index','view', 'create', 'update'),
+				'expression'=> function($user){
+					return $user->getLevel()<=2;
+				},
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('delete'),
+				'expression'=> function($user){
+					return $user->getLevel()==1;
+				},
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -121,17 +121,6 @@ class K_anggaranController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('KegiatanForAnggaran');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
 	{
 		$model=new KegiatanForAnggaran('search');
 		$model->unsetAttributes();  // clear any default values

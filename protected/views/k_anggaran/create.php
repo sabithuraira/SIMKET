@@ -1,18 +1,12 @@
-<?php
-/* @var $this K_anggaranController */
-/* @var $model KegiatanForAnggaran */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Tambah Kegiatan Peruntukan Anggaran</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Kegiatan Peruntukan Anggaran", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+	</div>
 
-$this->breadcrumbs=array(
-	'Kegiatan For Anggarans'=>array('index'),
-	'Create',
-);
-
-$this->menu=array(
-	array('label'=>'List KegiatanForAnggaran', 'url'=>array('index')),
-	array('label'=>'Manage KegiatanForAnggaran', 'url'=>array('admin')),
-);
-?>
-
-<h1>Create KegiatanForAnggaran</h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	<div class="box-body">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>
