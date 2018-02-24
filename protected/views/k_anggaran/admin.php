@@ -52,17 +52,17 @@
 					'buttons'=>array(
 						'update'=>array(
 							'url'=>function($data){
-									return Yii::app()->createUrl("indukkegiatan/update", array("id"=>$data->id));
+									return Yii::app()->createUrl("k_anggaran/update", array("id"=>$data->id));
 							},
 						),
 						'view'=>array(
 								'url'=>function($data){
-									return Yii::app()->createUrl("indukkegiatan/view", array("id"=>$data->id));
+									return Yii::app()->createUrl("k_anggaran/progress", array("id"=>$data->id));
 							},
 						),
 						'delete'=>array(
 							'url'=>function($data){
-									return Yii::app()->createUrl("indukkegiatan/delete", array("id"=>$data->id));
+									return Yii::app()->createUrl("k_anggaran/delete", array("id"=>$data->id));
 							},
 							'label'=>'Hapus',
 						),

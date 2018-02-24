@@ -28,7 +28,8 @@ class K_anggaranController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'create', 'update'),
+				'actions'=>array('index','create', 'update',
+					'progress'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -45,13 +46,16 @@ class K_anggaranController extends Controller
 		);
 	}
 
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
+	// public function actionView($id)
+	// {
+	// 	$this->render('view',array(
+	// 		'model'=>$this->loadModel($id),
+	// 	));
+	// }
+
+	public function actionProgress($id)
 	{
-		$this->render('view',array(
+		$this->render('progress',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
