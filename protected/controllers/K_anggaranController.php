@@ -29,7 +29,7 @@ class K_anggaranController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','create', 'update',
-					'progress', 'insert_target'),
+					'progress', 'insert_target', 'detail_kab_kota'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -53,36 +53,45 @@ class K_anggaranController extends Controller
 	// 	));
 	// }
 
-	public function actionInsert_target()
+	public function actionDetail_kab_kota($id, $kab_id)
+	{
+		$model = KegiatanForAnggaran::model()->findByPk($id);
+		$data = $model->getByKabKota($kab_id);
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu' => $data
+        ));
+        Yii::app()->end();
+	}
+
+	public function actionInsert_target($id)
 	{
 		$satu='';
 
-		if(strlen($_POST['unitkerja'])>0 && strlen($_POST['idnya'])>0){
+		if(isset($_POST['unitkerja']) && strlen($_POST['unitkerja'])>0){
 			for($i=1;$i<5;++$i){
-				$model=new ValueAnggaran;
-				
-				$model=ValueAnggaran::model()->findByPk($_POST['vid']);
-		
-				$model->kegiatan=$_POST['idnya'];
-				$model->unit_kerja = $_POST['unitkerja'];
-				$model->tanggal_realisasi = $_POST['tanggal'];
-				$model->jumlah = $_POST['jumlah'];
-				$model->keterangan = $_POST['via'];
-				
-				if($model->save())
-				{
-					$satu= $model->kegiatan; //$this->createUrl('progress',array('id'=>$model->kegiatan));
+				$model = ValueAnggaranTarget::model()->findByAttributes(array(
+					'unit_kerja' 	=>$_POST['unitkerja'],
+					'kegiatan'		=>$id,
+					'jenis'			=>$i
+				));
+
+				if($model===null){
+					$model=new ValueAnggaranTarget;
+					$model->kegiatan=$id;
+					$model->unit_kerja = $_POST['unitkerja'];
+					$model->jenis = $i;
+					$model->jumlah = $_POST['target'.$i];
+
+					$model->save();
+				}
+				else{
+					$model->jumlah = $_POST['target'.$i];
+					$model->save();
 				}
 			}
-			
-			if($model!=null){
-				$model->target_anggaran=$_POST['jumlah'];
-				
-				if($model->save(false))
-				{
-					$satu= $_POST['idnya'];
-				}
-			}
+			$satu = $id;
 		}
 		
 		echo CJSON::encode(array

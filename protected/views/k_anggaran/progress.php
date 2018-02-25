@@ -159,7 +159,7 @@
                             </div>
                             
                             <div class="modal-body">
-                                <form id="InfroTextTarget" method="POST">
+                                <form id="InfroFormTarget" method="POST">
                                     <table class="table table-hover table-striped table-bordered table-condensed">
                                         <tbody>
                                             <?php if(!HelpMe::isKabupaten()){ ?>
@@ -202,29 +202,51 @@
 </div>
 
 <script>
+    var unitkerja = $('#unit_kerja_target');
+    var idnya=$('#idnya');
+    var target1=$('#target1');
+    var target2=$('#target2');
+    var target3=$('#target3');
+    var target4=$('#target4');
+    var pathname = window.location.pathname;
+
     $(document).ready(function () {
+        setDetailTarget();
     });
 
-    $('#InfroTextTarget').click(function(){
-        var unitkerja = $('#unit_kerja_target').val();
-        var idnya=$('#idnya').val();
-        var target1=$('#target1').val();
-        var target2=$('#target2').val();
-        var target3=$('#target3').val();
-        var target4=$('#target4').val();
-        var pathname = window.location.pathname;
+    unitkerja.change(function(){
+        setDetailTarget();
+    });
 
-         $.ajax({
-            url: pathname+"?r=k_anggaran/insert_target",
+    function setDetailTarget(){
+        if(unitkerja.val().length > 0){
+            $.ajax({
+                url: pathname+"?r=k_anggaran/detail_kab_kota&id=" + idnya.val() + "&kab_id=" + unitkerja.val(),
+                type:"GET",
+                dataType :"json",
+                success : function(data)
+                {
+                    target1.val(data.satu.t1)
+                    target2.val(data.satu.t2)
+                    target3.val(data.satu.t3)
+                    target4.val(data.satu.t4)
+                }
+            });
+        }
+    }
+
+    $('#InfroTextTarget').click(function(){
+
+        $.ajax({
+            url: pathname+"?r=k_anggaran/insert_target&id=" + idnya.val(),
             type:"post",
             dataType :"json",
             data:{
-                    "unitkerja":unitkerja,
-                    "idnya": idnya,
-                    "target1":target1,
-                    "target2":target2,
-                    "target3":target3,
-                    "target4":target4
+                    "unitkerja":unitkerja.val(),
+                    "target1":target1.val(),
+                    "target2":target2.val(),
+                    "target3":target3.val(),
+                    "target4":target4.val()
                 },
                 success : function(data)
                 {
@@ -240,40 +262,5 @@
             }
         );
 
-    });
-
-    $('#InfroTextSubmit').click(function(){
-
-        var vid     =$("#vid2").val();
-        var unitkerja=$('#unit_kerja').val();
-        var tanggal=$('#tanggal').val();
-        var jumlah=$('#jumlah').val();
-        var idnya=$('#idnya').val();
-
-        var pathname = window.location.pathname;
-
-        $.ajax({
-            url: pathname+"?r=kegiatan/insert_progress",
-            type:"post",
-            dataType :"json",
-            data:{"unitkerja":unitkerja,
-                    "tanggal":tanggal,
-                    "jumlah":jumlah,
-                    "idnya":idnya,
-                    "vid":vid,
-                },
-                success : function(data)
-                {
-                    if(data.satu.length >0)
-                    {
-                        window.location.href=pathname+ "?r=kegiatan/progress&id="+data.satu
-                    }
-                    else
-                    {
-                        alert('Data gagal disimpan, refresh halaman anda dan ulangi lagi');
-                    }
-                }
-            }
-        );
     });
 </script>
