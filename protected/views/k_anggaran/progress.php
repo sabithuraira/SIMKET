@@ -12,7 +12,7 @@
                 <center>
                     <?php if(HelpMe::isKabupaten() || Yii::app()->user->getLevel()==1){ ?>
                         <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#myModalTarget">Input Target Anggaran</button>
-                        <button role="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#myModalRealisasi" >Input Realisasi Anggaran</a>
+                        <button role="button" class="btn btn-flat btn-primary insert_realisasi" data-toggle="modal" data-target="#myModalRealisasi" >Input Realisasi Anggaran</a>
                     <?php } ?>
                 </center>
                 <br/>
@@ -34,31 +34,30 @@
                         foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
                         {
                             $data_anggaran = $model->getByKabKota($value['id']);
+                            // print_r($data_anggaran);die();
                             echo '<tr>';
-                                $idx_jenis=0;
                                 echo '<td rowspan="4">'.$value['name'].'</td>';
-                                $curr_target = $data_anggaran['t'.($idx_jenis+1)];
-                                $curr_real = $data_anggaran['r'.($idx_jenis+1)];
+                                $curr_target = $data_anggaran['t1'];
+                                $curr_real = $data_anggaran['r1'];
 
-                                echo '<td>'.HelpMe::getRawAnggaran()[$idx_jenis]['label'].'</td>';
+                                echo '<td>'.HelpMe::getRawAnggaran()[0]['label'].'</td>';
                                 echo '<td>'.$curr_target.'</td>';
-                                echo '<td>'.$model->getDetailByKabKotaAndJenis($value['id'], ($idx_jenis+1)).'</td>';
+                                echo '<td>'.$model->getDetailByKabKotaAndJenis($value['id'], 1).'</td>';
                                 echo '<td>'.$curr_real.'</td>';
                                 echo '<td>'.($curr_target - $curr_real).'</td>';
                                 echo '<td>'.(($curr_real == 0) ? 0 : $curr_real / $curr_target * 100).'</td>';
-                                ++$idx_jenis;
                             echo '</tr>';
 
-                            for($i=0; $i<3; ++$i){
-                                $curr_target = $data_anggaran['t'.($idx_jenis+1)];
-                                $curr_real = $data_anggaran['r'.($idx_jenis+1)];
+                            for($i=2; $i<5; ++$i){
+                                $curr_target = $data_anggaran['t'.$i];
+                                $curr_real = $data_anggaran['r'.$i];
                                 echo '<tr>';
-                                echo '<td>'.HelpMe::getRawAnggaran()[$idx_jenis]['label'].'</td>';   
-                                echo '<td>'.$model->getDetailByKabKotaAndJenis($value['id'], ($idx_jenis+1)).'</td>';
+                                echo '<td>'.HelpMe::getRawAnggaran()[$i-1]['label'].'</td>';   
+                                echo '<td>'.$curr_target.'</td>';
+                                echo '<td>'.$model->getDetailByKabKotaAndJenis($value['id'], $i).'</td>';
                                 echo '<td>'.$curr_real.'</td>';
                                 echo '<td>'.($curr_target - $curr_real).'</td>';
                                 echo '<td>'.(($curr_real == 0) ? 0 : $curr_real / $curr_target * 100).'</td>';
-                                ++$idx_jenis;
                             echo '</tr>';
                             }
                             
@@ -230,6 +229,24 @@
     var target3=$('#target3');
     var target4=$('#target4');
     var pathname = window.location.pathname;
+
+    $(".update_realisasi").click(function () {
+        vid.val($(this).data('id'));
+        unitkerja_real.val($(this).data('unitkerja'));
+        rincian.val($(this).data('jenis'));
+        tanggal.val($(this).data('tanggal'));
+        jumlah.val($(this).data('jumlah'));
+        keterangan.val($(this).data('keterangan'));
+    });
+
+    $(".insert_realisasi").click(function () {
+        vid.val('');
+        unitkerja_real.val('');
+        rincian.val('');
+        tanggal.val('');
+        jumlah.val('');
+        keterangan.val('');
+    });
 
     $(document).ready(function () {
         setDetailTarget();

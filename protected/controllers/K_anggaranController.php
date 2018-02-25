@@ -106,8 +106,6 @@ class K_anggaranController extends Controller
 	{
 		$satu='';
 
-		// print_r('hha');
-		// print_r($_POST);die();
 		if(strlen($_POST['unitkerja']) > 0 && strlen($_POST['rincian']) > 0){
 			$model=new ValueAnggaran;
 			if(strlen($_POST['vid'])>0)

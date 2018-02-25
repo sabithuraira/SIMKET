@@ -123,7 +123,6 @@ class KegiatanForAnggaran extends HelpAR
 				FROM `value_anggaran` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
 
 		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
-
 		return array_merge($result_t, $result_r);
 	}
 
@@ -138,8 +137,8 @@ class KegiatanForAnggaran extends HelpAR
 
 		foreach($data as $value){
 			if(HelpMe::isAuthorizeUnitKerja($id_kab_kota)){
-				$str_result.=('- [ <a href="#myModal" role="button" class="update_terima" 
-					data-id="'.$id.'" 
+				$str_result.=('- [ <a href="#myModalRealisasi" role="button" class="update_realisasi" 
+					data-id="'.$value['id'].'" 
 					data-unitkerja="'.$id_kab_kota.'" 
 					data-jenis="'.$id_jenis.'" 
 					data-tanggal="'.date("Y-m-d",strtotime($value['tanggal_realisasi'])).'" 
