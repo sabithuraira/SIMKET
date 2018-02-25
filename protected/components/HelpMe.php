@@ -205,11 +205,33 @@ class HelpMe
             }
         }
     }
-    
 
     public static function getJenisData()
     {
         return CHtml::listData(self::getRawJenisData(),'id','label');   
+    }
+
+
+    public static function getRawAnggaran(){
+        $result=array();
+        $result[]=array('id'=>1,'label'=>'Persiapan');
+        $result[]=array('id'=>2,'label'=>'Pelatihan');
+        $result[]=array('id'=>3,'label'=>'Lapangan');
+        $result[]=array('id'=>4,'label'=>'Pengolahan');
+
+        return $result;
+    }
+
+    public static function showAnggaran($value){
+        foreach(self::getRawAnggaran() as $curr) {
+            if($curr['id'] == $value) {
+                return $curr['label'];
+            }
+        }
+    }
+    
+    public static function getDropDownAnggaran(){
+        return CHtml::listData(self::getRawAnggaran(),'id','label');   
     }
 
     //check if current user authorize for unit kerja

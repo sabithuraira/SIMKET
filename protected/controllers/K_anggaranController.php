@@ -29,7 +29,7 @@ class K_anggaranController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','create', 'update',
-					'progress'),
+					'progress', 'insert_target'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -52,6 +52,45 @@ class K_anggaranController extends Controller
 	// 		'model'=>$this->loadModel($id),
 	// 	));
 	// }
+
+	public function actionInsert_target()
+	{
+		$satu='';
+
+		if(strlen($_POST['unitkerja'])>0 && strlen($_POST['idnya'])>0){
+			for($i=1;$i<5;++$i){
+				$model=new ValueAnggaran;
+				
+				$model=ValueAnggaran::model()->findByPk($_POST['vid']);
+		
+				$model->kegiatan=$_POST['idnya'];
+				$model->unit_kerja = $_POST['unitkerja'];
+				$model->tanggal_realisasi = $_POST['tanggal'];
+				$model->jumlah = $_POST['jumlah'];
+				$model->keterangan = $_POST['via'];
+				
+				if($model->save())
+				{
+					$satu= $model->kegiatan; //$this->createUrl('progress',array('id'=>$model->kegiatan));
+				}
+			}
+			
+			if($model!=null){
+				$model->target_anggaran=$_POST['jumlah'];
+				
+				if($model->save(false))
+				{
+					$satu= $_POST['idnya'];
+				}
+			}
+		}
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu'=>$satu,
+        ));
+        Yii::app()->end();
+	}
 
 	public function actionProgress($id)
 	{

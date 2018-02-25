@@ -1,27 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "kegiatan_for_anggaran".
+ * This is the model class for table "value_anggaran_target".
  *
- * The followings are the available columns in table 'kegiatan_for_anggaran':
+ * The followings are the available columns in table 'value_anggaran_target':
  * @property integer $id
- * @property integer $id_induk
- * @property integer $tahun
+ * @property integer $unit_kerja
+ * @property integer $kegiatan
  * @property integer $jenis
- * @property string $keterangan
- * @property integer $created_by
+ * @property string $jumlah
  * @property string $created_time
- * @property integer $updated_by
+ * @property integer $created_by
  * @property string $updated_time
+ * @property integer $updated_by
  */
-class KegiatanForAnggaran extends HelpAR
+class ValueAnggaranTarget extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'kegiatan_for_anggaran';
+		return 'value_anggaran_target';
 	}
 
 	/**
@@ -32,11 +32,12 @@ class KegiatanForAnggaran extends HelpAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_induk, tahun, jenis, keterangan, created_by, created_time, updated_by, updated_time', 'required'),
-			array('id_induk, tahun, jenis, created_by, updated_by', 'numerical', 'integerOnly'=>true),
+			array('unit_kerja, kegiatan, jenis, jumlah, created_time, created_by, updated_time, updated_by', 'required'),
+			array('unit_kerja, kegiatan, jenis, created_by, updated_by', 'numerical', 'integerOnly'=>true),
+			array('jumlah', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, id_induk, tahun, jenis, keterangan, created_by, created_time, updated_by, updated_time', 'safe', 'on'=>'search'),
+			array('id, unit_kerja, kegiatan, jenis, jumlah, created_time, created_by, updated_time, updated_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,7 +49,6 @@ class KegiatanForAnggaran extends HelpAR
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'indukKegiatan' => array(self::BELONGS_TO, 'IndukKegiatan', 'id_induk'),
 		);
 	}
 
@@ -59,14 +59,14 @@ class KegiatanForAnggaran extends HelpAR
 	{
 		return array(
 			'id' => 'ID',
-			'id_induk' => 'Induk Kegiatan',
-			'tahun' => 'Tahun',
+			'unit_kerja' => 'Unit Kerja',
+			'kegiatan' => 'Kegiatan',
 			'jenis' => 'Jenis',
-			'keterangan' => 'Keterangan',
-			'created_by' => 'Created By',
+			'jumlah' => 'Jumlah',
 			'created_time' => 'Created Time',
-			'updated_by' => 'Updated By',
+			'created_by' => 'Created By',
 			'updated_time' => 'Updated Time',
+			'updated_by' => 'Updated By',
 		);
 	}
 
@@ -89,49 +89,25 @@ class KegiatanForAnggaran extends HelpAR
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('id_induk',$this->id_induk);
-		$criteria->compare('tahun',$this->tahun);
+		$criteria->compare('unit_kerja',$this->unit_kerja);
+		$criteria->compare('kegiatan',$this->kegiatan);
 		$criteria->compare('jenis',$this->jenis);
-		$criteria->compare('keterangan',$this->keterangan,true);
-		$criteria->compare('created_by',$this->created_by);
+		$criteria->compare('jumlah',$this->jumlah,true);
 		$criteria->compare('created_time',$this->created_time,true);
-		$criteria->compare('updated_by',$this->updated_by);
+		$criteria->compare('created_by',$this->created_by);
 		$criteria->compare('updated_time',$this->updated_time,true);
+		$criteria->compare('updated_by',$this->updated_by);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 
-	public function getByKabKota($id_kab_kota){
-		$id = $this->id;
-		$sql_t = "SELECT 
-				COALESCE(SUM(CASE WHEN jenis = 1 THEN jumlah ELSE 0 End),0) AS t1, 
-				COALESCE(SUM(CASE WHEN jenis = 2 THEN jumlah ELSE 0 End),0) AS t2, 
-				COALESCE(SUM(CASE WHEN jenis = 3 THEN jumlah ELSE 0 End),0) AS t3, 
-				COALESCE(SUM(CASE WHEN jenis = 4 THEN jumlah ELSE 0 End),0) AS t4
-				FROM `value_anggaran_target` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
-
-		$result_t = Yii::app()->db->createCommand($sql_t)->queryRow();
-
-
-		$sql_r = "SELECT 
-				COALESCE(SUM(CASE WHEN jenis = 1 THEN jumlah ELSE 0 End),0) AS r1, 
-				COALESCE(SUM(CASE WHEN jenis = 2 THEN jumlah ELSE 0 End),0) AS r2, 
-				COALESCE(SUM(CASE WHEN jenis = 3 THEN jumlah ELSE 0 End),0) AS r3, 
-				COALESCE(SUM(CASE WHEN jenis = 4 THEN jumlah ELSE 0 End),0) AS r4
-				FROM `value_anggaran` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
-
-		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
-
-		return array_merge($result_t, $result_r);
-	}
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return KegiatanForAnggaran the static model class
+	 * @return ValueAnggaranTarget the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

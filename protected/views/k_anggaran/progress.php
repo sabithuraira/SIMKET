@@ -33,52 +33,55 @@
                     <?php
                         foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
                         {
+                            $data_anggaran = $model->getByKabKota($value['id']);
                             echo '<tr>';
+                                $idx_jenis=0;
+                                echo '<td rowspan="4">'.$value['name'].'</td>';
+                                $curr_target = $data_anggaran['t'.($idx_jenis+1)];
+                                $curr_real = $data_anggaran['r'.($idx_jenis+1)];
 
-                                echo '<td>'.($key+1).'</td>';
-                                echo '<td>'.$value->unitkerja0->name.'</td>';
-                                echo '<td>'.$value->target.'</td>';
-                            
-                                echo '<td>'.$value->getListProgressDelivery().'</td>';
-                                echo '<td class="'.$value->getClassProgress(2).'">'.$value->getPercentageProgress(2).' % </td>';
-                                ?>
-                                <td>
-                                    <?php
-                                        $this->widget('Star', array('starNumber'=>$value->getTimelinesSkor(2)));
-                                    ?>
-                                </td>
-                                <?php
-                                echo '<td>'.$value->getListProgressAcceptance().'</td>';
-                                echo '<td class="'.$value->getClassProgress(1).'">'.$value->getPercentageProgress(1).' % </td>';
-                                ?>
-                                <td>
-                                    <?php
-                                        $this->widget('Star', array('starNumber'=>$value->getTimelinesSkor(1)));
-                                    ?>
-                                </td>
-                                <?php
+                                echo '<td>'.HelpMe::getRawAnggaran()[$idx_jenis]['label'].'</td>';
+                                echo '<td>'.$curr_target.'</td>';
+                                echo '<td></td>';
+                                echo '<td>'.$curr_real.'</td>';
+                                echo '<td>'.($curr_target - $curr_real).'</td>';
+                                echo '<td>'.(($curr_real == 0) ? 0 : $curr_target / $curr_real * 100).'</td>';
+                                ++$idx_jenis;
                             echo '</tr>';
+
+                            for($i=0; $i<3; ++$i){
+                                $curr_target = $data_anggaran['t'.($idx_jenis+1)];
+                                $curr_real = $data_anggaran['r'.($idx_jenis+1)];
+                                echo '<tr>';
+                                echo '<td>'.HelpMe::getRawAnggaran()[$idx_jenis]['label'].'</td>';                                echo '<td>'.$curr_target.'</td>';
+                                echo '<td></td>';
+                                echo '<td>'.$curr_real.'</td>';
+                                echo '<td>'.($curr_target - $curr_real).'</td>';
+                                echo '<td>'.(($curr_real == 0) ? 0 : $curr_target / $curr_real * 100).'</td>';
+                                ++$idx_jenis;
+                            echo '</tr>';
+                            }
                             
                         }
 
-                        echo '<tr>';
+                        // echo '<tr>';
 
-                                echo '<td colspan="2"><h4>Total</h4></td>';
-                                echo '<td><h4>'.$model->getTarget().'</h4></td>';
+                        //         echo '<td colspan="2"><h4>Total</h4></td>';
+                        //         echo '<td><h4>'.$model->getTarget().'</h4></td>';
                             
-                                echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
-                                echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
-                                echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+                        //         echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
+                        //         echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+                        //         echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
 
-                                echo '<td><h4>'.$model->getPercentageProgress(1).'</h4></td>';
-                                echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
-                                echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
-                            echo '</tr>';
+                        //         echo '<td><h4>'.$model->getPercentageProgress(1).'</h4></td>';
+                        //         echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
+                        //         echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
+                        //     echo '</tr>';
                     ?>
                 </table>
 
 
-                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div id="myModalRealisasi" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -145,18 +148,18 @@
                     </div>
                 </div>
 
-                <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
+
+                <div id="myModalTarget" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <span id="myModalLabel">Tambah Pengiriman</span>
+                                <span id="myModalLabel">Target Anggaran</span>
                             </div>
                             
                             <div class="modal-body">
-                                <form id="InfroText2" method="POST">
-                                    <input name="InfroText" value="1" type="hidden">
-                            
+                                <form id="InfroTextTarget" method="POST">
                                     <table class="table table-hover table-striped table-bordered table-condensed">
                                         <tbody>
                                             <?php if(!HelpMe::isKabupaten()){ ?>
@@ -164,44 +167,22 @@
                                                 <td>Kabupaten/Kota</td>
                                                 <td>
                                                     <?php 
-                                                        echo CHtml::dropDownList('unit_kerja2','',
-                                                                CHtml::listData(Participant::model()->PerKegiatan($model->id)->data,
-                                                                    'unitkerja','unitkerja0.name'),
+                                                        echo CHtml::dropDownList('unit_kerja_target','',
+                                                                CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')),
+                                                                    'id','name'),
                                                                 array('empty'=>'- Pilih Unit Kerja-','class'=>'form-control')); 
                                                     ?>
                                                 </td>  
 
                                             </tr>
-                                            <?php }else{ echo CHtml::hiddenField('unit_kerja2',Yii::app()->user-> getUnitKerja()); } ?>
-
-                                            <tr>
-                                                <td>Tanggal Pengiriman</td>
-                                                <td>
-                                                    <?php 
-                                                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                                            'name'=>'tanggal2',
-                                                            'options' => array(
-                                                                'dateFormat'=>'yy-mm-dd',
-                                                                //'changeYear'=>true,
-                                                                //'changeMonth'=>true,
-                                                            ),
-                                                        ));
-                                                    ?>
-                                                </td>
-                                            </tr>
+                                            <?php }else{ echo CHtml::hiddenField('unit_kerja_target',Yii::app()->user-> getUnitKerja()); } ?>
                                             
-                                            <tr>
-                                                <td>Jumlah</td>
-                                                <td><?php echo CHtml::textField('jumlah2','', array('class'=>'form-control')); ?></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Dikirim melalui</td>
-                                                <td><?php echo CHtml::textField('via','', array('class'=>'form-control')); ?></td>
-                                            </tr>
-
-                                            <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>">
-                                            <input id="vid" type="hidden" value="">    
+                                            <?php for($i=1;$i<5;++$i){ ?>
+                                                <tr>
+                                                    <td><?php echo HelpMe::showAnggaran($i) ?></td>
+                                                    <td><?php echo CHtml::textField('target'.$i,'', array('class'=>'form-control')); ?></td>
+                                                </tr>
+                                            <?php } ?> 
                                         </tbody>
                                     </table>
                             </form>
@@ -209,7 +190,7 @@
                             
                             <div class="modal-footer">
                                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                <button class="btn btn-primary" data-dismiss="modal" id="InfroTextSubmit2">Save changes</button>
+                                <button class="btn btn-primary" data-dismiss="modal" id="InfroTextTarget">Save changes</button>
                             </div>
                         </div>
                     </div>
@@ -222,47 +203,34 @@
 
 <script>
     $(document).ready(function () {
-        $(".update_kirim").click(function () {
-            $('#vid').val($(this).data('id'));
-            $('#unit_kerja2').val($(this).data('unitkerja'));
-            $('#tanggal2').val($(this).data('tanggal'));
-            $('#jumlah2').val($(this).data('jumlah'));
-            $('#via').val($(this).data('ket'));
-        });
-
-        $(".update_terima").click(function () {
-            $('#vid2').val($(this).data('id'));
-            $('#unit_kerja').val($(this).data('unitkerja'));
-            $('#tanggal').val($(this).data('tanggal'));
-            $('#jumlah').val($(this).data('jumlah'));
-        });
     });
 
-    $('#InfroTextSubmit2').click(function(){
-        var vid     =$("#vid").val();
-        var unitkerja=$('#unit_kerja2').val();
-        var tanggal=$('#tanggal2').val();
-        var jumlah=$('#jumlah2').val();
-        var via=$('#via').val();
+    $('#InfroTextTarget').click(function(){
+        var unitkerja = $('#unit_kerja_target').val();
         var idnya=$('#idnya').val();
+        var target1=$('#target1').val();
+        var target2=$('#target2').val();
+        var target3=$('#target3').val();
+        var target4=$('#target4').val();
         var pathname = window.location.pathname;
 
          $.ajax({
-            url: pathname+"?r=kegiatan/insert_pengiriman",
+            url: pathname+"?r=k_anggaran/insert_target",
             type:"post",
             dataType :"json",
-            data:{"tanggal":tanggal,
+            data:{
                     "unitkerja":unitkerja,
-                    "jumlah":jumlah,
-                    "via":via,
-                    "idnya":idnya,
-                    "vid":vid,
+                    "idnya": idnya,
+                    "target1":target1,
+                    "target2":target2,
+                    "target3":target3,
+                    "target4":target4
                 },
                 success : function(data)
                 {
                     if(data.satu.length >0)
                     {
-                        window.location.href=pathname+ "?r=kegiatan/progress&id="+data.satu
+                        window.location.href=pathname+ "?r=k_anggaran/progress&id="+data.satu
                     }
                     else
                     {
