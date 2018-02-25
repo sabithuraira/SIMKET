@@ -127,6 +127,35 @@ class KegiatanForAnggaran extends HelpAR
 		return array_merge($result_t, $result_r);
 	}
 
+	public function getDetailByKabKotaAndJenis($id_kab_kota, $id_jenis){
+		$id = $this->id;
+		$sql = "SELECT * FROM `value_anggaran` 
+				WHERE kegiatan=$id AND unit_kerja=$id_kab_kota AND jenis=$id_jenis";
+		
+		$data = Yii::app()->db->createCommand($sql)->queryAll();
+
+		$str_result = "";
+
+		foreach($data as $value){
+			if(HelpMe::isAuthorizeUnitKerja($id_kab_kota)){
+				$str_result.=('- [ <a href="#myModal" role="button" class="update_terima" 
+					data-id="'.$id.'" 
+					data-unitkerja="'.$id_kab_kota.'" 
+					data-jenis="'.$id_jenis.'" 
+					data-tanggal="'.date("Y-m-d",strtotime($value['tanggal_realisasi'])).'" 
+					data-jumlah="'.$value['jumlah'].'"
+					data-keterangan="'.$value['keterangan'].'" 
+					data-toggle="modal">Update</a> ] '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> ('.$value['keterangan'].')<br/>');
+			}
+			else
+			{
+				$str_result.=('- '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> ('.$value['keterangan'].')<br/>');
+			}
+		}
+
+		return $str_result;
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

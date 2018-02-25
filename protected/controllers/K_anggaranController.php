@@ -29,7 +29,8 @@ class K_anggaranController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','create', 'update',
-					'progress', 'insert_target', 'detail_kab_kota'),
+					'progress', 'insert_target', 'insert_realisasi'
+					,'detail_kab_kota'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -92,6 +93,36 @@ class K_anggaranController extends Controller
 				}
 			}
 			$satu = $id;
+		}
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu'=>$satu,
+        ));
+        Yii::app()->end();
+	}
+
+	public function actionInsert_realisasi($id)
+	{
+		$satu='';
+
+		// print_r('hha');
+		// print_r($_POST);die();
+		if(strlen($_POST['unitkerja']) > 0 && strlen($_POST['rincian']) > 0){
+			$model=new ValueAnggaran;
+			if(strlen($_POST['vid'])>0)
+				$model=ValueAnggaran::model()->findByPk($_POST['vid']);
+	
+			$model->kegiatan=$id;
+			$model->unit_kerja = $_POST['unitkerja'];
+			$model->jenis = $_POST['rincian'];
+			$model->tanggal_realisasi = $_POST['tanggal'];
+			$model->jumlah = $_POST['jumlah'];
+			$model->keterangan = $_POST['keterangan'];
+			
+			if($model->save()){
+				$satu = $id;
+			}
 		}
 		
 		echo CJSON::encode(array

@@ -7,7 +7,6 @@
  * @property integer $id
  * @property integer $unit_kerja
  * @property integer $kegiatan
- * @property string $seri_kegiatan
  * @property string $tanggal_realisasi
  * @property string $jumlah
  * @property string $created_time
@@ -34,13 +33,13 @@ class ValueAnggaran extends HelpAr
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('unit_kerja, kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by', 'required'),
+			array('unit_kerja, kegiatan, jenis, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by', 'required'),
 			array('unit_kerja, kegiatan, created_by, updated_by', 'numerical', 'integerOnly'=>true),
-			array('seri_kegiatan, keterangan', 'length', 'max'=>255),
+			array('keterangan', 'length', 'max'=>255),
 			array('jumlah', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, unit_kerja, kegiatan, seri_kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by, keterangan', 'safe', 'on'=>'search'),
+			array('id, unit_kerja, kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by, keterangan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +63,7 @@ class ValueAnggaran extends HelpAr
 			'id' => 'ID',
 			'unit_kerja' => 'Unit Kerja',
 			'kegiatan' => 'Kegiatan',
-			'seri_kegiatan' => 'Seri Kegiatan',
+			'jenis' => 'Rincian',
 			'tanggal_realisasi' => 'Tanggal Realisasi',
 			'jumlah' => 'Jumlah',
 			'created_time' => 'Created Time',
@@ -96,7 +95,7 @@ class ValueAnggaran extends HelpAr
 		$criteria->compare('id',$this->id);
 		$criteria->compare('unit_kerja',$this->unit_kerja);
 		$criteria->compare('kegiatan',$this->kegiatan);
-		$criteria->compare('seri_kegiatan',$this->seri_kegiatan,true);
+		$criteria->compare('jenis',$this->jenis,true);
 		$criteria->compare('tanggal_realisasi',$this->tanggal_realisasi,true);
 		$criteria->compare('jumlah',$this->jumlah,true);
 		$criteria->compare('created_time',$this->created_time,true);
