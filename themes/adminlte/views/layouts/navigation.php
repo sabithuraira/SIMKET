@@ -103,6 +103,10 @@
           </ul>
         </li>
 
+        <?php 
+          echo '<li><a href="'.Yii::app()->createUrl('k_anggaran/dashboard').'"><i class="fa fa-money"></i> <span>Anggaran</span></a></li>';
+        ?>
+
         
         <li class="header">TUGAS DAN DINAS LUAR</li>
 
@@ -132,10 +136,21 @@
                 echo '<li><a href="'.Yii::app()->createUrl('user/index').'"><i class="fa fa-user"></i> User</a></li>';
                 echo '<li><a href="'.Yii::app()->createUrl('pegawai/index').'"><i class="fa fa-user-plus"></i> Pegawai</a></li>';
                 echo '<li><a href="'.Yii::app()->createUrl('unitdaerah/index').'"><i class="fa  fa-bookmark-o"></i> Unit Kerja Kab/Kota</a></li>';
-                if(Yii::app()->user->getLevel()==1){
-                  echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/index').'"><i class="fa fa-cube"></i> Induk Kegiatan</a></li>';
-                }
+                
                 echo '<li><a href="'.Yii::app()->createUrl('kegiatan/index').'"><i class="fa fa-cube"></i> Kegiatan</a></li>';
+                
+                echo '<li class="treeview"><a href="#"><i class="fa fa-money"></i> Anggaran
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>';
+                echo '<ul class="treeview-menu">';
+                if(Yii::app()->user->getLevel()==1){
+                  echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/index').'"><i class="fa fa-circle-o"></i> Induk Kegiatan</a></li>';
+                }
+                echo '<li><a href="'.Yii::app()->createUrl('k_anggaran/index').'"><i class="fa fa fa-circle-o"></i> Kegiatan</a></li>';
+                echo '</ul></li>';
+
                 echo '<li><a href="'.Yii::app()->createUrl('unitkerja/index').'"><i class="fa fa-building-o"></i> Unit Kerja</a></li>';
               ?>
             </ul>

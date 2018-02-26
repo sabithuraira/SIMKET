@@ -30,7 +30,7 @@ class K_anggaranController extends Controller
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','create', 'update',
 					'progress', 'insert_target', 'insert_realisasi'
-					,'detail_kab_kota'),
+					,'detail_kab_kota', 'dashboard'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -209,6 +209,19 @@ class K_anggaranController extends Controller
 			$model->attributes=$_GET['KegiatanForAnggaran'];
 
 		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+
+	public function actionDashboard()
+	{
+		$model=new KegiatanForAnggaran('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['KegiatanForAnggaran']))
+			$model->attributes=$_GET['KegiatanForAnggaran'];
+
+		$this->render('dashboard',array(
 			'model'=>$model,
 		));
 	}

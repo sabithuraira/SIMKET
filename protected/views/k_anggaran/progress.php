@@ -36,7 +36,7 @@
                             $data_anggaran = $model->getByKabKota($value['id']);
                             // print_r($data_anggaran);die();
                             echo '<tr>';
-                                echo '<td rowspan="4">'.$value['name'].'</td>';
+                                echo '<td class="center" rowspan="4">'.$value['name'].'</td>';
                                 $curr_target = $data_anggaran['t1'];
                                 $curr_real = $data_anggaran['r1'];
 
