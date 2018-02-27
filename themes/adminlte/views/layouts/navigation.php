@@ -148,7 +148,7 @@
                 if(Yii::app()->user->getLevel()==1){
                   echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/index').'"><i class="fa fa-circle-o"></i> Induk Kegiatan</a></li>';
                 }
-                echo '<li><a href="'.Yii::app()->createUrl('k_anggaran/index').'"><i class="fa fa fa-circle-o"></i> Kegiatan</a></li>';
+                // echo '<li><a href="'.Yii::app()->createUrl('k_anggaran/index').'"><i class="fa fa fa-circle-o"></i> Kegiatan</a></li>';
                 echo '</ul></li>';
 
                 echo '<li><a href="'.Yii::app()->createUrl('unitkerja/index').'"><i class="fa fa-building-o"></i> Unit Kerja</a></li>';

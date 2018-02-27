@@ -111,3 +111,5 @@ ALTER TABLE `value_anggaran_target`
 --
 ALTER TABLE `value_anggaran_target`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `induk_kegiatan` ADD `tahun` INT NOT NULL AFTER `updated_time`;

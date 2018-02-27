@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'induk_kegiatan':
  * @property integer $id
  * @property string $name
+ * @property string $tahun
  * @property integer $created_by
  * @property string $created_time
  * @property integer $updated_by
@@ -29,12 +30,12 @@ class IndukKegiatan extends HelpAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, created_by, created_time, updated_by, updated_time', 'required'),
-			array('created_by, updated_by', 'numerical', 'integerOnly'=>true),
+			array('name, tahun, created_by, created_time, updated_by, updated_time', 'required'),
+			array('tahun, created_by, updated_by', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, created_by, created_time, updated_by, updated_time', 'safe', 'on'=>'search'),
+			array('id, name, tahun, created_by, created_time, updated_by, updated_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,6 +58,7 @@ class IndukKegiatan extends HelpAR
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'tahun' => 'Tahun',
 			'created_by' => 'Created By',
 			'created_time' => 'Created Time',
 			'updated_by' => 'Updated By',
@@ -84,6 +86,7 @@ class IndukKegiatan extends HelpAR
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('tahun',$this->tahun);
 		$criteria->compare('created_by',$this->created_by);
 		$criteria->compare('created_time',$this->created_time,true);
 		$criteria->compare('updated_by',$this->updated_by);

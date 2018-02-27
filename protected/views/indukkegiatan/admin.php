@@ -28,8 +28,8 @@
 			
 
 			'columns'=>array(
-				// 'id',
 				'name',
+				'tahun',
 				// 'created_by',
 				// 'created_time',
 				// 'updated_by',
