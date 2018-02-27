@@ -27,11 +27,18 @@ class IndukkegiatanController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow',
 				'actions'=>array('index','view', 'create','update','delete',
 					'progress'),
 				'expression'=> function($user){
 					return $user->getLevel()==1;
+				},
+			),
+			array('allow',
+				'actions'=>array('progress', 'detail_kab_kota',
+					'insert_anggaran'),
+				'expression'=> function($user){
+					return $user->getLevel()<=2;
 				},
 			),
 			array('allow',
@@ -42,6 +49,90 @@ class IndukkegiatanController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+
+	public function actionInsert_anggaran($id)
+	{
+		$satu='';
+
+		if(strlen($_POST['unitkerja']) > 0){
+			$model_target = ValueAnggaranTarget::model()->findByAttributes(
+				array(
+					'kegiatan'	=>$id,
+					'unit_kerja'=>$_POST['unitkerja']
+				),
+				array('order'=>'created_time DESC')
+			);
+
+			if($model_target===null){
+				$model=new ValueAnggaranTarget;
+				$model->kegiatan=$id;
+				$model->unit_kerja = $_POST['unitkerja'];
+				$model->jumlah = $_POST['target'];
+				$model->save();
+			}
+			else
+			{
+				if($model_target->jumlah!=$_POST['target']){
+					$model=new ValueAnggaranTarget;
+					$model->kegiatan=$id;
+					$model->unit_kerja = $_POST['unitkerja'];
+					$model->jumlah = $_POST['target'];
+					$model->save();
+				}				
+			}
+
+			for($i=1;$i<=12;++$i){
+				$model_real = ValueAnggaran::model()->findByAttributes(
+					array(
+						'kegiatan'	=>$id,
+						'unit_kerja'=>$_POST['unitkerja'],
+						'bulan'		=>$i
+					),
+					array('order'=>'created_time DESC')
+				);
+	
+				if($model_real===null){
+					$model=new ValueAnggaran;
+					$model->kegiatan=$id;
+					$model->unit_kerja = $_POST['unitkerja'];
+					$model->bulan = $i;
+					$model->jumlah = $_POST['r'.$i];
+					$model->save();
+				}
+				else
+				{
+					if($model_real->jumlah!=$_POST['r'.$i]){
+						$model=new ValueAnggaran;
+						$model->kegiatan=$id;
+						$model->unit_kerja = $_POST['unitkerja'];
+						$model->bulan = $i;
+						$model->jumlah = $_POST['r'.$i];
+						$model->save();
+					}				
+				}
+			}
+			$satu = $id;
+		}
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu'=>$satu,
+        ));
+        Yii::app()->end();
+	}
+
+	public function actionDetail_kab_kota($id, $kab_id)
+	{
+		$model = IndukKegiatan::model()->findByPk($id);
+		$data = $model->getByKabKota($kab_id);
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu' => $data
+        ));
+        Yii::app()->end();
 	}
 
 

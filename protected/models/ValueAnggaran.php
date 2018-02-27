@@ -33,13 +33,13 @@ class ValueAnggaran extends HelpAr
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('unit_kerja, kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by', 'required'),
+			array('unit_kerja, kegiatan, jumlah, bulan, created_time, created_by, updated_time, updated_by', 'required'),
 			array('unit_kerja, kegiatan, created_by, updated_by', 'numerical', 'integerOnly'=>true),
 			array('keterangan', 'length', 'max'=>255),
 			array('jumlah', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, unit_kerja, kegiatan, tanggal_realisasi, jumlah, created_time, created_by, updated_time, updated_by, keterangan', 'safe', 'on'=>'search'),
+			array('id, unit_kerja, kegiatan, jumlah, created_time, created_by, updated_time, updated_by, keterangan', 'safe', 'on'=>'search'),
 		);
 	}
 

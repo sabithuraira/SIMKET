@@ -68,23 +68,33 @@ class IndukKegiatan extends HelpAR
 
 	public function getByKabKota($id_kab_kota){
 		$id = $this->id;
-		$sql_t = "SELECT 
-				COALESCE((CASE WHEN unit_kerja=$id_kab_kota THEN jumlah ELSE 0 END),0) AS target 
-				FROM `value_anggaran_target` WHERE kegiatan=$id 
-				ORDER BY created_by LIMIT 1";
+		$sql_t = "(SELECT IFNULL(jumlah, 0) target 
+						FROM `value_anggaran_target` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota
+						ORDER BY created_time DESC LIMIT 1)
+					UNION
+					(SELECT 0 target)";
 
+		// print_r($sql_t);die();
 		$result_t = Yii::app()->db->createCommand($sql_t)->queryRow();
 		
 		$select_real = "";
 		for($i = 1;$i < 12;++$i){
-			$select_real.= "COALESCE((CASE WHEN bulan = $i AND unit_kerja=$id_kab_kota THEN jumlah ELSE 0 END),0) AS r$i, ";
+			$select_real.= "COALESCE(SUM(CASE WHEN va1.bulan = $i THEN va1.jumlah ELSE 0 END),0) AS r$i, ";
 		}
-		$select_real.= "COALESCE((CASE WHEN bulan = 12 AND unit_kerja=$id_kab_kota THEN jumlah ELSE 0 END),0) AS r12";
+		$select_real.= "COALESCE(SUM(CASE WHEN va1.bulan = 12 THEN va1.jumlah ELSE 0 END),0) AS r12";
 
 		$sql_r = "SELECT 
 				$select_real 
-				FROM `value_anggaran` WHERE kegiatan=$id 
-				ORDER BY created_by LIMIT 1";
+				FROM `value_anggaran` as va1 
+				JOIN (
+					SELECT MAX(t.id) AS id, bulan 
+					FROM `value_anggaran` as t 
+					WHERE t.kegiatan = $id AND t.unit_kerja=$id_kab_kota 
+					GROUP BY bulan
+				) AS x USING (id)";
+				
+
+		// print_r($sql_r);die();
 
 		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
 		
