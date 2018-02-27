@@ -25,7 +25,7 @@
                             <?php
                                 foreach (HelpMe::getMonthListArr() as $key => $value) {
                                     echo '<td>'.$value['short_lbl'].'</td>';
-                                    echo '<td>%</td>';
+                                    echo '<td class="text-center">%</td>';
                                 }
                             ?>
                         </tr>
@@ -33,13 +33,21 @@
                             foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
                             {
                                 $data = $model->getByKabKota($value['id']);
+                                $total_real = 0;
                                 
                                 echo '<tr>';
                                     echo '<td>'.$value['name'].'</td>';
                                     echo '<td>'.$data['target'].'</td>';
+
                                     for($i=1; $i<=12; ++$i){
-                                        echo '<td>'.$data["r$i"].'</td>';
-                                        echo '<td></td>';
+                                        $total_real += $data["r$i"];
+                                        $percentage = 0;
+
+                                        if($data['target']!=0)
+                                            $percentage = $total_real/$data['target']*100;
+
+                                        echo '<td>'.$total_real.'</td>';
+                                        echo '<td class="text-center">'.round($percentage,2).'</td>';
                                     }
                                 echo '</tr>';
                             }
