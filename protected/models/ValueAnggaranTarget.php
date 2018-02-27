@@ -32,7 +32,7 @@ class ValueAnggaranTarget extends HelpAR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('unit_kerja, kegiatan, jenis, jumlah, created_time, created_by, updated_time, updated_by', 'required'),
+			array('unit_kerja, kegiatan, jumlah, created_time, created_by, updated_time, updated_by', 'required'),
 			array('unit_kerja, kegiatan, jenis, created_by, updated_by', 'numerical', 'integerOnly'=>true),
 			array('jumlah', 'length', 'max'=>20),
 			// The following rule is used by search().

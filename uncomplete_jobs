@@ -1,1 +1,4 @@
 - delete all old anggaran features from database and code
+    - delete kegiatan for anggaran
+    - delete old anggaran pagu
+    - related functions in model and HelpMe

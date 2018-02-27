@@ -118,3 +118,11 @@ td.bpsgood
 #loading, #jadwal-success, #jadwal-error, .table-hidden{
   display: none;
 }
+
+td.center {
+  text-align: center;
+}
+
+td.uline {
+  text-decoration: underline;
+}

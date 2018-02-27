@@ -66,6 +66,31 @@ class IndukKegiatan extends HelpAR
 		);
 	}
 
+	public function getByKabKota($id_kab_kota){
+		$id = $this->id;
+		$sql_t = "SELECT 
+				COALESCE((CASE WHEN unit_kerja=$id_kab_kota THEN jumlah ELSE 0 END),0) AS target 
+				FROM `value_anggaran_target` WHERE kegiatan=$id 
+				ORDER BY created_by LIMIT 1";
+
+		$result_t = Yii::app()->db->createCommand($sql_t)->queryRow();
+		
+		$select_real = "";
+		for($i = 1;$i < 12;++$i){
+			$select_real.= "COALESCE((CASE WHEN bulan = $i AND unit_kerja=$id_kab_kota THEN jumlah ELSE 0 END),0) AS r$i, ";
+		}
+		$select_real.= "COALESCE((CASE WHEN bulan = 12 AND unit_kerja=$id_kab_kota THEN jumlah ELSE 0 END),0) AS r12";
+
+		$sql_r = "SELECT 
+				$select_real 
+				FROM `value_anggaran` WHERE kegiatan=$id 
+				ORDER BY created_by LIMIT 1";
+
+		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
+		
+		return array_merge($result_t, $result_r);
+	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

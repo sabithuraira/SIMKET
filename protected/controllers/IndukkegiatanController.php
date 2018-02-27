@@ -28,15 +28,28 @@ class IndukkegiatanController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view', 'create','update','delete'),
+				'actions'=>array('index','view', 'create','update','delete',
+					'progress'),
 				'expression'=> function($user){
 					return $user->getLevel()==1;
 				},
+			),
+			array('allow',
+				'actions'=>array('dashboard'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+
+	public function actionProgress($id)
+	{
+		$this->render('progress',array(
+			'model'=>$this->loadModel($id),
+		));
 	}
 
 	/**
@@ -118,10 +131,22 @@ class IndukkegiatanController extends Controller
 	{
 		$model=new IndukKegiatan('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['IndukKegiatan']))
-			$model->attributes=$_GET['IndukKegiatan'];
+		if(isset($_POST['IndukKegiatan']))
+			$model->attributes=$_POST['IndukKegiatan'];
 
 		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionDashboard()
+	{
+		$model=new IndukKegiatan('search');
+		$model->unsetAttributes();
+		if(isset($_POST['IndukKegiatan']))
+			$model->attributes=$_POST['IndukKegiatan'];
+
+		$this->render('dashboard',array(
 			'model'=>$model,
 		));
 	}

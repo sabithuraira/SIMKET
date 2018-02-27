@@ -113,3 +113,6 @@ ALTER TABLE `value_anggaran_target`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `induk_kegiatan` ADD `tahun` INT NOT NULL AFTER `updated_time`;
+ALTER TABLE `value_anggaran_target` CHANGE `jenis` `jenis` INT(11) NULL;
+ALTER TABLE `value_anggaran` CHANGE `jenis` `jenis` INT(11) NULL;
+ALTER TABLE `value_anggaran` ADD `bulan` INT NOT NULL AFTER `keterangan`;

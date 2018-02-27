@@ -104,7 +104,7 @@
         </li>
 
         <?php 
-          echo '<li><a href="'.Yii::app()->createUrl('k_anggaran/dashboard').'"><i class="fa fa-money"></i> <span>Anggaran</span></a></li>';
+          echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/dashboard').'"><i class="fa fa-money"></i> <span>Anggaran</span></a></li>';
         ?>
 
         

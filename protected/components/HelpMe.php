@@ -50,18 +50,18 @@ class HelpMe
     public static function getMonthList_singleNumber()
     {
         $arr=array();
-        $arr[]=array('id'=>1,'label'=>'Januari');
-        $arr[]=array('id'=>2,'label'=>'Februari');
-        $arr[]=array('id'=>3,'label'=>'Maret');
-        $arr[]=array('id'=>4,'label'=>'April');
-        $arr[]=array('id'=>5,'label'=>'Mei');
-        $arr[]=array('id'=>6,'label'=>'Juni');
-        $arr[]=array('id'=>7,'label'=>'Juli');
-        $arr[]=array('id'=>8,'label'=>'Agustus');
-        $arr[]=array('id'=>9,'label'=>'September');
-        $arr[]=array('id'=>10,'label'=>'Oktober');
-        $arr[]=array('id'=>11,'label'=>'November');
-        $arr[]=array('id'=>12,'label'=>'Desember');
+        $arr[]=array('id'=>1,'label'=>'Januari', 'short_lbl'=>'Jan');
+        $arr[]=array('id'=>2,'label'=>'Februari', 'short_lbl'=>'Feb');
+        $arr[]=array('id'=>3,'label'=>'Maret', 'short_lbl'=>'Mar');
+        $arr[]=array('id'=>4,'label'=>'April', 'short_lbl'=>'Apr');
+        $arr[]=array('id'=>5,'label'=>'Mei', 'short_lbl'=>'Mei');
+        $arr[]=array('id'=>6,'label'=>'Juni', 'short_lbl'=>'Jun');
+        $arr[]=array('id'=>7,'label'=>'Juli', 'short_lbl'=>'Jul');
+        $arr[]=array('id'=>8,'label'=>'Agustus', 'short_lbl'=>'Ags');
+        $arr[]=array('id'=>9,'label'=>'September', 'short_lbl'=>'Sep');
+        $arr[]=array('id'=>10,'label'=>'Oktober', 'short_lbl'=>'Okt');
+        $arr[]=array('id'=>11,'label'=>'November', 'short_lbl'=>'Nov');
+        $arr[]=array('id'=>12,'label'=>'Desember', 'short_lbl'=>'Des');
 
         return CHtml::listData($arr,'id','label');
     }
@@ -80,18 +80,19 @@ class HelpMe
     public static function getMonthListArr()
     {
         $arr=array();
-        $arr[]=array('id'=>'01','label'=>'Januari');
-        $arr[]=array('id'=>'02','label'=>'Februari');
-        $arr[]=array('id'=>'03','label'=>'Maret');
-        $arr[]=array('id'=>'04','label'=>'April');
-        $arr[]=array('id'=>'05','label'=>'Mei');
-        $arr[]=array('id'=>'06','label'=>'Juni');
-        $arr[]=array('id'=>'07','label'=>'Juli');
-        $arr[]=array('id'=>'08','label'=>'Agustus');
-        $arr[]=array('id'=>'09','label'=>'September');
-        $arr[]=array('id'=>10,'label'=>'Oktober');
-        $arr[]=array('id'=>11,'label'=>'November');
-        $arr[]=array('id'=>12,'label'=>'Desember');
+        
+        $arr[]=array('id'=>'01','label'=>'Januari', 'short_lbl'=>'Jan');
+        $arr[]=array('id'=>'02','label'=>'Februari', 'short_lbl'=>'Feb');
+        $arr[]=array('id'=>'03','label'=>'Maret', 'short_lbl'=>'Mar');
+        $arr[]=array('id'=>'04','label'=>'April', 'short_lbl'=>'Apr');
+        $arr[]=array('id'=>'05','label'=>'Mei', 'short_lbl'=>'Mei');
+        $arr[]=array('id'=>'06','label'=>'Juni', 'short_lbl'=>'Jun');
+        $arr[]=array('id'=>'07','label'=>'Juli', 'short_lbl'=>'Jul');
+        $arr[]=array('id'=>'08','label'=>'Agustus', 'short_lbl'=>'Ags');
+        $arr[]=array('id'=>'09','label'=>'September', 'short_lbl'=>'Sep');
+        $arr[]=array('id'=>10,'label'=>'Oktober', 'short_lbl'=>'Okt');
+        $arr[]=array('id'=>11,'label'=>'November', 'short_lbl'=>'Nov');
+        $arr[]=array('id'=>12,'label'=>'Desember', 'short_lbl'=>'Des');
 
         return $arr;
     }
