@@ -80,7 +80,8 @@
               'color'       =>  'aqua',
               'kegiatan'    =>  $peringkat1tahun['jumlah_kegiatan'],
               'target'      =>  $peringkat1tahun['jumlah_target'],
-              'point'       =>  $peringkat1tahun['point']
+              'point'       =>  $peringkat1tahun['point'],
+              'url'         =>  $peringkat1tahun['url'],
             ));
 
 
@@ -90,7 +91,8 @@
               'color'       =>  'green',
               'kegiatan'    =>  $peringkat1bulan['jumlah_kegiatan'],
               'target'      =>  $peringkat1bulan['jumlah_target'],
-              'point'       =>  $peringkat1bulan['point']
+              'point'       =>  $peringkat1bulan['point'],
+              'url'         =>  $peringkat1bulan['url'],
             ));
           ?>
 

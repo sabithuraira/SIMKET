@@ -8,7 +8,9 @@ class WJuara extends CPortlet
 
     public $kegiatan = 0;
     public $target = 0;
-    public $point = 0;
+	public $point = 0;
+	public $url = "url";
+
 	public function init()
 	{
 		parent::init();

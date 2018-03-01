@@ -2,6 +2,7 @@
     <div class="widget-user-header <?php echo "bg-".$this->color."-active" ?>">
         <h3 class="widget-user-username"><?php echo $this->kab_name; ?></h3>
         <h5 class="widget-user-desc"><?php echo $this->title_name; ?></h5>
+        <a type="button" href="<?php echo $this->url ?>" class="btn btn-default btn-sm">Selengkapnya</a>
     </div>
     <div class="widget-user-image">
         <img class="img-circle" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/logo_bps.png" ?>">
