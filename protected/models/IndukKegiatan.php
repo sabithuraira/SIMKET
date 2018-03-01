@@ -92,13 +92,28 @@ class IndukKegiatan extends HelpAR
 					WHERE t.kegiatan = $id AND t.unit_kerja=$id_kab_kota 
 					GROUP BY bulan
 				) AS x USING (id)";
-				
-
-		// print_r($sql_r);die();
 
 		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
+
+		$select_rpd = "";
+		for($i = 1;$i < 12;++$i){
+			$select_rpd.= "COALESCE(SUM(CASE WHEN va1.bulan = $i THEN va1.jumlah ELSE 0 END),0) AS rpd$i, ";
+		}
+		$select_rpd.= "COALESCE(SUM(CASE WHEN va1.bulan = 12 THEN va1.jumlah ELSE 0 END),0) AS rpd12";
+
+		$sql_rpd = "SELECT 
+				$select_rpd 
+				FROM `value_rpd` as va1 
+				JOIN (
+					SELECT MAX(t.id) AS id, bulan 
+					FROM `value_rpd` as t 
+					WHERE t.kegiatan = $id AND t.unit_kerja=$id_kab_kota 
+					GROUP BY bulan
+				) AS x USING (id)";
+
+		$result_rpd = Yii::app()->db->createCommand($sql_rpd)->queryRow();
 		
-		return array_merge($result_t, $result_r);
+		return array_merge($result_t, $result_r, $result_rpd);
 	}
 
 	/**

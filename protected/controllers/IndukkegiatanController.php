@@ -36,7 +36,7 @@ class IndukkegiatanController extends Controller
 			),
 			array('allow',
 				'actions'=>array('progress', 'detail_kab_kota',
-					'insert_anggaran'),
+					'insert_anggaran', 'insert_rpd'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -50,7 +50,6 @@ class IndukkegiatanController extends Controller
 			),
 		);
 	}
-
 
 	public function actionInsert_anggaran($id)
 	{
@@ -123,6 +122,52 @@ class IndukkegiatanController extends Controller
         Yii::app()->end();
 	}
 
+
+	public function actionInsert_rpd($id)
+	{
+		$satu='';
+
+		if(strlen($_POST['unitkerja']) > 0){
+			for($i=1;$i<=12;++$i){
+				$model_real = ValueRpd::model()->findByAttributes(
+					array(
+						'kegiatan'	=>$id,
+						'unit_kerja'=>$_POST['unitkerja'],
+						'bulan'		=>$i
+					),
+					array('order'=>'created_time DESC')
+				);
+	
+				if($model_real===null){
+					$model=new ValueRpd;
+					$model->kegiatan=$id;
+					$model->unit_kerja = $_POST['unitkerja'];
+					$model->bulan = $i;
+					$model->jumlah = $_POST['rpd'.$i];
+					$model->save();
+				}
+				else
+				{
+					if($model_real->jumlah!=$_POST['rpd'.$i]){
+						$model=new ValueRpd;
+						$model->kegiatan=$id;
+						$model->unit_kerja = $_POST['unitkerja'];
+						$model->bulan = $i;
+						$model->jumlah = $_POST['rpd'.$i];
+						$model->save();
+					}				
+				}
+			}
+			$satu = $id;
+		}
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu'=>$satu,
+        ));
+        Yii::app()->end();
+	}
+
 	public function actionDetail_kab_kota($id, $kab_id)
 	{
 		$model = IndukKegiatan::model()->findByPk($id);
@@ -134,7 +179,6 @@ class IndukkegiatanController extends Controller
         ));
         Yii::app()->end();
 	}
-
 
 	public function actionProgress($id)
 	{

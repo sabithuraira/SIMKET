@@ -57,7 +57,7 @@
                                             $percentage_total = $total_real/$data['target']*100;
                                         }
 
-                                        echo '<td></td>';
+                                        echo '<td>'.number_format($data["rpd$i"],2,',','.').'</td>';
                                         echo '<td>'.number_format($data["r$i"],2,',','.').'</td>';
                                         echo '<td class="text-center">'.number_format($percentage,2).'</td>';
                                         echo '<td class="text-center">'.number_format($percentage_total,2).'</td>';
@@ -203,7 +203,7 @@
                                                 <td class="text-center w50">Kabupaten/Kota</td>
                                                 <td class="text-center w50">
                                                     <?php 
-                                                        echo CHtml::dropDownList('unit_kerja','',
+                                                        echo CHtml::dropDownList('unit_kerjarpd','',
                                                                 CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')),
                                                                     'id','name'),
                                                                 array('empty'=>'- Pilih Unit Kerja-','class'=>'form-control')); 
@@ -211,7 +211,7 @@
                                                 </td>  
 
                                             </tr>
-                                            <?php }else{ echo CHtml::hiddenField('unit_kerja',Yii::app()->user-> getUnitKerja()); } ?>
+                                            <?php }else{ echo CHtml::hiddenField('unit_kerjarpd',Yii::app()->user-> getUnitKerja()); } ?>
                                         </tbody>
                                     </table>
                                     
@@ -221,50 +221,50 @@
                                         
                                             <tr>
                                                 <td>Jan</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r1',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd1',''); ?></td>
 
                                                 <td>Feb</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r2',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd2',''); ?></td>
                                             </tr>
 
                                             <tr>
                                                 <td>Mar</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r3',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd3',''); ?></td>
 
                                                 <td>Apr</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r4',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd4',''); ?></td>
                                             </tr>
 
                                             <tr>
                                                 <td>Mei</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r5',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd5',''); ?></td>
 
                                                 <td>Jun</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r6',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd6',''); ?></td>
                                             </tr>
 
                                             <tr>
                                                 <td>Jul</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r7',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd7',''); ?></td>
 
                                                 <td>Agu</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r8',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd8',''); ?></td>
                                             </tr>
 
                                             <tr>
                                                 <td>Sep</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r9',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd9',''); ?></td>
 
                                                 <td>Okt</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r10',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd10',''); ?></td>
                                             </tr>
 
                                             <tr>
                                                 <td>Nov</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r11',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd11',''); ?></td>
 
                                                 <td>Des</td>
-                                                <td class="text-center"><?php echo CHtml::textField('r12',''); ?></td>
+                                                <td class="text-center"><?php echo CHtml::textField('rpd12',''); ?></td>
                                             </tr>
 
                                         </tbody>
@@ -303,14 +303,34 @@
     var r10=$('#r10');
     var r11=$('#r11');
     var r12=$('#r12');
+
+
+    var unitkerja_rpd = $('#unit_kerjarpd');
+    var rpd1=$('#rpd1');
+    var rpd2=$('#rpd2');
+    var rpd3=$('#rpd3');
+    var rpd4=$('#rpd4');
+    var rpd5=$('#rpd5');
+    var rpd6=$('#rpd6');
+    var rpd7=$('#rpd7');
+    var rpd8=$('#rpd8');
+    var rpd9=$('#rpd9');
+    var rpd10=$('#rpd10');
+    var rpd11=$('#rpd11');
+    var rpd12=$('#rpd12');
     var pathname = window.location.pathname;
 
     $(document).ready(function () {
         setDetailTarget();
+        setDetailRpd();
     });
 
     unitkerja.change(function(){
         setDetailTarget();
+    });
+
+    unitkerja_rpd.change(function(){
+        setDetailRpd();
     });
 
     function setDetailTarget(){
@@ -338,6 +358,68 @@
             });
         }
     }
+
+    function setDetailRpd(){
+        if(unitkerja_rpd.val().length > 0){
+            $.ajax({
+                url: pathname+"?r=indukkegiatan/detail_kab_kota&id=" + idnya.val() + "&kab_id=" + unitkerja_rpd.val(),
+                type:"GET",
+                dataType :"json",
+                success : function(data)
+                {
+                    rpd1.val(data.satu.rpd1);
+                    rpd2.val(data.satu.rpd2);
+                    rpd3.val(data.satu.rpd3);
+                    rpd4.val(data.satu.rpd4);
+                    rpd5.val(data.satu.rpd5);
+                    rpd6.val(data.satu.rpd6);
+                    rpd7.val(data.satu.rpd7);
+                    rpd8.val(data.satu.rpd8);
+                    rpd9.val(data.satu.rpd9);
+                    rpd10.val(data.satu.rpd10);
+                    rpd11.val(data.satu.rpd11);
+                    rpd12.val(data.satu.rpd12);
+                }
+            });
+        }
+    }
+
+    $('#InfroTextRpd').click(function(){
+
+        $.ajax({
+            url: pathname+"?r=indukkegiatan/insert_rpd&id=" + idnya.val(),
+            type:"post",
+            dataType :"json",
+            data:{
+                    "unitkerja":unitkerja_rpd.val(),
+                    "rpd1":rpd1.val(),
+                    "rpd2":rpd2.val(),
+                    "rpd3":rpd3.val(),
+                    "rpd4":rpd4.val(),
+                    "rpd5":rpd5.val(),
+                    "rpd6":rpd6.val(),
+                    "rpd7":rpd7.val(),
+                    "rpd8":rpd8.val(),
+                    "rpd9":rpd9.val(),
+                    "rpd10":rpd10.val(),
+                    "rpd11":rpd11.val(),
+                    "rpd12":rpd12.val()
+                },
+                success : function(data)
+                {
+                    if(data.satu.length >0)
+                    {
+                        window.location.href=pathname+ "?r=indukkegiatan/progress&id="+data.satu
+                    }
+                    else
+                    {
+                        alert('Data gagal disimpan, refresh halaman anda dan ulangi lagi');
+                    }
+                }
+            }
+        );
+
+    });
 
     $('#InfroText').click(function(){
 
@@ -374,6 +456,5 @@
                 }
             }
         );
-
     });
 </script>
