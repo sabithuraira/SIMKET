@@ -72,7 +72,7 @@ class ReportMe
         $data=0;
         $result=Yii::app()->db->createCommand($sql)->queryAll();
         if(count($result)>0)
-            $data=$result[0]['point'];
+            $data=number_format($result[0]['point'],2);
         return $data;
     }
 

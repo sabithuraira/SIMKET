@@ -1,9 +1,14 @@
+.eventColor0,.eventColor0 a {
+    
+     border-color: #7A7A7A;
+     background: #3C8DBC;
+     
+    /* color: yellow; */
+ }
 .eventColor1,.eventColor1 a {
    
     border-color: #7A7A7A;
     background: #007F0E;
-    
-   /* color: yellow; */
 }
 .eventColor2,.eventColor2 a {
     background: #FFD800; 

@@ -194,7 +194,7 @@ class Kegiatan extends HelpAr
 
      	if($total_day>7)
      	{
-     		$kelas=1;
+     		$kelas=0;
      	}
      	else if($total_day<=7 && $total_day>=1)
      	{
@@ -241,7 +241,7 @@ class Kegiatan extends HelpAr
 
 	public function TabelClass()
 	{
-		$kelas="bpsgood";
+		$kelas="bpsnetral";
 		$now = time(); // or your date as well
      	$data_date = strtotime($this->end_date);
      	$datediff = $data_date-$now;
@@ -250,7 +250,7 @@ class Kegiatan extends HelpAr
 
      	if($total_day>7)
      	{
-     		$kelas="bpsgood";
+     		$kelas="bpsnetral";
      	}
      	else if($total_day<=7 && $total_day>=1)
      	{

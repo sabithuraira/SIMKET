@@ -6,12 +6,15 @@
 	<div class="mailbox-controls">
         <b>Kalender Kegiatan - </b>
         <?php echo CHtml::dropDownList('bidang',$bidang,HelpMe::getBidangBosList()); ?>
-	</div>
+    </div>
+    
     
 	<div class="box-body">
         <div class="alert alert-info text-center" id="loading">
             <i class="fa fa-spin fa-refresh"></i>&nbsp; Merefresh data calendar, harap tunggu..
         </div>
+
+        <?php $this->widget('ColorDesc'); ?>
 
         <div id="calendar"></div>
 	</div>

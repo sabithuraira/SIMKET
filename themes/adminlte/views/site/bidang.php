@@ -25,6 +25,9 @@
                     </div>
                 </div>
 
+                
+                <?php $this->widget('ColorDesc'); ?>
+                <br/>
                 <table class="table table-hover table-bordered table-condensed">
                     <tr>
                         <th></th>
@@ -36,7 +39,7 @@
                         <th>Penerimaan</th>
                     </tr>
                     <?php foreach (UnitKerja::model()->findAllByAttributes(array('parent'=>$model->id)) as $ukey => $uvalue) { ?>
-                        <tr><td colspan="7"><b><?php echo $uvalue->name; ?></b></td></tr>
+                        <tr><td colspan="7"><b><?php echo strtoupper($uvalue->name); ?></b></td></tr>
                         <?php
                             $criteria = new CDbCriteria;
                             $criteria->condition = "YEAR(end_date)={$tahun}";
