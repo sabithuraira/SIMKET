@@ -54,9 +54,6 @@ ALTER TABLE `induk_kegiatan`
 ALTER TABLE `induk_kegiatan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-
-
-
 CREATE TABLE `kegiatan_for_anggaran` (
   `id` int(11) NOT NULL,
   `id_induk` int(11) NOT NULL,
@@ -79,7 +76,6 @@ CREATE TABLE `kegiatan_for_anggaran` (
 ALTER TABLE `kegiatan_for_anggaran`
   ADD PRIMARY KEY (`id`);
 
-
 CREATE TABLE `value_anggaran_target` (
   `id` int(11) NOT NULL,
   `unit_kerja` int(11) NOT NULL,
@@ -92,23 +88,9 @@ CREATE TABLE `value_anggaran_target` (
   `updated_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `value_anggaran_target`
---
 ALTER TABLE `value_anggaran_target`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `value_anggaran_target`
---
 ALTER TABLE `value_anggaran_target`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
@@ -116,3 +98,4 @@ ALTER TABLE `induk_kegiatan` ADD `tahun` INT NOT NULL AFTER `updated_time`;
 ALTER TABLE `value_anggaran_target` CHANGE `jenis` `jenis` INT(11) NULL;
 ALTER TABLE `value_anggaran` CHANGE `jenis` `jenis` INT(11) NULL;
 ALTER TABLE `value_anggaran` ADD `bulan` INT NOT NULL AFTER `keterangan`;
+ALTER TABLE `induk_kegiatan` ADD `output_id` INT NOT NULL AFTER `tahun`, ADD `unit_kerja_id` INT NOT NULL AFTER `output_id`;
