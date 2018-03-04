@@ -36,6 +36,7 @@ class IndukkegiatanController extends Controller
 			),
 			array('allow',
 				'actions'=>array('progress', 'detail_kab_kota',
+					'detail_kegiatan',
 					'insert_anggaran', 'insert_rpd'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
@@ -180,6 +181,24 @@ class IndukkegiatanController extends Controller
         Yii::app()->end();
 	}
 
+	public function actionDetail_kegiatan($id, $kab_id)
+	{
+		$data = null;
+		if($kab_id==0){
+			$data = IndukKegiatan::getByKegiatan($id);
+		}
+		else{
+			$model = IndukKegiatan::model()->findByPk($id);
+			$data = $model->getByKabKota($kab_id);
+		}
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu' => $data
+        ));
+        Yii::app()->end();
+	}
+
 	public function actionProgress($id)
 	{
 		$this->render('progress',array(
@@ -212,6 +231,8 @@ class IndukkegiatanController extends Controller
 		if(isset($_POST['IndukKegiatan']))
 		{
 			$model->attributes=$_POST['IndukKegiatan'];
+			$model->output_id = $_POST['IndukKegiatan']['output_id'];
+			$model->unit_kerja_id = $_POST['IndukKegiatan']['unit_kerja_id'];
 			if($model->save())
 				$this->redirect(array('index'));
 		}
@@ -236,6 +257,8 @@ class IndukkegiatanController extends Controller
 		if(isset($_POST['IndukKegiatan']))
 		{
 			$model->attributes=$_POST['IndukKegiatan'];
+			$model->output_id = $_POST['IndukKegiatan']['output_id'];
+			$model->unit_kerja_id = $_POST['IndukKegiatan']['unit_kerja_id'];
 			if($model->save())
 				$this->redirect(array('index'));
 		}

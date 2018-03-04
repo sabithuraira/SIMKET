@@ -6,9 +6,7 @@
               <h3 class="box-title"><?php echo $model->kegiatan; ?></h3>
             </div>
 
-            
             <div class="box-body">
-
                 <?php $this->widget('zii.widgets.CDetailView', array(
                     'data'=>$model,
                     'attributes'=>array(

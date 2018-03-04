@@ -47,6 +47,8 @@ class IndukKegiatan extends HelpAR
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'unitKerja' => array(self::BELONGS_TO, 'UnitKerja', 'unit_kerja_id'),
+			'output' => array(self::BELONGS_TO, 'Output', 'output_id'),
 		);
 	}
 
@@ -59,6 +61,8 @@ class IndukKegiatan extends HelpAR
 			'id' => 'ID',
 			'name' => 'Name',
 			'tahun' => 'Tahun',
+			'output_id' => 'Output',
+			'unit_kerja_id'	=> 'Penanggung Jawab',
 			'created_by' => 'Created By',
 			'created_time' => 'Created Time',
 			'updated_by' => 'Updated By',
@@ -110,6 +114,64 @@ class IndukKegiatan extends HelpAR
 					WHERE t.kegiatan = $id AND t.unit_kerja=$id_kab_kota 
 					GROUP BY bulan
 				) AS x USING (id)";
+
+		$result_rpd = Yii::app()->db->createCommand($sql_rpd)->queryRow();
+		
+		return array_merge($result_t, $result_r, $result_rpd);
+	}
+
+	public function getByKegiatan($id){
+		$sql_t = "SELECT 
+				COALESCE(SUM(jumlah),0) AS target 
+				FROM `value_anggaran_target` as va1 
+				JOIN (
+		
+					SELECT MAX(t.id) AS id, unit_kerja
+					FROM `value_anggaran_target` as t 
+					WHERE t.kegiatan = $id 
+					GROUP BY unit_kerja
+				) AS x USING (id)";
+
+		$result_t = Yii::app()->db->createCommand($sql_t)->queryRow();
+		
+		$select_real = "";
+		for($i = 1;$i < 12;++$i){
+			$select_real.= "COALESCE(SUM(CASE WHEN va1.bulan = $i THEN va1.jumlah ELSE 0 END),0) AS r$i, ";
+		}
+		$select_real.= "COALESCE(SUM(CASE WHEN va1.bulan = 12 THEN va1.jumlah ELSE 0 END),0) AS r12";
+
+		$sql_r = "SELECT 
+				$select_real 
+				FROM `value_anggaran` as va1 
+				JOIN (
+					SELECT MAX(t.id) AS id, bulan, unit_kerja 
+					FROM `value_anggaran` as t 
+					WHERE t.kegiatan = $id 
+					GROUP BY bulan, unit_kerja
+				) AS x USING (id)";
+
+		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
+
+		$select_rpd = "";
+		for($i = 1;$i < 12;++$i){
+			$select_rpd.= "COALESCE(SUM(CASE WHEN va1.bulan = $i THEN va1.jumlah ELSE 0 END),0) AS rpd$i, ";
+		}
+		$select_rpd.= "COALESCE(SUM(CASE WHEN va1.bulan = 12 THEN va1.jumlah ELSE 0 END),0) AS rpd12";
+
+		$sql_rpd = "SELECT 
+				$select_rpd 
+				FROM `value_rpd` as va1 
+				JOIN (
+					SELECT MAX(t.id) AS id, bulan, unit_kerja 
+					FROM `value_rpd` as t 
+					WHERE t.kegiatan = $id 
+					GROUP BY bulan, unit_kerja
+				) AS x USING (id)";
+
+		// print_r($sql_t);
+		print_r($sql_r);
+		// print_r($sql_rpd);
+		die();
 
 		$result_rpd = Yii::app()->db->createCommand($sql_rpd)->queryRow();
 		

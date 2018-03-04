@@ -31,10 +31,34 @@
 				'name',
 				'tahun',
 				array(
+					'name'	=>'output_id',
+					'type'=>'raw',
+					'value'		=> function($data){ 
+						if($data->output_id == null || $data->output_id==0){
+							return '';
+						}
+						else{
+							return $data->output->name; 
+						}
+					},
+				),
+				array(
+					'name'	=>'unit_kerja_id',
+					'type'=>'raw',
+					'value'		=> function($data){ 
+						if($data->unit_kerja_id == null || $data->unit_kerja_id==0){
+							return '';
+						}
+						else{
+							return $data->unitKerja->name; 
+						}
+					},
+				),
+				array(
                     'header'	=>'',
                     'type'		=>'raw',
                     'cssClassExpression' => '"center uline"',
-                    'value'		=> function($data){ return CHtml::link("Progress Anggaran",array("indukkegiatan/progress","id"=>$data->id)); },
+                    'value'		=> function($data){ return CHtml::link("Progress",array("indukkegiatan/progress","id"=>$data->id),array('class'=>'btn btn-sm btn-flat btn-default')); },
                 ),
 			),
 		)); ?>

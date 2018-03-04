@@ -1,8 +1,8 @@
 <div class="box box-info">
 	<div class="mailbox-controls">
-		<b>Tambah Induk Kegiatan</b>
+		<b>Tambah Komponen</b>
 		<div class="pull-right">
-			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Induk Kegiatan", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Komponen", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
 		</div>
 	</div>
 

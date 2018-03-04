@@ -1,8 +1,8 @@
 <div class="box box-info">
 	<div class="mailbox-controls">
-		<b>Kelola Induk Kegiatan</b>
+		<b>Kelola Komponen</b>
 		<div class="pull-right">
-			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Induk Kegiatan", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Komponen", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
 		</div>
 	</div>
 
@@ -30,6 +30,30 @@
 			'columns'=>array(
 				'name',
 				'tahun',
+				array(
+					'name'	=>'output_id',
+					'type'=>'raw',
+					'value'		=> function($data){ 
+						if($data->output_id == null || $data->output_id==0){
+							return '';
+						}
+						else{
+							return $data->output->name; 
+						}
+					},
+				),
+				array(
+					'name'	=>'unit_kerja_id',
+					'type'=>'raw',
+					'value'		=> function($data){ 
+						if($data->unit_kerja_id == null || $data->unit_kerja_id==0){
+							return '';
+						}
+						else{
+							return $data->unitKerja->name; 
+						}
+					},
+				),
 				// 'created_by',
 				// 'created_time',
 				// 'updated_by',

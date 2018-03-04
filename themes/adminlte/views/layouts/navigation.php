@@ -146,7 +146,8 @@
                 </a>';
                 echo '<ul class="treeview-menu">';
                 if(Yii::app()->user->getLevel()==1){
-                  echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/index').'"><i class="fa fa-circle-o"></i> Induk Kegiatan</a></li>';
+                  echo '<li><a href="'.Yii::app()->createUrl('output/index').'"><i class="fa fa-circle-o"></i> Output</a></li>';
+                  echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/index').'"><i class="fa fa-circle-o"></i> Komponen</a></li>';
                 }
                 // echo '<li><a href="'.Yii::app()->createUrl('k_anggaran/index').'"><i class="fa fa fa-circle-o"></i> Kegiatan</a></li>';
                 echo '</ul></li>';

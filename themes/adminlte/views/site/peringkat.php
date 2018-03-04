@@ -1,18 +1,3 @@
-<style>
-    @import url('<?php echo Yii::app()->theme->baseUrl.'/css/baru/jadwal.css';?>');
-</style>
-<?php
-/* @var $this KegiatanController */
-/* @var $model Kegiatan */
-/*
-$this->breadcrumbs=array(
-    'Bidang'=>array('index'),
-    $model->name,
-);
-*/
-?>
-
-
 <div class="row">
 
     <div class="col-md-12">

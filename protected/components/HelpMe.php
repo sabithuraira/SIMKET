@@ -124,12 +124,15 @@ class HelpMe
         return CHtml::listData($arr,'id','label');
     }
 
-    public static function getKabKotaList()
+    public static function getKabKotaList($with_prov=false)
     {
-        $sql="SELECT * FROM unit_kerja WHERE parent=1 AND jenis=2";
+        $sql="SELECT * FROM unit_kerja WHERE parent=1 AND jenis=2 ORDER BY code";
         $data=Yii::app()->db->createCommand($sql)->queryAll();
 
         $arr=array();
+
+        if($with_prov)
+            $arr[]=array('id'=>0, 'label'=>'Semua Kab/Kota');
         foreach ($data as $key => $value) {
             $arr[]=array('id'=>$value['id'],'label'=>$value['name']);
         }

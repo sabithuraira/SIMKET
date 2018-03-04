@@ -28,6 +28,22 @@
 	</div>
 
 	<div class="form-group">
+		<?php echo $form->labelEx($model,'output_id'); ?>
+		<?php echo $form->dropDownList($model,'output_id',
+				CHtml::listData(Output::model()->findAll(), 'id', 'name'),
+				array('empty'=>'- Pilih Output -', 'class'=>"form-control")); ?>
+		<?php echo $form->error($model,'output_id'); ?>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'unit_kerja_id'); ?>
+		<?php echo $form->dropDownList($model,'unit_kerja_id',
+				CHtml::listData(HelpMe::getListProvinsi(), 'id', 'label'),
+				array('empty'=>'- Pilih Unit Kerja -', 'class'=>"form-control")); ?>
+		<?php echo $form->error($model,'output_id'); ?>
+	</div>
+
+	<div class="form-group">
 		<?php echo $form->labelEx($model,'tahun'); ?>
 		<?php echo $form->dropDownList($model,'tahun',
 				HelpMe::getYearForFilter(),
