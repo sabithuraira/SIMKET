@@ -28,6 +28,9 @@
 
                 <br/>
 
+                <div class="alert alert-info text-center" id="loading">
+                    <i class="fa fa-spin fa-refresh"></i>&nbsp; Merefresh data calendar, harap tunggu..
+                </div>
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <b>Grafik RPD & Realisasi Anggaran - </b>
@@ -43,99 +46,69 @@
                     <!-- /.box-body -->
                 </div>
 
-                <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_progress" data-toggle="tab"><b>Progress</b></a></li>
-                        <li><a href="#tab_chart" data-toggle="tab"><b>Chart</b></a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_progress">
-                            <center>
-                                <?php if(HelpMe::isKabupaten() || Yii::app()->user->getLevel()==1){ ?>
-                                    <button type="button" class="btn btn-flat btn-primary insert-anggaran" data-toggle="modal" data-target="#myModal">Masukkan Anggaran</button>
-                                    <button type="button" class="btn btn-flat btn-primary insert-rpd" data-toggle="modal" data-target="#myModalRpd">Masukkan RPD</button>
-                                <?php } ?>
-                            </center>
-                            <br/>
+                <center>
+                    <?php if(HelpMe::isKabupaten() || Yii::app()->user->getLevel()==1){ ?>
+                        <button type="button" class="btn btn-flat btn-primary insert-anggaran" data-toggle="modal" data-target="#myModal">Masukkan Anggaran</button>
+                        <button type="button" class="btn btn-flat btn-primary insert-rpd" data-toggle="modal" data-target="#myModalRpd">Masukkan RPD</button>
+                    <?php } ?>
+                </center>
+                <br/>
 
-                            <div class="scrollme"> 
-                                <table class="table table-hover table-bordered table-condensed">
-                                    <tr>
-                                        <th rowspan="2">Unit Kerja </th>
-                                        <th rowspan="2" class="text-center">Pagu Anggaran </th>
-                                        <!-- <th colspan="24" class="text-center">Realisasi</th> -->
-                                        <?php
-                                            foreach (HelpMe::getMonthListArr() as $key => $value) {
-                                                echo '<th colspan="4" class="text-center">'.$value['short_lbl'].'</th>';
-                                            }
-                                        ?>
-                                    </tr>
-                                    <tr>
-                                        <?php
-                                            foreach (HelpMe::getMonthListArr() as $key => $value) {
-                                                echo '<th class="text-center">RPD</th>';
-                                                echo '<th class="text-center">Real</th>';
-                                                echo '<th class="text-center">%</th>';
-                                                echo '<th class="text-center">% Kumulatif</th>';
-                                            }
-                                        ?>
-                                    </tr>
-                                    <?php
-                                        foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
-                                        {
-                                            $data = $model->getByKabKota($value['id']);
-                                            $total_real = 0;
-                                            
-                                            echo '<tr>';
-                                                echo '<th>'.$value['name'].'</th>';
-                                                echo '<td>'.number_format($data['target'],2,',','.').'</td>';
-
-                                                for($i=1; $i<=12; ++$i){
-                                                    $total_real += $data["r$i"];
-                                                    $percentage_total = 0;
-                                                    $percentage = 0;
-
-                                                    if($data['target']!=0){
-                                                        $percentage = $data["r$i"] / $data['target']*100;
-                                                        $percentage_total = $total_real/$data['target']*100;
-                                                    }
-
-                                                    echo '<td>'.number_format($data["rpd$i"],2,',','.').'</td>';
-                                                    echo '<td>'.number_format($data["r$i"],2,',','.').'</td>';
-                                                    echo '<td class="text-center">'.number_format($percentage,2).'</td>';
-                                                    echo '<td class="text-center">'.number_format($percentage_total,2).'</td>';
-                                                }
-                                            echo '</tr>';
-                                        }
-                                    ?>
-                                </table>
-                            </div>
-                        </div>
-
-
-                        <div class="tab-pane" id="tab_chart">
-   
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="box box-info">
-                                                <div class="box-header with-border">
-                                                    <h3 class="box-title">% Realisasi Bulanan <?php echo date('Y') ?></h3>
-                                                </div>
-                                                <div class="box-body">
-                                                    <div class="chart">
-                                                        <canvas id="barChart" style="height:230px"></canvas>
-                                                    </div>
-                                                </div>
-                                                <!-- /.box-body -->
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="scrollme"> 
+                    <table class="table table-hover table-bordered table-condensed">
+                        <tr>
+                            <th rowspan="2">Unit Kerja </th>
+                            <th rowspan="2" class="text-center">Pagu Anggaran </th>
+                            <!-- <th colspan="24" class="text-center">Realisasi</th> -->
+                            <?php
+                                foreach (HelpMe::getMonthListArr() as $key => $value) {
+                                    echo '<th colspan="4" class="text-center">'.$value['short_lbl'].'</th>';
+                                }
+                            ?>
+                        </tr>
+                        <tr>
+                            <?php
+                                foreach (HelpMe::getMonthListArr() as $key => $value) {
+                                    echo '<th class="text-center">RPD</th>';
+                                    echo '<th class="text-center">Real</th>';
+                                    echo '<th class="text-center">%</th>';
+                                    echo '<th class="text-center">% Kumulatif</th>';
+                                }
+                            ?>
+                        </tr>
+                        <?php
+                            foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
+                            {
+                                $data = $model->getByKabKota($value['id']);
+                                $total_real = 0;
                                 
-                        </div>
+                                echo '<tr>';
+                                    echo '<th>'.$value['name'].'</th>';
+                                    echo '<td>'.number_format($data['target'],2,',','.').'</td>';
 
-                    </div>
-                    <!-- /.tab-content -->
+                                    for($i=1; $i<=12; ++$i){
+                                        $total_real += $data["r$i"];
+                                        $percentage_total = 0;
+                                        $percentage = 0;
+
+                                        if($data['target']!=0){
+                                            $percentage = $data["r$i"] / $data['target']*100;
+                                            $percentage_total = $total_real/$data['target']*100;
+                                        }
+
+                                        echo '<td>'.number_format($data["rpd$i"],2,',','.').'</td>';
+                                        echo '<td>'.number_format($data["r$i"],2,',','.').'</td>';
+                                        echo '<td class="text-center">'.number_format($percentage,2).'</td>';
+                                        echo '<td class="text-center">'.number_format($percentage_total,2).'</td>';
+                                    }
+                                echo '</tr>';
+                            }
+                        ?>
+                    </table>
+
                 </div>
+                <!-- /.tab-content -->
+            </div>
 
 
 

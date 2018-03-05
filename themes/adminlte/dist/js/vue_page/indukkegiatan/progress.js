@@ -2,22 +2,13 @@
 var vm = new Vue({  
     el: "#progress_tag",
     data: {
-        line_data: [
-            {y: '2011 Q1', item1: 26},
-            {y: '2011 Q2', item1: 27},
-            {y: '2011 Q3', item1: 49},
-            {y: '2011 Q4', item1: 37},
-            {y: '2012 Q1', item1: 68},
-            {y: '2012 Q2', item1: 56},
-            {y: '2012 Q3', item1: 48},
-            {y: '2012 Q4', item1: 15},
-            {y: '2013 Q1', item1: 10},
-            {y: '2013 Q2', item1: 84}
-        ]
+        line_data: [],
+        months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     },
 });
 
 var unit_line = $('#unit_line');
+var loading = $("#loading");
 var unitkerja = $('#unit_kerja');
 var idnya=$('#idnya');
 var target=$('#target');
@@ -53,10 +44,12 @@ var pathname = window.location.pathname;
 $(document).ready(function () {
     setDetailTarget();
     setDetailRpd();
-
-    morrisLineChart();
     setChartData();
 });
+
+unit_line.change(function(){
+    setChartData();
+})
 
 unitkerja.change(function(){
     setDetailTarget();
@@ -67,42 +60,55 @@ unitkerja_rpd.change(function(){
 });
 
 function setChartData(){
+
+    loading.css("display", "block");
     $.ajax({
         url: pathname+"?r=indukkegiatan/detail_kegiatan&id=" + idnya.val()+ "&kab_id=" + unit_line.val(),
         type:"GET",
         dataType :"json",
         success : function(data)
         {
-            target.val(data.satu.target);
-            r1.val(data.satu.r1);
-            r2.val(data.satu.r2);
-            r3.val(data.satu.r3);
-            r4.val(data.satu.r4);
-            r5.val(data.satu.r5);
-            r6.val(data.satu.r6);
-            r7.val(data.satu.r7);
-            r8.val(data.satu.r8);
-            r9.val(data.satu.r9);
-            r10.val(data.satu.r10);
-            r11.val(data.satu.r11);
-            r12.val(data.satu.r12);
-        }
+            vm.line_data = [
+                {m: '2018-01', real: data.satu.r1, rpd: data.satu.rpd1},
+                {m: '2018-02', real: data.satu.r2, rpd: data.satu.rpd2},
+                {m: '2018-03', real: data.satu.r3, rpd: data.satu.rpd3},
+                {m: '2018-04', real: data.satu.r4, rpd: data.satu.rpd4},
+                {m: '2018-05', real: data.satu.r5, rpd: data.satu.rpd5},
+                {m: '2018-06', real: data.satu.r6, rpd: data.satu.rpd6},
+                {m: '2018-07', real: data.satu.r7, rpd: data.satu.rpd7},
+                {m: '2018-08', real: data.satu.r8, rpd: data.satu.rpd8},
+                {m: '2018-09', real: data.satu.r9, rpd: data.satu.rpd9},
+                {m: '2018-10', real: data.satu.r10, rpd: data.satu.rpd10},
+                {m: '2018-11', real: data.satu.r11, rpd: data.satu.rpd11},
+                {m: '2018-12', real: data.satu.r12, rpd: data.satu.rpd12},
+            ];
+
+            morrisLineChart();
+            loading.css("display", "none");
+        }.bind(this),
+        error: function(xhr, status, err) {
+            loading.css("display", "none");
+            alert("Terjadi kesalahan pada internet, harap refresh halaman");
+        }.bind(this)
     });
 }
 
 function morrisLineChart(){
-    // LINE CHART
     var line = new Morris.Line({
         element: 'line-chart',
         resize: true,
         data: vm.line_data,
-        xkey: 'y',
-        ykeys: ['item1'],
+        xkey: 'm',
+        ykeys: ['real', 'rpd'],
         ymax: 100,
         ymin: 0,
-        labels: ['Item 1'],
-        lineColors: ['#3c8dbc'],
-        hideHover: 'auto'
+        labels: ['real', 'rpd'],
+        lineColors: ['#3c8dbc', '#777777'],
+        hideHover: 'auto',
+        xLabelFormat: function(x) {
+            var month = vm.months[x.getMonth()];
+            return month;
+        },
     });
 }
 

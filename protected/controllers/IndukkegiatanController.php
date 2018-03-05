@@ -191,10 +191,31 @@ class IndukkegiatanController extends Controller
 			$model = IndukKegiatan::model()->findByPk($id);
 			$data = $model->getByKabKota($kab_id);
 		}
+
+		$result = array();
+
+		$result['target'] = 100;
+
+		$total_rpd=0;
+		$total_r=0;
+		for($i=1;$i<=12;++$i){
+			if($data['target']>0){
+				$total_rpd += $data["rpd$i"];
+				$total_r += $data["r$i"];
+
+				$result["rpd$i"] = $total_rpd/$data["target"]*100;
+				$result["r$i"] = $total_r/$data["target"]*100;
+			}
+			else{
+				$result["rpd$i"] = 0;
+				$result["r$i"] = 0;
+			}
+		}
+
 		
 		echo CJSON::encode(array
      	(
-        	 'satu' => $data
+        	 'satu' => $result
         ));
         Yii::app()->end();
 	}

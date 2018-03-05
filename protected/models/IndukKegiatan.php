@@ -168,13 +168,7 @@ class IndukKegiatan extends HelpAR
 					GROUP BY bulan, unit_kerja
 				) AS x USING (id)";
 
-		// print_r($sql_t);
-		print_r($sql_r);
-		// print_r($sql_rpd);
-		die();
-
 		$result_rpd = Yii::app()->db->createCommand($sql_rpd)->queryRow();
-		
 		return array_merge($result_t, $result_r, $result_rpd);
 	}
 
