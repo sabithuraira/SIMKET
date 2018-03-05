@@ -205,6 +205,12 @@ class IndukkegiatanController extends Controller
 
 				$result["rpd$i"] = $total_rpd/$data["target"]*100;
 				$result["r$i"] = $total_r/$data["target"]*100;
+
+				if($result["rpd$i"] > 100)
+					$result["rpd$i"] = 100;
+
+				if($result["r$i"] > 100)
+					$result["r$i"] = 100;
 			}
 			else{
 				$result["rpd$i"] = 0;

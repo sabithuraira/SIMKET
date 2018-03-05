@@ -103,8 +103,9 @@ function morrisLineChart(){
         ymax: 100,
         ymin: 0,
         labels: ['real', 'rpd'],
-        lineColors: ['#3c8dbc', '#777777'],
+        lineColors: ['Green', 'Blue'],
         hideHover: 'auto',
+        stacked: true,
         xLabelFormat: function(x) {
             var month = vm.months[x.getMonth()];
             return month;

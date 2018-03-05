@@ -40,6 +40,10 @@
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                         </div>
                     </div>
+                    &nbsp&nbsp<i>Ket: 
+                        &nbsp&nbsp<i class="fa fa fa-circle text-primary"></i> Rencana Penarikan Dana
+                        &nbsp&nbsp<i class="fa fa fa-circle text-green"></i> Realisasi Anggaran
+                    </i>
                     <div class="box-body chart-responsive">
                         <div class="chart" id="line-chart" style="height: 300px;"></div>
                     </div>
