@@ -97,7 +97,6 @@ class HelpMe
         return $arr;
     }
 
-
     public static function getBidangBosList()
     {
         $sql="SELECT * FROM unit_kerja WHERE parent IS NULL OR (parent=1 AND jenis=1)";
@@ -189,6 +188,22 @@ class HelpMe
             $result[]=array('label'=>$value['name'],'url'=>array('report/kabupaten','id'=>$value['id']), 'id'=>$value['id']);
         }
         return $result;
+    }
+
+    public static function getListEselon3($with_prov=false)
+    {
+        $sql="SELECT * FROM unit_kerja WHERE jenis=2 OR (jenis=1 AND parent=1) ORDER BY code";
+        $data=Yii::app()->db->createCommand($sql)->queryAll();
+
+        $arr=array();
+
+        if($with_prov)
+            $arr[]=array('id'=>0, 'label'=>'Semua Kab/Kota');
+        foreach ($data as $key => $value) {
+            $arr[]=array('id'=>$value['id'],'label'=>$value['name']);
+        }
+
+        return CHtml::listData($arr,'id','label');
     }
 
     public static function getRawJenisData(){

@@ -34,7 +34,7 @@
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <b>Grafik RPD & Realisasi Anggaran - </b>
-                        <?php echo CHtml::dropDownList('unit_line',0,HelpMe::getKabKotaList(true)); ?>
+                        <?php echo CHtml::dropDownList('unit_line',0,HelpMe::getListEselon3(true)); ?>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -81,7 +81,8 @@
                             ?>
                         </tr>
                         <?php
-                            foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
+                            // foreach (UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')) as $key => $value)
+                            foreach (UnitKerja::model()->findAll('jenis=2 OR (jenis=1 AND parent=1) ORDER BY code') as $key => $value)
                             {
                                 $data = $model->getByKabKota($value['id']);
                                 $total_real = 0;
@@ -143,9 +144,7 @@
                                                 <td class="text-center w50">Kabupaten/Kota</td>
                                                 <td class="text-center w50">
                                                     <?php 
-                                                        echo CHtml::dropDownList('unit_kerja','',
-                                                                CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')),
-                                                                    'id','name'),
+                                                        echo CHtml::dropDownList('unit_kerja','',HelpMe::getListEselon3(),
                                                                 array('empty'=>'- Pilih Unit Kerja-','class'=>'form-control')); 
                                                     ?>
                                                 </td>  
@@ -248,9 +247,7 @@
                                                 <td class="text-center w50">Kabupaten/Kota</td>
                                                 <td class="text-center w50">
                                                     <?php 
-                                                        echo CHtml::dropDownList('unit_kerjarpd','',
-                                                                CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'),array('order'=>'code')),
-                                                                    'id','name'),
+                                                        echo CHtml::dropDownList('unit_kerjarpd','',HelpMe::getListEselon3(),
                                                                 array('empty'=>'- Pilih Unit Kerja-','class'=>'form-control')); 
                                                     ?>
                                                 </td>  
