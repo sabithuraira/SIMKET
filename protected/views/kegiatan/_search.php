@@ -1,46 +1,38 @@
-<?php
-/* @var $this KegiatanController */
-/* @var $model Kegiatan */
-/* @var $form CActiveForm */
-?>
+<div class="box-body">
+	<div class="form">
 
-<div class="wide form">
+	<?php $form=$this->beginWidget('CActiveForm', array(
+		'action'=>Yii::app()->createUrl($this->route),
+		'method'=>'POST',
+	)); ?>
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl($this->route),
-	'method'=>'get',
-)); ?>
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'kegiatan'); ?>
+			<?php echo $form->textField($model,'kegiatan',array('size'=>45,'maxlength'=>45, 'class'=>"form-control")); ?>
+		</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'unit_kerja'); ?>
+			<?php 
+				echo $form->dropDownList($model,'unit_kerja',
+					HelpMe::ListAuthorizeUnitKerja(),
+					array('empty'=>'- Pilih Unit Kerja-', 'class'=>"form-control"));  
+			?>
+		</div>
+
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'tahun'); ?>
+			<?php 
+				echo CHtml::dropDownList('tahun',$tahun, HelpMe::getYearForFilter(),
+					array('empty'=>'- Pilih Tahun -', 'class'=>"form-control")); 
+			?>
+		</div>
+
+		<div class="box-footer">
+			<?php echo CHtml::submitButton('Search', array('class'=>"btn btn-info pull-right")); ?>
+		</div>
+
+	<?php $this->endWidget(); ?>
+
 	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'kegiatan'); ?>
-		<?php echo $form->textField($model,'kegiatan',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'unit_kerja'); ?>
-		<?php echo $form->textField($model,'unit_kerja'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'start_date'); ?>
-		<?php echo $form->textField($model,'start_date'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'end_date'); ?>
-		<?php echo $form->textField($model,'end_date'); ?>
-	</div>
-
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- search-form -->
+</div>

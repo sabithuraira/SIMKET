@@ -356,8 +356,8 @@ class KegiatanController extends Controller
 			$tahun=$_POST['tahun'];
 
 		$model->filter_tahun = $tahun;
-		if(isset($_GET['Kegiatan']))
-			$model->attributes=$_GET['Kegiatan'];
+		if(isset($_POST['Kegiatan']))
+			$model->attributes=$_POST['Kegiatan'];
 
 		$this->render('admin',array(
 			'model'=>$model,
