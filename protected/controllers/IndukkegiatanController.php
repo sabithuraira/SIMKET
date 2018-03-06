@@ -43,13 +43,18 @@ class IndukkegiatanController extends Controller
 				},
 			),
 			array('allow',
-				'actions'=>array('dashboard'),
+				'actions'=>array('dashboard', 'grafik',
+					'detail_unit'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionGrafik(){
+		$this->render('grafik');
 	}
 
 	public function actionInsert_anggaran($id)
@@ -191,6 +196,52 @@ class IndukkegiatanController extends Controller
 			$model = IndukKegiatan::model()->findByPk($id);
 			$data = $model->getByKabKota($kab_id);
 		}
+
+		$result = array();
+
+		$result['target'] = 100;
+
+		$total_rpd=0;
+		$total_r=0;
+		for($i=1;$i<=12;++$i){
+			if($data['target']>0){
+				$total_rpd += $data["rpd$i"];
+				$total_r += $data["r$i"];
+
+				$result["rpd$i"] = $total_rpd/$data["target"]*100;
+				$result["r$i"] = $total_r/$data["target"]*100;
+
+				if($result["rpd$i"] > 100)
+					$result["rpd$i"] = 100;
+
+				if($result["r$i"] > 100)
+					$result["r$i"] = 100;
+			}
+			else{
+				$result["rpd$i"] = 0;
+				$result["r$i"] = 0;
+			}
+		}
+
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu' => $result
+        ));
+        Yii::app()->end();
+	}
+
+
+	public function actionDetail_unit($id)
+	{
+		$data = IndukKegiatan::getByUnitKerja($id);
+		// if($kab_id==0){
+		// 	$data = IndukKegiatan::getByKegiatan($id);
+		// }
+		// else{
+		// 	$model = IndukKegiatan::model()->findByPk($id);
+		// 	$data = $model->getByKabKota($kab_id);
+		// }
 
 		$result = array();
 

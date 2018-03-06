@@ -172,6 +172,66 @@ class IndukKegiatan extends HelpAR
 		return array_merge($result_t, $result_r, $result_rpd);
 	}
 
+	public function getByUnitKerja($id){
+		$s_where = " ";
+
+		if($id!=0){
+			$s_where = " WHERE t.unit_kerja = $id ";
+		}
+
+		$sql_t = "SELECT 
+				COALESCE(SUM(jumlah),0) AS target 
+				FROM `value_anggaran_target` as va1 
+				JOIN (
+		
+					SELECT MAX(t.id) AS id, kegiatan
+					FROM `value_anggaran_target` as t 
+					$s_where 
+					GROUP BY kegiatan
+				) AS x USING (id)";
+
+		$result_t = Yii::app()->db->createCommand($sql_t)->queryRow();
+		
+		$select_real = "";
+		for($i = 1;$i < 12;++$i){
+			$select_real.= "COALESCE(SUM(CASE WHEN va1.bulan = $i THEN va1.jumlah ELSE 0 END),0) AS r$i, ";
+		}
+		$select_real.= "COALESCE(SUM(CASE WHEN va1.bulan = 12 THEN va1.jumlah ELSE 0 END),0) AS r12";
+
+		$sql_r = "SELECT 
+				$select_real 
+				FROM `value_anggaran` as va1 
+				JOIN (
+					SELECT MAX(t.id) AS id, bulan, kegiatan 
+					FROM `value_anggaran` as t 
+					$s_where 
+					GROUP BY bulan, kegiatan
+				) AS x USING (id)";
+
+		// print_r($sql_r);die();
+
+		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
+
+		$select_rpd = "";
+		for($i = 1;$i < 12;++$i){
+			$select_rpd.= "COALESCE(SUM(CASE WHEN va1.bulan = $i THEN va1.jumlah ELSE 0 END),0) AS rpd$i, ";
+		}
+		$select_rpd.= "COALESCE(SUM(CASE WHEN va1.bulan = 12 THEN va1.jumlah ELSE 0 END),0) AS rpd12";
+
+		$sql_rpd = "SELECT 
+				$select_rpd 
+				FROM `value_rpd` as va1 
+				JOIN (
+					SELECT MAX(t.id) AS id, bulan, kegiatan 
+					FROM `value_rpd` as t 
+					$s_where  
+					GROUP BY bulan, kegiatan
+				) AS x USING (id)";
+
+		$result_rpd = Yii::app()->db->createCommand($sql_rpd)->queryRow();
+		return array_merge($result_t, $result_r, $result_rpd);
+	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

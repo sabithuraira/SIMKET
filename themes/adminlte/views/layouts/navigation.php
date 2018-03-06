@@ -31,7 +31,7 @@
             ?>
             
             <?php 
-              $list_provinsi=HelpMe::getListProvinsi();
+              $list_provinsi = HelpMe::getListProvinsi();
 
               foreach($list_provinsi as $row){
                 echo '<li><a href="'.Yii::app()->createUrl('site/bidang',array('id'=> $row['id'])).'"><i class="fa fa fa-circle-o"></i> '.$row['label'].'</a></li>';
@@ -103,9 +103,23 @@
           </ul>
         </li>
 
-        <?php 
-          echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/dashboard').'"><i class="fa fa-money"></i> <span>Anggaran</span></a></li>';
-        ?>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-money"></i>
+            <span>Anggaran</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <?php
+              echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/dashboard').'"><i class="fa fa-circle-o"></i> <span>Progress</span></a></li>';
+              echo '<li><a href="'.Yii::app()->createUrl('indukkegiatan/grafik').'"><i class="fa fa-circle-o"></i> <span>Grafik</span></a></li>';
+              // echo '<li><a href="'.Yii::app()->createUrl('report/index').'"><i class="fa fa fa-circle-o"></i> Per Kegiatan</a></li>';
+              // echo '<li><a href="'.Yii::app()->createUrl('report/rekap').'"><i class="fa fa fa-circle-o"></i> Bulanan</a></li>';
+            ?>
+          </ul>
+        </li>
 
         
         <li class="header">TUGAS DAN DINAS LUAR</li>
