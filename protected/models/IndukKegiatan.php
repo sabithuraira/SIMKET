@@ -208,8 +208,6 @@ class IndukKegiatan extends HelpAR
 					GROUP BY bulan, kegiatan
 				) AS x USING (id)";
 
-		// print_r($sql_r);die();
-
 		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
 
 		$select_rpd = "";
