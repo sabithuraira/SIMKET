@@ -29,7 +29,7 @@ class IndukkegiatanController extends Controller
 		return array(
 			array('allow',
 				'actions'=>array('index','view', 'create','update','delete',
-					'progress'),
+					'progress', 'progress_j'),
 				'expression'=> function($user){
 					return $user->getLevel()==1;
 				},
@@ -37,7 +37,8 @@ class IndukkegiatanController extends Controller
 			array('allow',
 				'actions'=>array('progress', 'detail_kab_kota',
 					'detail_kegiatan',
-					'insert_anggaran', 'insert_rpd'),
+					'insert_anggaran', 'insert_rpd',
+					'detail_kab_kota_j'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -51,6 +52,25 @@ class IndukkegiatanController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+
+	public function actionDetail_kab_kota_j($id, $kab_id)
+	{
+		$model = IndukKegiatan::model()->findByPk($id);
+		$data = $model->getByKabKota_j($kab_id);
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu' => $data
+        ));
+        Yii::app()->end();
+	}
+
+	public function actionProgress_j($id){
+		$this->render('progress_j',array(
+			'model'=>$this->loadModel($id),
+		));
 	}
 
 	public function actionGrafik(){

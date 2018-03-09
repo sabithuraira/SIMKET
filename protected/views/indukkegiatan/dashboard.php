@@ -59,6 +59,12 @@
                     'type'		=>'raw',
                     'cssClassExpression' => '"center uline"',
                     'value'		=> function($data){ return CHtml::link("Progress",array("indukkegiatan/progress","id"=>$data->id),array('class'=>'btn btn-sm btn-flat btn-default')); },
+				),
+				array(
+                    'header'	=>'',
+                    'type'		=>'raw',
+                    'cssClassExpression' => '"center uline"',
+                    'value'		=> function($data){ return CHtml::link("Progress Per Jenis",array("indukkegiatan/progress_j","id"=>$data->id),array('class'=>'btn btn-sm btn-flat btn-default')); },
                 ),
 			),
 		)); ?>

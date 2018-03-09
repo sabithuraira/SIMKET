@@ -230,6 +230,63 @@ class IndukKegiatan extends HelpAR
 		return array_merge($result_t, $result_r, $result_rpd);
 	}
 
+
+	//menu from BOSS
+	public function getByKabKota_j($id_kab_kota){
+		$id = $this->id;
+		$sql_t = "SELECT 
+				COALESCE(SUM(CASE WHEN jenis = 1 THEN jumlah ELSE 0 End),0) AS t1, 
+				COALESCE(SUM(CASE WHEN jenis = 2 THEN jumlah ELSE 0 End),0) AS t2, 
+				COALESCE(SUM(CASE WHEN jenis = 3 THEN jumlah ELSE 0 End),0) AS t3, 
+				COALESCE(SUM(CASE WHEN jenis = 4 THEN jumlah ELSE 0 End),0) AS t4
+				FROM `value_anggaran_target_bos` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
+
+		$result_t = Yii::app()->db->createCommand($sql_t)->queryRow();
+
+
+		$sql_r = "SELECT 
+				COALESCE(SUM(CASE WHEN jenis = 1 THEN jumlah ELSE 0 End),0) AS r1, 
+				COALESCE(SUM(CASE WHEN jenis = 2 THEN jumlah ELSE 0 End),0) AS r2, 
+				COALESCE(SUM(CASE WHEN jenis = 3 THEN jumlah ELSE 0 End),0) AS r3, 
+				COALESCE(SUM(CASE WHEN jenis = 4 THEN jumlah ELSE 0 End),0) AS r4
+				FROM `value_anggaran_bos` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
+
+		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
+		return array_merge($result_t, $result_r);
+	}
+
+
+	//report jenis BOSS
+	public function getDetailByKabKotaAndJenis_j($id_kab_kota, $id_jenis){
+		$id = $this->id;
+		$sql = "SELECT * FROM `value_anggaran_bos` 
+				WHERE kegiatan=$id AND unit_kerja=$id_kab_kota AND jenis=$id_jenis";
+		
+		$data = Yii::app()->db->createCommand($sql)->queryAll();
+
+		$str_result = "";
+
+		foreach($data as $value){
+			if(HelpMe::isAuthorizeUnitKerja($id_kab_kota)){
+				$str_result.=('- [ <a href="#myModalRealisasi" role="button" class="update_realisasi" 
+					data-id="'.$value['id'].'" 
+					data-unitkerja="'.$id_kab_kota.'" 
+					data-jenis="'.$id_jenis.'" 
+					data-tanggal="'.date("Y-m-d",strtotime($value['tanggal_realisasi'])).'" 
+					data-jumlah="'.$value['jumlah'].'"
+					data-keterangan="'.$value['keterangan'].'" 
+					data-toggle="modal">Update</a> ] '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> ('.$value['keterangan'].')<br/>');
+			}
+			else
+			{
+				$str_result.=('- '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> ('.$value['keterangan'].')<br/>');
+			}
+		}
+
+		return $str_result;
+	}
+
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
