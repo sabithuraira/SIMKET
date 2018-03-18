@@ -1,6 +1,6 @@
 <?php
 
-class MitrabpsController extends Controller
+class Kegiatan_mitraController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -29,14 +29,16 @@ class MitrabpsController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'expression'=> function($user){
-					return $user->getLevel()<=2;
-				},
+				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'delete'),
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
 				'expression'=> function($user){
-					return $user->getLevel()<=2;
+					return $user->getLevel()<=1;
 				},
 			),
 			array('deny',  // deny all users
@@ -62,15 +64,14 @@ class MitrabpsController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new MitraBps;
+		$model=new KegiatanMitra;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['MitraBps']))
+		if(isset($_POST['KegiatanMitra']))
 		{
-			$model->attributes=$_POST['MitraBps'];
-			$model->kab_id=$_POST['MitraBps']['kab_id'];
+			$model->attributes=$_POST['KegiatanMitra'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -92,10 +93,9 @@ class MitrabpsController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['MitraBps']))
+		if(isset($_POST['KegiatanMitra']))
 		{
-			$model->attributes=$_POST['MitraBps'];
-			$model->kab_id=$_POST['MitraBps']['kab_id'];
+			$model->attributes=$_POST['KegiatanMitra'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -124,10 +124,10 @@ class MitrabpsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$model=new MitraBps('search');
+		$model=new KegiatanMitra('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_POST['MitraBps']))
-			$model->attributes=$_POST['MitraBps'];
+		if(isset($_GET['KegiatanMitra']))
+			$model->attributes=$_GET['KegiatanMitra'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -138,12 +138,12 @@ class MitrabpsController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return MitraBps the loaded model
+	 * @return KegiatanMitra the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=MitraBps::model()->findByPk($id);
+		$model=KegiatanMitra::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -151,11 +151,11 @@ class MitrabpsController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param MitraBps $model the model to be validated
+	 * @param KegiatanMitra $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='mitra-bps-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='kegiatan-mitra-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -121,6 +121,15 @@
           </ul>
         </li>
 
+        <li class="header">MONITORING MITRA BPS</li>
+
+        <?php if(!Yii::app()->user->isGuest){ ?>
+          <li><a href="<?php echo Yii::app()->createUrl('kegiatan_mitra/create'); ?>"><i class="fa fa-bicycle"></i><span> Daftar Kegiatan Mitra BPS</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/index'); ?>"><i class="fa fa-bicycle"></i><span> Manajemen Surat Tugas</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/calendar'); ?>"><i class="fa fa-calendar"></i><span> Kalender Tugas dan DL</span></a></li>
+          <li><a href="<?php echo Yii::app()->createUrl('jadwalTugas/single_calendar'); ?>"><i class="fa fa-calendar-plus-o"></i><span> Kalender Pegawai</span></a></li>
+        <?php } ?>
+
         
         <li class="header">TUGAS DAN DINAS LUAR</li>
 
@@ -167,6 +176,7 @@
                 echo '</ul></li>';
 
                 echo '<li><a href="'.Yii::app()->createUrl('unitkerja/index').'"><i class="fa fa-building-o"></i> Unit Kerja</a></li>';
+                echo '<li><a href="'.Yii::app()->createUrl('mitrabps/index').'"><i class="fa fa-circle-o"></i> Mitra BPS</a></li>';
               ?>
             </ul>
           </li>
