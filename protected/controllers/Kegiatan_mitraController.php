@@ -32,7 +32,7 @@ class Kegiatan_mitraController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create', 'update', 'mitra'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -72,11 +72,31 @@ class Kegiatan_mitraController extends Controller
 		if(isset($_POST['KegiatanMitra']))
 		{
 			$model->attributes=$_POST['KegiatanMitra'];
+			$model->kab_id = 22;
+			if($model->save())
+				$this->redirect(array('mitra','id'=>$model->id));
+		}
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionMitra($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['KegiatanMitra']))
+		{
+			$model->attributes=$_POST['KegiatanMitra'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-		$this->render('create',array(
+		$this->render('update',array(
 			'model'=>$model,
 		));
 	}

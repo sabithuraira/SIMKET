@@ -1,27 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "kegiatan_mitra".
+ * This is the model class for table "kegiatan_mitra_petugas".
  *
- * The followings are the available columns in table 'kegiatan_mitra':
+ * The followings are the available columns in table 'kegiatan_mitra_petugas':
  * @property integer $id
- * @property integer $induk_id
- * @property string $nama
- * @property integer $simket_id
- * @property integer $kab_id
+ * @property integer $id_kegiatan
+ * @property integer $flag_mitra
+ * @property integer $id_mitra
+ * @property integer $status
+ * @property double $nilai
  * @property integer $created_by
  * @property string $created_time
  * @property integer $updated_by
  * @property string $updated_time
  */
-class KegiatanMitra extends HelpAr
+class KegiatanMitraPetugas extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'kegiatan_mitra';
+		return 'kegiatan_mitra_petugas';
 	}
 
 	/**
@@ -32,12 +33,12 @@ class KegiatanMitra extends HelpAr
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('induk_id, nama, kab_id, created_by, created_time, updated_by, updated_time', 'required'),
-			array('induk_id, simket_id, kab_id, created_by, updated_by', 'numerical', 'integerOnly'=>true),
-			array('nama', 'length', 'max'=>255),
+			array('id_kegiatan, flag_mitra, id_mitra, status, nilai, created_by, created_time, updated_by, updated_time', 'required'),
+			array('id_kegiatan, flag_mitra, id_mitra, status, created_by, updated_by', 'numerical', 'integerOnly'=>true),
+			array('nilai', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, induk_id, nama, simket_id, kab_id, created_by, created_time, updated_by, updated_time', 'safe', 'on'=>'search'),
+			array('id, id_kegiatan, flag_mitra, id_mitra, status, nilai, created_by, created_time, updated_by, updated_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,9 +50,6 @@ class KegiatanMitra extends HelpAr
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'induk' => array(self::BELONGS_TO, 'IndukKegiatan', 'induk_id'),
-			'simket' => array(self::BELONGS_TO, 'Kegiatan', 'simket_id'),
-			'kab' => array(self::BELONGS_TO, 'UnitKerja', 'kab_id'),
 		);
 	}
 
@@ -62,10 +60,11 @@ class KegiatanMitra extends HelpAr
 	{
 		return array(
 			'id' => 'ID',
-			'induk_id' => 'Induk Kegiatan',
-			'nama' => 'Nama',
-			'simket_id' => 'Kegiatan SIMKET (jika ada)',
-			'kab_id' => 'Kabupaten/Kota',
+			'id_kegiatan' => 'Id Kegiatan',
+			'flag_mitra' => 'Flag Mitra',
+			'id_mitra' => 'Id Mitra',
+			'status' => 'Status',
+			'nilai' => 'Nilai',
 			'created_by' => 'Created By',
 			'created_time' => 'Created Time',
 			'updated_by' => 'Updated By',
@@ -92,10 +91,11 @@ class KegiatanMitra extends HelpAr
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('induk_id',$this->induk_id);
-		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('simket_id',$this->simket_id);
-		$criteria->compare('kab_id',$this->kab_id);
+		$criteria->compare('id_kegiatan',$this->id_kegiatan);
+		$criteria->compare('flag_mitra',$this->flag_mitra);
+		$criteria->compare('id_mitra',$this->id_mitra);
+		$criteria->compare('status',$this->status);
+		$criteria->compare('nilai',$this->nilai);
 		$criteria->compare('created_by',$this->created_by);
 		$criteria->compare('created_time',$this->created_time,true);
 		$criteria->compare('updated_by',$this->updated_by);
@@ -110,7 +110,7 @@ class KegiatanMitra extends HelpAr
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return KegiatanMitra the static model class
+	 * @return KegiatanMitraPetugas the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
