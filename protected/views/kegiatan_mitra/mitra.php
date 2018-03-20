@@ -53,7 +53,6 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
                                 <th></th>
                             </tr>
                             <?php
-                                //foreach (Participant::model()->findAllByAttributes(array('kegiatan'=>$model->id)) as $key => $value)
                                 foreach ($list_mitra as $key => $value)
                                 {
                                     echo '<tr>';
@@ -63,7 +62,7 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
                                     
                                         echo '<td>'.$value['status'].'</td>';
                                         echo '<td></td>';
-                                        echo '<td>'.CHtml::link("<i class='fa fa-tachometer'></i> Penilaian", array('nilai', 'id'=> $value['id']), array('class'=>'btn btn-default btn-sm')).'</td>';
+                                        echo '<td class="text-center">'.CHtml::link("<i class='fa fa-tachometer'></i> Penilaian", array('nilai', 'id'=> $value['id']), array('class'=>'btn btn-default btn-sm')).'</td>';
                                     echo '</tr>';
                                     
                                 }
