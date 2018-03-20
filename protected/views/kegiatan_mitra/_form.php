@@ -12,11 +12,21 @@
 				<p>Data Kegiatan</p>
 			</div>
 			<div class="stepwizard-step">
-				<a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+				<?php if($model->isNewRecord){ ?>
+					<a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+				<?php }else{ 
+						echo CHtml::link("2", array('mitra', 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
+					}
+				?>
 				<p>Petugas Kegiatan</p>
 			</div>
 			<div class="stepwizard-step">
-				<a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+				<?php if($model->isNewRecord){ ?>
+					<a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+				<?php }else{ 
+						echo CHtml::link("3", array("skoring", 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
+					}
+				?>
 				<p>Skoring</p>
 			</div>
 		</div>
@@ -75,7 +85,7 @@
 						</div> -->
 
 						<div class="box-footer">
-							<?php echo CHtml::submitButton('Next', array('class'=>'btn btn-primary nextBtn btn-lg pull-right')); ?>
+							<?php echo CHtml::submitButton('Simpan', array('class'=>'btn btn-primary nextBtn btn-lg pull-right')); ?>
 						</div>
 
 					<?php $this->endWidget(); ?>

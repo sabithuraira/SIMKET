@@ -32,7 +32,8 @@ class Kegiatan_mitraController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create', 'update', 'mitra'),
+				'actions'=>array('create', 'update', 'mitra',
+					'insert_petugas', 'get_list_mitra'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -45,6 +46,74 @@ class Kegiatan_mitraController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionGet_list_mitra($id)
+	{
+		$satu='';
+
+		if(strlen($_POST['mitra_from'])>0){
+			if($_POST['mitra_from']==1){
+				//pegawai
+				$data=Pegawai::model()->findAllByAttributes(array('unit_kerja'=>$id));
+				$data=CHtml::listData($data,'nip','nama');
+			
+				foreach($data as $value=>$name)
+				{
+					$satu.= CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+				}
+			}
+			else{
+				//mitra
+				$data=MitraBps::model()->findAllByAttributes(array('kab_id'=>$id));
+				$data=CHtml::listData($data,'id','nama');
+
+				foreach($data as $value=>$name)
+				{
+					$satu.= CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+				}
+			}
+			
+		}
+
+		echo CJSON::encode(array
+		(
+			'satu'=>$satu,
+		));
+		Yii::app()->end();
+	}
+
+	public function actionInsert_petugas($id)
+	{
+		$satu='';
+
+		if(strlen($_POST['mitra_id'])>0 && strlen($_POST['mitra_from'])>0 && strlen($_POST['mitra_status'])>0){
+			$model=KegiatanMitraPetugas::model()->findByAttributes(array(
+				'id_kegiatan'=>$id, 
+				'flag_mitra'=>$_POST['mitra_from'],
+				'id_mitra'	=>$_POST['mitra_id']
+			));
+			
+			if($model==null){
+				$model=new KegiatanMitraPetugas;
+				$model->id_kegiatan = $id;
+				$model->flag_mitra  = $_POST['mitra_from'];
+				$model->id_mitra	= $_POST['mitra_id'];
+				$model->status 		= $_POST['mitra_status'];
+				$model->nilai 		= 0;
+				
+				if($model->save())
+				{
+					$satu= $id;
+				}
+			}
+		}
+		
+		echo CJSON::encode(array
+     	(
+        	 'satu'=>$satu,
+        ));
+        Yii::app()->end();
 	}
 
 	/**
@@ -85,19 +154,11 @@ class Kegiatan_mitraController extends Controller
 	public function actionMitra($id)
 	{
 		$model=$this->loadModel($id);
+		$list_mitra = $model->listMitra();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['KegiatanMitra']))
-		{
-			$model->attributes=$_POST['KegiatanMitra'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
+		$this->render('mitra',array(
+			'model'		=>$model,
+			'list_mitra'=>$list_mitra
 		));
 	}
 

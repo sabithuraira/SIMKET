@@ -15,8 +15,12 @@
  * @property integer $updated_by
  * @property string $updated_time
  */
-class KegiatanMitraPetugas extends CActiveRecord
+class KegiatanMitraPetugas extends HelpAr
 {
+	//flag mitra 1 = pegawai, 2= mitra
+	//status 1 = PML, 2 = PCL
+
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -50,6 +54,8 @@ class KegiatanMitraPetugas extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'pegawai' => array(self::BELONGS_TO, 'Pegawai', 'id_mitra'),
+			'mitra' => array(self::BELONGS_TO, 'MitraBps', 'id_mitra'),
 		);
 	}
 

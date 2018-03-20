@@ -3,18 +3,11 @@
     @import url('<?php echo $baseUrl.'/dist/css/step.css';?>');
 </style>
 <?php
-
-if(HelpMe::isAuthorizeUnitKerja($model->kab_id))
-{
-
+if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
 ?>
 	<div class="box box-info">
 		<div class="mailbox-controls">
-			<b>Update Kegiatan <?php echo $model->name; ?></b>
-			<div class="pull-right">
-				<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Pegawai", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
-				<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Pegawai", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
-			</div>
+			<b><?php echo $model->nama; ?></b>
 			<!-- /.pull-right -->
 		</div>
 
@@ -23,7 +16,9 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id))
             <div class="stepwizard">
                 <div class="stepwizard-row setup-panel">
                     <div class="stepwizard-step">
-                        <a href="#step-1" type="button" class="btn btn-default btn-circle">1</a>
+                        <?php 
+					    	echo CHtml::link("1", array('update', 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
+                        ?>
                         <p>Data Kegiatan</p>
                     </div>
                     <div class="stepwizard-step">
@@ -39,62 +34,41 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id))
 
             <hr/>
 
+            <div class="pull-right">
+                <?php //echo CHtml::link("<i class='fa fa-plus'></i> Tambah Mitra", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+                <button type="button" class="btn btn-default btn-sm toggle-event" data-toggle="modal" data-target="#myModal"><i class='fa fa-plus'></i> Tambah Petugas</button>
+            </div>
             <div class="row setup-content" id="step-1">
                 <div class="col-xs-12">
+                    
                     <div class="col-md-12">
-                        <div class="form">
-
-                            <?php $form=$this->beginWidget('CActiveForm', array(
-                                'id'=>'kegiatan-form',
-                                'enableAjaxValidation'=>false,
-                            )); ?>
-
-                                <p class="note text-center">Fields with <span class="required">*</span> are required.</p>
-
-                                <?php echo $form->errorSummary($model); ?>
-
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'induk_id'); ?>
-                                    <?php 
-                                        echo $form->dropDownList($model,'induk_id',
-                                                CHtml::listData(IndukKegiatan::model()->findAll(), 'id', 'name'),
-                                                array('empty'=>'- Pilih Induk Kegiatan-', 'class'=>"form-control")); 
-                                    ?>
-                                    <?php echo $form->error($model,'induk_id'); ?>
-                                </div>
-
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'nama'); ?>
-                                    <?php echo $form->textField($model,'nama',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
-                                    <?php echo $form->error($model,'nama'); ?>
-                                </div>
-
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'simket_id'); ?>
-                                    <?php 
-                                        echo $form->dropDownList($model,'simket_id',
-                                                CHtml::listData(Kegiatan::model()->findAll(), 'id', 'kegiatan'),
-                                                array('empty'=>'- Pilih Induk Kegiatan-', 'class'=>"form-control")); 
-                                    ?>
-                                    <?php echo $form->error($model,'simket_id'); ?>
-                                </div>
-
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'kab_id'); ?>
-                                    <?php 
-                                        echo $form->dropDownList($model,'kab_id',
-                                                HelpMe::ListAuthorizeUnitKerja(),
-                                                array('empty'=>'- Pilih Kabupaten/Kota-', 'class'=>"form-control")); 
-                                    ?>
-                                    <?php echo $form->error($model,'kab_id'); ?>
-                                </div>
-
-                                <div class="box-footer">
-                                    <?php echo CHtml::submitButton('Next', array('class'=>'btn btn-primary nextBtn btn-lg pull-right')); ?>
-                                </div>
-
-                            <?php $this->endWidget(); ?>
-                        </div>
+                        <br/>
+                        <table class="table table-hover table-bordered table-condensed">
+                            <tr>
+                                <th>No. </th>
+                                <th>Nama</th>
+                                <th>NIP (Jika organik)</th>
+                                <th>Status</th>
+                                <th>SKOR</th>
+                                <th></th>
+                            </tr>
+                            <?php
+                                //foreach (Participant::model()->findAllByAttributes(array('kegiatan'=>$model->id)) as $key => $value)
+                                foreach ($list_mitra as $key => $value)
+                                {
+                                    echo '<tr>';
+                                        echo '<td>'.($key+1).'</td>';
+                                        echo '<td>'.$value['nama'].'</td>';
+                                        echo '<td>'.$value['nip'].'</td>';
+                                    
+                                        echo '<td>'.$value['status'].'</td>';
+                                        echo '<td></td>';
+                                        echo '<td>'.CHtml::link("<i class='fa fa-tachometer'></i> Penilaian", array('nilai', 'id'=> $value['id']), array('class'=>'btn btn-default btn-sm')).'</td>';
+                                    echo '</tr>';
+                                    
+                                }
+                            ?>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -107,3 +81,122 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id))
 		<h1>Anda Tidak Memiliki Autorisasi Pada Halaman Ini</h1>
 	</div>
 <?php } ?>
+
+
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <span id="myModalLabel">Tambah Petugas</span>
+            </div>
+            
+            <div class="modal-body">
+                <form id="InfroText2" method="POST">
+                    <input name="InfroText" value="1" type="hidden">
+            
+                    <table class="table table-hover table-striped table-bordered table-condensed">
+                        <tbody>
+                            <tr>
+                                <td>Petugas Dari</td>
+                                <td>
+                                    <?php 
+                                        echo CHtml::dropDownList('mitra_from','',
+                                            array(1=>'Pegawai', 2=>'Mitra'),
+                                            array('empty'=>'- Pilih -','class'=>'form-control')); 
+                                    ?>
+                                </td>  
+                            </tr>
+
+                            <tr>
+                                <td>Petugas</td>
+                                <td>
+                                    <?php 
+                                        echo CHtml::dropDownList('mitra_id','',
+                                            array(),
+                                            array('empty'=>'- Pilih Petugas -','class'=>'form-control')); 
+                                    ?>
+                                </td>  
+                            </tr>
+                            
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <?php 
+                                        echo CHtml::dropDownList('mitra_status','',
+                                            array(1=>'PML', 2=>'PCL'),
+                                            array('empty'=>'- Status -','class'=>'form-control')); 
+                                    ?>
+                                </td> 
+                            </tr>
+
+                            <input id="idnya" type="hidden" value="<?php  echo $model->id; ?>"> 
+                            <input id="idkab" type="hidden" value="<?php  echo $model->kab_id; ?>"> 
+                        </tbody>
+                    </table>
+            </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary" data-dismiss="modal" id="InfroTextSubmit">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var mitra_id    =$('#mitra_id');
+    var mitra_from  =$('#mitra_from');
+    var idkab  =$('#idkab');
+    var pathname = window.location.pathname;
+
+    $(document).ready(function () {
+        
+    });
+
+    mitra_from.change(function(){
+        $.ajax({
+            url: pathname+"?r=kegiatan_mitra/get_list_mitra&id=" + idkab.val(),
+            type:"post",
+            dataType :"json",
+            data:{
+                "mitra_from": mitra_from.val(),
+            },
+            success : function(data)
+            {
+                mitra_id.html(data.satu);
+            }
+        });
+    });
+
+    $('#InfroTextSubmit').click(function(){
+        var idnya       =$('#idnya').val();
+        var mitra_status=$('#mitra_status').val();
+
+        $.ajax({
+            url: pathname+"?r=kegiatan_mitra/insert_petugas&id=" + idnya,
+            type:"post",
+            dataType :"json",
+            data:{
+                "mitra_id":mitra_id.val(),
+                "mitra_from": mitra_from.val(),
+                "mitra_status":mitra_status
+            },
+            success : function(data)
+            {
+                if(data.satu.length >0)
+                {
+                    window.location.href=pathname+ "?r=kegiatan_mitra/mitra&id="+data.satu
+                }
+                else
+                {
+                    alert('Data gagal disimpan, refresh halaman anda dan ulangi lagi');
+                }
+            }
+        });
+    });
+</script>

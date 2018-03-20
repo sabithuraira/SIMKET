@@ -106,6 +106,50 @@ class KegiatanMitra extends HelpAr
 		));
 	}
 
+	public function listMitra(){
+		$id = $this->id;
+		$sql="SELECT * FROM kegiatan_mitra_petugas WHERE 
+			id_kegiatan=$id";
+		
+		$result = array();
+
+		$datas =Yii::app()->db->createCommand($sql)->queryAll();
+
+		foreach($datas as $key => $value){
+			$nama = "";
+			$nip = "";
+			$status = "PCL";
+
+			if($value['status']==1)
+				$status = "PML";
+
+			if($value['flag_mitra']==1){
+				$petugas = Pegawai::model()->findByPk($value['id_mitra']);	
+				if($petugas!==null){
+					$nama = $petugas->nama;
+					$nip = $petugas->nip;
+				}
+			}
+			else{
+				$petugas = MitraBps::model()->findByPk($value['id_mitra']);	
+				if($petugas!==null){
+					$nama = $petugas->nama;
+				}
+			}
+
+			$result[] = array(
+				'id'		=>$value['id'],
+				'id_mitra'	=>$value['id_mitra'],
+				'nama'		=>$nama,
+				'nip'		=>$nip,
+				'status'	=>$status,
+				'flag'		=>$value['flag_mitra']
+			);
+		}
+
+		return $result;
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
