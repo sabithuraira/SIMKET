@@ -1,21 +1,23 @@
 <?php
-/* @var $this PertanyaanController */
-/* @var $model MitraPertanyaan */
-
-$this->breadcrumbs=array(
-	'Mitra Pertanyaans'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List MitraPertanyaan', 'url'=>array('index')),
-	array('label'=>'Create MitraPertanyaan', 'url'=>array('create')),
-	array('label'=>'View MitraPertanyaan', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage MitraPertanyaan', 'url'=>array('admin')),
-);
+if(HelpMe::isAuthorizeUnitKerja($model->kab_id))
+{
 ?>
+	<div class="box box-info">
+		<div class="mailbox-controls">
+			<b>Update Pertanyaan <?php echo $model->pertanyaan; ?></b>
+			<div class="pull-right">
+				<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Pertanyaan", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+				<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Pertanyaan", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			</div>
+			<!-- /.pull-right -->
+		</div>
 
-<h1>Update MitraPertanyaan <?php echo $model->id; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+		<div class="box-body">
+			<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+		</div>
+	</div>
+<?php } else { ?>
+	<div class="page-header">
+		<h1>Anda Tidak Memiliki Autorisasi Pada Halaman Ini</h1>
+	</div>
+<?php } ?>

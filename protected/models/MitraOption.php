@@ -13,7 +13,7 @@
  * @property string $updated_time
  * @property integer $updated_by
  */
-class MitraOption extends CActiveRecord
+class MitraOption extends HelpAr
 {
 	/**
 	 * @return string the associated database table name

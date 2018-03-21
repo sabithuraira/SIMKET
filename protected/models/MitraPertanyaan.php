@@ -13,8 +13,9 @@
  * @property string $updated_time
  * @property integer $updated_by
  */
-class MitraPertanyaan extends CActiveRecord
+class MitraPertanyaan extends HelpAr
 {
+	public $option1, $option2, $option3, $option4;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -31,7 +32,7 @@ class MitraPertanyaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pertanyaan, description, teruntuk, created_time, created_by, updated_time, updated_by', 'required'),
+			array('pertanyaan, teruntuk, created_time, created_by, updated_time, updated_by, option1, option2, option3, option4', 'required'),
 			array('teruntuk, created_by, updated_by', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -58,8 +59,8 @@ class MitraPertanyaan extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'pertanyaan' => 'Pertanyaan',
-			'description' => 'Description',
-			'teruntuk' => 'Teruntuk',
+			'description' => 'Deskripsi',
+			'teruntuk' => 'Peruntukan Pertanyaan',
 			'created_time' => 'Created Time',
 			'created_by' => 'Created By',
 			'updated_time' => 'Updated Time',

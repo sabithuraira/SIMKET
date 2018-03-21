@@ -1,60 +1,20 @@
-<?php
-/* @var $this PertanyaanController */
-/* @var $model MitraPertanyaan */
-/* @var $form CActiveForm */
-?>
+<div class="box-body">
+	<div class="form">
 
-<div class="wide form">
+	<?php $form=$this->beginWidget('CActiveForm', array(
+		'action'=>Yii::app()->createUrl($this->route),
+		'method'=>'POST',
+	)); ?>
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl($this->route),
-	'method'=>'get',
-)); ?>
+		<div class="form-group">
+			<?php echo $form->labelEx($model,'pertanyaan'); ?>
+			<?php echo $form->textField($model,'pertanyaan',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
+		</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
+		<div class="box-footer">
+			<?php echo CHtml::submitButton('Search', array('class'=>"btn btn-info pull-right")); ?>
+		</div>
+		<?php $this->endWidget(); ?>
+
 	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'pertanyaan'); ?>
-		<?php echo $form->textArea($model,'pertanyaan',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'description'); ?>
-		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'teruntuk'); ?>
-		<?php echo $form->textField($model,'teruntuk'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'created_time'); ?>
-		<?php echo $form->textField($model,'created_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'created_by'); ?>
-		<?php echo $form->textField($model,'created_by'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'updated_time'); ?>
-		<?php echo $form->textField($model,'updated_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'updated_by'); ?>
-		<?php echo $form->textField($model,'updated_by'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- search-form -->
+</div>

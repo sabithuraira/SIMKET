@@ -1,18 +1,15 @@
-<?php
-/* @var $this PertanyaanController */
-/* @var $model MitraPertanyaan */
 
-$this->breadcrumbs=array(
-	'Mitra Pertanyaans'=>array('index'),
-	'Create',
-);
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Tambah Pertanyaan</b>
+		<div class="pull-right">
+			<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Pertanyaan", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+		</div>
+		<!-- /.pull-right -->
+	</div>
 
-$this->menu=array(
-	array('label'=>'List MitraPertanyaan', 'url'=>array('index')),
-	array('label'=>'Manage MitraPertanyaan', 'url'=>array('admin')),
-);
-?>
+	<div class="box-body">
 
-<h1>Create MitraPertanyaan</h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>

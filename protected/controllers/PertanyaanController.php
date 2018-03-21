@@ -29,15 +29,21 @@ class PertanyaanController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'expression'=> function($user){
+					return $user->getLevel()<=1;
+				},
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'expression'=> function($user){
+					return $user->getLevel()<=1;
+				},
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('delete'),
+				'expression'=> function($user){
+					return $user->getLevel()<=1;
+				},
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -56,22 +62,24 @@ class PertanyaanController extends Controller
 		));
 	}
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
 	public function actionCreate()
 	{
 		$model=new MitraPertanyaan;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['MitraPertanyaan']))
 		{
 			$model->attributes=$_POST['MitraPertanyaan'];
-			if($model->save())
+			if($model->save()){
+				for($i=1;$i<=4;++$i){
+					$option= new MitraOption;
+					$option->id_pertanyaan 	= $model->id;
+					$option->description 	= $_POST['MitraPertanyaan']['option'.$i];
+					$option->skala 			= $i;
+					$option->save(false);
+				}
+
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -121,17 +129,6 @@ class PertanyaanController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('MitraPertanyaan');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
 	{
 		$model=new MitraPertanyaan('search');
 		$model->unsetAttributes();  // clear any default values

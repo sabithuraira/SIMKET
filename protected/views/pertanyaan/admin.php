@@ -1,62 +1,62 @@
-<?php
-/* @var $this PertanyaanController */
-/* @var $model MitraPertanyaan */
+<div class="box box-info">
+	<div class="mailbox-controls">
+		<b>Pertanyaan</b>
 
-$this->breadcrumbs=array(
-	'Mitra Pertanyaans'=>array('index'),
-	'Manage',
-);
+		<?php if(Yii::app()->user->getLevel()<=2){ ?>
 
-$this->menu=array(
-	array('label'=>'List MitraPertanyaan', 'url'=>array('index')),
-	array('label'=>'Create MitraPertanyaan', 'url'=>array('create')),
-);
+			<div class="pull-right">
+				<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Pertanyaan", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
+			</div>
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#mitra-pertanyaan-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
-?>
+		<?php } ?>
+	</div>
+		
+	<div class="box-body">
+		<?php $this->renderPartial('_search',array(
+			'model'=>$model
+		)); ?>
 
-<h1>Manage Mitra Pertanyaans</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'mitra-pertanyaan-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'pertanyaan',
-		'description',
-		'teruntuk',
-		'created_time',
-		'created_by',
-		/*
-		'updated_time',
-		'updated_by',
-		*/
-		array(
-			'class'=>'CButtonColumn',
+	<?php $this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'kegiatan-mitra-grid',
+		'dataProvider'=>$model->search(),
+		'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
+		'pager'=>array(
+			'header'=>Yii::t('penerjemah','Ke halaman : '),
+			'prevPageLabel'=>Yii::t('penerjemah','Sebelumnya'),
+			'nextPageLabel'=>Yii::t('penerjemah','Selanjutnya'),
+			'firstPageLabel'=>Yii::t('penerjemah','Pertama'),
+			'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
+			),
+		'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
+		'columns'=>array(
+			'pertanyaan',
+			'description',
+			'teruntuk',
+			array(
+				'class'=>'CButtonColumn',
+				'template' => '{view} {update} {delete}',
+				'htmlOptions' => array('width' => 20),
+				'buttons'=>array(
+					'update'=>array(
+						'url'=>function($data){
+								return Yii::app()->createUrl("pertanyaaan/update", array("id"=>$data->id));
+						},
+					),
+					'view'=>array(
+							'url'=>function($data){
+								return Yii::app()->createUrl("pertanyaaan/view", array("id"=>$data->id));
+						},
+					),
+					'delete'=>array(
+						'url'=>function($data){
+								return Yii::app()->createUrl("pertanyaaan/view", array("id"=>$data->id));
+						},
+						'label'=>'Hapus',
+					),
+				),
+			),
 		),
-	),
-)); ?>
+	)); ?>
+	
+	</div>
+</div>

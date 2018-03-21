@@ -3,7 +3,7 @@
     @import url('<?php echo $baseUrl.'/dist/css/step.css';?>');
 </style>
   
-
+<br/>
 <div id="step_tag">
 	<div class="stepwizard">
 		<div class="stepwizard-row setup-panel">
