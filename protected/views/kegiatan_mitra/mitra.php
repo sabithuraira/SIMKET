@@ -135,6 +135,12 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
                         </tbody>
                     </table>
             </form>
+
+            <?php
+                echo CHtml::link("Tambah Mitra", array('mitra/create'));
+                echo "&nbsp | &nbsp";
+                echo CHtml::link("Tambah Pegawai", array('pegawai/create'));
+            ?>
             </div>
             
             <div class="modal-footer">

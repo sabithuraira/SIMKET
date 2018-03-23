@@ -33,7 +33,8 @@ class Kegiatan_mitraController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create', 'update', 'mitra',
-					'insert_petugas', 'get_list_mitra'),
+					'insert_petugas', 'get_list_mitra',
+					'nilai'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -162,6 +163,19 @@ class Kegiatan_mitraController extends Controller
 		));
 	}
 
+	public function actionNilai($id)
+	{
+		$model=$this->loadModelPetugas($id);
+		$questions = MitraPertanyaan::model()->findAllByAttributes(array(
+			'teruntuk'	=>$model->status
+		));
+
+		$this->render('nilai',array(
+			'model'		=>$model,
+			'questions'	=>$questions
+		));
+	}
+
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -225,6 +239,15 @@ class Kegiatan_mitraController extends Controller
 	public function loadModel($id)
 	{
 		$model=KegiatanMitra::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+
+	public function loadModelPetugas($id)
+	{
+		$model=KegiatanMitraPetugas::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

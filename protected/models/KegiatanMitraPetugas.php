@@ -59,6 +59,22 @@ class KegiatanMitraPetugas extends HelpAr
 		);
 	}
 
+	public function getNamaMitra(){
+		$str = "";
+		if($this->flag_mitra==1){
+			$petugas = Pegawai::model()->findByPk($this->id_mitra);
+			if($petugas!==null)
+				$str = $petugas->nama;
+		}
+		else{
+			$petugas = MitraBps::model()->findByPk($this->id_mitra);
+			if($petugas!==null)
+				$str = $petugas->nama;
+		}
+
+		return $str;
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

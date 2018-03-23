@@ -31,7 +31,11 @@
 		'columns'=>array(
 			'pertanyaan',
 			'description',
-			'teruntuk',
+			array(
+				'name'	=>'teruntuk',
+				'type'	=>'raw',	
+				'value'		=> function($data){ return $data->teruntuk==1 ? "PML" : "PCL"; },
+			),
 			array(
 				'class'=>'CButtonColumn',
 				'template' => '{view} {update} {delete}',

@@ -27,6 +27,7 @@
 					'name'=>'jk',
 					'value'=> ($model->jk == 1) ? "Laki-laki" : "Perempuan",
 				),
+				'riwayat',
 				'created_time',
 				'updated_time',
 				// 'created_by',

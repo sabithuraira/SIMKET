@@ -2,8 +2,10 @@
 
     <!-- Logo -->
     <a href="<?php echo Yii::app()->createUrl('site/index') ?>" class="logo">
-      <span class="logo-mini"><b>S</b>KT</span>
-      <span class="logo-lg"><b>SIMKET</b></span>
+      <!-- <span class="logo-mini"><b>S</b>KT</span>
+      <span class="logo-lg"><b>SIMKET</b></span> -->
+      <span class="logo-mini"><b>S</b>RT</span>
+      <span class="logo-lg"><b>SIM RAPOR</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

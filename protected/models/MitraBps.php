@@ -73,6 +73,7 @@ class MitraBps extends HelpAr
 			'updated_time' => 'Updated Time',
 			'created_by' => 'Created By',
 			'updated_by' => 'Updated By',
+			'riwayat'	=> 'Riwayat Kerja'
 		);
 	}
 

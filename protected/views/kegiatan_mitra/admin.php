@@ -45,6 +45,11 @@
 				'type'		=>'raw',
 				'value'		=> function($data){ return $data->kab_id!=null ? $data->kab->name : ""; },
 			),
+
+			array(
+				'type'		=>'raw',
+				'value'		=> function($data){ return CHtml::link('Progres', array('mitra','id'=>$data->id)); },
+			),
 			array(
 				'class'=>'CButtonColumn',
 				'template' => '{view} {update} {delete}',
