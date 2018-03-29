@@ -12,7 +12,7 @@
  * @property string $updated_time
  * @property integer $tahun
  */
-class Output extends HelpAR
+class Output extends HelpAr
 {
 	/**
 	 * @return string the associated database table name

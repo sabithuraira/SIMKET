@@ -38,7 +38,7 @@ class IndukkegiatanController extends Controller
 				'actions'=>array('progress', 'detail_kab_kota',
 					'detail_kegiatan',
 					'insert_anggaran', 'insert_rpd',
-					'detail_kab_kota_j'),
+					'detail_kab_kota_j','uk3'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -77,6 +77,15 @@ class IndukkegiatanController extends Controller
 		$data = IndukKegiatan::getByUnitKerjaAndKegiatan(0);
 		$this->render('grafik',array(
 			'data'	=>$data
+		));
+	}
+
+	public function actionUk3($id){
+		$data = IndukKegiatan::getAllAnggaranPerUnitKerja($id);
+		$model = $this->loadModelUk($id);
+		$this->render('uk3',array(
+			'data'	=>$data,
+			'model'	=>$model
 		));
 	}
 
@@ -418,7 +427,15 @@ class IndukkegiatanController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=IndukKegiatan::model()->findByPk($id);
+		$model = IndukKegiatan::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	public function loadModelUk($id)
+	{
+		$model = UnitKerja::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

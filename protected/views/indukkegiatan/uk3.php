@@ -3,20 +3,18 @@
         <div class="box box-info">
 
             <div class="box-body">
-
+                <input type="hidden" id="idnya" value="<?php echo $model->id; ?>" />
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <b>Grafik RPD & Realisasi Anggaran</b>
-                        <?php echo CHtml::dropDownList('unit_line',0,HelpMe::getListEselon3(true)); ?>
-                        <?php echo CHtml::dropDownList('tahun',date('Y'),HelpMe::getYearForFilter()); ?>
-
+                        <b>Tabel dan Grafik RPD & Realisasi Anggaran <?php $model->name; ?></b>
+                    
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                         </div>
                     </div>
 
                     <div class="alert alert-info text-center" id="loading">
-                        <i class="fa fa-spin fa-refresh"></i>&nbsp; Merefresh grafik, harap tunggu..
+                        <i class="fa fa-spin fa-refresh"></i>&nbsp; Merefresh data, harap tunggu..
                     </div>
 
                     &nbsp&nbsp<i>Ket: 
@@ -35,7 +33,6 @@
 
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <b>Tabel RPD & Realisasi Anggaran</b>
                         
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -75,10 +72,10 @@
                                 $percent_real = ($value['target']<=0) ? 0 : ($total_real/$value['target']*100);
 
                                 echo '<td>'.number_format($total_rpd,2,',','.').'</td>';
-                                echo '<td>'.number_format($percent_rpd,2).'</td>';
+                                echo '<td class="text-center">'.number_format($percent_rpd,2).'</td>';
                                 echo '<td>'.number_format($total_real,2,',','.').'</td>';
-                                echo '<td>'.number_format($percent_real,2).'</td>';
-                                echo '<td>'.CHtml::link('Detail',array('uk3','id'=>$value['id'])).'</td>';
+                                echo '<td class="text-center">'.number_format($percent_real,2).'</td>';
+                                echo '<td>'.CHtml::link('Detail',array('progress','id'=>$value['id'])).'</td>';
                                 echo '</tr>';
                             }
                         ?>
@@ -93,4 +90,4 @@
 <?php $baseUrl = Yii::app()->theme->baseUrl; ?>
 <script src="<?php echo $baseUrl;?>//plugins/raphael/raphael.js"></script>
 <script src="<?php echo $baseUrl;?>//plugins/morris/morris.min.js"></script>
-<script src="<?php echo $baseUrl;?>/dist/js/vue_page/indukkegiatan/grafik.js"></script>
+<script src="<?php echo $baseUrl;?>/dist/js/vue_page/indukkegiatan/uk3.js"></script>

@@ -317,60 +317,133 @@ class IndukKegiatan extends HelpAr
 		return Yii::app()->db->createCommand($sql_all)->queryAll();
 	}
 
-	//menu from BOSS
-	public function getByKabKota_j($id_kab_kota){
-		$id = $this->id;
+	// show data for tabel anggaran per unit kerja
+	public function getAllAnggaranPerUnitKerja($id){
+		$s_where = " ";
+
+		if($id!=0){
+			$s_where = " WHERE t.unit_kerja = $id ";
+		}
+
 		$sql_t = "SELECT 
-				COALESCE(SUM(CASE WHEN jenis = 1 THEN jumlah ELSE 0 End),0) AS t1, 
-				COALESCE(SUM(CASE WHEN jenis = 2 THEN jumlah ELSE 0 End),0) AS t2, 
-				COALESCE(SUM(CASE WHEN jenis = 3 THEN jumlah ELSE 0 End),0) AS t3, 
-				COALESCE(SUM(CASE WHEN jenis = 4 THEN jumlah ELSE 0 End),0) AS t4
-				FROM `value_anggaran_target_bos` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
+				COALESCE(SUM(jumlah),0) AS target,
+				va1.kegiatan as keg
+				FROM `value_anggaran_target` as va1 
+				JOIN (
+		
+					SELECT MAX(t.id) AS id, kegiatan
+					FROM `value_anggaran_target` as t 
+					$s_where 
+					GROUP BY kegiatan
+				) AS x USING (id) 
+				GROUP BY keg";
 
-		$result_t = Yii::app()->db->createCommand($sql_t)->queryRow();
+		$select_real = "";
+		for($i = 1;$i < 12;++$i){
+			$select_real.= "COALESCE(SUM(CASE WHEN va1.bulan = $i THEN va1.jumlah ELSE 0 END),0) AS r$i, ";
+		}
+		$select_real.= "COALESCE(SUM(CASE WHEN va1.bulan = 12 THEN va1.jumlah ELSE 0 END),0) AS r12";
 
+		$sql_r = "SELECT va1.kegiatan as keg, 
+				$select_real 
+				FROM `value_anggaran` as va1 
+				JOIN (
+					SELECT MAX(t.id) AS id, bulan, kegiatan
+					FROM `value_anggaran` as t 
+					$s_where 
+					GROUP BY bulan, kegiatan
+				) AS x USING (id) 
+				GROUP BY keg";
 
-		$sql_r = "SELECT 
-				COALESCE(SUM(CASE WHEN jenis = 1 THEN jumlah ELSE 0 End),0) AS r1, 
-				COALESCE(SUM(CASE WHEN jenis = 2 THEN jumlah ELSE 0 End),0) AS r2, 
-				COALESCE(SUM(CASE WHEN jenis = 3 THEN jumlah ELSE 0 End),0) AS r3, 
-				COALESCE(SUM(CASE WHEN jenis = 4 THEN jumlah ELSE 0 End),0) AS r4
-				FROM `value_anggaran_bos` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
+		$select_rpd = "";
+		for($i = 1;$i < 12;++$i){
+			$select_rpd.= "COALESCE(SUM(CASE WHEN va1.bulan = $i THEN va1.jumlah ELSE 0 END),0) AS rpd$i, ";
+		}
+		$select_rpd.= "COALESCE(SUM(CASE WHEN va1.bulan = 12 THEN va1.jumlah ELSE 0 END),0) AS rpd12";
 
-		$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
-		return array_merge($result_t, $result_r);
+		$sql_rpd = "SELECT va1.kegiatan as keg, 
+				$select_rpd 
+				FROM `value_rpd` as va1 
+				JOIN (
+					SELECT MAX(t.id) AS id, bulan, kegiatan 
+					FROM `value_rpd` as t 
+					$s_where  
+					GROUP BY bulan, kegiatan 
+				) AS x USING (id) 
+				GROUP BY keg";
+
+		$sql_all = "SELECT ik.id, ik.name,  t_target.target,
+			t_rpd.rpd1, t_rpd.rpd2, t_rpd.rpd3, t_rpd.rpd4, t_rpd.rpd5, t_rpd.rpd6, t_rpd.rpd7, t_rpd.rpd8, t_rpd.rpd9, t_rpd.rpd10, t_rpd.rpd11, t_rpd.rpd12,
+			t_r.r1, t_r.r2, t_r.r3, t_r.r4, t_r.r5, t_r.r6, t_r.r7, t_r.r8, t_r.r9, t_r.r10, t_r.r11, t_r.r12
+			
+			FROM induk_kegiatan as ik
+			
+			LEFT JOIN($sql_t) as t_target ON t_target.keg = ik.id 
+			LEFT JOIN($sql_rpd) as t_rpd ON t_rpd.keg = ik.id 
+			LEFT JOIN ($sql_r) as t_r ON t_r.keg = ik.id
+
+			ORDER BY id";
+
+		// print_r($sql_all);
+		// die();
+
+		return Yii::app()->db->createCommand($sql_all)->queryAll();
 	}
+
+	//menu from BOSS
+	// public function getByKabKota_j($id_kab_kota){
+	// 	$id = $this->id;
+	// 	$sql_t = "SELECT 
+	// 			COALESCE(SUM(CASE WHEN jenis = 1 THEN jumlah ELSE 0 End),0) AS t1, 
+	// 			COALESCE(SUM(CASE WHEN jenis = 2 THEN jumlah ELSE 0 End),0) AS t2, 
+	// 			COALESCE(SUM(CASE WHEN jenis = 3 THEN jumlah ELSE 0 End),0) AS t3, 
+	// 			COALESCE(SUM(CASE WHEN jenis = 4 THEN jumlah ELSE 0 End),0) AS t4
+	// 			FROM `value_anggaran_target_bos` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
+
+	// 	$result_t = Yii::app()->db->createCommand($sql_t)->queryRow();
+
+
+	// 	$sql_r = "SELECT 
+	// 			COALESCE(SUM(CASE WHEN jenis = 1 THEN jumlah ELSE 0 End),0) AS r1, 
+	// 			COALESCE(SUM(CASE WHEN jenis = 2 THEN jumlah ELSE 0 End),0) AS r2, 
+	// 			COALESCE(SUM(CASE WHEN jenis = 3 THEN jumlah ELSE 0 End),0) AS r3, 
+	// 			COALESCE(SUM(CASE WHEN jenis = 4 THEN jumlah ELSE 0 End),0) AS r4
+	// 			FROM `value_anggaran_bos` WHERE kegiatan=$id AND unit_kerja=$id_kab_kota";
+		
+	// 	$result_r = Yii::app()->db->createCommand($sql_r)->queryRow();
+	// 	return array_merge($result_t, $result_r);
+	// }
 
 
 	//report jenis BOSS
-	public function getDetailByKabKotaAndJenis_j($id_kab_kota, $id_jenis){
-		$id = $this->id;
-		$sql = "SELECT * FROM `value_anggaran_bos` 
-				WHERE kegiatan=$id AND unit_kerja=$id_kab_kota AND jenis=$id_jenis";
+	// public function getDetailByKabKotaAndJenis_j($id_kab_kota, $id_jenis){
+	// 	$id = $this->id;
+	// 	$sql = "SELECT * FROM `value_anggaran_bos` 
+	// 			WHERE kegiatan=$id AND unit_kerja=$id_kab_kota AND jenis=$id_jenis";
 		
-		$data = Yii::app()->db->createCommand($sql)->queryAll();
+	// 	$data = Yii::app()->db->createCommand($sql)->queryAll();
 
-		$str_result = "";
+	// 	$str_result = "";
 
-		foreach($data as $value){
-			if(HelpMe::isAuthorizeUnitKerja($id_kab_kota)){
-				$str_result.=('- [ <a href="#myModalRealisasi" role="button" class="update_realisasi" 
-					data-id="'.$value['id'].'" 
-					data-unitkerja="'.$id_kab_kota.'" 
-					data-jenis="'.$id_jenis.'" 
-					data-tanggal="'.date("Y-m-d",strtotime($value['tanggal_realisasi'])).'" 
-					data-jumlah="'.$value['jumlah'].'"
-					data-keterangan="'.$value['keterangan'].'" 
-					data-toggle="modal">Update</a> ] '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> ('.$value['keterangan'].')<br/>');
-			}
-			else
-			{
-				$str_result.=('- '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> ('.$value['keterangan'].')<br/>');
-			}
-		}
+	// 	foreach($data as $value){
+	// 		if(HelpMe::isAuthorizeUnitKerja($id_kab_kota)){
+	// 			$str_result.=('- [ <a href="#myModalRealisasi" role="button" class="update_realisasi" 
+	// 				data-id="'.$value['id'].'" 
+	// 				data-unitkerja="'.$id_kab_kota.'" 
+	// 				data-jenis="'.$id_jenis.'" 
+	// 				data-tanggal="'.date("Y-m-d",strtotime($value['tanggal_realisasi'])).'" 
+	// 				data-jumlah="'.$value['jumlah'].'"
+	// 				data-keterangan="'.$value['keterangan'].'" 
+	// 				data-toggle="modal">Update</a> ] '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> ('.$value['keterangan'].')<br/>');
+	// 		}
+	// 		else
+	// 		{
+	// 			$str_result.=('- '.HelpMe::HrDate($value['tanggal_realisasi']).' <b>Jumlah : '.$value['jumlah'].'</b> ('.$value['keterangan'].')<br/>');
+	// 		}
+	// 	}
 
-		return $str_result;
-	}
+	// 	return $str_result;
+	// }
 
 
 	/**
