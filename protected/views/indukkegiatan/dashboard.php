@@ -1,9 +1,6 @@
 <div class="box box-info">
 	<div class="mailbox-controls">
-		<b>Kelola Komponen Anggaran</b>
-		<div class="pull-right">
-			<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah Kompnonen Anggaran", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
-		</div>
+		<b>Komponen Anggaran</b>
 	</div>
 
 	<div class="box-body">

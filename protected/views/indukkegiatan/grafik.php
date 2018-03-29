@@ -6,7 +6,7 @@
 
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <b>Grafik RPD & Realisasi Anggaran - </b>
+                        <b>Grafik RPD & Realisasi Anggaran</b>
                         <?php echo CHtml::dropDownList('unit_line',0,HelpMe::getListEselon3(true)); ?>
                         <?php echo CHtml::dropDownList('tahun',date('Y'),HelpMe::getYearForFilter()); ?>
 
@@ -49,12 +49,13 @@
                             <th rowspan="2">Target</th>
                             <th colspan="2" class="text-center">RPD</th>
                             <th colspan="2" class="text-center">Realisasi</th>
+                            <th rowspan="2"></th>
                         </tr>
                         <tr>
                             <th></th>
-                            <th>%</th>
+                            <th class="text-center">%</th>
                             <th></th>
-                            <th>%</th>
+                            <th class="text-center">%</th>
                         </tr>
                         <?php
                             foreach($data as $key=>$value){
@@ -77,6 +78,7 @@
                                 echo '<td>'.number_format($percent_rpd,2).'</td>';
                                 echo '<td>'.number_format($total_real,2,',','.').'</td>';
                                 echo '<td>'.number_format($percent_real,2).'</td>';
+                                echo '<td>'.CHtml::link('Detail',array('uk3','id'=>$value['id'])).'</td>';
                                 echo '</tr>';
                             }
                         ?>

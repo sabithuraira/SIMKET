@@ -12,7 +12,7 @@
  * @property integer $updated_by
  * @property string $updated_time
  */
-class IndukKegiatan extends HelpAR
+class IndukKegiatan extends HelpAr
 {
 	/**
 	 * @return string the associated database table name
@@ -302,24 +302,18 @@ class IndukKegiatan extends HelpAR
 
 		// $result_rpd = Yii::app()->db->createCommand($sql_rpd)->queryAll();
 		
-		$sql_all = "SELECT code, name, t_target.target,
-		t_rpd.rpd1, t_rpd.rpd2, t_rpd.rpd3, t_rpd.rpd4, t_rpd.rpd5, t_rpd.rpd6, t_rpd.rpd7, t_rpd.rpd8, t_rpd.rpd9, t_rpd.rpd10, t_rpd.rpd11, t_rpd.rpd12,
-		t_r.r1, t_r.r2, t_r.r3, t_r.r4, t_r.r5, t_r.r6, t_r.r7, t_r.r8, t_r.r9, t_r.r10, t_r.r11, t_r.r12
-		
-		FROM unit_kerja as uk
-		
-		LEFT JOIN($sql_t) as t_target ON t_target.t_unit_kerja = uk.id 
-		LEFT JOIN($sql_rpd) as t_rpd ON t_rpd.rpd_unit_kerja = uk.id 
-		LEFT JOIN ($sql_r) as t_r ON t_r.r_unit_kerja = uk.id
+		$sql_all = "SELECT uk.id, code, name, t_target.target,
+			t_rpd.rpd1, t_rpd.rpd2, t_rpd.rpd3, t_rpd.rpd4, t_rpd.rpd5, t_rpd.rpd6, t_rpd.rpd7, t_rpd.rpd8, t_rpd.rpd9, t_rpd.rpd10, t_rpd.rpd11, t_rpd.rpd12,
+			t_r.r1, t_r.r2, t_r.r3, t_r.r4, t_r.r5, t_r.r6, t_r.r7, t_r.r8, t_r.r9, t_r.r10, t_r.r11, t_r.r12
+			
+			FROM unit_kerja as uk
+			
+			LEFT JOIN($sql_t) as t_target ON t_target.t_unit_kerja = uk.id 
+			LEFT JOIN($sql_rpd) as t_rpd ON t_rpd.rpd_unit_kerja = uk.id 
+			LEFT JOIN ($sql_r) as t_r ON t_r.r_unit_kerja = uk.id
 
-		 WHERE parent=1 ORDER BY jenis, code";
+			WHERE parent=1 ORDER BY jenis, code";
 
-		// print_r($sql_t);
-		// print_r("<br/><br/>");
-		// print_r($sql_rpd);
-		// print_r("<br/><br/>");
-		// print_r($sql_r);
-		// die();
 		return Yii::app()->db->createCommand($sql_all)->queryAll();
 	}
 
