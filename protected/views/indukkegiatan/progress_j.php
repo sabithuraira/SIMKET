@@ -308,7 +308,7 @@
                 {
                     if(data.satu.length >0)
                     {
-                        window.location.href=pathname+ "?r=k_anggaran/progress&id="+data.satu
+                        window.location.href=pathname+ "?r=indukkegiatan/progress_j&id="+data.satu
                     }
                     else
                     {
@@ -338,7 +338,7 @@
             {
                 if(data.satu.length >0)
                 {
-                    window.location.href=pathname+ "?r=k_anggaran/progress&id="+data.satu
+                    window.location.href=pathname+ "?r=indukkegiatan/progress_j&id="+data.satu
                 }
                 else
                 {

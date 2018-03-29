@@ -16,7 +16,7 @@
  * @property integer $updated_by
  * @property string $keterangan
  */
-class ValueAnggaranBos extends CActiveRecord
+class ValueAnggaranBos extends HelpAr
 {
 	/**
 	 * @return string the associated database table name

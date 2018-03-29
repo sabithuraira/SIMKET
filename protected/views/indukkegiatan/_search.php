@@ -7,17 +7,15 @@
 	)); ?>
 
 		<div class="form-group">
-			<?php echo $form->labelEx($model,'name'); ?>
-			<?php echo $form->textField($model,'name',array('size'=>45,'maxlength'=>45, 'class'=>"form-control")); ?>
+			<?php echo $form->textField($model,'name',array('size'=>45,'maxlength'=>45, 'placeholder'=>'Nama komponen anggaran', 'class'=>"form-control")); ?>
 		</div>
 
 
 
 		<div class="form-group">
-			<?php echo $form->labelEx($model,'tahun'); ?>
 			<?php echo $form->dropDownList($model,'tahun',
 					HelpMe::getYearForFilter(),
-					array('empty'=>'- Pilih Tahun -', 'class'=>"form-control")); ?>
+					array('empty'=>'- Pilih Tahun Komponen -', 'class'=>"form-control")); ?>
 		</div>
 
 		<div class="box-footer">

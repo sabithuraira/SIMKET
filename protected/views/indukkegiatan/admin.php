@@ -60,8 +60,8 @@
 				// 'updated_time',
 				array(
 					'class'=>'CButtonColumn',
-					'template' => '{view} {update} {delete}',
-					'htmlOptions' => array('width' => 20),
+					'template' => '{view} {update}',
+					'htmlOptions' => array('width' => 20, 'class'=>'text-center'),
 					'buttons'=>array(
 						'update'=>array(
 							'url'=>function($data){
@@ -73,12 +73,12 @@
 									return Yii::app()->createUrl("indukkegiatan/view", array("id"=>$data->id));
 							},
 						),
-						'delete'=>array(
-							'url'=>function($data){
-									return Yii::app()->createUrl("indukkegiatan/delete", array("id"=>$data->id));
-							},
-							'label'=>'Hapus',
-						),
+						// 'delete'=>array(
+						// 	'url'=>function($data){
+						// 			return Yii::app()->createUrl("indukkegiatan/delete", array("id"=>$data->id));
+						// 	},
+						// 	'label'=>'Hapus',
+						// ),
 					),
 				),
 			),

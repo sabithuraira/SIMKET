@@ -1,5 +1,7 @@
-
-
+<aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu">         
+      
         <li class="header">MONITORING MITRA BPS</li>
 
         <?php if(!Yii::app()->user->isGuest){ ?>
@@ -12,3 +14,10 @@
             echo '<li><a href="'.Yii::app()->createUrl('mitrabps/index').'"><i class="fa fa-user-plus"></i> Rapor Penilaian</a></li>';
           ?>
         <?php } ?>
+
+
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+

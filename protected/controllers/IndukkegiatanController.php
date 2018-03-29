@@ -45,7 +45,7 @@ class IndukkegiatanController extends Controller
 			),
 			array('allow',
 				'actions'=>array('dashboard', 'grafik',
-					'detail_unit'),
+					'detail_unit', 'detail_unit_kegiatan'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -74,7 +74,10 @@ class IndukkegiatanController extends Controller
 	}
 
 	public function actionGrafik(){
-		$this->render('grafik');
+		$data = IndukKegiatan::getByUnitKerjaAndKegiatan(0);
+		$this->render('grafik',array(
+			'data'	=>$data
+		));
 	}
 
 	public function actionInsert_anggaran($id)
@@ -250,7 +253,6 @@ class IndukkegiatanController extends Controller
         ));
         Yii::app()->end();
 	}
-
 
 	public function actionDetail_unit($id)
 	{

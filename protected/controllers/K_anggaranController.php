@@ -72,14 +72,14 @@ class K_anggaranController extends Controller
 
 		if(isset($_POST['unitkerja']) && strlen($_POST['unitkerja'])>0){
 			for($i=1;$i<5;++$i){
-				$model = ValueAnggaranTarget::model()->findByAttributes(array(
+				$model = ValueAnggaranTargetBos::model()->findByAttributes(array(
 					'unit_kerja' 	=>$_POST['unitkerja'],
 					'kegiatan'		=>$id,
 					'jenis'			=>$i
 				));
 
 				if($model===null){
-					$model=new ValueAnggaranTarget;
+					$model=new ValueAnggaranTargetBos;
 					$model->kegiatan=$id;
 					$model->unit_kerja = $_POST['unitkerja'];
 					$model->jenis = $i;
@@ -107,9 +107,9 @@ class K_anggaranController extends Controller
 		$satu='';
 
 		if(strlen($_POST['unitkerja']) > 0 && strlen($_POST['rincian']) > 0){
-			$model=new ValueAnggaran;
+			$model=new ValueAnggaranBos;
 			if(strlen($_POST['vid'])>0)
-				$model=ValueAnggaran::model()->findByPk($_POST['vid']);
+				$model=ValueAnggaranBos::model()->findByPk($_POST['vid']);
 	
 			$model->kegiatan=$id;
 			$model->unit_kerja = $_POST['unitkerja'];
