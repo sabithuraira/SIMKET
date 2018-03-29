@@ -16,10 +16,6 @@ $(document).ready(function () {
     setChartData();
 });
 
-unit_line.change(function(){
-    setChartData();
-})
-
 function setChartData(){
 
     loading.css("display", "block");
@@ -71,5 +67,12 @@ function morrisLineChart(){
             var month = vm.months[x.getMonth()];
             return month;
         },
+        gridTextColor: "#fff",
+        pointStrokeColors: ["#efefef"],
+        gridLineColor: "#efefef",
+        lineWidth: 2,
+        gridStrokeWidth: 0.4,
+        pointSize: 4,
+        gridTextSize: 11
     });
 }

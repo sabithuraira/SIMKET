@@ -72,6 +72,13 @@ function morrisLineChart(){
           var month = vm.months[x.getMonth()];
           return month;
       },
+      gridTextColor: "#fff",
+      pointStrokeColors: ["#efefef"],
+      gridLineColor: "#efefef",
+      lineWidth: 2,
+      gridStrokeWidth: 0.4,
+      pointSize: 4,
+      gridTextSize: 11
   });
 }
 

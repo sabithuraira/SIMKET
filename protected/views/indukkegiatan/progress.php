@@ -31,15 +31,14 @@
                 <div class="alert alert-info text-center" id="loading">
                     <i class="fa fa-spin fa-refresh"></i>&nbsp; Merefresh data calendar, harap tunggu..
                 </div>
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <b>Grafik RPD & Realisasi Anggaran - </b>
-                        <?php echo CHtml::dropDownList('unit_line',0,HelpMe::getListEselon3(true)); ?>
 
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        </div>
-                    </div>
+
+                <div class="box-header with-border">
+                    <b>Grafik RPD & Realisasi Anggaran - </b>
+                    <?php echo CHtml::dropDownList('unit_line',0,HelpMe::getListEselon3(true)); ?>
+                </div>
+
+                <div class="box box-solid bg-teal-gradient">
                     &nbsp&nbsp<i>Ket: 
                         &nbsp&nbsp<i class="fa fa fa-circle text-primary"></i> Rencana Penarikan Dana
                         &nbsp&nbsp<i class="fa fa fa-circle text-green"></i> Realisasi Anggaran

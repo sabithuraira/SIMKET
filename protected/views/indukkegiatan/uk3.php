@@ -1,22 +1,23 @@
 <div id="grafik_tag" class="row">
     <div class="col-md-12">
         <div class="box box-info">
+            <div class="box-header with-border">
+                <b>Tabel dan Grafik RPD & Realisasi Anggaran <?php echo $model->name; ?></b>
+            
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+            </div>
+
+            <div class="alert alert-info text-center" id="loading">
+                <i class="fa fa-spin fa-refresh"></i>&nbsp; Merefresh data, harap tunggu..
+            </div>
 
             <div class="box-body">
                 <input type="hidden" id="idnya" value="<?php echo $model->id; ?>" />
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <b>Tabel dan Grafik RPD & Realisasi Anggaran <?php $model->name; ?></b>
-                    
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        </div>
-                    </div>
+                
 
-                    <div class="alert alert-info text-center" id="loading">
-                        <i class="fa fa-spin fa-refresh"></i>&nbsp; Merefresh data, harap tunggu..
-                    </div>
-
+                <div class="box box-solid bg-teal-gradient">
                     &nbsp&nbsp<i>Ket: 
                         &nbsp&nbsp<i class="fa fa fa-circle text-primary"></i> Rencana Penarikan Dana
                         &nbsp&nbsp<i class="fa fa fa-circle text-green"></i> Realisasi Anggaran
@@ -30,15 +31,7 @@
 
 
             <div class="box-body">
-
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        </div>
-                    </div>
-                    
+                <div class="box box-info">    
                     <table class="table table-hover table-bordered table-condensed">
                         <tr>
                             <th rowspan="2">No.</th>
