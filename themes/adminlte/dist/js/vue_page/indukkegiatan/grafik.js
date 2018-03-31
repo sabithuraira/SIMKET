@@ -16,6 +16,11 @@ $(document).ready(function () {
     setChartData();
 });
 
+
+unit_line.change(function(){
+    setChartData();
+});
+
 function setChartData(){
 
     loading.css("display", "block");

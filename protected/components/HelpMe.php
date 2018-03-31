@@ -198,7 +198,7 @@ class HelpMe
         $arr=array();
 
         if($with_prov)
-            $arr[]=array('id'=>0, 'label'=>'Semua Kab/Kota');
+            $arr[]=array('id'=>0, 'label'=>'Semua Unit Kerja');
         foreach ($data as $key => $value) {
             $arr[]=array('id'=>$value['id'],'label'=>$value['name']);
         }
