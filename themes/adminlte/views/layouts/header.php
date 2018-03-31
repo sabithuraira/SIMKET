@@ -18,13 +18,43 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           
-          <li class="dropdown messages-menu">
+          <!-- <li class="dropdown messages-menu">
             <a href="https://laci.bps.go.id/s/rJvvgHkm2KPvl8s">
               <i class="fa fa-file-pdf-o"></i>
               Panduan Penggunaan
               <span class="label label-success">&#8730;</span>
             </a>
+          </li> -->
+
+
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-file-pdf-o"></i>
+              Panduan Penggunaan
+              <span class="label label-success">2</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">Panduan SIMKET</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li>
+                    <a href="https://laci.bps.go.id/s/rJvvgHkm2KPvl8s">
+                      <i class="fa fa-users text-aqua"></i> Panduan Awal
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://laci.bps.go.id/s/R8Dmm3bIrK1jItI">
+                      <i class="fa fa-shopping-cart text-green"></i> MODUL Anggaran
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </li>
+
+
+
 
 
           <li class="dropdown user user-menu">
