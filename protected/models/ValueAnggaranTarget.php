@@ -14,7 +14,7 @@
  * @property string $updated_time
  * @property integer $updated_by
  */
-class ValueAnggaranTarget extends HelpAR
+class ValueAnggaranTarget extends HelpAr
 {
 	/**
 	 * @return string the associated database table name

@@ -92,16 +92,17 @@
               'url'         =>  $peringkat1tahun['url'],
             ));
 
-
-            $this->widget('WJuara', array(
-              'kab_name'    =>  $peringkat1bulan['name'],
-              'title_name'  =>  'Peringkat 1 Bulan '.date('F').' Tahun '.date('Y'),
-              'color'       =>  'green',
-              'kegiatan'    =>  $peringkat1bulan['jumlah_kegiatan'],
-              'target'      =>  $peringkat1bulan['jumlah_target'],
-              'point'       =>  $peringkat1bulan['point'],
-              'url'         =>  $peringkat1bulan['url'],
-            ));
+            if(array_key_exists("name",$peringkat1bulan)){
+              $this->widget('WJuara', array(
+                'kab_name'    =>  $peringkat1bulan['name'],
+                'title_name'  =>  'Peringkat 1 Bulan '.date('F').' Tahun '.date('Y'),
+                'color'       =>  'green',
+                'kegiatan'    =>  $peringkat1bulan['jumlah_kegiatan'],
+                'target'      =>  $peringkat1bulan['jumlah_target'],
+                'point'       =>  $peringkat1bulan['point'],
+                'url'         =>  $peringkat1bulan['url'],
+              ));
+            }
           ?>
 
           <!-- Calendar -->
