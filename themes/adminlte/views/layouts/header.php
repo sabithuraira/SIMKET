@@ -48,6 +48,12 @@
                       <i class="fa fa-shopping-cart text-green"></i> MODUL Anggaran
                     </a>
                   </li>
+
+                  <li>
+                    <a href="https://laci.bps.go.id/s/1xRoh37hx6kP3zY">
+                      <i class="fa fa-sticky-note text-yellow"></i> Slide SIMKET pada BIMTEK TU
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>

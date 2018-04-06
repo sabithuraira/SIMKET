@@ -14,7 +14,7 @@
  * @property integer $updated_by
  * @property integer $bulan
  */
-class ValueRpd extends HelpAR
+class ValueRpd extends HelpAr
 {
 	/**
 	 * @return string the associated database table name
