@@ -73,16 +73,17 @@
 							?>
 							<?php echo $form->error($model,'simket_id'); ?>
 						</div>
+						-->
 
 						<div class="form-group">
 							<?php echo $form->labelEx($model,'kab_id'); ?>
 							<?php 
 								echo $form->dropDownList($model,'kab_id',
-										HelpMe::ListAuthorizeUnitKerja(),
+						CHtml::listData(HelpMe::getListKabupaten(), 'id', 'label'),
 										array('empty'=>'- Pilih Kabupaten/Kota-', 'class'=>"form-control")); 
 							?>
 							<?php echo $form->error($model,'kab_id'); ?>
-						</div> -->
+						</div> 
 
 						<div class="box-footer">
 							<?php echo CHtml::submitButton('Simpan', array('class'=>'btn btn-primary nextBtn btn-lg pull-right')); ?>

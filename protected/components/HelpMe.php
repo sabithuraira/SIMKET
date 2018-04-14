@@ -183,7 +183,7 @@ class HelpMe
     public static function getListKabupaten()
     {
         $result=array();
-        $all=UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'));
+        $all=UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'), array('order'=>'code'));
         foreach ($all as $key => $value) {
             $result[]=array('label'=>$value['name'],'url'=>array('report/kabupaten','id'=>$value['id']), 'id'=>$value['id']);
         }

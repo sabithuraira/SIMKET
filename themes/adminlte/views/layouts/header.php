@@ -31,7 +31,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-file-pdf-o"></i>
               Panduan Penggunaan
-              <span class="label label-success">2</span>
+              <span class="label label-success">3</span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">Panduan SIMKET</li>

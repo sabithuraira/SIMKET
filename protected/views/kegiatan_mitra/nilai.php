@@ -46,7 +46,7 @@
               <h5 class="widget-user-desc">Web Designer</h5>
             </div>
             <div class="widget-user-image">
-              <img class="img-circle" src="../dist/img/user3-128x128.jpg" alt="User Avatar">
+              <img class="img-circle" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/user1-128x128.jpg" ?>" alt="User Avatar">
             </div>
             <div class="box-footer">
               <div class="row">
@@ -83,20 +83,13 @@
 
                         <br/>
                         <table class="table table-hover table-bordered table-condensed">
-                            <tr>
-                                <th></th>
-                            </tr>
                             <?php
-                                foreach ($list_mitra as $key => $value)
+                                foreach ($questions as $key => $value)
                                 {
                                     echo '<tr>';
                                         echo '<td>'.($key+1).'</td>';
-                                        echo '<td>'.$value['nama'].'</td>';
-                                        echo '<td>'.$value['nip'].'</td>';
-                                    
-                                        echo '<td>'.$value['status'].'</td>';
-                                        echo '<td></td>';
-                                        echo '<td class="text-center">'.CHtml::link("<i class='fa fa-tachometer'></i> Penilaian", array('nilai', 'id'=> $value['id']), array('class'=>'btn btn-default btn-sm')).'</td>';
+                                        echo '<td>'.$value['pertanyaan'].'</td>';
+                                        echo '<td>'.$value['description'].'</td>';
                                     echo '</tr>';
                                     
                                 }

@@ -26,7 +26,7 @@
 			<?php echo $form->labelEx($model,'kab_id'); ?>
 			<?php 
 				echo $form->dropDownList($model,'kab_id',
-						HelpMe::ListAuthorizeUnitKerja(),
+						CHtml::listData(HelpMe::getListKabupaten(), 'id', 'label'),
 						array('empty'=>'- Pilih Kabupaten/Kota-', 'class'=>"form-control")); 
 			?>
 			<?php echo $form->error($model,'kab_id'); ?>

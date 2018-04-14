@@ -137,9 +137,9 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
             </form>
 
             <?php
-                echo CHtml::link("Tambah Mitra", array('mitra/create'));
+                echo CHtml::link("Tambah Mitra", array('mitrabps/create'), array('target'=>'_blank'));
                 echo "&nbsp | &nbsp";
-                echo CHtml::link("Tambah Pegawai", array('pegawai/create'));
+                echo CHtml::link("Tambah Pegawai", array('pegawai/create'), array('target'=>'_blank'));
             ?>
             </div>
             
