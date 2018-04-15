@@ -175,9 +175,30 @@ class Kegiatan_mitraController extends Controller
 			foreach ($questions as $key => $value)
 			{
 				if(isset($_POST['opts'.$value['id']])){
-					
+					$nilai = MitraNilai::model()->findByAttributes(
+						array(
+							'mitra_id'		=>$id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+							'pertanyaan_id'	=>$value['id']
+						)
+					);
+
+					if($nilai==null){
+						$nilai = new MitraNilai;
+						$nilai->mitra_id = $id;
+						$nilai->kegiatan_id = $model->id_kegiatan;
+						$nilai->pertanyaan_id = $value['id'];
+						$nilai->nilai = $_POST['opts'.$value['id']];
+						$nilai->save();
+					}
+					else{
+						$nilai->nilai = $_POST['opts'.$value['id']];
+						$nilai->save();
+					}
 				}
 			}
+
+			$model->nilai = ($model->totalNilai/$model->totalPertanyaan);
+			$model->save();
 		}
 
 		$this->render('nilai',array(

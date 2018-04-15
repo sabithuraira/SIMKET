@@ -48,8 +48,8 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
                                 <th>No. </th>
                                 <th>Nama</th>
                                 <th>NIP (Jika organik)</th>
-                                <th>Status</th>
-                                <th>SKOR</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">SKOR</th>
                                 <th></th>
                             </tr>
                             <?php
@@ -60,8 +60,8 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
                                         echo '<td>'.$value['nama'].'</td>';
                                         echo '<td>'.$value['nip'].'</td>';
                                     
-                                        echo '<td>'.$value['status'].'</td>';
-                                        echo '<td></td>';
+                                        echo '<td class="text-center">'.$value['status'].'</td>';
+                                        echo '<td class="text-center">'.$value['nilai'].' / 4</td>';
                                         echo '<td class="text-center">'.CHtml::link("<i class='fa fa-tachometer'></i> Penilaian", array('nilai', 'id'=> $value['id']), array('class'=>'btn btn-default btn-sm')).'</td>';
                                     echo '</tr>';
                                     

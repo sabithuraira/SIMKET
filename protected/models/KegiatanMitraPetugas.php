@@ -82,6 +82,20 @@ class KegiatanMitraPetugas extends HelpAr
 			return 'PCL';
 	}
 
+	public function getTotalNilai(){
+		$idnya = $this->id;
+		$sql = "SELECT SUM(nilai) FROM mitra_nilai WHERE mitra_id=$idnya";
+
+		return Yii::app()->db->createCommand($sql)->queryScalar();
+	}
+
+	public function getTotalPertanyaan(){
+		$statusnya = $this->status;
+		$sql = "SELECT COUNT(id) FROM mitra_pertanyaan WHERE teruntuk=$statusnya OR teruntuk=3";
+
+		return Yii::app()->db->createCommand($sql)->queryScalar();
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

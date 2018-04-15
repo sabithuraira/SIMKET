@@ -143,7 +143,8 @@ class KegiatanMitra extends HelpAr
 				'nama'		=>$nama,
 				'nip'		=>$nip,
 				'status'	=>$status,
-				'flag'		=>$value['flag_mitra']
+				'flag'		=>$value['flag_mitra'],
+				'nilai'		=>$value['nilai']
 			);
 		}
 

@@ -15,13 +15,13 @@
                 <div class="stepwizard-row setup-panel">
                     <div class="stepwizard-step">
                         <?php 
-					    	echo CHtml::link("1", array('update', 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
+					    	echo CHtml::link("1", array('update', 'id'=>$model->id_kegiatan), array('class'=>'btn btn-default btn-circle'));
                         ?>
                         <p>Data Kegiatan</p>
                     </div>
                     <div class="stepwizard-step">
                         <?php 
-					    	echo CHtml::link("2", array('mitra', 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
+					    	echo CHtml::link("2", array('mitra', 'id'=>$model->id_kegiatan), array('class'=>'btn btn-default btn-circle'));
                         ?>
                         <p>Petugas Kegiatan</p>
                     </div>
@@ -52,24 +52,24 @@
                             <div class="row">
                                 <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header">3,200</h5>
-                                    <span class="description-text">SALES</span>
+                                    <h5 class="description-header"><?php echo $model->totalPertanyaan; ?></h5>
+                                    <span class="description-text">TOTAL PERTANYAAN</span>
                                 </div>
                                 <!-- /.description-block -->
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header">13,000</h5>
-                                    <span class="description-text">FOLLOWERS</span>
+                                    <h5 class="description-header"><?php echo $model->totalNilai; ?></h5>
+                                    <span class="description-text">TOTAL NILAI</span>
                                 </div>
                                 <!-- /.description-block -->
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4">
                                 <div class="description-block">
-                                    <h5 class="description-header">35</h5>
-                                    <span class="description-text">PRODUCTS</span>
+                                    <h5 class="description-header"><?php echo $model->totalNilai/$model->totalPertanyaan.' / 4'; ?></h5>
+                                    <span class="description-text">RATA-RATA</span>
                                 </div>
                                 <!-- /.description-block -->
                                 </div>
@@ -96,13 +96,23 @@
                                         echo '<tr>';
                                         echo '<td><div class="form-group">';
                                         
+                                        $nilai = MitraNilai::model()->findByAttributes(
+                                            array(
+                                                'mitra_id'		=>$model->id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+                                                'pertanyaan_id'	=>$value['id']
+                                            )
+                                        );
+                                        
                                         foreach($value->options as $key2 => $value2){
                                             $opts_name = 'opts'.$value['id'];
                                             $opts_id = 'opts'.$value['id'].$value2['skala'];
 
                                             $is_disable = (strlen($value2['label']) == 0) ? 'disabled' : '';
+                                            $is_checked = ($nilai!=null && $nilai->nilai==$value2['skala']) ? 'checked' : '';
+
+
                                             echo '<div class="radio"><label>';
-                                            echo '<input type="radio" name="'.$opts_name.'" id="'.$opts_id.'" value="'.$value2['skala'].'" $is_disable>('.$value2['skala'].') '.$value2['label'].'</label>';
+                                            echo '<input type="radio" name="'.$opts_name.'" id="'.$opts_id.'" value="'.$value2['skala'].'" '.$is_disable.' '.$is_checked.'>('.$value2['skala'].') '.$value2['label'].'</label>';
                                             echo '</div>';    
                                         }
                                         echo '</div></td>';
