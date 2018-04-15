@@ -69,6 +69,7 @@ class PertanyaanController extends Controller
 		if(isset($_POST['MitraPertanyaan']))
 		{
 			$model->attributes=$_POST['MitraPertanyaan'];
+			$model->description = $_POST['MitraPertanyaan']['description'];
 			if($model->save()){
 				for($i=1;$i<=4;++$i){
 					$option= new MitraOption;
@@ -96,11 +97,16 @@ class PertanyaanController extends Controller
 	{
 		$model=$this->loadModel($id);
 		for($i=1;$i<=4;++$i){
-			$model['option'.$i] = MitraOption::model()->findByAttributes(
+			$opt = MitraOption::model()->findByAttributes(
 				array(
 					'id_pertanyaan'=>$model->id, 
 					'skala'=>$i)
 			);
+
+			if($opt!=null)
+				$model['option'.$i] = $opt->description;
+			else
+				$model['option'.$i] = '';
 		}
 
 		// Uncomment the following line if AJAX validation is needed
@@ -109,9 +115,16 @@ class PertanyaanController extends Controller
 		if(isset($_POST['MitraPertanyaan']))
 		{
 			$model->attributes=$_POST['MitraPertanyaan'];
+			$model->description = $_POST['MitraPertanyaan']['description'];
 			if($model->save()){
 				for($i=1;$i<=4;++$i){
-					if($model['option'.$i]==null || strlen($model['option'.$i]==0)){
+					$opt = MitraOption::model()->findByAttributes(
+						array(
+							'id_pertanyaan'=>$model->id, 
+							'skala'=>$i)
+					);
+
+					if($opt==null){
 						$option= new MitraOption;
 						$option->id_pertanyaan 	= $model->id;
 						$option->description 	= $_POST['MitraPertanyaan']['option'.$i];

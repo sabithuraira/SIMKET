@@ -75,6 +75,13 @@ class KegiatanMitraPetugas extends HelpAr
 		return $str;
 	}
 
+	public function getStatusLabel(){
+		if($this->status==1)
+			return 'PML';
+		else
+			return 'PCL';
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

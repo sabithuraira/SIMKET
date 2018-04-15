@@ -170,6 +170,14 @@ class Kegiatan_mitraController extends Controller
 			'teruntuk'	=>$model->status
 		));
 
+		// if(isset($_POST))
+		// {
+		// 	$model->attributes=$_POST['KegiatanMitra'];
+		// 	$model->kab_id = 22;
+		// 	if($model->save())
+		// 		$this->redirect(array('mitra','id'=>$model->id));
+		// }
+
 		$this->render('nilai',array(
 			'model'		=>$model,
 			'questions'	=>$questions

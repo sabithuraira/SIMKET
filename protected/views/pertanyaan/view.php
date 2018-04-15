@@ -16,7 +16,10 @@
 				'attributes'=>array(
 					'pertanyaan',
 					'description',
-					'teruntuk',
+					array(
+						'name'	=>'teruntuk',
+						'value'=>$model->peruntukanLabel
+					)
 				),
 			)); 
 		?>

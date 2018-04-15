@@ -28,7 +28,7 @@
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'teruntuk'); ?>
 			<?php echo $form->dropDownList($model,'teruntuk',
-					array(1 => 'PML', 2 => 'PCL'),
+					array(1 => 'PML', 2 => 'PCL', 3=> 'PCL dan PML'),
 					array('empty'=>'- Pilih Output -', 'class'=>"form-control")); ?>
 			<?php echo $form->error($model,'teruntuk'); ?>
 		</div>

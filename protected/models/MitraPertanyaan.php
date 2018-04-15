@@ -51,6 +51,28 @@ class MitraPertanyaan extends HelpAr
 		);
 	}
 
+	public function getOptions(){
+		$options = array();
+		
+		for($i=1;$i<=4;++$i){
+			$option = MitraOption::model()->findByAttributes(
+				array(
+					'id_pertanyaan'=>$this->id, 
+					'skala'=>$i
+				)
+			);
+
+			if($option!=null){
+				$options[] = array('skala'=>$i, 'label'=>$option->description);
+			}
+			else{
+				$options[] = array('skala'=>$i, 'label'=>'');
+			}
+		}
+
+		return $options;
+	}
+
 	public function getFullContent(){
 		$str_result = "";
 		$str_result.= $this->pertanyaan;
@@ -74,6 +96,12 @@ class MitraPertanyaan extends HelpAr
 		$str_result.= "</ul>";
 
 		return $str_result;
+	}
+
+	public function getPeruntukanLabel(){
+		if($this->teruntuk==1) return 'PML';
+		else if($this->teruntuk==2) return 'PCL';
+		else return 'PCL dan PML';
 	}
 
 	/**
