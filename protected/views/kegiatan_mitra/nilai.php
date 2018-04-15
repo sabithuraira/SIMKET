@@ -90,7 +90,7 @@
                                     foreach ($questions as $key => $value)
                                     {
                                         echo '<tr>';
-                                            echo '<td><b>'.$value['pertanyaan'].'</b></td>';
+                                        echo '<td><b>'.$value['pertanyaan'].'</b></td>';
                                         echo '</tr>';
 
                                         echo '<tr>';
@@ -107,7 +107,6 @@
                                         }
                                         echo '</div></td>';
                                         echo '</tr>';
-                                        
                                     }
                                 ?>
                             </table>

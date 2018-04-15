@@ -166,17 +166,19 @@ class Kegiatan_mitraController extends Controller
 	public function actionNilai($id)
 	{
 		$model=$this->loadModelPetugas($id);
-		$questions = MitraPertanyaan::model()->findAllByAttributes(array(
-			'teruntuk'	=>$model->status
-		));
+		$questions = MitraPertanyaan::model()->findAll(
+			'teruntuk=:t1 OR teruntuk=:t2', array(':t1'=>$model->status, ':t2'=>3)
+		);
 
-		// if(isset($_POST))
-		// {
-		// 	$model->attributes=$_POST['KegiatanMitra'];
-		// 	$model->kab_id = 22;
-		// 	if($model->save())
-		// 		$this->redirect(array('mitra','id'=>$model->id));
-		// }
+		if(isset($_POST))
+		{
+			foreach ($questions as $key => $value)
+			{
+				if(isset($_POST['opts'.$value['id']])){
+					
+				}
+			}
+		}
 
 		$this->render('nilai',array(
 			'model'		=>$model,
