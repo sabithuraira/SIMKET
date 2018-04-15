@@ -95,6 +95,13 @@ class PertanyaanController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		for($i=1;$i<=4;++$i){
+			$model['option'.$i] = MitraOption::model()->findByAttributes(
+				array(
+					'id_pertanyaan'=>$model->id, 
+					'skala'=>$i)
+			);
+		}
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -102,8 +109,28 @@ class PertanyaanController extends Controller
 		if(isset($_POST['MitraPertanyaan']))
 		{
 			$model->attributes=$_POST['MitraPertanyaan'];
-			if($model->save())
+			if($model->save()){
+				for($i=1;$i<=4;++$i){
+					if($model['option'.$i]==null || strlen($model['option'.$i]==0)){
+						$option= new MitraOption;
+						$option->id_pertanyaan 	= $model->id;
+						$option->description 	= $_POST['MitraPertanyaan']['option'.$i];
+						$option->skala 			= $i;
+						$option->save(false);
+					}
+					else{
+						$option = MitraOption::model()->findByAttributes(
+							array(
+								'id_pertanyaan'=>$model->id, 
+								'skala'=>$i)
+						);
+						$option->description 	= $_POST['MitraPertanyaan']['option'.$i];
+						$option->save(false);	
+					}
+				}
+
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(

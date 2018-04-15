@@ -51,6 +51,31 @@ class MitraPertanyaan extends HelpAr
 		);
 	}
 
+	public function getFullContent(){
+		$str_result = "";
+		$str_result.= $this->pertanyaan;
+		$str_result.="<br/> <b>Pilihan jawaban:</b>";
+		$str_result.= "<ul>";
+		for($i=1;$i<=4;++$i){
+			$option = MitraOption::model()->findByAttributes(
+				array(
+					'id_pertanyaan'=>$this->id, 
+					'skala'=>$i)
+			);
+
+			if($option!=null){
+				$str_result.= "<li>".$i." => ".$option->description."</li>";
+			}
+			else{
+				$str_result.= "<li>".$i." => -</li>";
+			}
+		}
+
+		$str_result.= "</ul>";
+
+		return $str_result;
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

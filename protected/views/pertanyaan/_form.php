@@ -37,7 +37,9 @@
 		<p></p>
 		<table class="table table-hover table-bordered table-condensed">
 			<tr>
-				<th class="text-center">Skala Nilai</th>
+				<th class="text-center">Skala Nilai<br/>
+				<small>(Besar kecil skala sesuai dengan nilai)</small>
+				</th>
 				<th>Option</th>
 			</tr>
 			<?php
@@ -46,8 +48,8 @@
 					echo '<tr class="text-center">';
 						echo '<td>'.($i).'</td>';
 						echo '<td>'.$form->textField($model,'option'.$i,array('size'=>60,'maxlength'=>255, 'class'=>"form-control")).'</td>';
+				
 					echo '</tr>';
-					
 				}
 			?>
 		</table>

@@ -29,7 +29,11 @@
 			),
 		'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
 		'columns'=>array(
-			'pertanyaan',
+			array(
+				'name'	=>'teruntuk',
+				'type'	=>'raw',	
+				'value'		=> function($data){ return $data->fullContent; },
+			),
 			'description',
 			array(
 				'name'	=>'teruntuk',
@@ -43,17 +47,17 @@
 				'buttons'=>array(
 					'update'=>array(
 						'url'=>function($data){
-								return Yii::app()->createUrl("pertanyaaan/update", array("id"=>$data->id));
+								return Yii::app()->createUrl("pertanyaan/update", array("id"=>$data->id));
 						},
 					),
 					'view'=>array(
 							'url'=>function($data){
-								return Yii::app()->createUrl("pertanyaaan/view", array("id"=>$data->id));
+								return Yii::app()->createUrl("pertanyaan/view", array("id"=>$data->id));
 						},
 					),
 					'delete'=>array(
 						'url'=>function($data){
-								return Yii::app()->createUrl("pertanyaaan/view", array("id"=>$data->id));
+								return Yii::app()->createUrl("pertanyaan/view", array("id"=>$data->id));
 						},
 						'label'=>'Hapus',
 					),

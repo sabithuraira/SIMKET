@@ -1,5 +1,5 @@
 <?php
-if(HelpMe::isAuthorizeUnitKerja($model->kab_id))
+if(Yii::app()->user->level<=1)
 {
 ?>
 	<div class="box box-info">
