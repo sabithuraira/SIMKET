@@ -151,6 +151,43 @@ class KegiatanMitra extends HelpAr
 		return $result;
 	}
 
+	public function getResume(){
+		$result = array();
+		$idnya = $this->id;
+
+		$sql = "SELECT COUNT(id) as jumlah_petugas, 
+					SUM(case when status = 1 then 1 else 0 end) as jumlah_pml,
+					SUM(case when status = 2 then 1 else 0 end) as jumlah_pcl,
+					SUM(case when flag_mitra = 1 then 1 else 0 end) as jumlah_pegawai,
+					SUM(case when flag_mitra = 2 then 1 else 0 end) as jumlah_mitra,
+					AVG(nilai) as rata_nilai,
+					MAX(nilai) as max_nilai,
+					MIN(nilai) as min_nilai
+					FROM `kegiatan_mitra_petugas` WHERE id_kegiatan=$idnya";
+		
+		$jumlah_petugas = Yii::app()->db->createCommand($sql)->queryRow();
+
+		$result['jumlah_petugas'] = $jumlah_petugas['jumlah_petugas'];
+		$result['jumlah_pml'] = $jumlah_petugas['jumlah_pml'];
+		$result['jumlah_pcl'] = $jumlah_petugas['jumlah_pcl'];
+		$result['jumlah_pegawai'] = $jumlah_petugas['jumlah_pegawai'];
+		$result['jumlah_mitra'] = $jumlah_petugas['jumlah_mitra'];
+		$result['rata_nilai'] = $jumlah_petugas['rata_nilai'];
+		$result['max_nilai'] = $jumlah_petugas['max_nilai'];
+		$result['min_nilai'] = $jumlah_petugas['min_nilai'];
+
+		return $result;
+	}
+
+	public function getResumePertanyaan(){
+		$idnya = $this->id;
+		$sql = "SELECT AVG(nilai) as rata, pertanyaan_id, p.pertanyaan FROM `mitra_nilai` m, mitra_pertanyaan p WHERE 
+					m.pertanyaan_id=p.id  AND kegiatan_id = $idnya 
+					GROUP BY pertanyaan_id";
+
+		return Yii::app()->db->createCommand($sql)->queryAll();		
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

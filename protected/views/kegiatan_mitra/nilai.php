@@ -23,11 +23,18 @@
                         <?php 
 					    	echo CHtml::link("2", array('mitra', 'id'=>$model->id_kegiatan), array('class'=>'btn btn-default btn-circle'));
                         ?>
-                        <p>Petugas Kegiatan</p>
+                        <p>Petugas Lapangan</p>
                     </div>
                     <div class="stepwizard-step">
                         <a href="#step-3" type="button" class="btn btn-primary btn-circle">3</a>
-                        <p>Skoring</p>
+                        <p>Skoring Petugas</p>
+                    </div>
+
+                    <div class="stepwizard-step">
+                        <?php
+                            echo CHtml::link("4", array("resume", 'id'=>$model->id_kegiatan), array('class'=>'btn btn-default btn-circle'));
+                        ?>
+                        <p>Resume Kegiatan</p>
                     </div>
                 </div>
             </div>
@@ -79,7 +86,12 @@
                             </div>
                         </div>
 
-
+                        <?php if($is_simpan){ ?>
+                            <div class="callout callout-info" style="margin-bottom: 0!important;">
+                                Data penilaian berhasil disimpan
+                            </div>
+                        <?php } ?>
+                        
                         <?php $form=$this->beginWidget('CActiveForm', array(
                             'id'=>'kegiatan-form',
                             'enableAjaxValidation'=>false,

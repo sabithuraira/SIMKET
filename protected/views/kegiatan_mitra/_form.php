@@ -18,7 +18,7 @@
 						echo CHtml::link("2", array('mitra', 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
 					}
 				?>
-				<p>Petugas Kegiatan</p>
+				<p>Petugas Lapangan</p>
 			</div>
 			<div class="stepwizard-step">
 				<?php if($model->isNewRecord){ ?>
@@ -27,7 +27,17 @@
 						echo CHtml::link("3", array("skoring", 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
 					}
 				?>
-				<p>Skoring</p>
+				<p>Skoring Petugas</p>
+			</div>
+
+			<div class="stepwizard-step">
+				<?php if($model->isNewRecord){ ?>
+					<a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+				<?php }else{ 
+						echo CHtml::link("4", array("resume", 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
+					}
+				?>
+				<p>Resume Kegiatan</p>
 			</div>
 		</div>
 	</div>

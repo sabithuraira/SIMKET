@@ -34,7 +34,7 @@ class Kegiatan_mitraController extends Controller
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create', 'update', 'mitra',
 					'insert_petugas', 'get_list_mitra',
-					'nilai'),
+					'nilai', 'resume'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -163,8 +163,19 @@ class Kegiatan_mitraController extends Controller
 		));
 	}
 
+	public function actionResume($id){
+		$model=$this->loadModel($id);
+		$list_mitra = $model->listMitra();
+
+		$this->render('resume',array(
+			'model'		=>$model,
+			'list_mitra'=>$list_mitra
+		));
+	}
+
 	public function actionNilai($id)
 	{
+		$is_simpan = false;
 		$model=$this->loadModelPetugas($id);
 		$questions = MitraPertanyaan::model()->findAll(
 			'teruntuk=:t1 OR teruntuk=:t2', array(':t1'=>$model->status, ':t2'=>3)
@@ -189,10 +200,13 @@ class Kegiatan_mitraController extends Controller
 						$nilai->pertanyaan_id = $value['id'];
 						$nilai->nilai = $_POST['opts'.$value['id']];
 						$nilai->save();
+
+						$is_simpan = true;
 					}
 					else{
 						$nilai->nilai = $_POST['opts'.$value['id']];
 						$nilai->save();
+						$is_simpan = true;
 					}
 				}
 			}
@@ -203,7 +217,8 @@ class Kegiatan_mitraController extends Controller
 
 		$this->render('nilai',array(
 			'model'		=>$model,
-			'questions'	=>$questions
+			'questions'	=>$questions,
+			'is_simpan'	=>$is_simpan
 		));
 	}
 

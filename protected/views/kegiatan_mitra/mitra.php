@@ -23,11 +23,18 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
                     </div>
                     <div class="stepwizard-step">
                         <a href="#step-2" type="button" class="btn btn-primary btn-circle">2</a>
-                        <p>Petugas Kegiatan</p>
+                        <p>Petugas Lapangan</p>
                     </div>
                     <div class="stepwizard-step">
                         <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p>Skoring</p>
+                        <p>Skoring Petugas</p>
+                    </div>
+
+                    <div class="stepwizard-step">
+                        <?php
+                            echo CHtml::link("4", array("resume", 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
+                        ?>
+                        <p>Resume Kegiatan</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +56,7 @@ if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){
                                 <th>Nama</th>
                                 <th>NIP (Jika organik)</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center">SKOR</th>
+                                <th class="text-center">Nilai</th>
                                 <th></th>
                             </tr>
                             <?php
