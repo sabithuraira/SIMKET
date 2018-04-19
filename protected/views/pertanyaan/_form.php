@@ -1,3 +1,7 @@
+<?php
+	$baseUrl = Yii::app()->theme->baseUrl;
+?>
+<link rel="stylesheet" href="<?php echo $baseUrl;?>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <div class="form">
 
 	<?php $form=$this->beginWidget('CActiveForm', array(
@@ -21,7 +25,7 @@
 
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'description'); ?>
-			<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
+			<?php echo $form->textArea($model,'description',array('class'=>"textarea", 'style'=>"width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;")); ?>
 			<?php echo $form->error($model,'description'); ?>
 		</div>
 
@@ -61,3 +65,8 @@
 	<?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script src="<?php echo $baseUrl;?>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script>
+	$("#MitraPertanyaan_description").wysihtml5();
+</script>

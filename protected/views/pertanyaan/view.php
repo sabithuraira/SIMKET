@@ -15,7 +15,12 @@
 				'data'=>$model,
 				'attributes'=>array(
 					'pertanyaan',
-					'description',
+					// 'description',
+					array(
+						'name'=>'desription',
+						'type'=>'raw',
+						'value'=>$model->description,
+					),
 					array(
 						'name'	=>'teruntuk',
 						'value'=>$model->peruntukanLabel
@@ -37,7 +42,7 @@
 				{
 					echo '<tr class="text-center">';
 						echo '<td>'.($i).'</td>';
-						echo '<td>'.MitraOption::model()->findByAttributes(array('id_pertanyaan'=>$model->id, 'skala'=>$i))->description.'</td>';
+						echo '<td>'.CHtml::encode(MitraOption::model()->findByAttributes(array('id_pertanyaan'=>$model->id, 'skala'=>$i))->description).'</td>';
 					echo '</tr>';
 					
 				}

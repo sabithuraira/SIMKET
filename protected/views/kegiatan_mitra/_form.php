@@ -57,7 +57,7 @@
 						<p class="note text-center">Fields with <span class="required">*</span> are required.</p>
 
 						<?php echo $form->errorSummary($model); ?>
-
+<!-- 
 						<div class="form-group">
 							<?php echo $form->labelEx($model,'induk_id'); ?>
 							<?php 
@@ -66,7 +66,7 @@
 										array('empty'=>'- Pilih Induk Kegiatan-', 'class'=>"form-control")); 
 							?>
 							<?php echo $form->error($model,'induk_id'); ?>
-						</div>
+						</div> -->
 
 						<div class="form-group">
 							<?php echo $form->labelEx($model,'nama'); ?>

@@ -6,7 +6,7 @@
 		'method'=>'POST',
 	)); ?>
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<?php echo $form->labelEx($model,'induk_id'); ?>
 			<?php 
 				echo $form->dropDownList($model,'induk_id',
@@ -14,7 +14,7 @@
 						array('empty'=>'- Pilih Induk Kegiatan-', 'class'=>"form-control")); 
 			?>
 			<?php echo $form->error($model,'induk_id'); ?>
-		</div>
+		</div> -->
 
 		<div class="form-group">
 			<?php echo $form->labelEx($model,'nama'); ?>

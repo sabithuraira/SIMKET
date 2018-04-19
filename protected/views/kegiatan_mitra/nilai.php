@@ -53,7 +53,7 @@
                             <h5 class="widget-user-desc"><?php echo $model->statusLabel; ?></h5>
                             </div>
                             <div class="widget-user-image">
-                            <img class="img-circle" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/user1-128x128.jpg" ?>" alt="User Avatar">
+                            <img class="img-circle" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/logo_bps.png" ?>" alt="User Avatar">
                             </div>
                             <div class="box-footer">
                             <div class="row">

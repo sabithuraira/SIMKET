@@ -34,7 +34,11 @@
 				'type'	=>'raw',	
 				'value'		=> function($data){ return $data->fullContent; },
 			),
-			'description',
+			array(
+				'name'	=>'description',
+				'type'	=>'raw',	
+				'value'	=> function($data){ return $data->description; },
+			),
 			array(
 				'name'	=>'teruntuk',
 				'type'	=>'raw',	

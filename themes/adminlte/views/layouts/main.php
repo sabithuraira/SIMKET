@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SIMKET | Sistem Monitoring Kegiatan Terpadu</title>
+  <title>SIM Rapor</title>
 	<?php
 	  $baseUrl = Yii::app()->theme->baseUrl; 
 	  // $cs = Yii::app()->getClientScript();
@@ -38,7 +38,8 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<!-- <body class="hold-transition skin-blue sidebar-mini"> -->
+<body class="hold-transition skin-yellow sidebar-mini">
 
 
 <!-- Bootstrap 3.3.6 -->
@@ -65,7 +66,7 @@
 <div class="wrapper">
 
   <?php require_once('header.php'); ?>
-  <?php require_once('navigation.php'); ?>
+  <?php require_once('navigation_1604.php'); ?>
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

@@ -34,7 +34,7 @@
               <span class="label label-success">3</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">Panduan SIMKET</li>
+              <li class="header">Panduan SIM RAPOR</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -43,7 +43,7 @@
                       <i class="fa fa-users text-aqua"></i> Panduan Awal
                     </a>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href="https://laci.bps.go.id/s/R8Dmm3bIrK1jItI">
                       <i class="fa fa-shopping-cart text-green"></i> MODUL Anggaran
                     </a>
@@ -53,7 +53,7 @@
                     <a href="https://laci.bps.go.id/s/1xRoh37hx6kP3zY">
                       <i class="fa fa-sticky-note text-yellow"></i> Slide SIMKET pada BIMTEK TU
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
               </li>
             </ul>

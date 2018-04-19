@@ -127,6 +127,8 @@ class PegawaiController extends Controller
 		if(isset($_GET['Pegawai']))
 			$model->attributes=$_GET['Pegawai'];
 
+		$model->unit_kerja = 22;
+
 		$this->render('admin',array(
 			'model'=>$model,
 		));

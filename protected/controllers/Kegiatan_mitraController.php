@@ -143,8 +143,9 @@ class Kegiatan_mitraController extends Controller
 		{
 			$model->attributes=$_POST['KegiatanMitra'];
 			$model->kab_id = 22;
+			$model->induk_id = 15;
 			if($model->save())
-				$this->redirect(array('mitra','id'=>$model->id));
+				$this->redirect(array('mitra', 'id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -238,7 +239,7 @@ class Kegiatan_mitraController extends Controller
 		{
 			$model->attributes=$_POST['KegiatanMitra'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('mitra','id'=>$model->id));
 		}
 
 		$this->render('update',array(
