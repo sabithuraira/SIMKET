@@ -105,6 +105,22 @@ class Kegiatan_mitraController extends Controller
 				
 				if($model->save())
 				{
+					if($model->status!=1){
+						$total_wil = count($_POST['mitra_wils']);
+						if($total_wil>0){
+							for($i=0;$i<$total_wil;++$i){
+								$m_wils = new KegiatanMitraWilayah;
+								$m_wils->kmp_id = $model->id;
+								$m_wils->kegiatan_id = $model->id_kegiatan;
+								$m_wils->mitra_id = $model->id_mitra;
+								
+								$m_wils->nks = $_POST['mitra_wils'][$i]['nks'];
+								$m_wils->bs = $_POST['mitra_wils'][$i]['bs'];
+								$m_wils->save();
+							}
+						}
+					}
+
 					$satu= $id;
 				}
 			}
@@ -186,28 +202,65 @@ class Kegiatan_mitraController extends Controller
 		{
 			foreach ($questions as $key => $value)
 			{
-				if(isset($_POST['opts'.$value['id']])){
-					$nilai = MitraNilai::model()->findByAttributes(
-						array(
-							'mitra_id'		=>$id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
-							'pertanyaan_id'	=>$value['id']
-						)
-					);
 
-					if($nilai==null){
-						$nilai = new MitraNilai;
-						$nilai->mitra_id = $id;
-						$nilai->kegiatan_id = $model->id_kegiatan;
-						$nilai->pertanyaan_id = $value['id'];
-						$nilai->nilai = $_POST['opts'.$value['id']];
-						$nilai->save();
-
-						$is_simpan = true;
+				if($value['id']==11 || $value['id']==12 || $value['id']==15){
+					$wilayah = KegiatanMitraWilayah::model()->findAllByAttributes(array(
+						'kmp_id'	=>$model->id //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+					));
+					foreach ($wilayah as $key_wil => $value_wil)
+					{
+						if(isset($_POST['opts'.$value['id'].'_'.$value_wil['id']])){
+							$nilai = MitraNilai::model()->findByAttributes(
+								array(
+									'mitra_id'		=>$id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+									'pertanyaan_id'	=>$value['id'],
+									'wilayah_id'	=>$value_wil['id']
+								)
+							);
+		
+							if($nilai==null){
+								$nilai = new MitraNilai;
+								$nilai->mitra_id = $id;
+								$nilai->kegiatan_id = $model->id_kegiatan;
+								$nilai->pertanyaan_id = $value['id'];
+								$nilai->nilai = $_POST['opts'.$value['id'].'_'.$value_wil['id']];
+								$nilai->wilayah_id = $value_wil['id'];
+								$nilai->save();
+		
+								$is_simpan = true;
+							}
+							else{
+								$nilai->nilai = $_POST['opts'.$value['id'].'_'.$value_wil['id']];
+								$nilai->save();
+								$is_simpan = true;
+							}
+						}
 					}
-					else{
-						$nilai->nilai = $_POST['opts'.$value['id']];
-						$nilai->save();
-						$is_simpan = true;
+				}
+				else{
+					if(isset($_POST['opts'.$value['id']])){
+						$nilai = MitraNilai::model()->findByAttributes(
+							array(
+								'mitra_id'		=>$id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+								'pertanyaan_id'	=>$value['id']
+							)
+						);
+	
+						if($nilai==null){
+							$nilai = new MitraNilai;
+							$nilai->mitra_id = $id;
+							$nilai->kegiatan_id = $model->id_kegiatan;
+							$nilai->pertanyaan_id = $value['id'];
+							$nilai->nilai = $_POST['opts'.$value['id']];
+							$nilai->save();
+	
+							$is_simpan = true;
+						}
+						else{
+							$nilai->nilai = $_POST['opts'.$value['id']];
+							$nilai->save();
+							$is_simpan = true;
+						}
 					}
 				}
 			}

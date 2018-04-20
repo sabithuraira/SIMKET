@@ -15,6 +15,18 @@
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'mitra-bps-grid',
 			'dataProvider'=>$model->search(),
+
+			'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
+			'pager'=>array(
+				'header'=>Yii::t('penerjemah','Ke halaman : '),
+				'prevPageLabel'=>Yii::t('penerjemah','Sebelumnya'),
+				'nextPageLabel'=>Yii::t('penerjemah','Selanjutnya'),
+				'firstPageLabel'=>Yii::t('penerjemah','Pertama'),
+				'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
+			),
+			
+			'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
+			
 			// 'filter'=>$model,
 			'columns'=>array(
 				'nama',

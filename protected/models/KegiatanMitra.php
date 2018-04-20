@@ -120,8 +120,19 @@ class KegiatanMitra extends HelpAr
 			$nip = "";
 			$status = "PCL";
 
-			if($value['status']==1)
+			if($value['status']==1){
 				$status = "PML";
+			}
+			else{
+				$wilayah = KegiatanMitraWilayah::model()->findAllByAttributes(array(
+					'kmp_id'	=>$value['id']
+				));
+
+				$status .= "<p><b> <u>Wilayah Tugas</u></b></p>";
+				foreach($wilayah as $key_wil => $val_wil){
+					$status .="<p>- NKS: ".$val_wil['nks'].", NBS: ".$val_wil['bs']."</p>";
+				}
+			}
 
 			if($value['flag_mitra']==1){
 				$petugas = Pegawai::model()->findByPk($value['id_mitra']);	

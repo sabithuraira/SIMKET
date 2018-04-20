@@ -101,33 +101,67 @@
                                 <?php
                                     foreach ($questions as $key => $value)
                                     {
-                                        echo '<tr>';
-                                        echo '<td><b>'.$value['pertanyaan'].'</b></td>';
-                                        echo '</tr>';
+                                        $opts_name = 'opts'.$value['id'];
+                                        echo '<tr><td><b>'.$value['pertanyaan'].'</b></td></tr>';
+                                        if($value['id']==11 || $value['id']==12 || $value['id']==15){
+                                    
+                                            echo '<tr>';
+                                            echo '<td><div class="form-group">';
+                                            
+                                            $wilayah = KegiatanMitraWilayah::model()->findAllByAttributes(array(
+                                                'kmp_id'	=>$model->id //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+                                            ));
 
-                                        echo '<tr>';
-                                        echo '<td><div class="form-group">';
-                                        
-                                        $nilai = MitraNilai::model()->findByAttributes(
-                                            array(
-                                                'mitra_id'		=>$model->id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
-                                                'pertanyaan_id'	=>$value['id']
-                                            )
-                                        );
-                                        
-                                        foreach($value->options as $key2 => $value2){
-                                            $opts_name = 'opts'.$value['id'];
-                                            $opts_id = 'opts'.$value['id'].$value2['skala'];
+                                            echo '<table class="table table-hover table-bordered table-condensed">';
+                                            
+                                            $list_data = CHtml::listData($value->options, 'skala', 'label');
+                                            foreach ($wilayah as $key_wil => $value_wil)
+                                            {
+                                                $nilai = MitraNilai::model()->findByAttributes(
+                                                    array(
+                                                        'mitra_id'		=>$model->id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+                                                        'pertanyaan_id'	=>$value['id'],
+                                                        'wilayah_id'	=>$value_wil['id']
+                                                    )
+                                                );
+                                                echo '<tr>';
+                                                    echo '<td>'.($key_wil+1).'</td>';
+                                                    echo '<td>'.$value_wil['nks'].'</td>';
+                                                    echo '<td>'.$value_wil['bs'].'</td>';
+                                                
+                                                    echo '<td class="text-center">'.CHtml::dropDownList($opts_name.'_'.$value_wil['id'], $nilai->nilai ,$list_data).'</td>';
+                                                echo '</tr>';
+                                            }
 
-                                            $is_disable = (strlen($value2['label']) == 0) ? 'disabled' : '';
-                                            $is_checked = ($nilai!=null && $nilai->nilai==$value2['skala']) ? 'checked' : '';
-
-
-                                            echo '<div class="radio"><label>';
-                                            echo '<input type="radio" name="'.$opts_name.'" id="'.$opts_id.'" value="'.$value2['skala'].'" '.$is_disable.' '.$is_checked.'>('.$value2['skala'].') '.$value2['label'].'</label>';
-                                            echo '</div>';    
+                                            echo '</table>';
+                                            
+                                            echo '</div></td>';
                                         }
-                                        echo '</div></td>';
+                                        else{
+    
+                                            echo '<tr>';
+                                            echo '<td><div class="form-group">';
+                                            
+                                            $nilai = MitraNilai::model()->findByAttributes(
+                                                array(
+                                                    'mitra_id'		=>$model->id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+                                                    'pertanyaan_id'	=>$value['id']
+                                                )
+                                            );
+                                            
+                                            foreach($value->options as $key2 => $value2){
+                                                $opts_id = 'opts'.$value['id'].$value2['skala'];
+    
+                                                $is_disable = (strlen($value2['label']) == 0) ? 'disabled' : '';
+                                                $is_checked = ($nilai!=null && $nilai->nilai==$value2['skala']) ? 'checked' : '';
+    
+    
+                                                echo '<div class="radio"><label>';
+                                                echo '<input type="radio" name="'.$opts_name.'" id="'.$opts_id.'" value="'.$value2['skala'].'" '.$is_disable.' '.$is_checked.'>('.$value2['skala'].') '.$value2['label'].'</label>';
+                                                echo '</div>';    
+                                            }
+                                            echo '</div></td>';
+                                        }
                                         echo '</tr>';
                                     }
                                 ?>
