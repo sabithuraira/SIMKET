@@ -189,6 +189,69 @@
             </div>
         </div>
     </div>
+
+    <div id="modalUpdate" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span id="myModalLabel">Perbaharui Wilayah Tugas {{ cur_mitra_name }}</span>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="loading">
+                        <img class="loading_image"  height="50" width="50" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/loading.gif" /><br/>
+                        <b class="loading_message">Loading...</b>
+                    </div>
+
+                    <form id="InfroText2" method="POST">
+                        <input name="InfroText" value="1" type="hidden">
+
+                        <b><u>Wilayah tugas (khusus PCL):</u></b><br/>
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <td class="text-center">
+                                        <input class="new-todo"
+                                            autofocus autocomplete="off"
+                                            placeholder="NKS, ex: 541928"
+                                            v-model="nks">
+                                    </td>
+                                    <td class="text-center">
+                                        <input class="new-todo"
+                                            autofocus autocomplete="off"
+                                            placeholder="Nomor BS, ex: 001B"
+                                            v-model="bs">
+                                    </td>
+                                    <td class="text-center"><a href="#" @click="addWilDb" class="btn btn-default btn-sm"><i class='fa fa-plus'></i> Tambah</a></td>  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="wil in cur_wils" :key="wil.nks">
+                                    <td>{{ wil.nks }}</td>
+                                    <td>{{ wil.bs }}</td>
+                                    <td class="text-center"><a href="#"  @click="removeWilDb(wil.id)" class="btn btn-default btn-sm"><i class='fa fa-trash'></i> Hapus</a></td>  
+                                </tr>
+                            </tbody>
+                        </table>
+                </form>
+
+                <?php
+                    echo CHtml::link("Tambah Mitra", array('mitrabps/create'), array('target'=>'_blank'));
+                    echo "&nbsp | &nbsp";
+                    echo CHtml::link("Tambah Pegawai", array('pegawai/create'), array('target'=>'_blank'));
+                ?>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button class="btn btn-primary" data-dismiss="modal" id="btn-update-finish">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 <script src="<?php echo $baseUrl;?>/dist/js/vue_page/kegiatan_mitra/mitra.js"></script>

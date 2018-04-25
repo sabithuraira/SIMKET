@@ -34,7 +34,8 @@ class Kegiatan_mitraController extends Controller
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create', 'update', 'mitra',
 					'insert_petugas', 'get_list_mitra',
-					'nilai', 'resume'),
+					'nilai', 'resume', 'get_list_wilayah',
+					'delete_wilayah', 'add_single_wilayah'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -47,6 +48,69 @@ class Kegiatan_mitraController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionAdd_single_wilayah($id) //kegiatan_id
+	{
+		$satu='';
+		
+		if(strlen($_POST['nks'])>0 && strlen($_POST['bs'])>0 && strlen($_POST['kmp_id'])>0){
+			$m_wils = new KegiatanMitraWilayah;
+			$m_wils->kmp_id = $_POST['kmp_id'];
+			$m_wils->kegiatan_id = $id;
+			$m_wils->mitra_id = $_POST['mitra_id'];
+			
+			$m_wils->nks = $_POST['nks'];
+			$m_wils->bs = $_POST['bs'];
+			$m_wils->save();
+						
+			$satu= $id;
+		}
+		
+		echo CJSON::encode(array
+		(
+				'satu'=>$satu,
+		));
+		Yii::app()->end();
+	}
+
+	public function actionDelete_wilayah($id)
+	{
+		$satu=array();
+
+		$wil = KegiatanMitraWilayah::model()->findByPk($id);
+		$wil->delete();
+
+		echo CJSON::encode(array
+		(
+			'satu'=>$id,
+		));
+		Yii::app()->end();
+	}
+
+	public function actionGet_list_wilayah($id)
+	{
+		$satu=array();
+
+		$wils = KegiatanMitraWilayah::model()->findAllByAttributes(array(
+			'kmp_id'	=>$id
+		));
+
+		foreach($wils as $key => $value){
+			$satu[] = array(
+				'id'	=>$value->id,
+				'nks'	=>$value->nks,
+				'bs'	=>$value->bs,
+				'kegiatan_id'	=>$value->kegiatan_id,
+				'mitra_id'		=>$value->mitra_id
+			);
+		}
+
+		echo CJSON::encode(array
+		(
+			'satu'=>$satu,
+		));
+		Yii::app()->end();
 	}
 
 	public function actionGet_list_mitra($id)
