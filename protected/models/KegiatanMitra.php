@@ -120,20 +120,6 @@ class KegiatanMitra extends HelpAr
 			$nip = "";
 			$status = "PCL";
 
-			if($value['status']==1){
-				$status = "PML";
-			}
-			else{
-				$wilayah = KegiatanMitraWilayah::model()->findAllByAttributes(array(
-					'kmp_id'	=>$value['id']
-				));
-
-				$status .= "<p><b> <u>Wilayah Tugas</u></b></p>";
-				foreach($wilayah as $key_wil => $val_wil){
-					$status .="<p>- NKS: ".$val_wil['nks'].", NBS: ".$val_wil['bs']."</p>";
-				}
-			}
-
 			if($value['flag_mitra']==1){
 				$petugas = Pegawai::model()->findByPk($value['id_mitra']);	
 				if($petugas!==null){
@@ -146,6 +132,26 @@ class KegiatanMitra extends HelpAr
 				if($petugas!==null){
 					$nama = $petugas->nama;
 				}
+			}
+
+			if($value['status']==1){
+				$status = "PML";
+			}
+			else{
+				$wilayah = KegiatanMitraWilayah::model()->findAllByAttributes(array(
+					'kmp_id'	=>$value['id']
+				));
+
+				$status .= "<p><b> <u>Wilayah Tugas</u></b></p>";
+				foreach($wilayah as $key_wil => $val_wil){
+					$status .="<p>- NKS: ".$val_wil['nks'].", NBS: ".$val_wil['bs']."</p>";
+				}
+
+				$status.=('[<a href="#modalUpdate" role="button" class="update_wilayah" 
+				data-id="'.$value['id'].'" 
+				data-nama="'.$nama.'" 
+				data-mitra_id="'.$value['id_mitra'].'" 
+				data-toggle="modal">Update Wilayah Tugas</a>]');
 			}
 
 			$result[] = array(

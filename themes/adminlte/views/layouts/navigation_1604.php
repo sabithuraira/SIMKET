@@ -2,7 +2,7 @@
     <section class="sidebar">
       <ul class="sidebar-menu">         
       
-        <li class="header">MONITORING MITRA BPS</li>
+        <li class="header">MONITORING EVALUASI KINERJA PEGAWAI BPS</li>
 
         <?php if(!Yii::app()->user->isGuest){ ?>
           <li><a href="<?php echo Yii::app()->createUrl('kegiatan_mitra'); ?>"><i class="fa fa-bicycle"></i><span> Daftar Kegiatan Mitra BPS</span></a></li>

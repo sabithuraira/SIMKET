@@ -9,8 +9,6 @@
 
         <!-- Left col -->
         <section class="col-lg-7 connectedSortable">
-
-
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Resume Kegiatan <?php echo date('Y'); ?></h3>
