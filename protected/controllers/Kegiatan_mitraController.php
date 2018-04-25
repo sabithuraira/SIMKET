@@ -33,7 +33,8 @@ class Kegiatan_mitraController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create', 'update', 'mitra',
-					'insert_petugas', 'get_list_mitra',
+					'insert_petugas', 'delete_petugas',
+					'get_list_mitra',
 					'nilai', 'resume', 'get_list_wilayah',
 					'delete_wilayah', 'add_single_wilayah'),
 				'users'=>array('@'),
@@ -48,6 +49,21 @@ class Kegiatan_mitraController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionDelete_petugas($id)
+	{
+		$satu=array();
+
+		$petugas = KegiatanMitraPetugas::model()->findByPk($id);
+		$id_kegiatan = $petugas->id_kegiatan;
+		$petugas->delete();
+
+		echo CJSON::encode(array
+		(
+			'satu'=>$id_kegiatan,
+		));
+		Yii::app()->end();
 	}
 
 	public function actionAdd_single_wilayah($id) //kegiatan_id

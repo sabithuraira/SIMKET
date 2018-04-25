@@ -129,7 +129,10 @@
                                                     echo '<td>'.$value_wil['nks'].'</td>';
                                                     echo '<td>'.$value_wil['bs'].'</td>';
                                                 
-                                                    echo '<td class="text-center">'.CHtml::dropDownList($opts_name.'_'.$value_wil['id'], $nilai->nilai ,$list_data).'</td>';
+                                                    if($nilai!=null)
+                                                        echo '<td class="text-center">'.CHtml::dropDownList($opts_name.'_'.$value_wil['id'], $nilai->nilai ,$list_data).'</td>';
+                                                    else
+                                                        echo '<td class="text-center">'.CHtml::dropDownList($opts_name.'_'.$value_wil['id'], '' ,$list_data).'</td>';
                                                 echo '</tr>';
                                             }
 

@@ -46,6 +46,23 @@ class KegiatanMitraPetugas extends HelpAr
 		);
 	}
 
+	public function beforeDelete()
+    {   
+		$datas = KegiatanMitraWilayah::model()->findAllByAttributes(array(
+				'kmp_id'	=>$this->id
+		));
+
+		foreach($datas as $key=>$value){
+			$id_kmp = $this->id;
+			$sql = "DELETE FROM mitra_nilai WHERE mitra_id=$id_kmp";
+			Yii::app()->db->createCommand($sql)->execute();
+
+			$value->delete();
+		}
+
+        return parent::beforeDelete();
+    }
+
 	/**
 	 * @return array relational rules.
 	 */

@@ -60,6 +60,7 @@
                                     <th class="text-center">Status & wilayah tugas(khusus PCL)</th>
                                     <th class="text-center">Nilai</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                                 <?php
                                     foreach ($list_mitra as $key => $value)
@@ -71,7 +72,15 @@
                                         
                                             echo '<td class="text-center">'.$value['status'].'</td>';
                                             echo '<td class="text-center">'.$value['nilai'].' / 4</td>';
-                                            echo '<td class="text-center">'.CHtml::link("<i class='fa fa-tachometer'></i> Penilaian", array('nilai', 'id'=> $value['id']), array('class'=>'btn btn-default btn-sm')).'</td>';
+                                            echo '<td class="text-center">';
+                                                echo CHtml::link("<i class='fa fa-tachometer'></i> Penilaian", array('nilai', 'id'=> $value['id']), array('class'=>'btn btn-default btn-sm'));
+                                            echo '</td>';
+                                            
+                                            echo '<td class="text-center">';
+                                                echo '<a href="#" data-id="'.$value['id'].'"  class="btn btn-default btn-sm delete-petugas"><i class="fa fa-trash"></i> Hapus</a>';
+                                            echo '</td>';
+                                        
+
                                         echo '</tr>';
                                     }
                                 ?>

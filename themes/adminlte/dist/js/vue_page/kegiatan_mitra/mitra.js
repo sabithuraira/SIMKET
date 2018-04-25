@@ -1,4 +1,3 @@
-
 var vm = new Vue({  
     el: "#mitra_tag",
     data: {
@@ -111,6 +110,24 @@ $(".update_wilayah").click(function () {
     vm.cur_mitra_name = $(this).data('nama');
     vm.cur_mitra_id = $(this).data('mitra_id');
     refreshWilayah();
+});
+
+$(".delete-petugas").click(function () {
+
+    if (confirm('Menghapus data petugas akan menghapus semua data nilai dan wilayah yang terkait dengan petugas ini. Anda yakin ingin melanjutkan?')) {
+        var idnya = $(this).data('id');
+        
+        $.ajax({
+            url: pathname+"?r=kegiatan_mitra/delete_petugas&id=" + idnya,
+            type:"gat",
+            dataType :"json",
+            success : function(data)
+            {
+                window.location.href=pathname+ "?r=kegiatan_mitra/mitra&id="+data.satu
+            }
+        });
+    } else {
+    }
 });
 
 mitra_from.change(function(){
