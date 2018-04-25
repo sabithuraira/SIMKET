@@ -25,6 +25,15 @@ class KegiatanMitraWilayah extends HelpAr
 		return 'kegiatan_mitra_wilayah';
 	}
 
+	public function beforeDelete()
+    {   
+		$id_wil = $this->id;
+		$sql = "DELETE FROM mitra_nilai WHERE wilayah_id=$id_wil";
+		Yii::app()->db->createCommand($sql)->execute();
+
+        return parent::beforeDelete();
+    }
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
