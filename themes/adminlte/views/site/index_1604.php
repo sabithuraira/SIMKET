@@ -7,7 +7,7 @@
         <h2>SIM RAPOR</h2>
     </div>
     <div class="text-center widget-user-image">
-        <img src="<?php echo Yii::app()->theme->baseUrl."/dist/img/dashboard_1604.jpg" ?>">
+        <img width="600" height="400" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/dashboard_1604.jpg" ?>">
     </div>
 </div>
 
