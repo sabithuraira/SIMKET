@@ -3,6 +3,8 @@
     @import url('<?php echo $baseUrl.'/dist/css/step.css';?>');
 </style>
 
+<div id="resume_tag">
+
 	<div class="box box-info">
 		<div class="box-body">
             <div class="stepwizard">
@@ -99,6 +101,7 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">Petugas</a></li>
               <li><a href="#tab_2" data-toggle="tab">Form Pertanyaan</a></li>  
+              <li><a href="#tab_3" data-toggle="tab">Grafik Pertanyaan</a></li>  
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
@@ -152,5 +155,67 @@
                         ?>
                     </table>
                 </div>
+
+                <div class="tab-pane" id="tab_3">
+                    <div class="row">
+                            <?php
+                                foreach ($model->resumePertanyaan as $key => $value)
+                                {
+                                    if($key%2==0){
+                                        echo '<div class="col-sm-6 border-right">';
+                                    }
+                                    else{
+                                        echo '<div class="col-sm-6">';
+                                    }
+                            ?>
+                                    <div class="box box-default">
+                                        <div class="box-header with-border">
+                                        <?php echo $value['pertanyaan']; ?>
+                                        </div>
+                                    
+                                        <div class="box-body">
+                                            <?php
+                                                echo '<div id="donut-chart-'.$value['pertanyaan_id'].'" class="donut-chart" style="height:150px;width: 100%"
+                                                    data-one="'.$value['jumlah1'].'" 
+                                                    data-two="'.$value['jumlah2'].'"
+                                                    data-three="'.$value['jumlah3'].'"
+                                                    data-four="'.$value['jumlah4'].'"
+                                                    data-optone="'.$value['opt1'].'" 
+                                                    data-opttwo="'.$value['opt2'].'"
+                                                    data-optthree="'.$value['opt3'].'"
+                                                    data-optfour="'.$value['opt4'].'">
+                                                    </div>';
+                                            ?>
+                                        </div>
+                                        
+                                        <div class="box-footer no-padding">
+
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <?php
+                                                    for($i=1;$i<=4;++$i){
+                                                        echo '<li><a href="#">'.$value['opt'.$i].'<span class="pull-right text-blue"> '.$value['jumlah'.$i].'</span></a></li>';
+                                                    }
+                                                ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                            <?php        
+                                    echo '</div>';
+                                }
+                            ?>
+                    </div>
+
+
+                </div>
             </div>
-          </div>
+        </div>
+</div>
+
+
+
+<script src="<?php echo $baseUrl;?>/plugins/flot/jquery.flot.min.js"></script>
+<script src="<?php echo $baseUrl;?>/plugins/flot/jquery.flot.resize.min.js"></script>
+<script src="<?php echo $baseUrl;?>/plugins/flot/jquery.flot.pie.min.js"></script>
+<script src="<?php echo $baseUrl;?>/plugins/flot/jquery.flot.categories.min.js"></script>
+
+<script src="<?php echo $baseUrl;?>/dist/js/vue_page/kegiatan_mitra/resume.js"></script>
