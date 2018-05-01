@@ -76,7 +76,7 @@ class PertanyaanController extends Controller
 					$option->id_pertanyaan 	= $model->id;
 					$option->description 	= $_POST['MitraPertanyaan']['option'.$i];
 					$option->skala 			= $i;
-					$option->save(false);
+					$option->save();
 				}
 
 				$this->redirect(array('view','id'=>$model->id));
@@ -128,7 +128,7 @@ class PertanyaanController extends Controller
 						$option->id_pertanyaan 	= $model->id;
 						$option->description 	= $_POST['MitraPertanyaan']['option'.$i];
 						$option->skala 			= $i;
-						$option->save(false);
+						$option->save();
 					}
 					else{
 						$option = MitraOption::model()->findByAttributes(

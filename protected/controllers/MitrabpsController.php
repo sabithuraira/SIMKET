@@ -34,7 +34,8 @@ class MitrabpsController extends Controller
 				},
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'delete'),
+				'actions'=>array('create','update', 'delete',
+					'rapor'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -132,6 +133,19 @@ class MitrabpsController extends Controller
 			$model->attributes=$_POST['MitraBps'];
 
 		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+
+	public function actionRapor()
+	{
+		$model=new MitraBps('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_POST['MitraBps']))
+			$model->attributes=$_POST['MitraBps'];
+
+		$this->render('rapor',array(
 			'model'=>$model,
 		));
 	}

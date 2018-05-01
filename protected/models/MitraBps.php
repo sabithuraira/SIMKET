@@ -122,4 +122,20 @@ class MitraBps extends HelpAr
 	{
 		return parent::model($className);
 	}
+
+	public function getNilaiAndJumlah(){
+		$idnya = $this->id;
+		$sql = "SELECT IFNULL(AVG(nilai),0) as rata, COUNT(id) as jumlah 
+					FROM `kegiatan_mitra_petugas` 
+					WHERE id_mitra='$idnya'";
+
+		
+		$sql_result = Yii::app()->db->createCommand($sql)->queryRow();	
+
+		$result = array();
+		$result['rata'] = $sql_result['rata'];
+		$result['jumlah'] = $sql_result['jumlah'];
+
+		return $result;
+	}
 }
