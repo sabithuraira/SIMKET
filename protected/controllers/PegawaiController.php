@@ -33,7 +33,7 @@ class PegawaiController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','delete',
-					'rapor'),
+					'rapor', 'detail'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -51,6 +51,13 @@ class PegawaiController extends Controller
 	public function actionView($id)
 	{
 		$this->render('view',array(
+			'model'=>$this->loadModel($id),
+		));
+	}
+
+	public function actionDetail($id)
+	{
+		$this->render('detail',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
