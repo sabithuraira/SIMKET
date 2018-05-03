@@ -108,9 +108,18 @@ class KegiatanMitraPetugas extends HelpAr
 
 	public function getTotalPertanyaan(){
 		$statusnya = $this->status;
+		$idnya = $this->id;
 		$sql = "SELECT COUNT(id) FROM mitra_pertanyaan WHERE teruntuk=$statusnya OR teruntuk=3";
 
-		return Yii::app()->db->createCommand($sql)->queryScalar();
+		$total_pertanyaan = Yii::app()->db->createCommand($sql)->queryScalar() - 2;
+
+		$sql_wilayah = "SELECT COUNT(id) FROM kegiatan_mitra_wilayah WHERE kmp_id=$idnya";
+
+		$total_wilayah = Yii::app()->db->createCommand($sql_wilayah)->queryScalar();
+		$total = $total_pertanyaan + (2 * $total_wilayah);
+		// print_r($total_pertanyaan);die();
+
+		return $total;
 	}
 
 	/**
