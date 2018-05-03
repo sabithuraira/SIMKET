@@ -119,7 +119,7 @@ $(".delete-petugas").click(function () {
         
         $.ajax({
             url: pathname+"?r=kegiatan_mitra/delete_petugas&id=" + idnya,
-            type:"gat",
+            type:"get",
             dataType :"json",
             success : function(data)
             {

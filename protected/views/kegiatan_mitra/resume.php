@@ -79,7 +79,7 @@
                 <!-- /.col -->
                 <div class="col-sm-6">
                     <ul class="nav nav-stacked">
-                        <li><a href="#">% Penilaian <span class="pull-right badge bg-blue">31</span></a></li>
+                        <!-- <li><a href="#">% Penilaian <span class="pull-right badge bg-blue">31</span></a></li> -->
                         <li><a href="#">Nilai Rata-rata <span class="pull-right badge bg-blue"><?php echo $model->resume['rata_nilai'].' / 4'; ?></span></a></li>
                         <li><a href="#">Nilai Paling Tinggi <span class="pull-right badge bg-aqua"><?php echo $model->resume['max_nilai'].' / 4'; ?></span></a></li>
                         <li><a href="#">Nilai Paling Kecil <span class="pull-right badge bg-red"><?php echo $model->resume['min_nilai'].' / 4'; ?></span></a></li>
