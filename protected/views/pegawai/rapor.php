@@ -41,7 +41,7 @@
 				array(
 					'header'	=>'Rata Nilai',
 					'type'=>'raw',
-					'value'		=> function($data){ return round($data->nilaiAndJumlah['rata'],3); },
+					'value'		=> function($data){ return round($data->nilaiAndJumlah['rata'],3)." (".$data->nilaiAndJumlah['labelRata'].")"; },
 				),
 				array(
 					'type'		=>'raw',

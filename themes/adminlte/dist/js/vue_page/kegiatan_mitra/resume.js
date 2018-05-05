@@ -20,10 +20,10 @@ function setDonutChart(id_chart){
     chartEl = $("#"+id_chart);
 
     var donutData = [
-        {label: chartEl.data('optone'), data: chartEl.data('one'), color: "#B2D1E4"},
-        {label: chartEl.data('opttwo'), data: chartEl.data('two'), color: "#3c8dbc"},
-        {label: chartEl.data('optthree'), data: chartEl.data('three'), color: "#0073b7"},
-        {label: chartEl.data('optfour'), data: chartEl.data('four'), color: "#00c0ef"}
+        {label: chartEl.data('optone'), data: chartEl.data('one'), color: "#DD5245"},
+        {label: chartEl.data('opttwo'), data: chartEl.data('two'), color: "#F5CD46"},
+        {label: chartEl.data('optthree'), data: chartEl.data('three'), color: "#0E58E3"},
+        {label: chartEl.data('optfour'), data: chartEl.data('four'), color: "#5BA05C"}
     ];
     /*
      * DONUT CHART
