@@ -137,11 +137,13 @@ class MitraBps extends HelpAr
 		$result['jumlah'] = $sql_result['jumlah'];
 
 		$label = "";
+
+		//print_r($result['jumlah']);die();
 		
-		if($result['jumlah'] <= 1.65) $label = "Buruk";
-		else if($result['jumlah'] > 1.66 && $result['jumlah']<= 2.65) $label = "Cukup";
-		else if($result['jumlah'] > 2.66 && $result['jumlah']<= 3.65) $label = "Baik";
-		else if($result['jumlah'] > 3.65) $label = "Amat Baik";
+		if($result['rata'] <= 1.65){ $label = "Buruk"; }
+		else if($result['rata'] > 1.66 && $result['rata']<= 2.65){  $label = "Cukup"; }
+		else if($result['rata'] > 2.66 && $result['rata']<= 3.65){  $label = "Baik"; }
+		else if($result['rata'] > 3.65){  $label = "Amat Baik"; }
 		
 		$result['labelRata'] = $label;
 

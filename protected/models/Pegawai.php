@@ -128,10 +128,12 @@ class Pegawai extends HelpAr
 
 		$label = "";
 
-		if($result['jumlah'] <= 1.65) $label = "Buruk";
-		else if($result['jumlah'] > 1.66 && $result['jumlah']<= 2.65) $label = "Cukup";
-		else if($result['jumlah'] > 2.66 && $result['jumlah']<= 3.65) $label = "Baik";
-		else if($result['jumlah'] > 3.65) $label = "Amat Baik";
+		// print_r($result['jumlah']);die();
+		
+		if($result['rata'] <= 1.65){ $label = "Buruk"; }
+		else if($result['rata'] > 1.66 && $result['rata']<= 2.65){  $label = "Cukup"; }
+		else if($result['rata'] > 2.66 && $result['rata']<= 3.65){  $label = "Baik"; }
+		else if($result['rata'] > 3.65){  $label = "Amat Baik"; }
 
 		$result['labelRata'] = $label;
 
