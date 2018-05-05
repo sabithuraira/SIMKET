@@ -1,5 +1,5 @@
 <?php
-if(Yii::app()->user->level<=1)
+if(Yii::app()->user->level<=2)
 {
 ?>
 	<div class="box box-info">

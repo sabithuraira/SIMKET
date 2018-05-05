@@ -103,7 +103,7 @@
                                     {
                                         $opts_name = 'opts'.$value['id'];
                                         echo '<tr><td><b>'.$value['pertanyaan'].'</b></td></tr>';
-                                        if($value['id']==11 || $value['id']==12 || $value['id']==15){
+                                        if($value['id']==11 || $value['id']==12){
                                     
                                             echo '<tr>';
                                             echo '<td><div class="form-group">';
