@@ -39,7 +39,7 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
-                    <a href="https://laci.bps.go.id/s/rJvvgHkm2KPvl8s">
+                    <a href="https://laci.bps.go.id/s/NIPd5Yt53tuCZeG">
                       <i class="fa fa-users text-aqua"></i> Panduan Awal
                     </a>
                   </li>
