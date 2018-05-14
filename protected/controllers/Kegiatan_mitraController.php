@@ -283,7 +283,7 @@ class Kegiatan_mitraController extends Controller
 			foreach ($questions as $key => $value)
 			{
 
-				if($value['id']==11 || $value['id']==12 || $value['id']==15){
+				if($value['id']==11 || $value['id']==12){
 					$wilayah = KegiatanMitraWilayah::model()->findAllByAttributes(array(
 						'kmp_id'	=>$model->id //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
 					));
