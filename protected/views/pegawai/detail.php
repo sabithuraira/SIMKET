@@ -105,7 +105,7 @@
                                             <ul class="nav nav-pills nav-stacked">
                                                 <?php
                                                     for($i=1;$i<=4;++$i){
-                                                        echo '<li><a href="#">'.$value['opt'.$i].'<span class="pull-right text-blue"> '.$value['jumlah'.$i].'</span></a></li>';
+                                                        echo '<li class="li'.$i.'"><a href="#">'.$value['opt'.$i].'<span class="pull-right"> '.$value['jumlah'.$i].'</span></a></li>';
                                                     }
                                                 ?>
                                             </ul>

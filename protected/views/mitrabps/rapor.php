@@ -26,6 +26,11 @@
 			
 			// 'filter'=>$model,
 			'columns'=>array(
+				array(
+					'name'	=>'',
+					'type'	=>'raw',
+					'cssClassExpression' => '"bps" . $data->nilaiAndJumlah["jumlah"]',
+				),
 				'nama',
 				array(
 					'name'	=>'kab_id',
