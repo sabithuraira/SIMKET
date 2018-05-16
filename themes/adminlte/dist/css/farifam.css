@@ -158,22 +158,22 @@ li.li4
 }
 
 
-td.bps1
+tr.bps1 > td.color
 {
   background-color: #DD5245;
 }
 
-td.bps2
+tr.bps2 > td.color
 {
   background-color: #F5CD46;
 }
 
-td.bps3
+tr.bps3 > td.color
 {
   background-color: #5BA05C;
 }
 
-td.bps4
+tr.bps4 > td.color
 {
   background-color: #0E58E3;
 }

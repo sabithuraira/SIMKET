@@ -8,8 +8,12 @@
 		<?php $this->renderPartial('_search',array(
 			'model'=>$model
 		)); ?>
+		
 
-		<?php $this->widget('zii.widgets.grid.CGridView', array(
+		<?php 
+			$arrayClass = array("1" => "bps1", "2" => "bps2", "3" => "bps3", "4" => "bps4");
+		
+		$this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pegawai-grid',
 			'dataProvider'=>$model->search(),
 
@@ -23,13 +27,15 @@
 			),
 			
 			'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
-			
+			'rowCssClassExpression'=> '"bps".$data->nilaiAndJumlah["strata"]',
 			// 'filter'=>$model,
 			'columns'=>array(
 				array(
 					'name'	=>'',
 					'type'	=>'raw',
-					'cssClassExpression' => '"bps" . $data->nilaiAndJumlah["jumlah"]',
+					// 'value'	=> function($data){ return '<div class="bps'.$data->nilaiAndJumlah["strata"].'"></div>'; },
+					// 'cssClassExpression' => '$arrayClass[$data->nilaiAndJumlah["strata"]]',
+					'cssClassExpression' => '"color"',
 				),
 				'nip',
 				'nama',
