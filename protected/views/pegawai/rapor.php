@@ -35,7 +35,7 @@
 					'type'	=>'raw',
 					// 'value'	=> function($data){ return '<div class="bps'.$data->nilaiAndJumlah["strata"].'"></div>'; },
 					// 'cssClassExpression' => '$arrayClass[$data->nilaiAndJumlah["strata"]]',
-					'cssClassExpression' => '"color"',
+					'cssClassExpression' => function($data){ return 'color'; } ,
 				),
 				'nip',
 				'nama',

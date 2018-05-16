@@ -172,11 +172,18 @@
                                     
                                         <div class="box-body">
                                             <?php
+                                                $total = $value['jumlah1'] + $value['jumlah2'] + $value['jumlah3'] + $value['jumlah4'];
+                                                $perc1 = $value['jumlah1'] / $total * 100;
+                                                $perc2 = $value['jumlah2'] / $total * 100;
+                                                $perc3 = $value['jumlah3'] / $total * 100;
+                                                $perc4 = $value['jumlah4'] / $total * 100;
+
+
                                                 echo '<div id="donut-chart-'.$value['pertanyaan_id'].'" class="donut-chart" style="height:150px;width: 100%"
-                                                    data-one="'.$value['jumlah1'].'" 
-                                                    data-two="'.$value['jumlah2'].'"
-                                                    data-three="'.$value['jumlah3'].'"
-                                                    data-four="'.$value['jumlah4'].'"
+                                                    data-one="'.$perc1.'" 
+                                                    data-two="'.$perc2.'"
+                                                    data-three="'.$perc3.'"
+                                                    data-four="'.$perc4.'"
                                                     data-optone="'.$value['opt1'].'" 
                                                     data-opttwo="'.$value['opt2'].'"
                                                     data-optthree="'.$value['opt3'].'"
@@ -190,7 +197,7 @@
                                             <ul class="nav nav-pills nav-stacked">
                                                 <?php
                                                     for($i=1;$i<=4;++$i){
-                                                        echo '<li class="li'.$i.'"><a href="#">'.$value['opt'.$i].'<span class="pull-right text-white"> '.$value['jumlah'.$i].'</span></a></li>';
+                                                        echo '<li class="li'.$i.'"><a href="#">'.$value['opt'.$i].'<span class="pull-right text-white"> '.($value['jumlah'.$i] / $total * 100).' %</span></a></li>';
                                                     }
                                                 ?>
                                             </ul>
