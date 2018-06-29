@@ -26,6 +26,7 @@
 		<?php $this->renderPartial('_search',array(
 			'model'=>$model
 		)); ?>
+		<?php $baseUrl = Yii::app()->theme->baseUrl; ?>
 
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pegawai-grid',
@@ -44,16 +45,21 @@
 			
 			// 'filter'=>$model,
 			'columns'=>array(
-				'nip',
-				'nama',
+				// 'nip',
+				// 'nama',
 				array(
 					'name'	=>'unit_kerja',
 					'type'=>'raw',
-					'value'		=> function($data){ return $data->unitKerja->name; },
-					'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
+					'value'		=> function($data){ return '<div class="user-block">
+						<img class="img-circle" src="'.Yii::app()->theme->baseUrl.'/dist/img/avatar.png" alt="User Image">
+						<span class="comment">'.$data->jabatan.' - '.$data->unitKerja->name.'</span>
+						<span class="username"><a href="'.Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip)).'">'.$data->nama.'</a></span>
+						<span class="description">'.$data->nip.'</span>
+					  </div>'; },
+					// 'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
 				),
-				'golongan',
-				'jabatan',
+				// 'golongan',
+				// 'jabatan',
 				// 'created_time',
 				/*
 				'updated_time',
@@ -65,17 +71,12 @@
 				// ),
 				array(
 					'class'=>'CButtonColumn',
-					'template' => '{view} {update} {delete}',
+					'template' => '{update} {delete}',
 					'htmlOptions' => array('width' => 20),
 					'buttons'=>array(
 						'update'=>array(
 							'url'=>function($data){
 								return Yii::app()->createUrl("pegawai/update", array("id"=>$data->nip));
-							},
-						),
-						'view'=>array(
-							'url'=>function($data){
-								return Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip));
 							},
 						),
 						'delete'=>array(

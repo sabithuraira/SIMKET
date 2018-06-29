@@ -37,7 +37,7 @@
 </head>
 
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page bg-full">
 <div class="login-box">
   <div class="login-logo">
     <b>SIM</b> 

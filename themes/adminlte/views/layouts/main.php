@@ -22,7 +22,7 @@
   <!-- jvectormap -->
   <link rel="stylesheet" href="<?php echo $baseUrl;?>/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo $baseUrl;?>/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo $baseUrl;?>/dist/css/AdminLTE.css">
   <link rel="stylesheet" href="<?php echo $baseUrl;?>/dist/css/farifam.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->

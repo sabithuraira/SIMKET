@@ -177,3 +177,7 @@ tr.bps4 > td.color
 {
   background-color: #0E58E3;
 }
+
+.bg-full {
+  background: url('../img/dashboard_1604.jpg') repeat fixed;
+}

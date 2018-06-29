@@ -4778,15 +4778,15 @@ table.text-center th {
   clear: both;
 }
 .user-block img {
-  width: 40px;
-  height: 40px;
+  width: 55px;
+  height: 55px;
   float: left;
 }
 .user-block .username,
 .user-block .description,
 .user-block .comment {
   display: block;
-  margin-left: 50px;
+  margin-left: 65px;
 }
 .user-block .username {
   font-size: 16px;
@@ -4799,7 +4799,7 @@ table.text-center th {
 .user-block.user-block-sm .username,
 .user-block.user-block-sm .description,
 .user-block.user-block-sm .comment {
-  margin-left: 40px;
+  margin-left: 60px;
 }
 .user-block.user-block-sm .username {
   font-size: 14px;
