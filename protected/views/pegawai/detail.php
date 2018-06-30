@@ -25,11 +25,11 @@
                             <div class="box-footer">
                             <div class="row">
                                 <div class="col-sm-6 border-right">
-                                <div class="description-block">
-                                    <h5 class="description-header"><?php echo $model->nilaiAndJumlah['jumlah']; ?></h5>
-                                    <span class="description-text">JUMLAH KEGIATAN</span>
-                                </div>
-                                <!-- /.description-block -->
+                                    <div class="description-block">
+                                        <h5 class="description-header"><?php echo $model->nilaiAndJumlah['jumlah']; ?></h5>
+                                        <span class="description-text">JUMLAH KEGIATAN</span>
+                                    </div>
+                                    <!-- /.description-block -->
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-6">

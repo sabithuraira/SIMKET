@@ -48,14 +48,20 @@
 				// 'nip',
 				// 'nama',
 				array(
-					'name'	=>'unit_kerja',
+					'header'	=>'Pegawai',
 					'type'=>'raw',
 					'value'		=> function($data){ return '<div class="user-block">
+						<div class="pull-right">
+							<a href="'.Yii::app()->createUrl("pegawai/update", array("id"=>$data->nip)).'" class="btn"><i class="fa fa-edit"></i></a>
+							<a href="'.Yii::app()->createUrl("pegawai/delete", array("id"=>$data->nip)).'" class="btn"><i class="fa fa-trash"></i></a>
+						</div>
+
 						<img class="img-circle" src="'.Yii::app()->theme->baseUrl.'/dist/img/avatar.png" alt="User Image">
 						<span class="comment">'.$data->jabatan.' - '.$data->unitKerja->name.'</span>
 						<span class="username"><a href="'.Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip)).'">'.$data->nama.'</a></span>
 						<span class="description">'.$data->nip.'</span>
-					  </div>'; },
+					  </div>
+					  '; },
 					// 'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
 				),
 				// 'golongan',
@@ -69,24 +75,24 @@
 				// 	'type' 	=>'raw',
 				// 	'value'		=> function($data){ return "[".CHtml::link("Update",array("update","id"=>$data->nip))."] [".CHtml::link("Delete",array("delete","id"=>$data->nip))."]"; },
 				// ),
-				array(
-					'class'=>'CButtonColumn',
-					'template' => '{update} {delete}',
-					'htmlOptions' => array('width' => 20),
-					'buttons'=>array(
-						'update'=>array(
-							'url'=>function($data){
-								return Yii::app()->createUrl("pegawai/update", array("id"=>$data->nip));
-							},
-						),
-						'delete'=>array(
-							'url'=>function($data){
-								return Yii::app()->createUrl("pegawai/delete", array("id"=>$data->nip));
-							},
-							'label'=>'Hapus',
-						),
-					),
-				),
+				// array(
+				// 	'class'=>'CButtonColumn',
+				// 	'template' => '{update} {delete}',
+				// 	'htmlOptions' => array('width' => 20),
+				// 	'buttons'=>array(
+				// 		'update'=>array(
+				// 			'url'=>function($data){
+				// 				return Yii::app()->createUrl("pegawai/update", array("id"=>$data->nip));
+				// 			},
+				// 		),
+				// 		'delete'=>array(
+				// 			'url'=>function($data){
+				// 				return Yii::app()->createUrl("pegawai/delete", array("id"=>$data->nip));
+				// 			},
+				// 			'label'=>'Hapus',
+				// 		),
+				// 	),
+				// ),
 			),
 		)); ?>
 	</div>

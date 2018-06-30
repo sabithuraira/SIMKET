@@ -181,3 +181,7 @@ tr.bps4 > td.color
 .bg-full {
   background: url('../img/dashboard_1604.jpg') repeat fixed;
 }
+
+img.img-profile{
+  width: 100%;
+}
