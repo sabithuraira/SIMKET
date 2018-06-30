@@ -63,3 +63,4 @@ ALTER TABLE `mitra_bps`
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ALTER TABLE `mitra_bps` ADD `kab_id` INT NOT NULL AFTER `updated_by`;
+ALTER TABLE `mitra_bps` ADD `pendidikan` INT NULL AFTER `riwayat`;
