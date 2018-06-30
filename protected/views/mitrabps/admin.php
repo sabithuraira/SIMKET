@@ -29,45 +29,62 @@
 			
 			// 'filter'=>$model,
 			'columns'=>array(
-				'nama',
 				array(
-					'name'	=>'kab_id',
+					'header'	=>'Mitra BPS',
 					'type'=>'raw',
-					'value'		=> function($data){ return $data->kabupaten->name; },
-					// 'filter' => CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>2)), 'id', 'name')
+					'value'		=> function($data){ return '<div class="user-block">
+						<div class="pull-right">
+							<a href="'.Yii::app()->createUrl("mitrabps/update", array("id"=>$data->id)).'" class="btn"><i class="fa fa-edit"></i></a>
+							<a href="'.Yii::app()->createUrl("mitrabps/delete", array("id"=>$data->id)).'" class="btn"><i class="fa fa-trash"></i></a>
+						</div>
+
+						<img class="img-circle" src="'.Yii::app()->theme->baseUrl.'/dist/img/avatar.png" alt="User Image">
+						<span class="comment">'.$data->kabupaten->name.'</span>
+						<span class="username"><a href="'.Yii::app()->createUrl("mitrabps/view", array("id"=>$data->id)).'">'.$data->nama.'</a></span>
+						<span class="description">'.$jk = ($data->jk==1 ? "Laki-laki" : "Perempuan").', Alamat: '.$data->alamat.'</span>
+					  </div>
+					  '; },
+					// 'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
 				),
-				'nomor_telepon',
-				'alamat',
-				'tanggal_lahir',
-				// 'jk',
-				array(
-					'name'	=>'jk',
-					'type'=>'raw',
-					'value'		=> function($data){ return $data->jk==1 ? "Laki-laki" : "Perempuan"; },
-				),
-				array(
-					'class'=>'CButtonColumn',
-					'template' => '{view} {update} {delete}',
-					'htmlOptions' => array('width' => 20),
-					'buttons'=>array(
-						'update'=>array(
-							'url'=>function($data){
-								return Yii::app()->createUrl("mitrabps/update", array("id"=>$data->id));
-							},
-						),
-						'view'=>array(
-							'url'=>function($data){
-								return Yii::app()->createUrl("mitrabps/view", array("id"=>$data->id));
-							},
-						),
-						'delete'=>array(
-							'url'=>function($data){
-								return Yii::app()->createUrl("mitrabps/delete", array("id"=>$data->id));
-							},
-							'label'=>'Hapus',
-						),
-					),
-				),
+				// 'nama',
+				// array(
+				// 	'name'	=>'kab_id',
+				// 	'type'=>'raw',
+				// 	'value'		=> function($data){ return $data->kabupaten->name; },
+				// 	// 'filter' => CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>2)), 'id', 'name')
+				// ),
+				// 'nomor_telepon',
+				// 'alamat',
+				// 'tanggal_lahir',
+				// // 'jk',
+				// array(
+				// 	'name'	=>'jk',
+				// 	'type'=>'raw',
+				// 	'value'		=> function($data){ return $data->jk==1 ? "Laki-laki" : "Perempuan"; },
+				// ),
+				// array(
+				// 	'class'=>'CButtonColumn',
+				// 	'template' => '{view} {update} {delete}',
+				// 	'htmlOptions' => array('width' => 20),
+				// 	'buttons'=>array(
+				// 		'update'=>array(
+				// 			'url'=>function($data){
+				// 				return Yii::app()->createUrl("mitrabps/update", array("id"=>$data->id));
+				// 			},
+				// 		),
+				// 		'view'=>array(
+				// 			'url'=>function($data){
+				// 				return Yii::app()->createUrl("mitrabps/view", array("id"=>$data->id));
+				// 			},
+				// 		),
+				// 		'delete'=>array(
+				// 			'url'=>function($data){
+				// 				return Yii::app()->createUrl("mitrabps/delete", array("id"=>$data->id));
+				// 			},
+				// 			'label'=>'Hapus',
+				// 		),
+				// 	),
+				// ),
 			),
 		)); ?>
 	</div>

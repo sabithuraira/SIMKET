@@ -17,6 +17,20 @@
  */
 class MitraBps extends HelpAr
 {
+	//pendidikan: 1=tidak sekolah/tidak tamat SD,
+	//2=SD, 3=SMP, 4=SMA, 5=D3 atau sederajat, 6=S1 atau sederajat, 7=S2 atau S3
+	public static function getPendidikanDropdown(){
+		return array(
+			1=>'Tidak sekolah/tidak tamat SD',
+			2=> 'SD',
+			3=> 'SMP',
+			4=> 'SMA',
+			5=> 'D1, D3 atau sederajat',
+			6=> 'S1, D4 atau sederajat',
+			7=> 'S2 atau S3',
+		);
+	}
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -73,7 +87,8 @@ class MitraBps extends HelpAr
 			'updated_time' => 'Updated Time',
 			'created_by' => 'Created By',
 			'updated_by' => 'Updated By',
-			'riwayat'	=> 'Riwayat Kerja'
+			'riwayat'	=> 'Riwayat Kerja',
+			'pendidikan'	=>'Pendidikan Terakhir'
 		);
 	}
 

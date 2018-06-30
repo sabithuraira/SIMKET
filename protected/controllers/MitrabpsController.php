@@ -80,6 +80,7 @@ class MitrabpsController extends Controller
 			$model->attributes=$_POST['MitraBps'];
 			$model->kab_id=$_POST['MitraBps']['kab_id'];
 			$model->riwayat=$_POST['MitraBps']['riwayat'];
+			$model->pendidikan=$_POST['MitraBps']['pendidikan'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -106,6 +107,7 @@ class MitrabpsController extends Controller
 			$model->attributes=$_POST['MitraBps'];
 			$model->kab_id=$_POST['MitraBps']['kab_id'];
 			$model->riwayat=$_POST['MitraBps']['riwayat'];
+			$model->pendidikan=$_POST['MitraBps']['pendidikan'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

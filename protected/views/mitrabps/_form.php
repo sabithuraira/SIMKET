@@ -66,6 +66,15 @@
 		<?php echo $form->error($model,'jk'); ?>
 	</div>
 
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'pendidikan'); ?>
+		<?php echo $form->dropDownList($model,'pendidikan',
+				$model->pendidikanDropdown,
+				array('empty'=>'- Pendidikan Terakhir -', 'class'=>"form-control")); ?>
+		<?php echo $form->error($model,'pendidikan'); ?>
+	</div>
+
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'riwayat'); ?>
 		<?php echo $form->textArea($model,'riwayat',array('rows'=>6, 'cols'=>50, 'class'=>"form-control")); ?>
