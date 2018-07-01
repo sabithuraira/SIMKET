@@ -81,8 +81,32 @@ class MitrabpsController extends Controller
 			$model->kab_id=$_POST['MitraBps']['kab_id'];
 			$model->riwayat=$_POST['MitraBps']['riwayat'];
 			$model->pendidikan=$_POST['MitraBps']['pendidikan'];
-			if($model->save())
+
+			$temp_file;
+			$ext_name = array('', '');
+
+			if(strlen(trim(CUploadedFile::getInstance($model,'foto'))) > 0)
+			{
+				$temp_file = CUploadedFile::getInstance($model,'foto');
+				$ext_name = explode('.',basename($temp_file));
+			}
+			else{
+				$model->foto = '';
+			}
+
+
+			if($model->save()){
+				if(strlen($ext_name[1]) > 0)
+				{
+					$fname = $model->id.'.'.$ext_name[1];
+					if($temp_file->saveAs(Yii::app()->basePath.'/../upload/temp/mitra_foto/' . $fname)){
+						$model->foto = $fname;
+						$model->save(false);
+					}
+				}
+
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -104,12 +128,37 @@ class MitrabpsController extends Controller
 
 		if(isset($_POST['MitraBps']))
 		{
+			$old_foto = $model->foto;
 			$model->attributes=$_POST['MitraBps'];
 			$model->kab_id=$_POST['MitraBps']['kab_id'];
 			$model->riwayat=$_POST['MitraBps']['riwayat'];
 			$model->pendidikan=$_POST['MitraBps']['pendidikan'];
-			if($model->save())
+
+			$temp_file;
+			$ext_name = array('', '');
+
+			if(strlen(trim(CUploadedFile::getInstance($model,'foto'))) > 0)
+			{
+				$temp_file = CUploadedFile::getInstance($model,'foto');
+				$ext_name = explode('.',basename($temp_file));
+			}
+
+			if($model->save()){
+				if(strlen($ext_name[1]) > 0)
+				{
+					$fname = $model->id.'.'.$ext_name[1];
+					if($temp_file->saveAs(Yii::app()->basePath.'/../upload/temp/mitra_foto/' . $fname)){
+						$model->foto = $fname;
+						$model->save(false);
+					}
+				}
+				else{
+					$model->foto = $old_foto;
+					$model->save(false);
+				}
+
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(

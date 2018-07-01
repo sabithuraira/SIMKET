@@ -64,3 +64,6 @@ ALTER TABLE `mitra_bps`
 
 ALTER TABLE `mitra_bps` ADD `kab_id` INT NOT NULL AFTER `updated_by`;
 ALTER TABLE `mitra_bps` ADD `pendidikan` INT NULL AFTER `riwayat`;
+
+ALTER TABLE `mitra_bps` ADD `foto` VARCHAR(255) NOT NULL AFTER `pendidikan`;
+ALTER TABLE `pegawai` ADD `foto` VARCHAR(255) NOT NULL AFTER `updated_by`;

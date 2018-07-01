@@ -51,6 +51,7 @@ class MitraBps extends HelpAr
 			array('jk, kab_id, created_by', 'numerical', 'integerOnly'=>true),
 			array('nama', 'length', 'max'=>255),
 			array('nomor_telepon', 'length', 'max'=>15),
+			array('foto', 'file', 'types'=>'jpg, png', 'allowEmpty'=>true, 'maxSize'=>1024*100),
 			array('alamat, tanggal_lahir', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -68,6 +69,13 @@ class MitraBps extends HelpAr
 		return array(
 			'kabupaten' => array(self::BELONGS_TO, 'UnitKerja', 'kab_id'),
 		);
+	}
+
+	public function getFotoImage(){
+		if($this->foto!==''){
+			return Yii::app()->baseUrl.'/upload/temp/mitra_foto/' . $this->foto;
+		}
+		return Yii::app()->theme->baseUrl.'/dist/img/avatar.png';
 	}
 
 	/**
@@ -88,7 +96,8 @@ class MitraBps extends HelpAr
 			'created_by' => 'Created By',
 			'updated_by' => 'Updated By',
 			'riwayat'	=> 'Riwayat Kerja',
-			'pendidikan'	=>'Pendidikan Terakhir'
+			'pendidikan'	=>'Pendidikan Terakhir',
+			'foto'	=>'Foto (ukuran maksimal 100kb)'
 		);
 	}
 

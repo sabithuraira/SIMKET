@@ -16,7 +16,7 @@
 			<div class="row">
 
 				<div class="col-sm-3 border-right">
-					<img class="img-profile" src="<?php echo Yii::app()->theme->baseUrl; ?>/dist/img/avatar.png" alt="User Image">
+					<img class="img-profile" src="<?php echo $model->fotoImage; ?>" alt="User Image">
 				</div>
 				<div class="col-sm-9">
 
