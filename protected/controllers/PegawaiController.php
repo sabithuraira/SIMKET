@@ -135,7 +135,7 @@ class PegawaiController extends Controller
 		if(isset($_POST['Pegawai']))
 			$model->attributes=$_POST['Pegawai'];
 
-		$model->unit_kerja = 22;
+		// $model->unit_kerja = 22;
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -149,7 +149,7 @@ class PegawaiController extends Controller
 		if(isset($_POST['Pegawai']))
 			$model->attributes=$_POST['Pegawai'];
 
-		$model->unit_kerja = 22;
+		// $model->unit_kerja = 22;
 
 		$this->render('rapor',array(
 			'model'=>$model,

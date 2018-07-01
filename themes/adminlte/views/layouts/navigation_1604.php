@@ -5,11 +5,12 @@
         <li class="header">MONITORING EVALUASI KINERJA PEGAWAI BPS</li>
 
         <?php if(!Yii::app()->user->isGuest){ ?>
-          <li><a href="<?php echo Yii::app()->createUrl('kegiatan_mitra'); ?>"><i class="fa fa-bicycle"></i><span> Daftar Kegiatan Mitra BPS</span></a></li>
           <?php
-            echo '<li><a href="'.Yii::app()->createUrl('pegawai/index').'"><i class="fa fa-user-plus"></i> Pegawai</a></li>';
-            echo '<li><a href="'.Yii::app()->createUrl('mitrabps/index').'"><i class="fa fa-user-plus"></i> Mitra BPS</a></li>';
-            echo '<li><a href="'.Yii::app()->createUrl('pertanyaan/index').'"><i class="fa fa-user-plus"></i> Pertanyaan</a></li>';
+            echo '<li><a href="'.Yii::app()->createUrl('mitrabps/index').'"><i class="fa fa-user-plus"></i> Kelola Petugas Mitra</a></li>';
+            echo '<li><a href="'.Yii::app()->createUrl('pegawai/index').'"><i class="fa fa-user-plus"></i> Kelola Petugas Organik</a></li>';
+            echo '<li><a href="'.Yii::app()->createUrl('pertanyaan/index').'"><i class="fa fa-user-plus"></i> Kelola Pertanyaan Penilaian</a></li>';
+
+            echo '<li><a href="'.Yii::app()->createUrl('kegiatan_mitra').'"><i class="fa fa-bicycle"></i><span> Kelola Penilaian Daftar Kegiatan</span></a></li>';
 
             echo '<li class="treeview"><a href="#"><i class="fa fa-circle-o"></i> Rapor Penilaian Kinerja
               <span class="pull-right-container">
@@ -21,6 +22,8 @@
               echo '<li><a href="'.Yii::app()->createUrl('pegawai/rapor').'"><i class="fa fa-user-plus"></i> Pegawai</a></li>';
               echo '<li><a href="'.Yii::app()->createUrl('mitrabps/rapor').'"><i class="fa fa-user-plus"></i> Mitra BPS</a></li>';
             echo '</ul></li>';
+
+            echo '<li><a href="#"><i class="fa fa-user-plus"></i> Database Mitra BPS Kab/Kota</a></li>';            
           ?>
           
         <?php } ?>

@@ -11,6 +11,10 @@
 		<?php echo $form->textField($model,'nama',array('size'=>60,'maxlength'=>255, 'class'=>"form-control")); ?>
 	</div>
 
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'kab_id'); ?>
+		<?php echo $form->dropDownList($model,'kab_id', HelpMe::getKabKotaList(),array('class'=>"form-control", 'empty'=>'- Semua Kabupaten/Kota -')); ?>
+	</div>
 
 	<div class="box-footer">
 		<?php echo CHtml::submitButton('Search', array('class'=>"btn btn-info pull-right")); ?>

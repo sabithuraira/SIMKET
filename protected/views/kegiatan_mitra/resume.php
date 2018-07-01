@@ -80,9 +80,9 @@
                 <div class="col-sm-6">
                     <ul class="nav nav-stacked">
                         <!-- <li><a href="#">% Penilaian <span class="pull-right badge bg-blue">31</span></a></li> -->
-                        <li><a href="#">Nilai Rata-rata <span class="pull-right badge bg-blue"><?php echo $model->resume['rata_nilai'].' / 4'; ?></span></a></li>
-                        <li><a href="#">Nilai Paling Tinggi <span class="pull-right badge bg-aqua"><?php echo $model->resume['max_nilai'].' / 4'; ?></span></a></li>
-                        <li><a href="#">Nilai Paling Kecil <span class="pull-right badge bg-red"><?php echo $model->resume['min_nilai'].' / 4'; ?></span></a></li>
+                        <li><a href="#">Nilai Rata-rata <span class="pull-right badge bg-blue"><?php echo round($model->resume['rata_nilai'],2).' / 4'; ?></span></a></li>
+                        <li><a href="#">Nilai Paling Tinggi <span class="pull-right badge bg-aqua"><?php echo round($model->resume['max_nilai'],2).' / 4'; ?></span></a></li>
+                        <li><a href="#">Nilai Paling Kecil <span class="pull-right badge bg-red"><?php echo round($model->resume['min_nilai'],2).' / 4'; ?></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                                     echo '<td>'.$value['nip'].'</td>';
                                 
                                     echo '<td class="text-center">'.$value['status'].'</td>';
-                                    echo '<td class="text-center">'.$value['nilai'].' / 4</td>';
+                                    echo '<td class="text-center">'.round($value['nilai'],2).' / 4</td>';
                                 echo '</tr>';
                                 
                             }
@@ -145,7 +145,7 @@
                                 echo '<tr>';
                                     echo '<td>'.($key+1).'</td>';
                                     echo '<td>'.$value['pertanyaan'].'</td>';
-                                    echo '<td class="text-center">'.$value['rata'].' / 4</td>';
+                                    echo '<td class="text-center">'.round($value['rata'],2).' / 4</td>';
                                 echo '</tr>';
                                 
                             }
@@ -173,10 +173,10 @@
                                         <div class="box-body">
                                             <?php
                                                 $total = $value['jumlah1'] + $value['jumlah2'] + $value['jumlah3'] + $value['jumlah4'];
-                                                $perc1 = $value['jumlah1'] / $total * 100;
-                                                $perc2 = $value['jumlah2'] / $total * 100;
-                                                $perc3 = $value['jumlah3'] / $total * 100;
-                                                $perc4 = $value['jumlah4'] / $total * 100;
+                                                $perc1 = round($value['jumlah1'] / $total * 100,2);
+                                                $perc2 = round($value['jumlah2'] / $total * 100,2);
+                                                $perc3 = round($value['jumlah3'] / $total * 100,2);
+                                                $perc4 = round($value['jumlah4'] / $total * 100,2);
 
 
                                                 echo '<div id="donut-chart-'.$value['pertanyaan_id'].'" class="donut-chart" style="height:150px;width: 100%"
