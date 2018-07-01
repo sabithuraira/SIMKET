@@ -35,6 +35,7 @@ class Pegawai extends HelpAr
 			array('unit_kerja', 'numerical', 'integerOnly'=>true),
 			array('nip', 'length', 'max'=>18),
 			array('nama, golongan, jabatan', 'length', 'max'=>255),
+			array('foto', 'file', 'types'=>'jpg, png', 'allowEmpty'=>true, 'maxSize'=>1024*100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('nip, nama, unit_kerja, unit_kerja_kab, golongan, jabatan, created_time, updated_time', 'safe', 'on'=>'search'),
@@ -53,6 +54,13 @@ class Pegawai extends HelpAr
 		);
 	}
 
+	public function getFotoImage(){
+		if($this->foto!==''){
+			return Yii::app()->baseUrl.'/upload/temp/pegawai/' . $this->foto;
+		}
+		return Yii::app()->theme->baseUrl.'/dist/img/avatar.png';
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -67,6 +75,7 @@ class Pegawai extends HelpAr
 			'jabatan' => 'Jabatan',
 			'created_time' => 'Created Time',
 			'updated_time' => 'Updated Time',
+			'foto'	=>'Foto (ukuran maksimal 100kb)',
 		);
 	}
 

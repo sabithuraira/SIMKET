@@ -77,8 +77,30 @@ class PegawaiController extends Controller
 		{
 			$model->attributes=$_POST['Pegawai'];
 			$model->unit_kerja_kab=$_POST['Pegawai']['unit_kerja_kab'];
-			if($model->save())
+
+			$temp_file;
+			$ext_name = array('', '');
+
+			if(strlen(trim(CUploadedFile::getInstance($model,'foto'))) > 0)
+			{
+				$temp_file = CUploadedFile::getInstance($model,'foto');
+				$ext_name = explode('.',basename($temp_file));
+			}
+			else{
+				$model->foto = '';
+			}
+
+			if($model->save()){
+				if(strlen($ext_name[1]) > 0)
+				{
+					$fname = $model->nip.'.'.$ext_name[1];
+					if($temp_file->saveAs(Yii::app()->basePath.'/../upload/temp/pegawai/' . $fname)){
+						$model->foto = $fname;
+						$model->save(false);
+					}
+				}
 				$this->redirect(array('view','id'=>$model->nip));
+			}
 		}
 
 		$this->render('create',array(
@@ -100,10 +122,35 @@ class PegawaiController extends Controller
 
 		if(isset($_POST['Pegawai']))
 		{
+			$old_foto = $model->foto;
 			$model->attributes=$_POST['Pegawai'];
 			$model->unit_kerja_kab = $_POST['Pegawai']['unit_kerja_kab'];
-			if($model->save())
+
+			$temp_file;
+			$ext_name = array('', '');
+
+			if(strlen(trim(CUploadedFile::getInstance($model,'foto'))) > 0)
+			{
+				$temp_file = CUploadedFile::getInstance($model,'foto');
+				$ext_name = explode('.',basename($temp_file));
+			}
+
+			if($model->save()){
+				if(strlen($ext_name[1]) > 0)
+				{
+					$fname = $model->nip.'.'.$ext_name[1];
+					if($temp_file->saveAs(Yii::app()->basePath.'/../upload/temp/pegawai/' . $fname)){
+						$model->foto = $fname;
+						$model->save(false);
+					}
+				}
+				else{
+					$model->foto = $old_foto;
+					$model->save(false);
+				}
+
 				$this->redirect(array('view','id'=>$model->nip));
+			}
 		}
 
 		$this->render('update',array(

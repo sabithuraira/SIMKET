@@ -13,6 +13,7 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+	'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -60,6 +61,16 @@
 		<?php echo $form->error($model,'jabatan'); ?>
 	</div>
 
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'foto'); ?>
+		<?php echo $form->fileField($model,'foto',array('rows'=>6, 'cols'=>50, 'class'=>"form-control")); ?>
+		<?php echo $form->error($model,'foto'); ?>
+		<?php 
+			if(!$model->isNewRecord && strlen($model->foto)>0){
+				echo '<br/><img width="100" src="'.$model->fotoImage.'" alt="User Image">';
+			}
+		?>
+	</div>
 
 	<div class="box-footer">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>"btn btn-info pull-right")); ?>

@@ -56,7 +56,7 @@
 							<a href="'.Yii::app()->createUrl("pegawai/delete", array("id"=>$data->nip)).'" class="btn"><i class="fa fa-trash"></i></a>
 						</div>
 
-						<img class="img-circle" src="'.Yii::app()->theme->baseUrl.'/dist/img/avatar.png" alt="User Image">
+						<img class="img-circle" src="'.$data->fotoImage.'" alt="User Image">
 						<span class="comment">'.$data->jabatan.' - '.$data->unitKerja->name.'</span>
 						<span class="username"><a href="'.Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip)).'">'.$data->nama.'</a></span>
 						<span class="description">'.$data->nip.'</span>
