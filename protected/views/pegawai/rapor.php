@@ -30,34 +30,51 @@
 			'rowCssClassExpression'=> '"bps".$data->nilaiAndJumlah["strata"]',
 			// 'filter'=>$model,
 			'columns'=>array(
+				// array(
+				// 	'name'	=>'',
+				// 	'type'	=>'raw',
+				// 	// 'value'	=> function($data){ return '<div class="bps'.$data->nilaiAndJumlah["strata"].'"></div>'; },
+				// 	// 'cssClassExpression' => '$arrayClass[$data->nilaiAndJumlah["strata"]]',
+				// 	'cssClassExpression' => function($data){ return 'color'; } ,
+				// ),
 				array(
-					'name'	=>'',
-					'type'	=>'raw',
-					// 'value'	=> function($data){ return '<div class="bps'.$data->nilaiAndJumlah["strata"].'"></div>'; },
-					// 'cssClassExpression' => '$arrayClass[$data->nilaiAndJumlah["strata"]]',
-					'cssClassExpression' => function($data){ return 'color'; } ,
-				),
-				'nip',
-				'nama',
-				array(
-					'name'	=>'unit_kerja',
+					'header'	=>'Pegawai',
 					'type'=>'raw',
-					'value'		=> function($data){ return $data->unitKerja->name; },
+					'value'		=> function($data){ return '<div class="user-block">
+						<div class="pull-right">
+							<span class="username">Mengikuti '.$data->total_menjadi_mitra.' kegiatan, nilai: '.round($data->nilai_menjadi_mitra,2).' ('.$data->predikatLabel.')</span>
+							
+						</div>
+
+						<img class="img-circle" src="'.$data->fotoImage.'" alt="User Image">
+						<span class="comment">'.$data->jabatan.' - '.$data->unitKerja->name.'</span>
+						<span class="username"><a href="'.Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip)).'">'.$data->nama.'</a></span>
+						<span class="description">'.$data->nip.'</span>
+					  </div>
+					  '; },
+					// 'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
 				),
-				array(
-					'header'	=>'Jumlah Kegiatan',
-					'type'=>'raw',
-					'value'		=> function($data){ return $data->nilaiAndJumlah['jumlah']; },
-				),
-				array(
-					'header'	=>'Rata Nilai',
-					'type'=>'raw',
-					'value'		=> function($data){ return round($data->nilaiAndJumlah['rata'],3)." (".$data->nilaiAndJumlah['labelRata'].")"; },
-				),
-				array(
-					'type'		=>'raw',
-					'value'		=> function($data){ return CHtml::link('Detail', array('detail','id'=>$data->nip)); },
-				),
+				// 'nip',
+				// 'nama',
+				// array(
+				// 	'name'	=>'unit_kerja',
+				// 	'type'=>'raw',
+				// 	'value'		=> function($data){ return $data->unitKerja->name; },
+				// ),
+				// array(
+				// 	'header'	=>'Jumlah Kegiatan',
+				// 	'type'=>'raw',
+				// 	'value'		=> function($data){ return $data->nilaiAndJumlah['jumlah']; },
+				// ),
+				// array(
+				// 	'header'	=>'Rata Nilai',
+				// 	'type'=>'raw',
+				// 	'value'		=> function($data){ return round($data->nilaiAndJumlah['rata'],3)." (".$data->nilaiAndJumlah['labelRata'].")"; },
+				// ),
+				// array(
+				// 	'type'		=>'raw',
+				// 	'value'		=> function($data){ return CHtml::link('Detail', array('detail','id'=>$data->nip)); },
+				// ),
 			),
 		)); ?>
 	</div>

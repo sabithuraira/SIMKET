@@ -27,30 +27,20 @@
 			// 'filter'=>$model,
 			'columns'=>array(
 				array(
-					'name'	=>'',
-					'type'	=>'raw',
-					'cssClassExpression' => '"bps" . $data->nilaiAndJumlah["jumlah"]',
-				),
-				'nama',
-				array(
-					'name'	=>'kab_id',
+					'header'	=>'Mitra BPS',
 					'type'=>'raw',
-					'value'		=> function($data){ return $data->kabupaten->name; },
-					// 'filter' => CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>2)), 'id', 'name')
-				),
-				array(
-					'header'	=>'Jumlah Kegiatan',
-					'type'=>'raw',
-					'value'		=> function($data){ return $data->nilaiAndJumlah['jumlah']; },
-				),
-				array(
-					'header'	=>'Rata Nilai',
-					'type'=>'raw',
-					'value'		=> function($data){ return round($data->nilaiAndJumlah['rata'],3)." (".$data->nilaiAndJumlah['labelRata'].")"; },
-				),
-				array(
-					'type'		=>'raw',
-					'value'		=> function($data){ return CHtml::link('Detail', array('detail','id'=>$data->id)); },
+					'value'		=> function($data){ return '<div class="user-block">
+						<div class="pull-right">
+							<span class="username">Mengikuti '.$data->total_menjadi_mitra.' kegiatan, nilai: '.round($data->nilai_menjadi_mitra,2).' ('.$data->predikatLabel.')</span>
+						</div>
+
+						<img class="img-circle" src="'.$data->fotoImage.'" alt="User Image">
+						<span class="comment">'.$data->kabupaten->name.'</span>
+						<span class="username"><a href="'.Yii::app()->createUrl("mitrabps/view", array("id"=>$data->id)).'">'.$data->nama.'</a></span>
+						<span class="description">'.$jk = ($data->jk==1 ? "Laki-laki" : "Perempuan").', Alamat: '.$data->alamat.'</span>
+					  </div>
+					  '; },
+					// 'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
 				),
 			),
 		)); ?>

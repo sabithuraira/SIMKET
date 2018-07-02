@@ -122,6 +122,26 @@ class Pegawai extends HelpAr
 		return parent::model($className);
 	}
 
+	public function getPredikatLabel(){
+		if($this->total_menjadi_mitra>0){
+			if($this->nilai_menjadi_mitra <= 1.65){ 
+				return "Buruk";
+			}
+			else if($this->nilai_menjadi_mitra > 1.66 && $this->nilai_menjadi_mitra<= 2.65){  
+				return "Cukup"; 
+			}
+			else if($this->nilai_menjadi_mitra > 2.66 && $this->nilai_menjadi_mitra<= 3.65){  
+				return "Baik";
+			}
+			else if($this->nilai_menjadi_mitra > 3.65){  
+				return "Amat Baik";
+			}
+		}
+		else{
+			return "-";
+		}
+	}
+
 	public function getNilaiAndJumlah(){
 		$idnya = $this->nip;
 		$sql = "SELECT IFNULL(AVG(nilai),0) as rata, COUNT(id) as jumlah 
@@ -134,13 +154,6 @@ class Pegawai extends HelpAr
 		$result = array();
 		$result['rata'] = $sql_result['rata'];
 		$result['jumlah'] = $sql_result['jumlah'];
-
-		///
-		$sql_update = "UPDATE pegawai SET total_menjadi_mitra=".$sql_result['jumlah'].", 
-		nilai_menjadi_mitra=".$sql_result['rata']." WHERE nip='".$idnya."'";
-
-		Yii::app()->db->createCommand($sql_update)->execute();
-		///
 
 		$label = "";
 		$strata = 1;
