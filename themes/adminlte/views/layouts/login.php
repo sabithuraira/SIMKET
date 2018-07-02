@@ -40,8 +40,7 @@
 <body class="hold-transition login-page bg-full">
 <div class="login-box">
   <div class="login-logo">
-    <b>SIM</b> 
-    RAPOR
+    <b>&nbsp</b>&nbsp 
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

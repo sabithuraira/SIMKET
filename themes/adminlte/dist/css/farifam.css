@@ -179,7 +179,8 @@ tr.bps4 > td.color
 }
 
 .bg-full {
-  background: url('../img/dashboard_1604.jpg') repeat fixed;
+  background: url('../img/cover_1604.png');
+  background-size: 100%;
 }
 
 img.img-profile{
