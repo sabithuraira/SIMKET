@@ -187,8 +187,8 @@ class MitrabpsController extends Controller
 	{
 		$model=new MitraBps('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_POST['MitraBps']))
-			$model->attributes=$_POST['MitraBps'];
+		if(isset($_GET['MitraBps']))
+			$model->attributes=$_GET['MitraBps'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -200,8 +200,8 @@ class MitrabpsController extends Controller
 	{
 		$model=new MitraBps('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_POST['MitraBps']))
-			$model->attributes=$_POST['MitraBps'];
+		if(isset($_GET['MitraBps']))
+			$model->attributes=$_GET['MitraBps'];
 
 		$this->render('rapor',array(
 			'model'=>$model,
