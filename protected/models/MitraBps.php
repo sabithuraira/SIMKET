@@ -160,6 +160,12 @@ class MitraBps extends HelpAr
 		$result['rata'] = $sql_result['rata'];
 		$result['jumlah'] = $sql_result['jumlah'];
 
+
+		$sql_update = "UPDATE mitra_bps SET total_menjadi_mitra=".$sql_result['jumlah'].", 
+		nilai_menjadi_mitra=".$sql_result['rata']." WHERE id='".$idnya."'";
+
+		Yii::app()->db->createCommand($sql_update)->execute();
+
 		$label = "";
 
 		//print_r($result['jumlah']);die();

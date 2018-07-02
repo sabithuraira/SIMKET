@@ -195,7 +195,6 @@ class PegawaiController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_POST['Pegawai']))
 			$model->attributes=$_POST['Pegawai'];
-
 		// $model->unit_kerja = 22;
 
 		$this->render('rapor',array(

@@ -135,6 +135,13 @@ class Pegawai extends HelpAr
 		$result['rata'] = $sql_result['rata'];
 		$result['jumlah'] = $sql_result['jumlah'];
 
+		///
+		$sql_update = "UPDATE pegawai SET total_menjadi_mitra=".$sql_result['jumlah'].", 
+		nilai_menjadi_mitra=".$sql_result['rata']." WHERE nip='".$idnya."'";
+
+		Yii::app()->db->createCommand($sql_update)->execute();
+		///
+
 		$label = "";
 		$strata = 1;
 

@@ -61,6 +61,37 @@ class KegiatanMitraPetugas extends HelpAr
 		}
 
         return parent::beforeDelete();
+	}
+	
+	public function afterSave()
+    {   
+        if($this->nilai!=0)
+        {    
+			$idnya = $this->id_mitra;
+			$sql = "SELECT IFNULL(AVG(nilai),0) as rata, COUNT(id) as jumlah 
+						FROM `kegiatan_mitra_petugas` 
+						WHERE id_mitra='$idnya'";
+
+			// $result = array();
+			// $result['rata'] = $sql_result['rata'];
+			// $result['jumlah'] = $sql_result['jumlah'];
+
+			$sql_result = Yii::app()->db->createCommand($sql)->queryRow();	
+			if($this->flag_mitra==1){
+				$sql_update = "UPDATE pegawai SET total_menjadi_mitra=".$sql_result['jumlah'].", 
+					nilai_menjadi_mitra=".$sql_result['rata']." WHERE nip='".$idnya."'";
+
+				Yii::app()->db->createCommand($sql_update)->execute();
+			}
+			else{
+				$sql_update = "UPDATE mitra_bps SET total_menjadi_mitra=".$sql_result['jumlah'].", 
+				nilai_menjadi_mitra=".$sql_result['rata']." WHERE id='".$idnya."'";
+
+				Yii::app()->db->createCommand($sql_update)->execute();
+			}
+        }
+
+        return parent::afterSave();
     }
 
 	/**

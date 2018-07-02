@@ -67,3 +67,9 @@ ALTER TABLE `mitra_bps` ADD `pendidikan` INT NULL AFTER `riwayat`;
 
 ALTER TABLE `mitra_bps` ADD `foto` VARCHAR(255) NOT NULL AFTER `pendidikan`;
 ALTER TABLE `pegawai` ADD `foto` VARCHAR(255) NOT NULL AFTER `updated_by`;
+
+ALTER TABLE `pegawai` ADD `total_menjadi_mitra` INT NOT NULL DEFAULT '0' AFTER `foto`, ADD `nilai_menjadi_mitra` INT NOT NULL DEFAULT '0' AFTER `total_menjadi_mitra`;
+ALTER TABLE `mitra_bps` ADD `total_menjadi_mitra` INT NOT NULL DEFAULT '0' AFTER `foto`, ADD `nilai_menjadi_mitra` INT NOT NULL DEFAULT '0' AFTER `total_menjadi_mitra`;
+
+ALTER TABLE `pegawai` CHANGE `nilai_menjadi_mitra` `nilai_menjadi_mitra` FLOAT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `mitra_bps` CHANGE `nilai_menjadi_mitra` `nilai_menjadi_mitra` FLOAT(11) NOT NULL DEFAULT '0';
