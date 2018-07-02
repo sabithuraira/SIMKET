@@ -91,7 +91,7 @@ class Pegawai extends HelpAr
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($is_raport=false)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -105,6 +105,10 @@ class Pegawai extends HelpAr
 		$criteria->compare('jabatan',$this->jabatan,true);
 		$criteria->compare('created_time',$this->created_time,true);
 		$criteria->compare('updated_time',$this->updated_time,true);
+
+		if($is_raport){
+			$criteria->order = 'nilai_menjadi_mitra DESC, total_menjadi_mitra DESC';
+		}
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

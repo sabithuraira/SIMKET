@@ -113,7 +113,7 @@ class MitraBps extends HelpAr
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($is_raport=false)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -130,6 +130,10 @@ class MitraBps extends HelpAr
 		$criteria->compare('updated_time',$this->updated_time,true);
 		$criteria->compare('created_by',$this->created_by);
 		$criteria->compare('updated_by',$this->updated_by,true);
+
+		if($is_raport){
+			$criteria->order = 'nilai_menjadi_mitra DESC, total_menjadi_mitra DESC';
+		}
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -11,7 +11,7 @@
 
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'mitra-bps-grid',
-			'dataProvider'=>$model->search(),
+			'dataProvider'=>$model->search(true),
 
 			'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
 			'pager'=>array(
