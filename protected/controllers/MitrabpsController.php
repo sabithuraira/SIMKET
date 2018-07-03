@@ -40,6 +40,12 @@ class MitrabpsController extends Controller
 					return $user->getLevel()<=2;
 				},
 			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			'actions'=>array('dbase'),
+			'expression'=> function($user){
+				return true;
+			},
+		),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -195,7 +201,6 @@ class MitrabpsController extends Controller
 		));
 	}
 
-
 	public function actionRapor()
 	{
 		$model=new MitraBps('search');
@@ -204,6 +209,18 @@ class MitrabpsController extends Controller
 			$model->attributes=$_GET['MitraBps'];
 
 		$this->render('rapor',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionDbase()
+	{
+		$model=new MitraBps('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['MitraBps']))
+			$model->attributes=$_GET['MitraBps'];
+
+		$this->render('dbase',array(
 			'model'=>$model,
 		));
 	}

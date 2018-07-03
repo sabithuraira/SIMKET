@@ -23,7 +23,7 @@
               echo '<li><a href="'.Yii::app()->createUrl('mitrabps/rapor').'"><i class="fa fa-user-plus"></i> Mitra BPS</a></li>';
             echo '</ul></li>';
 
-            echo '<li><a href="#"><i class="fa fa-user-plus"></i> Database Mitra BPS Kab/Kota</a></li>';            
+            echo '<li><a href="'.Yii::app()->createUrl('mitrabps/dbase').'"><i class="fa fa-user-plus"></i> Database Mitra BPS Kab/Kota</a></li>';            
           ?>
           
         <?php } ?>

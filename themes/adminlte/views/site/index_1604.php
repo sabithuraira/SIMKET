@@ -3,12 +3,8 @@
     @import url('<?php echo $baseUrl.'/dist/css/jadwal.css';?>');
 </style>
 <div id="dashboard_tag">
-    <div class="text-center">
-        <h2>SISTEM INFORMASI RAPOR (SIM RAPOR)</h2>
-        <h3>PENILAIAN KINERJA INDIVIDU PETUGAS LAPANGAN BADAN PUSAT STATISTIK KABUPATEN LAHAT</h3>
-    </div>
     <div class="text-center widget-user-image">
-        <img width="600" height="400" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/dashboard_1604.jpg" ?>">
+        <img width="100%" src="<?php echo Yii::app()->theme->baseUrl."/dist/img/cover_1604.png" ?>">
     </div>
 </div>
 
