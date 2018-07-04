@@ -36,7 +36,7 @@ class Kegiatan_mitraController extends Controller
 					'insert_petugas', 'delete_petugas',
 					'get_list_mitra',
 					'nilai', 'resume', 'get_list_wilayah',
-					'delete_wilayah', 'add_single_wilayah'),
+					'delete_wilayah', 'add_single_wilayah', 'form'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -246,6 +246,35 @@ class Kegiatan_mitraController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+		));
+	}
+
+	public function actionForm($id)
+	{
+		$model=$this->loadModel($id);
+
+		if(isset($_POST['par_post'])){
+			$all_pertanyaan = MitraPertanyaan::model()->findAll();
+			
+			foreach($all_pertanyaan as $key=>$value){
+				if(isset($_POST['form'.$value['id']])){
+					///
+					$new_soal = new KegiatanMitraPertanyaan;
+					$new_soal->kegiatan_mitra_id = $id;
+					$new_soal->mitra_pertanyaan_id =  $value['id'];
+					if(isset($_POST['wil'.$value['id']]))
+						$new_soal->is_per_wilayah = 1;
+					$new_soal->save();
+					//
+				}
+			}
+
+			$model->is_set_form = 1;
+			$model->save();
+		}
+
+		$this->render('form',array(
+			'model'		=>$model
 		));
 	}
 

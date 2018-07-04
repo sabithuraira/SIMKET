@@ -19,20 +19,25 @@
                         ?>
                         <p>Data Kegiatan</p>
                     </div>
+
+                    <div class="stepwizard-step">
+                        <?php echo CHtml::link("2", array('form', 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));?>
+                        <p>Kelola Pertanyaan</p>
+                    </div>
                     <div class="stepwizard-step">
                         <?php 
-					    	echo CHtml::link("2", array('mitra', 'id'=>$model->id_kegiatan), array('class'=>'btn btn-default btn-circle'));
+					    	echo CHtml::link("3", array('mitra', 'id'=>$model->id_kegiatan), array('class'=>'btn btn-default btn-circle'));
                         ?>
                         <p>Petugas Lapangan</p>
                     </div>
                     <div class="stepwizard-step">
-                        <a href="#step-3" type="button" class="btn btn-primary btn-circle">3</a>
+                        <a href="#step-4" type="button" class="btn btn-primary btn-circle">4</a>
                         <p>Skoring Petugas</p>
                     </div>
 
                     <div class="stepwizard-step">
                         <?php
-                            echo CHtml::link("4", array("resume", 'id'=>$model->id_kegiatan), array('class'=>'btn btn-default btn-circle'));
+                            echo CHtml::link("5", array("resume", 'id'=>$model->id_kegiatan), array('class'=>'btn btn-default btn-circle'));
                         ?>
                         <p>Resume Kegiatan</p>
                     </div>
