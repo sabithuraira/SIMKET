@@ -104,73 +104,79 @@
                             <br/>
                             <table class="table table-hover table-bordered table-condensed">
                                 <?php
-                                    foreach ($questions as $key => $value)
+                                    foreach ($questions as $kkey => $kvalue)
                                     {
-                                        $opts_name = 'opts'.$value['id'];
-                                        echo '<tr><td><b>'.$value['pertanyaan'].'</b></td></tr>';
-                                        if($value['id']==11 || $value['id']==12){
-                                    
-                                            echo '<tr>';
-                                            echo '<td><div class="form-group">';
-                                            
-                                            $wilayah = KegiatanMitraWilayah::model()->findAllByAttributes(array(
-                                                'kmp_id'	=>$model->id //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
-                                            ));
+                                        $value = MitraPertanyaan::model()->find(
+                                        	'id=:t0 AND (teruntuk=:t1 OR teruntuk=:t2)', array(':t0'=>$kvalue->mitra_pertanyaan_id ,':t1'=>$model->status, ':t2'=>3)
+                                        );
 
-                                            echo '<table class="table table-hover table-bordered table-condensed">';
-                                            
-                                            $list_data = CHtml::listData($value->options, 'skala', 'label');
-                                            foreach ($wilayah as $key_wil => $value_wil)
-                                            {
+                                        if($value!==null){
+                                            $opts_name = 'opts'.$value['id'];
+                                            echo '<tr><td><b>'.$value['pertanyaan'].'</b></td></tr>';
+                                            if($kvalue->is_per_wilayah==1){
+                                        
+                                                echo '<tr>';
+                                                echo '<td><div class="form-group">';
+                                                
+                                                $wilayah = KegiatanMitraWilayah::model()->findAllByAttributes(array(
+                                                    'kmp_id'	=>$model->id //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+                                                ));
+
+                                                echo '<table class="table table-hover table-bordered table-condensed">';
+                                                
+                                                $list_data = CHtml::listData($value->options, 'skala', 'label');
+                                                foreach ($wilayah as $key_wil => $value_wil)
+                                                {
+                                                    $nilai = MitraNilai::model()->findByAttributes(
+                                                        array(
+                                                            'mitra_id'		=>$model->id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
+                                                            'pertanyaan_id'	=>$value['id'],
+                                                            'wilayah_id'	=>$value_wil['id']
+                                                        )
+                                                    );
+                                                    echo '<tr>';
+                                                        echo '<td>'.($key_wil+1).'</td>';
+                                                        echo '<td>'.$value_wil['nks'].'</td>';
+                                                        echo '<td>'.$value_wil['bs'].'</td>';
+                                                    
+                                                        if($nilai!=null)
+                                                            echo '<td class="text-center">'.CHtml::dropDownList($opts_name.'_'.$value_wil['id'], $nilai->nilai ,$list_data).'</td>';
+                                                        else
+                                                            echo '<td class="text-center">'.CHtml::dropDownList($opts_name.'_'.$value_wil['id'], '' ,$list_data).'</td>';
+                                                    echo '</tr>';
+                                                }
+
+                                                echo '</table>';
+                                                
+                                                echo '</div></td>';
+                                            }
+                                            else{
+        
+                                                echo '<tr>';
+                                                echo '<td><div class="form-group">';
+                                                
                                                 $nilai = MitraNilai::model()->findByAttributes(
                                                     array(
                                                         'mitra_id'		=>$model->id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
-                                                        'pertanyaan_id'	=>$value['id'],
-                                                        'wilayah_id'	=>$value_wil['id']
+                                                        'pertanyaan_id'	=>$value['id']
                                                     )
                                                 );
-                                                echo '<tr>';
-                                                    echo '<td>'.($key_wil+1).'</td>';
-                                                    echo '<td>'.$value_wil['nks'].'</td>';
-                                                    echo '<td>'.$value_wil['bs'].'</td>';
                                                 
-                                                    if($nilai!=null)
-                                                        echo '<td class="text-center">'.CHtml::dropDownList($opts_name.'_'.$value_wil['id'], $nilai->nilai ,$list_data).'</td>';
-                                                    else
-                                                        echo '<td class="text-center">'.CHtml::dropDownList($opts_name.'_'.$value_wil['id'], '' ,$list_data).'</td>';
-                                                echo '</tr>';
+                                                foreach($value->options as $key2 => $value2){
+                                                    $opts_id = 'opts'.$value['id'].$value2['skala'];
+        
+                                                    $is_disable = (strlen($value2['label']) == 0) ? 'disabled' : '';
+                                                    $is_checked = ($nilai!=null && $nilai->nilai==$value2['skala']) ? 'checked' : '';
+        
+        
+                                                    echo '<div class="radio"><label>';
+                                                    echo '<input type="radio" name="'.$opts_name.'" id="'.$opts_id.'" value="'.$value2['skala'].'" '.$is_disable.' '.$is_checked.'>('.$value2['skala'].') '.$value2['label'].'</label>';
+                                                    echo '</div>';    
+                                                }
+                                                echo '</div></td>';
                                             }
-
-                                            echo '</table>';
-                                            
-                                            echo '</div></td>';
+                                            echo '</tr>';
                                         }
-                                        else{
-    
-                                            echo '<tr>';
-                                            echo '<td><div class="form-group">';
-                                            
-                                            $nilai = MitraNilai::model()->findByAttributes(
-                                                array(
-                                                    'mitra_id'		=>$model->id, //this field refer to id_mitra in kegiatan NOT ID PEGAWAI/MITRA MASTER
-                                                    'pertanyaan_id'	=>$value['id']
-                                                )
-                                            );
-                                            
-                                            foreach($value->options as $key2 => $value2){
-                                                $opts_id = 'opts'.$value['id'].$value2['skala'];
-    
-                                                $is_disable = (strlen($value2['label']) == 0) ? 'disabled' : '';
-                                                $is_checked = ($nilai!=null && $nilai->nilai==$value2['skala']) ? 'checked' : '';
-    
-    
-                                                echo '<div class="radio"><label>';
-                                                echo '<input type="radio" name="'.$opts_name.'" id="'.$opts_id.'" value="'.$value2['skala'].'" '.$is_disable.' '.$is_checked.'>('.$value2['skala'].') '.$value2['label'].'</label>';
-                                                echo '</div>';    
-                                            }
-                                            echo '</div></td>';
-                                        }
-                                        echo '</tr>';
                                     }
                                 ?>
                             </table>
