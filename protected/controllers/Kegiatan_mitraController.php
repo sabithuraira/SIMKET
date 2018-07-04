@@ -384,7 +384,11 @@ class Kegiatan_mitraController extends Controller
 				}
 			}
 
-			$model->nilai = ($model->totalNilai/$model->totalPertanyaan);
+			if($model->totalPertanyaan==0 || $model->totalNilai==0)
+				$model->nilai = 0;
+			else
+				$model->nilai = ($model->totalNilai/$model->totalPertanyaan);
+			
 			$model->save();
 		}
 

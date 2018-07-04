@@ -132,27 +132,36 @@ class KegiatanMitraPetugas extends HelpAr
 
 	public function getTotalNilai(){
 		$idnya = $this->id;
-		$sql = "SELECT SUM(nilai) FROM mitra_nilai WHERE mitra_id=$idnya";
+		//mitra id disini bukan id pegawai/mitra, tetapi id dari kegiatan_mitra_petugas.
+		//karena itulah kita tidak perlu filter lagi by kegiatan.
+		$sql = "SELECT COALESCE(SUM(nilai),0) FROM mitra_nilai WHERE mitra_id=$idnya";
 
 		return Yii::app()->db->createCommand($sql)->queryScalar();
 	}
 
 	public function getTotalPertanyaan(){
-		$statusnya = $this->status;
-		$idnya = $this->id;
-		$sql = "SELECT COUNT(id) FROM mitra_pertanyaan WHERE teruntuk=$statusnya OR teruntuk=3";
+		// $statusnya = $this->status;
+		// $idnya = $this->id;
+		// $sql = "SELECT COUNT(id) FROM mitra_pertanyaan WHERE teruntuk=$statusnya OR teruntuk=3";
 
-		$total = Yii::app()->db->createCommand($sql)->queryScalar();
+		// $total = Yii::app()->db->createCommand($sql)->queryScalar();
 
-		if($statusnya==2){
-			$total_pertanyaan = Yii::app()->db->createCommand($sql)->queryScalar() - 2;
+		// if($statusnya==2){
+		// 	$total_pertanyaan = Yii::app()->db->createCommand($sql)->queryScalar() - 2;
 			
-			$sql_wilayah = "SELECT COUNT(id) FROM kegiatan_mitra_wilayah WHERE kmp_id=$idnya";
+		// 	$sql_wilayah = "SELECT COUNT(id) FROM kegiatan_mitra_wilayah WHERE kmp_id=$idnya";
 	
-			$total_wilayah = Yii::app()->db->createCommand($sql_wilayah)->queryScalar();
-			$total = $total_pertanyaan + (2 * $total_wilayah);
-		}
+		// 	$total_wilayah = Yii::app()->db->createCommand($sql_wilayah)->queryScalar();
+		// 	$total = $total_pertanyaan + (2 * $total_wilayah);
+		// }
 		// print_r($total_pertanyaan);die();
+
+		$idnya = $this->id;
+		//mitra id disini bukan id pegawai/mitra, tetapi id dari kegiatan_mitra_petugas.
+		//karena itulah kita tidak perlu filter lagi by kegiatan.
+		$sql = "SELECT COALESCE(COUNT(nilai),0) FROM mitra_nilai WHERE mitra_id=$idnya";
+		// print_r($sql);die();
+		$total = Yii::app()->db->createCommand($sql)->queryScalar();
 
 		return $total;
 	}

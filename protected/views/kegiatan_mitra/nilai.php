@@ -65,7 +65,7 @@
                                 <div class="col-sm-4 border-right">
                                 <div class="description-block">
                                     <h5 class="description-header"><?php echo $model->totalPertanyaan; ?></h5>
-                                    <span class="description-text">TOTAL PERTANYAAN</span>
+                                    <span class="description-text">TOTAL DIJAWAB</span>
                                 </div>
                                 <!-- /.description-block -->
                                 </div>
@@ -80,7 +80,7 @@
                                 <!-- /.col -->
                                 <div class="col-sm-4">
                                 <div class="description-block">
-                                    <h5 class="description-header"><?php echo round($model->totalNilai/$model->totalPertanyaan,2).' / 4'; ?></h5>
+                                    <h5 class="description-header"><?php echo round($model->nilai,2).' / 4'; ?></h5>
                                     <span class="description-text">RATA-RATA</span>
                                 </div>
                                 <!-- /.description-block -->
