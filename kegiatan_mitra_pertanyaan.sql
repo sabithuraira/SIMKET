@@ -60,3 +60,4 @@ ALTER TABLE `kegiatan_mitra_pertanyaan`
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ALTER TABLE `kegiatan_mitra` ADD `is_set_form` INT NOT NULL DEFAULT '0' AFTER `updated_time`;
+ALTER TABLE `kegiatan_mitra_pertanyaan` ADD `is_per_wilayah` INT NOT NULL DEFAULT '0' AFTER `updated_time`;
