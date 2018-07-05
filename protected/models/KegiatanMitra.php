@@ -211,8 +211,9 @@ class KegiatanMitra extends HelpAr
 					(SELECT o.description FROM mitra_option o WHERE o.id_pertanyaan=pertanyaan_id AND o.skala=4 LIMIT 1) as opt4
 					
 					FROM `mitra_nilai` m, 
-					mitra_pertanyaan p
+					mitra_pertanyaan p, kegiatan_mitra_pertanyaan kmp
 					WHERE 
+						kmp.mitra_pertanyaan_id = p.id AND 
 						m.pertanyaan_id=p.id  AND kegiatan_id = $idnya 
 					GROUP BY pertanyaan_id";
 
