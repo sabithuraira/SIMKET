@@ -17,8 +17,6 @@ $this->breadcrumbs=array(
             'validateOnSubmit'=>true,
         ),
     )); ?>
-    
-        <p class="note">Fields with <span class="required">*</span> are required.</p>
 
         <div class="form-group has-feedback">
             <?php echo $form->textField($model,'username', array('class'=>'form-control', 'placeholder'=>'Email')); ?>

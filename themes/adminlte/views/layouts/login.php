@@ -43,8 +43,10 @@
     <b>&nbsp</b>&nbsp 
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Log in</p>
+  <div class="login-box-body"> 
+    <div class="login-icon">
+      <img src="<?php echo $baseUrl;?>/dist/img/logo_1604.png" />
+    </div>
 
     <?php echo $content; ?>
 

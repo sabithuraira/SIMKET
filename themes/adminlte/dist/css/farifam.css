@@ -186,3 +186,11 @@ tr.bps4 > td.color
 img.img-profile{
   width: 100%;
 }
+
+.login-icon{
+  text-align: center;
+}
+
+.login-icon > img{
+  width: 120px;
+}
