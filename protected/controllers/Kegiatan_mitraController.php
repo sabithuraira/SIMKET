@@ -37,7 +37,9 @@ class Kegiatan_mitraController extends Controller
 					'get_list_mitra',
 					'nilai', 'resume', 'get_list_wilayah',
 					'delete_wilayah', 'add_single_wilayah', 'form'),
-				'users'=>array('@'),
+				'expression'=> function($user){
+					return $user->getLevel()<=1;
+				},
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),

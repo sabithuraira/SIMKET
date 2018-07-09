@@ -6,7 +6,9 @@ class EWebUser extends CWebUser{
     protected function loadUser()
     {
         if ( $this->_model === null ) {
+            if($this->id!='guess'){
                 $this->_model = User::model()->findByPk($this->id);
+            }
         }
         return $this->_model;
     }
@@ -14,17 +16,23 @@ class EWebUser extends CWebUser{
     //1=top admin, 2=admin kabupaten, 0=member
     function getLevel()
     {
-        $user=$this->loadUser();
-        if($user)
-            return $user->type_user;
+        if($this->id!='guess')
+        {
+            $user=$this->loadUser();
+            if($user)
+                return $user->type_user;
+        }
         return 100;
     }
 
-     function getUnitKerja()
+    function getUnitKerja()
     {
-        $user=$this->loadUser();
-        if($user)
-            return $user->unit_kerja;
+        if($this->id!='guess')
+        {
+            $user=$this->loadUser();
+            if($user)
+                return $user->unit_kerja;
+        }
         return 100;
     }
 
@@ -32,17 +40,20 @@ class EWebUser extends CWebUser{
     {
         $result=0;
 
-        if(!Yii::app()->user->isGuest){
-            $id=$this->id;
-            $sql="SELECT uk.jenis FROM mem_user u, unit_kerja uk WHERE u.unit_kerja=uk.id AND u.id={$id}";
-            $return_val=Yii::app()->db->createCommand($sql)->queryScalar();
+        if($this->id!='guess')
+        {
+            if(!Yii::app()->user->isGuest){
+                $id=$this->id;
+                $sql="SELECT uk.jenis FROM mem_user u, unit_kerja uk WHERE u.unit_kerja=uk.id AND u.id={$id}";
+                $return_val=Yii::app()->db->createCommand($sql)->queryScalar();
 
-            if($return_val==2)
-                $result=1;
-        }
-        else{
-            //mean not login
-            $result = 100;
+                if($return_val==2)
+                    $result=1;
+            }
+            else{
+                //mean not login
+                $result = 100;
+            }
         }
 
         return $result;

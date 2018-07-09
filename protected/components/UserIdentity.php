@@ -39,6 +39,15 @@ class UserIdentity extends CUserIdentity
 	  	}
 	   	return $this->errorCode == self::ERROR_NONE;
 	}	
+
+
+	public function authenticateGuess()
+	{
+		$this->_id = 'guess';
+		$this->username = 'guess';
+		$this->errorCode = self::ERROR_NONE;
+		return !$this->errorCode;
+	}
 	
 	public function getId()
 	{

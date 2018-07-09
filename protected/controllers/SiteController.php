@@ -204,6 +204,29 @@ class SiteController extends Controller
 		$this->render('login',array('model'=>$model));
 	}
 
+
+	public function actionGuess()
+	{
+		$result = array(
+			'status'	=>'false',
+			'url'		=>'',
+		);
+		$model=new LoginForm;
+
+		// validate user input and redirect to the previous page if valid
+		if($model->loginGuess()){
+			// $this->redirect(Yii::app()->user->returnUrl);
+
+			$result['status']	='true';
+			$result['url']		= Yii::app()->user->returnUrl;
+		}
+		// display the login form
+		// $this->render('login',array('model'=>$model));
+
+		echo CJSON::encode($result);
+		Yii::app()->end();
+	}
+
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */

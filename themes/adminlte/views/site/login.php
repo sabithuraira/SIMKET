@@ -42,19 +42,48 @@ $this->breadcrumbs=array(
                 </label>
                 </div>
             </div>
+            <div class="col-xs-4"></div>
 
+        </div>
+
+        <div class="row">
             <div class="col-xs-4">
                 <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
             </div>
 
+            <div class="col-xs-8">
+                <div class="pull-right">            
+                    <button id="guess-btn" type="button" class="btn btn-success btn-block btn-flat">Masuk sebagai tamu &nbsp<i class="fa fa-sign-in"></i></button>
+                </div>
+            </div>
         </div>
     
     
     <?php $this->endWidget(); ?>
     </div><!-- form -->
 
-
-
+<script>
+  $(document).ready(function () {
+    var pathname = window.location.pathname;
+    $("#guess-btn").click(function(){
+        $.ajax({
+        url: pathname+"?r=site/guess",
+        dataType: 'json',
+        method: "POST",
+        // data: { LoginForm_username: 'guess', LoginForm_password: 'guess'},
+        success: function(data) {
+            if(data.status == 'true'){
+                window.location.href=data.url;
+            }
+        }.bind(this),
+        error: function(xhr, status, err) {
+            console.log(JSON.stringify(xhr));
+        }.bind(this)
+    });
+    });
+  
+});
+</script>
 <!--
 <form action="../../index2.html" method="post">
     <div class="row">
