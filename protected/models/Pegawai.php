@@ -105,6 +105,7 @@ class Pegawai extends HelpAr
 		$criteria->compare('jabatan',$this->jabatan,true);
 		$criteria->compare('created_time',$this->created_time,true);
 		$criteria->compare('updated_time',$this->updated_time,true);
+		$criteria->compare('is_active',$this->is_active,true);
 
 		if($is_raport){
 			$criteria->order = 'nilai_menjadi_mitra DESC, total_menjadi_mitra DESC';

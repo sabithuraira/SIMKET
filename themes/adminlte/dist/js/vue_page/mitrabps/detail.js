@@ -10,6 +10,22 @@ $(document).ready(function () {
     callDonutChart();
 });
 
+
+$("#btn-delete").click(function(){
+    if (confirm("Apakah anda yakin ingin menghapus data ini?")) {
+        const idnya = $(this).attr('dataid');
+        $.ajax({
+            url: pathname+"?r=mitrabps/delete&id=" + idnya,
+            type:"post",
+            dataType :"json",
+            success : function(data)
+            {
+                window.location.href=pathname+ "?r=mitrabps/index"
+            }
+        });
+    }
+});
+
 function callDonutChart(){
     $(".donut-chart").each(function() {
         setDonutChart($(this).attr('id'));

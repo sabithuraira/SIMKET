@@ -130,6 +130,7 @@ class MitraBps extends HelpAr
 		$criteria->compare('updated_time',$this->updated_time,true);
 		$criteria->compare('created_by',$this->created_by);
 		$criteria->compare('updated_by',$this->updated_by,true);
+		$criteria->compare('is_active',$this->is_active,true);
 
 		if($is_raport){
 			$criteria->order = 'nilai_menjadi_mitra DESC, total_menjadi_mitra DESC';

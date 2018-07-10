@@ -35,7 +35,6 @@
 					'value'		=> function($data){ return '<div class="user-block">
 						<div class="pull-right">
 							<a href="'.Yii::app()->createUrl("mitrabps/update", array("id"=>$data->id)).'" class="btn"><i class="fa fa-edit"></i></a>
-							<a href="'.Yii::app()->createUrl("mitrabps/delete", array("id"=>$data->id)).'" class="btn"><i class="fa fa-trash"></i></a>
 						</div>
 
 						<img class="img-circle" src="'.$data->fotoImage.'" alt="User Image">

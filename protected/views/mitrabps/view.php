@@ -5,10 +5,10 @@
 		<div class="mailbox-controls">
 			<b><?php echo $model->nama; ?></b>
 			<div class="pull-right">
-				<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Mitra", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
-				<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
-				<?php echo CHtml::link("<i class='fa fa-pencil'></i> Perbaharui", array('update', 'id'=>$model->id), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
-				<?php echo CHtml::link("<i class='fa fa-trash'></i> Hapus", "#", array("submit"=>array('delete', 'id'=>$model->id), 'confirm' => 'Anda yakin ingin menghapus data ini?', 'class'=>'btn btn-default btn-sm toggle-event')) ?>
+				<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Mitra", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
+				<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
+				<?php echo CHtml::link("<i class='fa fa-pencil'></i> Perbaharui", array('update', 'id'=>$model->id), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
+				<?php echo '<button id="btn-delete" dataid="'.$model->id.'" class="btn btn-danger btn-sm toggle-event"> <i class="fa fa-trash"></i> Hapus</button>'; ?>
 			</div>
 		</div>
 
@@ -169,4 +169,4 @@
 <script src="<?php echo $baseUrl;?>/plugins/flot/jquery.flot.pie.min.js"></script>
 <script src="<?php echo $baseUrl;?>/plugins/flot/jquery.flot.categories.min.js"></script>
 
-<script src="<?php echo $baseUrl;?>/dist/js/vue_page/pegawai/detail.js"></script>
+<script src="<?php echo $baseUrl;?>/dist/js/vue_page/mitrabps/detail.js"></script>

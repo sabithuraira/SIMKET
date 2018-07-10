@@ -50,29 +50,29 @@
 				'type'		=>'raw',
 				'value'		=> function($data){ return CHtml::link('Progres', array('mitra','id'=>$data->id)); },
 			),
-			array(
-				'class'=>'CButtonColumn',
-				'template' => '{view} {update} {delete}',
-				'htmlOptions' => array('width' => 20),
-				'buttons'=>array(
-					'update'=>array(
-						'url'=>function($data){
-								return Yii::app()->createUrl("kegiatan_mitra/update", array("id"=>$data->id));
-						},
-					),
-					'view'=>array(
-							'url'=>function($data){
-								return Yii::app()->createUrl("kegiatan_mitra/view", array("id"=>$data->id));
-						},
-					),
-					'delete'=>array(
-						'url'=>function($data){
-								return Yii::app()->createUrl("kegiatan_mitra/view", array("id"=>$data->id));
-						},
-						'label'=>'Hapus',
-					),
-				),
-			),
+			// array(
+			// 	'class'=>'CButtonColumn',
+			// 	'template' => '{view} {update}',
+			// 	'htmlOptions' => array('width' => 20),
+			// 	'buttons'=>array(
+			// 		'update'=>array(
+			// 			'url'=>function($data){
+			// 					return Yii::app()->createUrl("kegiatan_mitra/update", array("id"=>$data->id));
+			// 			},
+			// 		),
+			// 		'view'=>array(
+			// 				'url'=>function($data){
+			// 					return Yii::app()->createUrl("kegiatan_mitra/view", array("id"=>$data->id));
+			// 			},
+			// 		),
+			// 		// 'delete'=>array(
+			// 		// 	'url'=>function($data){
+			// 		// 			return Yii::app()->createUrl("kegiatan_mitra/view", array("id"=>$data->id));
+			// 		// 	},
+			// 		// 	'label'=>'Hapus',
+			// 		// ),
+			// 	),
+			// ),
 		),
 	)); ?>
 	

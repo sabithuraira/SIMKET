@@ -73,7 +73,7 @@ $this->breadcrumbs=array(
         // data: { LoginForm_username: 'guess', LoginForm_password: 'guess'},
         success: function(data) {
             if(data.status == 'true'){
-                window.location.href=data.url;
+                window.location.href= pathname;
             }
         }.bind(this),
         error: function(xhr, status, err) {

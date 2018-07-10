@@ -165,11 +165,15 @@ class PegawaiController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model = $this->loadModel($id);
+		$model->is_active = 0;
+		$model->save(false);
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		echo CJSON::encode(array
+		(
+				'satu'=>'',
+		));
+		Yii::app()->end();
 	}
 
 	/**
@@ -183,6 +187,7 @@ class PegawaiController extends Controller
 			$model->attributes=$_GET['Pegawai'];
 
 		// $model->unit_kerja = 22;
+		$model->is_active = 1;
 
 		$this->render('admin',array(
 			'model'=>$model,

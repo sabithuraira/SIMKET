@@ -53,7 +53,6 @@
 					'value'		=> function($data){ return '<div class="user-block">
 						<div class="pull-right">
 							<a href="'.Yii::app()->createUrl("pegawai/update", array("id"=>$data->nip)).'" class="btn"><i class="fa fa-edit"></i></a>
-							<a href="'.Yii::app()->createUrl("pegawai/delete", array("id"=>$data->nip)).'" class="btn"><i class="fa fa-trash"></i></a>
 						</div>
 
 						<img class="img-circle" src="'.$data->fotoImage.'" alt="User Image">
