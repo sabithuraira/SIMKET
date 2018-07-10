@@ -29,11 +29,19 @@
 				array(
 					'header'	=>'Mitra BPS',
 					'type'=>'raw',
-					'value'		=> function($data){ return '<div class="user-block">
-						<div class="pull-right">
+					'value'		=> function($data){ 
+						$ket_nilai = '<div class="pull-right">
 							<span class="username">Mengikuti '.$data->total_menjadi_mitra.' kegiatan, nilai: '.round($data->nilai_menjadi_mitra,2).' ('.$data->predikatLabel.')</span>
-						</div>
+						</div>';
 
+						if(Yii::app()->user->name=='guess'){
+							$ket_nilai = '<div class="pull-right">
+								<span class="username">Mengikuti '.$data->total_menjadi_mitra.' kegiatan</span>
+							</div>';
+						}
+
+						return '<div class="user-block"> 
+						'.$ket_nilai.'
 						<img class="img-circle" src="'.$data->fotoImage.'" alt="User Image">
 						<span class="comment">'.$data->kabupaten->name.'</span>
 						<span class="username"><a href="#">'.$data->nama.'</a></span>
