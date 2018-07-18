@@ -5,10 +5,12 @@
 		<div class="mailbox-controls">
 			<b><?php echo $model->nama; ?></b>
 			<div class="pull-right">
-				<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Mitra", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
-				<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
-				<?php echo CHtml::link("<i class='fa fa-pencil'></i> Perbaharui", array('update', 'id'=>$model->id), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
-				<?php echo '<button id="btn-delete" dataid="'.$model->id.'" class="btn btn-danger btn-sm toggle-event"> <i class="fa fa-trash"></i> Hapus</button>'; ?>
+				<?php if(Yii::app()->user->name!='guess'){ ?>
+					<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Mitra", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
+					<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
+					<?php echo CHtml::link("<i class='fa fa-pencil'></i> Perbaharui", array('update', 'id'=>$model->id), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
+					<?php echo '<button id="btn-delete" dataid="'.$model->id.'" class="btn btn-danger btn-sm toggle-event"> <i class="fa fa-trash"></i> Hapus</button>'; ?>
+				<?php } ?>
 			</div>
 		</div>
 
@@ -53,7 +55,7 @@
 			<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">
 						<div class="col-md-12">
-							
+							<?php if(Yii::app()->user->name!='guess'){ ?>
 							<div class="box box-widget widget-user">
 								<div class="row">
 									<div class="col-sm-6 border-right">
@@ -156,6 +158,9 @@
 
 
 						</div>
+
+
+						<?php } ?>
 					</div>
 				</div>
 

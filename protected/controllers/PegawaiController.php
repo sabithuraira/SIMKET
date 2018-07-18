@@ -189,6 +189,10 @@ class PegawaiController extends Controller
 		// $model->unit_kerja = 22;
 		$model->is_active = 1;
 
+		if(Yii::app()->user->isKabupaten()==1){
+			$model->unit_kerja = Yii::app()->user->unitKerja;
+		}
+
 		$this->render('admin',array(
 			'model'=>$model,
 		));
@@ -201,6 +205,10 @@ class PegawaiController extends Controller
 		if(isset($_GET['Pegawai']))
 			$model->attributes=$_GET['Pegawai'];
 		// $model->unit_kerja = 22;
+
+		if(Yii::app()->user->isKabupaten()==1){
+			$model->unit_kerja = Yii::app()->user->unitKerja;
+		}
 
 		$this->render('rapor',array(
 			'model'=>$model,

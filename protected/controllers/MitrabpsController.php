@@ -28,7 +28,7 @@ class MitrabpsController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
@@ -41,7 +41,7 @@ class MitrabpsController extends Controller
 				},
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-			'actions'=>array('dbase'),
+			'actions'=>array('dbase','view'),
 			'expression'=> function($user){
 				return true;
 			},
@@ -206,6 +206,10 @@ class MitrabpsController extends Controller
 
 		$model->is_active = 1;
 
+		if(Yii::app()->user->isKabupaten()==1){
+			$model->kab_id = Yii::app()->user->unitKerja;
+		}
+
 		$this->render('admin',array(
 			'model'=>$model,
 		));
@@ -218,6 +222,10 @@ class MitrabpsController extends Controller
 		if(isset($_GET['MitraBps']))
 			$model->attributes=$_GET['MitraBps'];
 
+		if(Yii::app()->user->isKabupaten()==1){
+			$model->kab_id = Yii::app()->user->unitKerja;
+		}
+
 		$this->render('rapor',array(
 			'model'=>$model,
 		));
@@ -229,6 +237,8 @@ class MitrabpsController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['MitraBps']))
 			$model->attributes=$_GET['MitraBps'];
+
+		$model->is_active = 1;
 
 		$this->render('dbase',array(
 			'model'=>$model,
