@@ -36,7 +36,7 @@ class KegiatanController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow',
-				'actions'=>array('listkegiatan'),
+				'actions'=>array('listkegiatan', 'listkegiatanrapor'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -63,6 +63,28 @@ class KegiatanController extends Controller
 		foreach($model as $value){
 			$data[] = array(
 				'url'=> "index.php?r=kegiatan/progress&id=".$value['id'],
+				'title'=> $value['kegiatan'],
+				'start'=> $value['start_date'],
+				'end'=> $value['end_date'],
+				'className'=>"eventColor".Kegiatan::model()->CalendarClassByDate($value['id'])
+			);
+		}
+
+		echo CJSON::encode(array
+		(
+			'data'=>$data
+		));
+
+		Yii::app()->end();
+	}
+
+	public function actionListkegiatanrapor($id){
+		$model=Kegiatan::model()->getKegiatan2017Plus($id);
+
+		$data = array();
+		foreach($model as $value){
+			$data[] = array(
+				'url'=> "#",
 				'title'=> $value['kegiatan'],
 				'start'=> $value['start_date'],
 				'end'=> $value['end_date'],

@@ -13,7 +13,33 @@
               echo '<li><a href="'.Yii::app()->createUrl('pertanyaan/index').'"><i class="fa fa-user-plus"></i> Kelola Pertanyaan Penilaian</a></li>';
 
               echo '<li><a href="'.Yii::app()->createUrl('kegiatan_mitra').'"><i class="fa fa-bicycle"></i><span> Kelola Penilaian Daftar Kegiatan</span></a></li>';
+            ?>
 
+        <li class="treeview">
+        <a href="#">
+          <i class="fa fa-bicycle"></i>
+          <span>Monitoring Kegiatan</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <?php 
+            echo '<li><a href="'.Yii::app()->createUrl('simrapor/tagihan').'"><i class="fa fa fa-circle-o"></i> Tagihan Kerja</a></li>';
+            echo '<li><a href="'.Yii::app()->createUrl('simrapor/calendar').'"><i class="fa fa fa-circle-o"></i> Kalender Kegiatan</a></li>';
+          ?>
+          
+          <?php 
+            $list_provinsi = HelpMe::getListProvinsi();
+
+            foreach($list_provinsi as $row){
+              echo '<li><a href="'.Yii::app()->createUrl('simrapor/bidang',array('id'=> $row['id'])).'"><i class="fa fa fa-circle-o"></i> '.$row['label'].'</a></li>';
+            }
+          ?>
+        </ul>
+      </li>
+
+      <?php
               echo '<li class="treeview"><a href="#"><i class="fa fa-circle-o"></i> Rapor Penilaian Kinerja
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
