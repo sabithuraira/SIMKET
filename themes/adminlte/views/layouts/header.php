@@ -31,7 +31,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-file-pdf-o"></i>
               Panduan Penggunaan
-              <span class="label label-success">3</span>
+              <span class="label label-success">1</span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">Panduan SIM RAPOR</li>
@@ -39,8 +39,8 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
-                    <a href="https://laci.bps.go.id/s/NIPd5Yt53tuCZeG">
-                      <i class="fa fa-users text-aqua"></i> Panduan Awal
+                    <a href="https://laci.bps.go.id/s/yE1z8AP0GZwpDe6">
+                      <i class="fa fa-users text-aqua"></i> Unduh
                     </a>
                   </li>
                   <!-- <li>
