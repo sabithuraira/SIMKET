@@ -12,8 +12,10 @@
 			'model'=>$model
 		)); ?>
 
+
+		<button id="cetak-surat"  onclick="tableToExcel();" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Download Excel</button>
+
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
-			'id'=>'mitra-bps-grid',
 			'dataProvider'=>$model->search(),
 
 			'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
@@ -25,7 +27,7 @@
 				'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
 			),
 			
-			'itemsCssClass'=>'table table-hover table-striped table-bordered table-condensed',
+			'itemsCssClass'=>'table-excel table table-hover table-striped table-bordered table-condensed',
 			
 			// 'filter'=>$model,
 			'columns'=>array(
@@ -45,46 +47,69 @@
 					  '; },
 					// 'filter' => CHtml::listData(UnitKerja::model()->findAll(), 'id', 'name')
 				),
-				// 'nama',
-				// array(
-				// 	'name'	=>'kab_id',
-				// 	'type'=>'raw',
-				// 	'value'		=> function($data){ return $data->kabupaten->name; },
-				// 	// 'filter' => CHtml::listData(UnitKerja::model()->findAllByAttributes(array('jenis'=>2)), 'id', 'name')
-				// ),
-				// 'nomor_telepon',
-				// 'alamat',
-				// 'tanggal_lahir',
-				// // 'jk',
-				// array(
-				// 	'name'	=>'jk',
-				// 	'type'=>'raw',
-				// 	'value'		=> function($data){ return $data->jk==1 ? "Laki-laki" : "Perempuan"; },
-				// ),
-				// array(
-				// 	'class'=>'CButtonColumn',
-				// 	'template' => '{view} {update} {delete}',
-				// 	'htmlOptions' => array('width' => 20),
-				// 	'buttons'=>array(
-				// 		'update'=>array(
-				// 			'url'=>function($data){
-				// 				return Yii::app()->createUrl("mitrabps/update", array("id"=>$data->id));
-				// 			},
-				// 		),
-				// 		'view'=>array(
-				// 			'url'=>function($data){
-				// 				return Yii::app()->createUrl("mitrabps/view", array("id"=>$data->id));
-				// 			},
-				// 		),
-				// 		'delete'=>array(
-				// 			'url'=>function($data){
-				// 				return Yii::app()->createUrl("mitrabps/delete", array("id"=>$data->id));
-				// 			},
-				// 			'label'=>'Hapus',
-				// 		),
-				// 	),
-				// ),
 			),
 		)); ?>
+
+		<table id="table-excel" style="display:none" class="table table-hover table-bordered table-condensed">
+			<tr>
+				<th>Nama</th>
+				<th>Kabupaten/Kota</th>
+				<th>Jenis Kelamin</th>
+				<th>Alamat</th>
+				<th>Telepon</th>
+				<th>Tanggal Lahir</th>
+				<th>Pendidikan Terakhir</th>
+				<th>Riwayat Kerja</th>
+			</tr>
+			
+			<?php 
+				foreach($model->searchAll()->data as $key=>$value){
+					echo '<tr>';
+					echo '<td>'.$value->nama.'</td>';
+					echo '<td>'.$value->kabupaten->name.'</td>';
+					echo '<td>'.(($value->jk == 1) ? "Laki-laki" : "Perempuan").'</td>';
+					echo '<td>'.$value->alamat.'</td>';
+					echo '<td>'.$value->nomor_telepon.'</td>';
+					echo '<td>'.$value->tanggal_lahir.'</td>';
+					echo '<td>'.(($value->pendidikan!=null) ? $value->pendidikanDropDown[$value->pendidikan] : "-").'</td>';
+					echo '<td>'.$value->riwayat.'</td>';
+					echo '</tr>';
+				} 
+			?>
+		</table>
 	</div>
 </div>
+
+
+
+<script>
+    var tableToExcel = (function() {   
+        
+        var uri = "data:application/vnd.ms-excel;base64,",
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http:\/\/www.w3.org\/TR\/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}<\/x:Name><x:WorksheetOptions><x:DisplayGridlines\/><\/x:WorksheetOptions><\/x:ExcelWorksheet><\/x:ExcelWorksheets><\/x:ExcelWorkbook><\/xml><![endif]--><\/head><body><table>{table}<\/table><\/body><\/html>',
+            base64 = function(s) {
+                return window.btoa(unescape(encodeURIComponent(s)));
+            },
+            format = function(s, c) {
+                return s.replace(/{(\w+)}/g, function(m, p) {
+                    return c[p];
+                });
+            };
+
+        return function() {
+            table = 'table-excel';
+            fileName = 'mitra_bps.xls';
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {
+                worksheet: fileName || 'Worksheet', 
+                table: table.innerHTML
+            }
+
+            $("<a id='dlink'  style='display:none;'></a>").appendTo("body");
+                document.getElementById("dlink").href = uri + base64(format(template, ctx))
+                document.getElementById("dlink").download = fileName;
+                document.getElementById("dlink").click();
+        }
+
+    })();  
+</script>

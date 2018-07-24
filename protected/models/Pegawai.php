@@ -116,6 +116,29 @@ class Pegawai extends HelpAr
 		));
 	}
 
+	public function searchAll($is_raport=false)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('nama',$this->nama,true);
+		$criteria->compare('unit_kerja',$this->unit_kerja);
+		$criteria->compare('is_active',$this->is_active,true);
+
+		if($is_raport){
+			$criteria->order = 'nilai_menjadi_mitra DESC, total_menjadi_mitra DESC';
+		}
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'totalItemCount'=>$this->count(),
+			'pagination'=>array(
+				'pageSize'=>$this->count(),
+			 ),
+		));
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
