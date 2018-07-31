@@ -9,6 +9,7 @@
 					<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Mitra", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
 					<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
 					<?php echo CHtml::link("<i class='fa fa-pencil'></i> Perbaharui", array('update', 'id'=>$model->id), array('class'=>'btn btn-default btn-sm toggle-event')); ?>
+					<?php echo CHtml::link("<i class='fa fa-thumbs-o-down'></i> Tandai Mitra Hitam", array('black', 'id'=>$model->id), array('class'=>'btn bg-black btn-sm toggle-event')); ?>
 					<?php echo '<button id="btn-delete" dataid="'.$model->id.'" class="btn btn-danger btn-sm toggle-event"> <i class="fa fa-trash"></i> Hapus</button>'; ?>
 				<?php } ?>
 			</div>
@@ -52,6 +53,12 @@
 			</div>
 
 			<br/>
+
+
+			<div class="alert bg-black">
+				<h4 class="text-center"><i class="icon fa fa-warning"></i> MITRA HITAM</h4>
+			</div>
+
 			<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">
 						<div class="col-md-12">

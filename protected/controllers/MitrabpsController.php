@@ -35,13 +35,13 @@ class MitrabpsController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update', 'delete',
-					'rapor', 'detail'),
+					'rapor', 'detail', 'black', 'blacklist'),
 				'expression'=> function($user){
 					return $user->getLevel()<=2;
 				},
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-			'actions'=>array('dbase','view'),
+			'actions'=>array('dbase','view', 'recommended'),
 			'expression'=> function($user){
 				return true;
 			},
@@ -50,6 +50,30 @@ class MitrabpsController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionBlack($id)
+	{
+		$model=$this->loadModel($id);
+		$model->is_black = 1;
+		
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['MitraBps']))
+		{
+			// print_r($_POST['MitraBps']);die();
+			$model->is_black=$_POST['MitraBps']['is_black'];
+			$model->black_note=$_POST['MitraBps']['black_note'];
+
+			if($model->save()){
+				$this->redirect(array('view','id'=>$model->id));
+			}
+		}
+
+		$this->render('black',array(
+			'model'=>$model,
+		));
 	}
 
 	/**
@@ -241,6 +265,36 @@ class MitrabpsController extends Controller
 		$model->is_active = 1;
 
 		$this->render('dbase',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionRecommended()
+	{
+		$model=new MitraBps('search');
+		$model->unsetAttributes(); 
+		if(isset($_GET['MitraBps']))
+			$model->attributes=$_GET['MitraBps'];
+
+		$model->is_active = 1;
+		$model->is_black = 0;
+
+		$this->render('recommended',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionBlacklist()
+	{
+		$model=new MitraBps('search');
+		$model->unsetAttributes(); 
+		if(isset($_GET['MitraBps']))
+			$model->attributes=$_GET['MitraBps'];
+
+		$model->is_black = 1;
+		$model->is_active = 1;
+
+		$this->render('blacklist',array(
 			'model'=>$model,
 		));
 	}

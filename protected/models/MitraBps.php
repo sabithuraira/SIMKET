@@ -72,8 +72,13 @@ class MitraBps extends HelpAr
 	}
 
 	public function getFotoImage(){
-		if($this->foto!==''){
-			return Yii::app()->baseUrl.'/upload/temp/mitra_foto/' . $this->foto;
+		if($this->is_black==1){
+			return Yii::app()->baseUrl.'/upload/temp/mitra_foto/black.png';
+		}
+		else{
+			if($this->foto!==''){
+				return Yii::app()->baseUrl.'/upload/temp/mitra_foto/' . $this->foto;
+			}
 		}
 		return Yii::app()->theme->baseUrl.'/dist/img/avatar.png';
 	}
@@ -97,7 +102,9 @@ class MitraBps extends HelpAr
 			'updated_by' => 'Updated By',
 			'riwayat'	=> 'Riwayat Kerja',
 			'pendidikan'	=>'Pendidikan Terakhir',
-			'foto'	=>'Foto (ukuran maksimal 100kb)'
+			'foto'	=>'Foto (ukuran maksimal 100kb)',
+			'is_black'	=> 'Tandai Sebagai Mitra Hitam?',
+			'black_note'	=>'Catatan Mitra',
 		);
 	}
 
@@ -131,6 +138,27 @@ class MitraBps extends HelpAr
 		$criteria->compare('created_by',$this->created_by);
 		$criteria->compare('updated_by',$this->updated_by,true);
 		$criteria->compare('is_active',$this->is_active,true);
+		$criteria->compare('is_black',$this->is_black,true);
+
+		if($is_raport){
+			$criteria->order = 'nilai_menjadi_mitra DESC, total_menjadi_mitra DESC';
+		}
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	public function searchRecommended($is_raport=false)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('nama',$this->nama,true);
+		$criteria->compare('kab_id',$this->kab_id);
+		$criteria->compare('is_black',$this->is_black,true);
+		$criteria->addCondition('nilai_menjadi_mitra>=3');
 
 		if($is_raport){
 			$criteria->order = 'nilai_menjadi_mitra DESC, total_menjadi_mitra DESC';

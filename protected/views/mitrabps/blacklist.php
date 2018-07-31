@@ -1,9 +1,8 @@
 <div class="box box-info">
 	<div class="mailbox-controls">
-		Mitra BPS
+		Mitra HITAM
 	</div>
 		 
-	
 	<div class="box-body">
 		<?php $this->renderPartial('_search',array(
 			'model'=>$model
@@ -44,7 +43,7 @@
 						'.$ket_nilai.'
 						<img class="img-circle" src="'.$data->fotoImage.'" alt="User Image">
 						<span class="comment">'.$data->kabupaten->name.'</span>
-						<span class="username">'.(($data->is_black==1) ? "  <small class='label bg-black'>MITRA HITAM</small>  "  : "").'<a href="'.Yii::app()->createUrl("mitrabps/view", array("id"=>$data->id)).'">'.$data->nama.'</a></span>
+						<span class="username"><a href="'.Yii::app()->createUrl("mitrabps/view", array("id"=>$data->id)).'">'.$data->nama.'</a></span>
 						<span class="description">'.$jk = ($data->jk==1 ? "Laki-laki" : "Perempuan").', Alamat: '.$data->alamat.'</span>
 					  </div>
 					  '; },

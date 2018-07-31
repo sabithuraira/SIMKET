@@ -52,7 +52,18 @@
               echo '</ul></li>';
             }
 
-            echo '<li><a href="'.Yii::app()->createUrl('mitrabps/dbase').'"><i class="fa fa-user-plus"></i> Database Mitra BPS Kab/Kota</a></li>';            
+
+            echo '<li class="treeview"><a href="#"><i class="fa fa-circle-o"></i>  Database Mitra
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>';
+
+            echo '<ul class="treeview-menu">';
+              echo '<li><a href="'.Yii::app()->createUrl('mitrabps/dbase').'"><i class="fa fa-user-plus"></i> Daftar Mitra</a></li>';
+              echo '<li><a href="'.Yii::app()->createUrl('mitrabps/recommended').'"><i class="fa fa-thumbs-o-up"></i> Mitra Andalan</a></li>';
+              echo '<li><a href="'.Yii::app()->createUrl('mitrabps/blacklist').'"><i class="fa fa-thumbs-o-down"></i> Mitra Hitam</a></li>';
+            echo '</ul></li>';       
           ?>
           
         <?php } ?>

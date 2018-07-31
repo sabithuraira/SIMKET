@@ -3,7 +3,6 @@
 		Mitra BPS
 	</div>
 		 
-	
 	<div class="box-body">
 		<?php $this->renderPartial('_search',array(
 			'model'=>$model
@@ -11,7 +10,7 @@
 
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'mitra-bps-grid',
-			'dataProvider'=>$model->search(true),
+			'dataProvider'=>$model->searchRecommended(true),
 
 			'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
 			'pager'=>array(
