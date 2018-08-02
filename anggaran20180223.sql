@@ -99,3 +99,5 @@ ALTER TABLE `value_anggaran_target` CHANGE `jenis` `jenis` INT(11) NULL;
 ALTER TABLE `value_anggaran` CHANGE `jenis` `jenis` INT(11) NULL;
 ALTER TABLE `value_anggaran` ADD `bulan` INT NOT NULL AFTER `keterangan`;
 ALTER TABLE `induk_kegiatan` ADD `output_id` INT NOT NULL AFTER `tahun`, ADD `unit_kerja_id` INT NOT NULL AFTER `output_id`;
+
+ALTER TABLE `kegiatan_mitra_petugas` ADD `catatan` TEXT NOT NULL AFTER `updated_time`;

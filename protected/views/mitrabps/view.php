@@ -16,41 +16,67 @@
 		</div>
 
 		<div class="box-body">
-			<div class="row">
 
-				<div class="col-sm-3 border-right">
-					<img class="img-profile" src="<?php echo $model->fotoImage; ?>" alt="User Image">
-				</div>
-				<div class="col-sm-9">
+			<div class="box box-widget">
+            <div class="box-header with-border">
+              <div class="user-block">
+                <img class="img-circle" src="<?php echo $model->fotoImage; ?>" alt="User Image">
+                <span class="username"><?php echo $model->nama; ?></span>
+                <span class="description"><?php echo $model->kabupaten->name; ?></span>
+                <span class="description">Tanggal Lahir: <?php echo $model->tanggal_lahir; ?></span>
+                <span class="description">Riwayat Kerja: <?php echo $model->riwayat; ?></span>
+              </div>
 
-					<?php $this->widget('zii.widgets.CDetailView', array(
-						'data'=>$model,
-						'attributes'=>array(
-							'nama',
-							array(
-								'name'=>'kab_id',
-								'value'=> $model->kabupaten->name,
-							),
-							'nomor_telepon',
-							'alamat',
-							'tanggal_lahir',
-							array(
-								'name'=>'jk',
-								'value'=> ($model->jk == 1) ? "Laki-laki" : "Perempuan",
-							),
-							array(
-								'name'=>'pendidikan',
-								'value'=> ($model->pendidikan!=null) ? $model->pendidikanDropDown[$model->pendidikan] : "-",
-							),
-							'riwayat',
-							// 'created_time',
-							// 'updated_time',
-							// 'created_by',
-							// 'updated_by',
-						),
-					)); ?>
+			  <div class="box-tools">
+			  
+			  <div class="box-header with-border">
+				<div class="user-block">
+					<span class="description">Nomor Telepon: <?php echo $model->nomor_telepon; ?></span>
+					<span class="description"><?php echo ($model->jk == 1) ? "Laki-laki" : "Perempuan"; ?>, Pendidikan Terakhir: <?php echo ($model->pendidikan!=null) ? $model->pendidikanDropDown[$model->pendidikan] : "-" ?></span>
+					<span class="description"><?php echo $model->alamat; ?></span>
 				</div>
-			</div>
+              </div>
+
+              <!-- /.box-tools -->
+            </div>
+
+            <!-- /.box-body -->
+            <div class="box-footer box-comments">
+              <div class="box-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+
+                <div class="comment-text">
+                      <span class="username">
+                        Maria Gonzales
+                        <span class="text-muted pull-right">8:03 PM Today</span>
+                      </span><!-- /.username -->
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </div>
+                <!-- /.comment-text -->
+              </div>
+              <!-- /.box-comment -->
+              <div class="box-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="../dist/img/user5-128x128.jpg" alt="User Image">
+
+                <div class="comment-text">
+                      <span class="username">
+                        Nora Havisham
+                        <span class="text-muted pull-right">8:03 PM Today</span>
+                      </span><!-- /.username -->
+                  The point of using Lorem Ipsum is that it has a more-or-less
+                  normal distribution of letters, as opposed to using
+                  'Content here, content here', making it look like readable English.
+                </div>
+                <!-- /.comment-text -->
+              </div>
+              <!-- /.box-comment -->
+            </div>
+			
+            <!-- /.box-footer -->
+          </div>
 
 			<br/>
 

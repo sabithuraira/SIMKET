@@ -26,7 +26,7 @@
 			// 'filter'=>$model,
 			'columns'=>array(
 				array(
-					'header'	=>'Mitra BPS',
+					'header'	=>'Mitra HITAM',
 					'type'=>'raw',
 					'value'		=> function($data){ 
 						$ket_nilai = '<div class="pull-right">
