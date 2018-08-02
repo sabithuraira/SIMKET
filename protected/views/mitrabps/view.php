@@ -39,42 +39,29 @@
 
               <!-- /.box-tools -->
             </div>
-
+			<br/>
             <!-- /.box-body -->
             <div class="box-footer box-comments">
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
-
-                <div class="comment-text">
-                      <span class="username">
-                        Maria Gonzales
-                        <span class="text-muted pull-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                </div>
-                <!-- /.comment-text -->
-              </div>
-              <!-- /.box-comment -->
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user5-128x128.jpg" alt="User Image">
-
-                <div class="comment-text">
-                      <span class="username">
-                        Nora Havisham
-                        <span class="text-muted pull-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using
-                  'Content here, content here', making it look like readable English.
-                </div>
-                <!-- /.comment-text -->
-              </div>
+				<?php 
+					foreach ($model->listKegiatan as $key => $value)
+					{
+						$statusLabel = 'PCL';
+						if($value['status']==1) $statusLabel = 'PML';
+						echo '<div class="box-comment">
+							<img class="img-circle img-sm" src="'.Yii::app()->theme->baseUrl.'/dist/img/logo_bps.png">
+			
+							<div class="comment-text">
+								<span class="username">'.$value['nama'].'<span class="text-muted pull-right">Status: '.$statusLabel.', Nilai: '.round($value['nilai'],2).'</span></span>
+								Catatan: -
+							</div>
+						</div>
+						';
+					}
+				?>
+              
               <!-- /.box-comment -->
             </div>
-			
+
             <!-- /.box-footer -->
           </div>
 
@@ -110,28 +97,7 @@
 								</div>
 							</div>
 
-								<h4>Kegiatan yang diikuti</h4>
-								<table class="table table-hover table-bordered table-condensed">
-
-									<tr>
-										<th>Nama Kegiatan</th>
-										<th>Status</th>
-										<th>Nilai</th>
-									</tr>
-									<?php
-										foreach ($model->listKegiatan as $key => $value)
-										{
-											$statusLabel = 'PCL';
-											if($value['status']==1) $statusLabel = 'PML';
-
-											echo '<tr>';
-											echo '<td>'.$value['nama'].'</td>';
-											echo '<td>'.$statusLabel.'</td>';
-											echo '<td>'.round($value['nilai'],2).'</td>';
-											echo '</tr>';
-										}
-									?>
-								</table>
+								
 
 
 							<div class="row">
