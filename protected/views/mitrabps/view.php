@@ -48,7 +48,7 @@
 						$statusLabel = 'PCL';
 						if($value['status']==1) $statusLabel = 'PML';
 						echo '<div class="box-comment">
-							<img class="img-circle img-sm" src="'.Yii::app()->theme->baseUrl.'/dist/img/logo_bps.png">
+							<img class="img-circle img-sm" src="'.Yii::app()->theme->baseUrl.'/dist/img/logo_bps.png" />
 			
 							<div class="comment-text">
 								<span class="username">'.$value['nama'].'<span class="text-muted pull-right">Status: '.$statusLabel.', Nilai: '.round($value['nilai'],2).'</span></span>

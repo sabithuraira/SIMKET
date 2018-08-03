@@ -74,7 +74,7 @@
                                             echo '<td>'.$value['nama'].'</td>';
                                             echo '<td>'.$value['nip'].'</td>';
                                         
-                                            echo '<td class="text-center">'.$value['status'].'</td>';
+                                            echo '<td class="text-center">'.$value['status'].$value['list_wilayah'].$value['btn_wilayah'].'</td>';
                                             echo '<td class="text-center">'.round($value['nilai'],2).' / 4</td>';
                                             echo '<td class="text-center">';
                                                 echo CHtml::link("<i class='fa fa-tachometer'></i> Penilaian", array('nilai', 'id'=> $value['id']), array('class'=>'btn btn-default btn-sm'));

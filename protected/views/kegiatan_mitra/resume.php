@@ -103,30 +103,33 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
 
+                    <div class="box-footer box-comments">
+                    <?php
+                        foreach ($list_mitra as $key => $value)
+                        {
+                            echo '<div class="box-comment">
+                                <img class="img-circle img-sm" src="'.$value['foto'].'" />
+                
+                                <div class="comment-text">
+                                    <span class="username"> ['.$value['status'].'] '.$value['nama'].'<span class="text-muted pull-right">Nilai: '.round($value['nilai'],2).' / 4</span></span>
+                                    <span class="username">NIP: '.$value['nip'].'</span>
+                                </div>
+                            </div>
+                            ';
 
-                    <table class="table table-hover table-bordered table-condensed">
-                        <tr>
-                            <th>No. </th>
-                            <th>Nama</th>
-                            <th>NIP (Jika organik)</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Nilai</th>
-                        </tr>
-                        <?php
-                            foreach ($list_mitra as $key => $value)
-                            {
-                                echo '<tr>';
-                                    echo '<td>'.($key+1).'</td>';
-                                    echo '<td>'.$value['nama'].'</td>';
-                                    echo '<td>'.$value['nip'].'</td>';
-                                
-                                    echo '<td class="text-center">'.$value['status'].'</td>';
-                                    echo '<td class="text-center">'.round($value['nilai'],2).' / 4</td>';
-                                echo '</tr>';
-                                
-                            }
-                        ?>
-                    </table>
+                            // echo '<tr>';
+                            //     echo '<td>'.($key+1).'</td>';
+                            //     echo '<td>'.$value['nama'].'</td>';
+                            //     echo '<td>'.$value['nip'].'</td>';
+                            
+                            //     echo '<td class="text-center">'.$value['status'].'</td>';
+                            //     echo '<td class="text-center">'.round($value['nilai'],2).' / 4</td>';
+                            // echo '</tr>';
+                            
+                        }
+                    ?>
+                    </div>
+                    
 
 
 
