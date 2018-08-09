@@ -31,7 +31,12 @@
 			  
 			  <div class="box-header with-border">
 				<div class="user-block">
+					<?php
+					if(!Yii::app()->user->isGuest){
+						if(Yii::app()->user->id != 'guess') {
+					?>
 					<span class="description">Nomor Telepon: <?php echo $model->nomor_telepon; ?></span>
+						<?php }} ?>
 					<span class="description"><?php echo ($model->jk == 1) ? "Laki-laki" : "Perempuan"; ?>, Pendidikan Terakhir: <?php echo ($model->pendidikan!=null) ? $model->pendidikanDropDown[$model->pendidikan] : "-" ?></span>
 					<span class="description"><?php echo $model->alamat; ?></span>
 				</div>
