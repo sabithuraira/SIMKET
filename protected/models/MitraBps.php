@@ -72,14 +72,14 @@ class MitraBps extends HelpAr
 	}
 
 	public function getFotoImage(){
-		if($this->is_black==1){
-			return Yii::app()->baseUrl.'/upload/temp/mitra_foto/black.png';
-		}
-		else{
+		// if($this->is_black==1){
+		// 	return Yii::app()->baseUrl.'/upload/temp/mitra_foto/black.png';
+		// }
+		// else{
 			if($this->foto!==''){
 				return Yii::app()->baseUrl.'/upload/temp/mitra_foto/' . $this->foto;
 			}
-		}
+		// }
 		return Yii::app()->theme->baseUrl.'/dist/img/avatar.png';
 	}
 

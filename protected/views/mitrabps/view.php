@@ -72,10 +72,11 @@
 
 			<br/>
 
-
+			<?php if($model->is_black==1){ ?>
 			<div class="alert bg-black">
 				<h4 class="text-center"><i class="icon fa fa-warning"></i> MITRA HITAM</h4>
 			</div>
+			<?php } ?>
 
 			<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">

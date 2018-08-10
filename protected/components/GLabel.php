@@ -6,7 +6,7 @@ class GLabel
     public static $short_title2 = 'RR';
 
     public static $version = '2.0';
-    public static $publisher = 'BPS Kabupaten Lahat';
+    public static $publisher = 'BPS Provinsi Sumatera Selatan';
     public static $year = "2018";   
-    public static $url_footer =  "http://lahatkab.bps.go.id/";
+    public static $url_footer =  "http://sumsel.bps.go.id/";
 }
