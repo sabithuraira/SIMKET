@@ -74,7 +74,7 @@
 
 			<?php if($model->is_black==1){ ?>
 			<div class="alert bg-black">
-				<h4 class="text-center"><i class="icon fa fa-warning"></i> MITRA HITAM</h4>
+				<h4 class="text-center"><i class="icon fa fa-warning"></i> Incompetent Agent</h4>
 			</div>
 			<?php } ?>
 

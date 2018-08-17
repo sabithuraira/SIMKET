@@ -59,10 +59,6 @@
             </ul>
           </li>
 
-
-
-
-
           <li class="dropdown user user-menu">
             <?php 
               if(Yii::app()->user->isGuest){ 

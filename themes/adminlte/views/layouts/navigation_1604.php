@@ -61,12 +61,12 @@
 
             echo '<ul class="treeview-menu">';
               echo '<li><a href="'.Yii::app()->createUrl('mitrabps/dbase').'"><i class="fa fa-user-plus"></i> Daftar Mitra</a></li>';
-              echo '<li><a href="'.Yii::app()->createUrl('mitrabps/recommended').'"><i class="fa fa-thumbs-o-up"></i> Mitra Andalan</a></li>';
+              echo '<li><a href="'.Yii::app()->createUrl('mitrabps/recommended').'"><i class="fa fa-thumbs-o-up"></i> Competent Agent</a></li>';
 
 
               if(!Yii::app()->user->isGuest){
                 if(Yii::app()->user->id != 'guess') {
-                  echo '<li><a href="'.Yii::app()->createUrl('mitrabps/blacklist').'"><i class="fa fa-thumbs-o-down"></i> Mitra Hitam</a></li>';
+                  echo '<li><a href="'.Yii::app()->createUrl('mitrabps/blacklist').'"><i class="fa fa-thumbs-o-down"></i> Incompetent Agent</a></li>';
                 }
               }
             echo '</ul></li>';       
