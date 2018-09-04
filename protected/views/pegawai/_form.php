@@ -32,6 +32,7 @@
 		<?php echo $form->error($model,'nama'); ?>
 	</div>
 
+	<?php if(Yii::app()->user->getLevel()==1){ ?>
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'unit_kerja'); ?>
 		<?php echo $form->dropDownList($model,'unit_kerja',
@@ -39,6 +40,7 @@
 				array('empty'=>'- Pilih Unit Kerja-', 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'unit_kerja'); ?>
 	</div>
+	<?php } ?>
 
 
 	<div class="form-group">

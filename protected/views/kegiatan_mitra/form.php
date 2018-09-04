@@ -4,7 +4,6 @@
 </style>
 
 <div id="form_tag">
-    <?php if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){ ?>
 	<div class="box box-info">
 		<div class="box-body">
             <div class="stepwizard">
@@ -126,16 +125,14 @@
         ?>
         </div>
     <br/>
+
+    <?php if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){ ?>
     <button type="submit" value="Submit" class="btn btn-success btn-block margin-bottom" <?php echo $is_disabled; ?>>Simpan</button>
+    <?php } ?>
     <?php 
         // echo CHtml::submitButton('Simpan', array('class'=>"btn btn-success btn-block margin-bottom"));
         $this->endWidget(); 
-    } else { 
     ?>
-        <div class="page-header">
-            <h1>Anda Tidak Memiliki Autorisasi Pada Halaman Ini</h1>
-        </div>
-    <?php } ?>
 </div>
 
 

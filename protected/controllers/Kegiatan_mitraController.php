@@ -38,13 +38,13 @@ class Kegiatan_mitraController extends Controller
 					'nilai', 'resume', 'get_list_wilayah',
 					'delete_wilayah', 'add_single_wilayah', 'form'),
 				'expression'=> function($user){
-					return $user->getLevel()<=1;
+					return $user->getLevel()<=2;
 				},
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'expression'=> function($user){
-					return $user->getLevel()<=1;
+					return $user->getLevel()<=2;
 				},
 			),
 			array('deny',  // deny all users
@@ -240,7 +240,9 @@ class Kegiatan_mitraController extends Controller
 		if(isset($_POST['KegiatanMitra']))
 		{
 			$model->attributes=$_POST['KegiatanMitra'];
-			$model->kab_id = 22;
+			if(Yii::app()->user->getLevel()==2){
+				$model->kab_id = Yii::app()->user->getUnitKerja();	
+			}
 			$model->induk_id = 15;
 			if($model->save())
 				$this->redirect(array('mitra', 'id'=>$model->id));
@@ -416,6 +418,10 @@ class Kegiatan_mitraController extends Controller
 		if(isset($_POST['KegiatanMitra']))
 		{
 			$model->attributes=$_POST['KegiatanMitra'];
+
+			if(Yii::app()->user->getLevel()==2){
+				$model->kab_id = Yii::app()->user->getUnitKerja();	
+			}
 			if($model->save())
 				$this->redirect(array('mitra','id'=>$model->id));
 		}

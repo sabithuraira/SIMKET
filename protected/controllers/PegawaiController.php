@@ -76,6 +76,10 @@ class PegawaiController extends Controller
 		if(isset($_POST['Pegawai']))
 		{
 			$model->attributes=$_POST['Pegawai'];
+			if(Yii::app()->user->getLevel()==2){
+				$model->unit_kerja = Yii::app()->user->getUnitKerja();	
+			}
+
 			$model->unit_kerja_kab=$_POST['Pegawai']['unit_kerja_kab'];
 
 			$temp_file;
@@ -124,6 +128,9 @@ class PegawaiController extends Controller
 		{
 			$old_foto = $model->foto;
 			$model->attributes=$_POST['Pegawai'];
+			if(Yii::app()->user->getLevel()==2){
+				$model->unit_kerja = Yii::app()->user->getUnitKerja();	
+			}
 			$model->unit_kerja_kab = $_POST['Pegawai']['unit_kerja_kab'];
 
 			$temp_file;

@@ -21,6 +21,7 @@
 	</div>
 
 
+	<?php if(Yii::app()->user->getLevel()==1){ ?>
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'kab_id'); ?>
 		<?php echo $form->dropDownList($model,'kab_id',
@@ -28,6 +29,7 @@
 				array('empty'=>'- Pilih Kabupaten -', 'class'=>"form-control")); ?>
 		<?php echo $form->error($model,'kab_id'); ?>
 	</div>
+	<?php } ?>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'nomor_telepon'); ?>

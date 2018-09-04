@@ -31,12 +31,7 @@
 				<p>Petugas Lapangan</p>
 			</div>
 			<div class="stepwizard-step">
-				<?php if($model->isNewRecord){ ?>
-					<a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-				<?php }else{ 
-						echo CHtml::link("4", array("skoring", 'id'=>$model->id), array('class'=>'btn btn-default btn-circle'));
-					}
-				?>
+				<a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
 				<p>Skoring Petugas</p>
 			</div>
 
@@ -95,6 +90,7 @@
 						</div>
 						-->
 
+						<?php if(Yii::app()->user->getLevel()==1 && $model->isNewRecord){ ?>
 						<div class="form-group">
 							<?php echo $form->labelEx($model,'kab_id'); ?>
 							<?php 
@@ -104,10 +100,36 @@
 							?>
 							<?php echo $form->error($model,'kab_id'); ?>
 						</div> 
+						<?php } ?>
 
+
+						<?php if(!$model->isNewRecord){ 
+							$options_arr = 	array('empty'=>'- Pilih Kabupaten/Kota-', 'class'=>"form-control");
+							if(Yii::app()->user->getLevel()==2)
+								$options_arr = array('empty'=>'- Pilih Kabupaten/Kota-', 'class'=>"form-control", 'disabled'=>'disabled');
+
+						?>
+							<div class="form-group">
+								<?php echo $form->labelEx($model,'kab_id'); ?>
+								<?php 
+									echo $form->dropDownList($model,'kab_id',
+							CHtml::listData(HelpMe::getListKabupaten(), 'id', 'label'), $options_arr); 
+								?>
+								<?php echo $form->error($model,'kab_id'); ?>
+							</div> 
+						<?php } ?>
+
+						<?php if($model->isNewRecord){ ?>
 						<div class="box-footer">
 							<?php echo CHtml::submitButton('Simpan', array('class'=>'btn btn-primary nextBtn btn-lg pull-right')); ?>
 						</div>
+						<?php }else{
+							if(HelpMe::isAuthorizeUnitKerja($model->kab_id)){ ?>
+
+							<div class="box-footer">
+								<?php echo CHtml::submitButton('Simpan', array('class'=>'btn btn-primary nextBtn btn-lg pull-right')); ?>
+							</div>
+						<?php }} ?>
 
 					<?php $this->endWidget(); ?>
 				</div>

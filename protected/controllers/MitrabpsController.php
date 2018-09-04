@@ -108,7 +108,12 @@ class MitrabpsController extends Controller
 		if(isset($_POST['MitraBps']))
 		{
 			$model->attributes=$_POST['MitraBps'];
-			$model->kab_id=$_POST['MitraBps']['kab_id'];
+			if(Yii::app()->user->getLevel()==2){
+				$model->kab_id = Yii::app()->user->getUnitKerja();	
+			}
+			else{
+				$model->kab_id=$_POST['MitraBps']['kab_id'];
+			}
 			$model->riwayat=$_POST['MitraBps']['riwayat'];
 			$model->pendidikan=$_POST['MitraBps']['pendidikan'];
 
@@ -160,7 +165,12 @@ class MitrabpsController extends Controller
 		{
 			$old_foto = $model->foto;
 			$model->attributes=$_POST['MitraBps'];
-			$model->kab_id=$_POST['MitraBps']['kab_id'];
+			if(Yii::app()->user->getLevel()==2){
+				$model->kab_id = Yii::app()->user->getUnitKerja();	
+			}
+			else{
+				$model->kab_id=$_POST['MitraBps']['kab_id'];
+			}
 			$model->riwayat=$_POST['MitraBps']['riwayat'];
 			$model->pendidikan=$_POST['MitraBps']['pendidikan'];
 
