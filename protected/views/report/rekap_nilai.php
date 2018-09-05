@@ -36,10 +36,10 @@
 
                 <?php $this->endWidget(); ?>
             </div>
+            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/download.jpg" style="padding: 5px" width="35"  id='xlsBtn' title="XLS" onclick="tableToExcel();">
 
 
-
-            <table class="table table-hover table-bordered table-condensed">
+            <table id="initabel" class="table table-hover table-bordered table-condensed">
                 <tr>
                     <th rowspan="2">No. </th>
                     <th rowspan="2" class="text-center">Kabupaten/Kota</th>
@@ -63,7 +63,7 @@
                         echo '<tr>';
 
                         echo '<td>'.($key+1).'</td>';
-                        echo '<td>'.CHtml::link($value['code'].$value['name'],array('report/kabupaten','id'=>$value['unitkerja'])).'</td>';
+                        echo '<td>'.CHtml::link('('.$value['code'].') '.$value['name'],array('report/kabupaten','id'=>$value['unitkerja'])).'</td>';
                         echo '<td>'.($value['jumlah_tu']!=0 ? round($value['total_tu']/$value['jumlah_tu'],2) : 0).'</td>';
                         echo '<td>'.($value['jumlah_sosial']!=0 ? round($value['total_sosial']/$value['jumlah_sosial'],2) : 0).'</td>';
                         echo '<td>'.($value['jumlah_produksi']!=0 ? round($value['total_produksi']/$value['jumlah_produksi'],2) : 0).'</td>';
@@ -82,3 +82,37 @@
     </div>
 </div>
 </div>
+
+
+
+<script>
+    var tableToExcel = (function() {   
+        
+        var uri = "data:application/vnd.ms-excel;base64,",
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http:\/\/www.w3.org\/TR\/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}<\/x:Name><x:WorksheetOptions><x:DisplayGridlines\/><\/x:WorksheetOptions><\/x:ExcelWorksheet><\/x:ExcelWorksheets><\/x:ExcelWorkbook><\/xml><![endif]--><\/head><body><table>{table}<\/table><\/body><\/html>',
+            base64 = function(s) {
+                return window.btoa(unescape(encodeURIComponent(s)));
+            },
+            format = function(s, c) {
+                return s.replace(/{(\w+)}/g, function(m, p) {
+                    return c[p];
+                });
+            };
+
+        return function() {
+            table = 'initabel';
+            fileName = 'rekapitulasi.xls';
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {
+                worksheet: fileName || 'Worksheet', 
+                table: table.innerHTML
+            }
+
+            $("<a id='dlink'  style='display:none;'></a>").appendTo("body");
+                document.getElementById("dlink").href = uri + base64(format(template, ctx))
+                document.getElementById("dlink").download = fileName;
+                document.getElementById("dlink").click();
+        }
+
+    })();  
+</script>
