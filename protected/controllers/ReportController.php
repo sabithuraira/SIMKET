@@ -25,13 +25,36 @@ class ReportController extends Controller
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
                 'actions'=>array('index','kabupaten','rekap', 'api_report_kabupaten'),
-                'users'=>array('*'),
+                // 'users'=>array('*'),
             ),
-          
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                'actions'=>array('rekap_nilai'),
+                'expression'=> function($user){
+                    return $user->getLevel()<=2;
+                },
+            ),
             array('deny',  // deny all users
                 'users'=>array('*'),
             ),
         );
+    }
+
+    public function actionRekap_nilai(){
+		$year=date('Y');
+		$month=date('m');
+
+		if(isset($_POST['year']))
+			$year=$_POST['year'];
+
+		if(isset($_POST['month']))
+            $month=$_POST['month'];
+            
+		$data=ReportMe::RekapNilai($year, $month);
+        $this->render('rekap_nilai',array(
+			'data'			=>$data,
+			'year'			=>$year,
+			'month'			=>$month,
+		));
     }
 
     public function actionIndex()
@@ -49,7 +72,7 @@ class ReportController extends Controller
         $this->render('index',array(
             'bidang'=>$bidang,
             'tahun'=>$tahun,
-        ));        
+        )); 
     }
 
     public function actionRekap()
