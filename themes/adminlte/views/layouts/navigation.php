@@ -40,6 +40,7 @@
           </a>
           <ul class="treeview-menu">
           <?php 
+              echo '<li><a href="'.Yii::app()->createUrl('report/rekap_nilai').'"><i class="fa fa fa-circle-o"></i> Rekapitulasi Nilai</a></li>';
               echo '<li><a href="'.Yii::app()->createUrl('site/peringkat').'"><i class="fa fa fa-circle-o"></i> Peringkat Tahunan</a></li>';
               echo '<li><a href="'.Yii::app()->createUrl('site/peringkat_month').'"><i class="fa fa fa-circle-o"></i> Peringkat Bulanan</a></li>';
 
