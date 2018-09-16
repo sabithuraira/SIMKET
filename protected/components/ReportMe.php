@@ -17,10 +17,10 @@ class ReportMe
                 GROUP BY unitkerja
                 ORDER BY point DESC, jumlah_target DESC, jumlah_kegiatan DESC";
 
-        if(Yii::app()->user->getUnitKerja()!=1)
-        {
-            $sql.=" LIMIT 5";
-        }
+        // if(Yii::app()->user->getUnitKerja()!=1)
+        // {
+        //     $sql.=" LIMIT 5";
+        // }
 
         return Yii::app()->db->createCommand($sql)->queryAll();
     }
@@ -94,10 +94,10 @@ class ReportMe
                 GROUP BY unitkerja
                 ORDER BY point DESC, jumlah_target DESC, jumlah_kegiatan DESC";
 
-        if(Yii::app()->user->getUnitKerja()!=1)
-        {
-            $sql.=" LIMIT 5";
-        }
+        // if(Yii::app()->user->getUnitKerja()!=1)
+        // {
+        //     $sql.=" LIMIT 5";
+        // }
 
         return Yii::app()->db->createCommand($sql)->queryAll();
     }

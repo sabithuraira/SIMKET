@@ -30,7 +30,6 @@ $this->breadcrumbs=array(
                         <h4><i class="fa fa-info"></i> Note:</h4>
                         <ul>
                             <li>Point maksimal = 5</li>
-                            <li>Daftar lengkap peringkat kabupaten/kota dapat dilihat oleh admin, pastikan unit kerja anda ada pada daftar di bawah...</li>
                         </ul>
                     </div>
                     <br/>
