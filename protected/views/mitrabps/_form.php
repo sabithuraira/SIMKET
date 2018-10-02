@@ -20,6 +20,13 @@
 		<?php echo $form->error($model,'nama'); ?>
 	</div>
 
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'unit_kerja_id'); ?>
+		<?php echo $form->dropDownList($model,'unit_kerja_id',
+				CHtml::listData(UnitKerjaDaerah::model()->findAll('id NOT IN(1,2)'), 'id', 'nama'),
+				array('empty'=>'- Pilih Seksi/Subbagian -', 'class'=>"form-control")); ?>
+		<?php echo $form->error($model,'unit_kerja_id'); ?>
+	</div>
 
 	<?php if(Yii::app()->user->getLevel()==1){ ?>
 	<div class="form-group">

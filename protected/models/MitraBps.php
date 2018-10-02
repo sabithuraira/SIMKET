@@ -96,6 +96,7 @@ class MitraBps extends HelpAr
 			'alamat' => 'Alamat',
 			'tanggal_lahir' => 'Tanggal Lahir',
 			'jk' => 'Jenis Kelamin',
+			'unit_kerja_id'	=>	'Seksi/Subbagian',
 			'created_time' => 'Created Time',
 			'updated_time' => 'Updated Time',
 			'created_by' => 'Created By',
