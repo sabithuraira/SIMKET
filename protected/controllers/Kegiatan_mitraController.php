@@ -438,11 +438,26 @@ class Kegiatan_mitraController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$msg = '';
+		$model = $this->loadModel($id);
+
+		if(Yii::app()->user->getLevel()==1 || ($model->kab_id==Yii::app()->user->getUnitKerja())){
+			$model->is_active = 0;
+			$model->save(false);
+		}
+		else{
+			$msg = 'Anda tidak berhak menghapus data ini!';
+		}
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		// if(!isset($_GET['ajax']))
+		// 	$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+
+		echo CJSON::encode(array
+		(
+			'satu'=>$msg,
+		));
+		Yii::app()->end();
 	}
 
 	/**
@@ -452,8 +467,11 @@ class Kegiatan_mitraController extends Controller
 	{
 		$model=new KegiatanMitra('search');
 		$model->unsetAttributes();  // clear any default values
+
 		if(isset($_GET['KegiatanMitra']))
 			$model->attributes=$_GET['KegiatanMitra'];
+
+		$model->is_active = 1;
 
 		$this->render('admin',array(
 			'model'=>$model,

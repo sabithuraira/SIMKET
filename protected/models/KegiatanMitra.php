@@ -100,6 +100,7 @@ class KegiatanMitra extends HelpAr
 		$criteria->compare('created_time',$this->created_time,true);
 		$criteria->compare('updated_by',$this->updated_by);
 		$criteria->compare('updated_time',$this->updated_time,true);
+		$criteria->compare('is_active',$this->is_active);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

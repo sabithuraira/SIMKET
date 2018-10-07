@@ -50,27 +50,31 @@
 				'type'		=>'raw',
 				'value'		=> function($data){ return CHtml::link('Progres', array('mitra','id'=>$data->id)); },
 			),
+			array(
+				'type'		=>'raw',
+				'value'		=>function($data) {	return '<button dataid="'.$data->id.'" class="btn btn-danger btn-sm btn-delete toggle-event"> <i class="fa fa-trash"></i> Hapus</button>'; },
+			),
 			// array(
 			// 	'class'=>'CButtonColumn',
-			// 	'template' => '{view} {update}',
+			// 	'template' => '{delete}',
 			// 	'htmlOptions' => array('width' => 20),
 			// 	'buttons'=>array(
-			// 		'update'=>array(
-			// 			'url'=>function($data){
-			// 					return Yii::app()->createUrl("kegiatan_mitra/update", array("id"=>$data->id));
-			// 			},
-			// 		),
-			// 		'view'=>array(
-			// 				'url'=>function($data){
-			// 					return Yii::app()->createUrl("kegiatan_mitra/view", array("id"=>$data->id));
-			// 			},
-			// 		),
-			// 		// 'delete'=>array(
+			// 		// 'update'=>array(
 			// 		// 	'url'=>function($data){
+			// 		// 			return Yii::app()->createUrl("kegiatan_mitra/update", array("id"=>$data->id));
+			// 		// 	},
+			// 		// ),
+			// 		// 'view'=>array(
+			// 		// 		'url'=>function($data){
 			// 		// 			return Yii::app()->createUrl("kegiatan_mitra/view", array("id"=>$data->id));
 			// 		// 	},
-			// 		// 	'label'=>'Hapus',
 			// 		// ),
+			// 		'delete'=>array(
+			// 			'url'=>function($data){
+			// 					return Yii::app()->createUrl("kegiatan_mitra/delete", array("id"=>$data->id));
+			// 			},
+			// 			'label'=>'Hapus',
+			// 		),
 			// 	),
 			// ),
 		),
@@ -78,3 +82,6 @@
 	
 	</div>
 </div>
+
+<?php $baseUrl = Yii::app()->theme->baseUrl; ?>
+<script src="<?php echo $baseUrl;?>/dist/js/vue_page/kegiatan_mitra/admin.js"></script>

@@ -62,3 +62,4 @@ ALTER TABLE `kegiatan_mitra`
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ALTER TABLE `mitra_bps` ADD `unit_kerja_id` INT NULL AFTER `jk`;
+ALTER TABLE `kegiatan_mitra` ADD `is_active` INT NOT NULL DEFAULT '1' AFTER `is_set_form`;
