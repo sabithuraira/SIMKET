@@ -26,13 +26,66 @@
             </a>
           </li> -->
 
+
+          <!-- SIMKET -->
+          <!-- <li class="dropdown notifications-menu">
+            <a href="https://s.bps.go.id/simrapor">
+              SIM RAPOR
+            </a>
+          </li> -->
+
+          <!-- SIM RAPOR -->
           <li class="dropdown notifications-menu">
             <a href="http://s.bps.go.id/simket">
               SIMKET
             </a>
           </li>
 
+          <!-- SIMKET -->
+          <!-- <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-file-pdf-o"></i>
+              File Kerja BPS1600
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <ul class="menu">
+                  <li>
+                    <a href="https://laci.bps.go.id/s/rJvvgHkm2KPvl8s">
+                      <i class="fa fa-file-pdf-o text-aqua"></i> Panduan SIMKET
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://laci.bps.go.id/s/R8Dmm3bIrK1jItI">
+                      <i class="fa fa-file-pdf-o text-green"></i> Panduan SIMKET Modul Anggaran
+                    </a>
+                  </li>
 
+
+                  <li>
+                    <a href="https://s.bps.go.id/file_rb1600">
+                      <i class="fa fa-gears text-aqua"></i> Direktori Dokumen RB
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="http://s.bps.go.id/foto1600">
+                      <i class="fa fa-file-image-o text-green"></i> Direktori Foto Kegiatan
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="http://s.bps.go.id/pedoman1600">
+                      <i class="fa fa-file-pdf-o text-aqua"></i> Direktori Buku Pedoman Kegiatan
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+            </ul>
+          </li> -->
+
+          <!-- SIM RAPOR -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-file-pdf-o"></i>
