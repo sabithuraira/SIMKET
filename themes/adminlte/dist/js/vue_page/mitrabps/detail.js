@@ -20,7 +20,12 @@ $("#btn-delete").click(function(){
             dataType :"json",
             success : function(data)
             {
-                window.location.href=pathname+ "?r=mitrabps/index"
+                if(data.satu.length>0){
+                    alert(data.satu);
+                }
+                else{
+                    window.location.href=pathname+ "?r=mitrabps/index"
+                }
             }
         });
     }

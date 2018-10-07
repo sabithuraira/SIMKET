@@ -213,17 +213,20 @@ class MitrabpsController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		$msg = '';
 		$model = $this->loadModel($id);
-		$model->is_active = 0;
-		$model->save(false);
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		// if(!isset($_GET['ajax']))
-		// 	$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		if(Yii::app()->user->getLevel()==1 || ($model->kab_id==Yii::app()->user->getUnitKerja())){
+			$model->is_active = 0;
+			$model->save(false);
+		}
+		else{
+			$msg = 'Anda tidak berhak menghapus data ini!';
+		}
 
 		echo CJSON::encode(array
 		(
-				'satu'=>'',
+				'satu'=>$msg,
 		));
 		Yii::app()->end();
 	}
