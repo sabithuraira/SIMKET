@@ -26,36 +26,47 @@
             </a>
           </li> -->
 
+          <li class="dropdown notifications-menu">
+            <a href="http://s.bps.go.id/simket">
+              SIMKET
+            </a>
+          </li>
+
 
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-file-pdf-o"></i>
-              Panduan Penggunaan
-              <span class="label label-success">1</span>
+              File Kerja BPS1600
             </a>
             <ul class="dropdown-menu">
-              <li class="header">Panduan SIM RAPOR</li>
               <li>
-                <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
                     <a href="https://laci.bps.go.id/s/yE1z8AP0GZwpDe6">
-                      <i class="fa fa-users text-aqua"></i> Unduh
-                    </a>
-                  </li>
-                  <!-- <li>
-                    <a href="https://laci.bps.go.id/s/R8Dmm3bIrK1jItI">
-                      <i class="fa fa-shopping-cart text-green"></i> MODUL Anggaran
+                      <i class="fa fa-users text-aqua"></i> Panduan SIM Rapor
                     </a>
                   </li>
 
                   <li>
-                    <a href="https://laci.bps.go.id/s/1xRoh37hx6kP3zY">
-                      <i class="fa fa-sticky-note text-yellow"></i> Slide SIMKET pada BIMTEK TU
+                    <a href="https://s.bps.go.id/file_rb1600">
+                      <i class="fa fa-gears text-aqua"></i> Direktori Dokumen RB
                     </a>
-                  </li> -->
+                  </li>
+
+                  <li>
+                    <a href="http://s.bps.go.id/foto1600">
+                      <i class="fa fa-file-image-o text-aqua"></i> Direktori Foto Kegiatan
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="http://s.bps.go.id/pedoman1600">
+                      <i class="fa fa-file-pdf-o text-aqua"></i> Direktori Buku Pedoman Kegiatan
+                    </a>
+                  </li>
                 </ul>
               </li>
+
             </ul>
           </li>
 
