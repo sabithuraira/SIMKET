@@ -174,7 +174,7 @@ class IndukKegiatan extends HelpAr
 
 	// show data for graphic RPD and Realisasi
 	// for all unit kerja or spesific unit kerja
-	public function getByUnitKerja($id){
+	public static function getByUnitKerja($id){
 		$s_where = " ";
 
 		if($id!=0){
@@ -242,7 +242,7 @@ class IndukKegiatan extends HelpAr
 	// show data for tabel RPD and Realisasi
 	// for all unit kerja or spesific unit kerja
 	// and all kegiatan
-	public function getByUnitKerjaAndKegiatan($id){
+	public static function getByUnitKerjaAndKegiatan($id){
 		$s_where = " ";
 
 		if($id!=0){
