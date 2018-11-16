@@ -183,7 +183,12 @@ class HelpMe
     public static function getListKabupaten()
     {
         $result=array();
-        $all=UnitKerja::model()->findAllByAttributes(array('jenis'=>'2'), array('order'=>'code'));
+
+        $criteria = new CDbCriteria;
+        $criteria->compare('jenis','2');
+        $criteria->order = 'code';
+
+        $all=UnitKerja::model()->findAll($criteria);
         foreach ($all as $key => $value) {
             $result[]=array('label'=>$value['name'],'url'=>array('report/kabupaten','id'=>$value['id']), 'id'=>$value['id']);
         }

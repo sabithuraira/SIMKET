@@ -163,7 +163,7 @@ class ReportMe
                     'keyField' => 'id', 
                     'totalItemCount' => $count,
                     'pagination' => array(
-                        'pageSize' => 15,
+                        'pageSize' => $count,
                     ),
                 ));
 
