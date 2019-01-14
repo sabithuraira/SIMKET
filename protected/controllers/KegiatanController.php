@@ -280,11 +280,13 @@ class KegiatanController extends Controller
 				{
 					if(isset($_POST['target_'.$value['id']]) && strlen($_POST['target_'.$value['id']])>0)
 					{
-						$participant=new Participant;
-						$participant->kegiatan=$model->primaryKey;
-						$participant->unitkerja=$value['id'];
-						$participant->target=$_POST['target_'.$value['id']];
-						$participant->save();
+						if($_POST['target_'.$value['id']]!=0  || !is_numeric($_POST['target_'.$value['id']])){
+							$participant=new Participant;
+							$participant->kegiatan=$model->primaryKey;
+							$participant->unitkerja=$value['id'];
+							$participant->target=$_POST['target_'.$value['id']];
+							$participant->save();
+						}
 					}
 				}
 
@@ -324,11 +326,13 @@ class KegiatanController extends Controller
 
 					if($modelpart==null)
 						$modelpart=new Participant;
-
-					$modelpart->kegiatan 	=$id;
-					$modelpart->unitkerja 	=$value['id'];
-					$modelpart->target 		=$_POST['target_'.$value['id']];
-					$modelpart->save();
+						
+					if($_POST['target_'.$value['id']]!=0  || !is_numeric($_POST['target_'.$value['id']])){	
+						$modelpart->kegiatan 	=$id;
+						$modelpart->unitkerja 	=$value['id'];
+						$modelpart->target 		=$_POST['target_'.$value['id']];
+						$modelpart->save();
+					}
 				}
 			}
 			if($model->save())
