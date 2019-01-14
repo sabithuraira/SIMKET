@@ -269,8 +269,10 @@ class Participant extends HelpAr
 	public function getTimelinesSkor($jenis)
 	{
 		$skor=0;
-		if($this->getPercentageProgress($jenis)<100)
+		if($this->getPercentageProgress($jenis)==0)
 			$skor=0;
+		else if($this->getPercentageProgress($jenis)>0 && $this->getPercentageProgress($jenis)<100)
+			$skor=1;
 		else
 		{
 			$sql="SELECT TO_DAYS(tanggal_pengumpulan)-TO_DAYS(end_date) FROM value_kegiatan v, kegiatan k WHERE v.kegiatan={$this['kegiatan']} AND 
@@ -279,61 +281,65 @@ class Participant extends HelpAr
 
 			//difference between end_date and the last time report they work
 			$difference_date=Yii::app()->db->createCommand($sql)->queryScalar();
-			if($difference_date<0)
+			if($difference_date<=0)
 			{
 				$skor=5;
-			}
-			else if($difference_date==0)
-			{
-				$skor=4;
 			}
 			else
 			{
 				$jenis_kegiatan=$this->kegiatan0->jenis_kegiatan;
-				if($jenis_kegiatan==1)
+				if($jenis_kegiatan==1) //bulanan
 				{
-					if($difference_date<=2)
-						$skor=3;
-					else if($difference_date>2 && $difference_date<=5)
+					if($difference_date==1)
+						$skor=4;
+					else if($difference_date==2)
+						$skor=3;	
+					else if($difference_date>=3 && $difference_date<=5)
 						$skor=2;
 					else
 						$skor=1;
 				}
-				else if($jenis_kegiatan==2)
+				else if($jenis_kegiatan==2) //triwulanan
+				{
+					if($difference_date==1)
+						$skor=4;
+					else if($difference_date>=2 && $difference_date<=5)
+						$skor=3;
+					else if($difference_date>=6 && $difference_date<=14)
+						$skor=2;
+					else
+						$skor=1;
+				}
+				else if($jenis_kegiatan==3) //semester
+				{
+					if($difference_date==1)
+						$skor=4;
+					else if($difference_date>=2 && $difference_date<=9)
+						$skor=3;
+					else if($difference_date>=10 && $difference_date<=18)
+						$skor=2;
+					else
+						$skor=1;
+				}
+				else if($jenis_kegiatan==4) //tahunan
+				{
+					if($difference_date==1)
+						$skor=4;
+					else if($difference_date>=2 && $difference_date<=11)
+						$skor=3;
+					else if($difference_date>=12 && $difference_date<=21)
+						$skor=2;
+					else
+						$skor=1;
+				}
+				else if($jenis_kegiatan==5) //subround
 				{
 
-					if($difference_date<=5)
+					if($difference_date==1)
+						$skor=4;
+					else if($difference_date>=2 && $difference_date<=6)
 						$skor=3;
-					else if($difference_date>5 && $difference_date<=14)
-						$skor=2;
-					else
-						$skor=1;
-				}
-				else if($jenis_kegiatan==3)
-				{
-					if($difference_date<=9)
-						$skor=3;
-					else if($difference_date>9 && $difference_date<=18)
-						$skor=2;
-					else
-						$skor=1;
-				}
-				else if($jenis_kegiatan==4)
-				{
-
-					if($difference_date<=11)
-						$skor=3;
-					else if($difference_date>11 && $difference_date<=21)
-						$skor=2;
-					else
-						$skor=1;
-				}
-				else if($jenis_kegiatan==5)
-				{
-
-					if($difference_date<=6)
-						$skor=3;
-					else if($difference_date>6 && $difference_date<=16)
+					else if($difference_date>=7 && $difference_date<=16)
 						$skor=2;
 					else
 						$skor=1;
@@ -357,9 +363,13 @@ class Participant extends HelpAr
 	{
 		$skor=0;
 		$jenis=1;
+
+
 		foreach (Participant::model()->findAll() as $key => $vmodel) {
-			if($vmodel->getPercentageProgress($jenis)<100)
+			if($vmodel->getPercentageProgress($jenis)==0)
 				$skor=0;
+			else if($vmodel->getPercentageProgress($jenis)>0 && $this->getPercentageProgress($jenis)<100)
+				$skor=1;
 			else
 			{
 				$sql="SELECT TO_DAYS(tanggal_pengumpulan)-TO_DAYS(end_date) FROM value_kegiatan v, kegiatan k WHERE v.kegiatan={$vmodel['kegiatan']} AND 
@@ -368,61 +378,65 @@ class Participant extends HelpAr
 
 				//difference between end_date and the last time report they work
 				$difference_date=Yii::app()->db->createCommand($sql)->queryScalar();
-				if($difference_date<0)
+				if($difference_date<=0)
 				{
 					$skor=5;
 				}
-				else if($difference_date==0)
-				{
-					$skor=4;
-				}
 				else
 				{
-					$jenis_kegiatan=$vmodel->kegiatan0->jenis_kegiatan;
-					if($jenis_kegiatan==1)
+					$jenis_kegiatan=$this->kegiatan0->jenis_kegiatan;
+					if($jenis_kegiatan==1) //bulanan
 					{
-						if($difference_date<=2)
-							$skor=3;
-						else if($difference_date>2 && $difference_date<=5)
+						if($difference_date==1)
+							$skor=4;
+						else if($difference_date==2)
+							$skor=3;	
+						else if($difference_date>=3 && $difference_date<=5)
 							$skor=2;
 						else
 							$skor=1;
 					}
-					else if($jenis_kegiatan==2)
+					else if($jenis_kegiatan==2) //triwulanan
+					{
+						if($difference_date==1)
+							$skor=4;
+						else if($difference_date>=2 && $difference_date<=5)
+							$skor=3;
+						else if($difference_date>=6 && $difference_date<=14)
+							$skor=2;
+						else
+							$skor=1;
+					}
+					else if($jenis_kegiatan==3) //semester
+					{
+						if($difference_date==1)
+							$skor=4;
+						else if($difference_date>=2 && $difference_date<=9)
+							$skor=3;
+						else if($difference_date>=10 && $difference_date<=18)
+							$skor=2;
+						else
+							$skor=1;
+					}
+					else if($jenis_kegiatan==4) //tahunan
+					{
+						if($difference_date==1)
+							$skor=4;
+						else if($difference_date>=2 && $difference_date<=11)
+							$skor=3;
+						else if($difference_date>=12 && $difference_date<=21)
+							$skor=2;
+						else
+							$skor=1;
+					}
+					else if($jenis_kegiatan==5) //subround
 					{
 
-						if($difference_date<=5)
-							$skor=3;
-						else if($difference_date>5 && $difference_date<=14)
+						if($difference_date==1)
+							$skor=4;
+						else if($difference_date>=2 && $difference_date<=6)
 							$skor=2;
-						else
-							$skor=1;
-					}
-					else if($jenis_kegiatan==3)
-					{
-						if($difference_date<=9)
-							$skor=3;
-						else if($difference_date>9 && $difference_date<=18)
-							$skor=2;
-						else
-							$skor=1;
-					}
-					else if($jenis_kegiatan==4)
-					{
-
-						if($difference_date<=11)
-							$skor=3;
-						else if($difference_date>11 && $difference_date<=21)
-							$skor=2;
-						else
-							$skor=1;
-					}
-					else if($jenis_kegiatan==5)
-					{
-
-						if($difference_date<=6)
-							$skor=3;
-						else if($difference_date>6 && $difference_date<=16)
+						else if($difference_date>=7 && $difference_date<=16)
 							$skor=2;
 						else
 							$skor=1;

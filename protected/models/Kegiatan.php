@@ -349,9 +349,9 @@ class Kegiatan extends HelpAr
                 if($hasil2==0)
                     $hasil='<span class="text-red">TIDAK DILAPORKAN OPERATOR PROVINSI</span>';
             }
-            else if($hasil<$this->getTarget()){
-                $hasil='<span class="label label-danger">'.$hasil.'</span>';
-            }
+            // else if($hasil<$this->getTarget()){
+            //     $hasil='<span class="label label-danger">'.$hasil.'</span>';
+            // }
         }
         return $hasil;
 	}

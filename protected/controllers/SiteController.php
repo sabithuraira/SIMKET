@@ -90,7 +90,7 @@ class SiteController extends Controller
 		$peringkat1tahun=ReportMe::Peringkat1Tahunan(date('Y'));
 		$peringkat1bulan=ReportMe::Peringkat1Bulanan(date('Y'),date('n'));
 
-		$this->render('index_1604',array(
+		$this->render('index',array(
 			'peringkat1tahun'	=>$peringkat1tahun,
 			'peringkat1bulan'	=>$peringkat1bulan,
 		));

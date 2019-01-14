@@ -1,7 +1,7 @@
 <?php
 
-Yii::import("application.vendor.mpdf.*");
-require_once("mpdf.php");
+// Yii::import("application.vendor.mpdf.*");
+// require_once("mpdf.php");
 class KegiatanController extends Controller
 {
 	/**
@@ -102,15 +102,15 @@ class KegiatanController extends Controller
 
 	public function actionPdfinfo($id)
 	{
- 		$model=Kegiatan::model()->findByPk($id);
+ 		// $model=Kegiatan::model()->findByPk($id);
         
-        $mpdf=new mPDF();
-        $html= $this->renderPartial('pdf_info',array(
-            'model'     =>$model
-            ), true,true);
+        // $mpdf=new mPDF();
+        // $html= $this->renderPartial('pdf_info',array(
+        //     'model'     =>$model
+        //     ), true,true);
 
-        $mpdf->WriteHTML($html);
-        $mpdf->Output('report_'.$id.'.pdf','D');
+        // $mpdf->WriteHTML($html);
+        // $mpdf->Output('report_'.$id.'.pdf','D');
 	}
 
 

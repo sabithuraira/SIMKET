@@ -66,7 +66,7 @@
 <div class="wrapper">
 
   <?php require_once('header.php'); ?>
-  <?php require_once('navigation_1604.php'); ?>
+  <?php require_once('navigation.php'); ?>
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

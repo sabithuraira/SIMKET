@@ -113,8 +113,16 @@
                                             echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
 
                                             echo '<td><h4>'.$model->getPercentageProgress(1).'</h4></td>';
-                                            echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
-                                            echo '<td><h4>'.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
+                                            
+                                            
+                                            // print_r('percentage:'.round($model->getPercentageProgress(1)/$model->getTarget()*100,2));
+                                            // print_r('percentage:'.$model->getPercentageProgress(1));
+                                            // print_r('target:'.$model->getTarget());
+                                            // die();
+                                            
+                                            echo '<td><h4>'.(($model->getTarget()==0 || !is_numeric($model->getPercentageProgress(1))) ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
+                                            
+                                            echo '<td><h4>'.(($model->getTarget()==0 || !is_numeric($model->getPercentageProgress(1))) ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
                                         echo '</tr>';
                                 ?>
                             </table>
