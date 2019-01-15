@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SIM Rapor</title>
+  <title>SIMKET</title>
 	<?php
 	  $baseUrl = Yii::app()->theme->baseUrl; 
 	  // $cs = Yii::app()->getClientScript();
@@ -39,7 +39,7 @@
   <![endif]-->
 </head>
 <!-- <body class="hold-transition skin-blue sidebar-mini"> -->
-<body class="hold-transition skin-yellow sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini">
 
 
 <!-- Bootstrap 3.3.6 -->
