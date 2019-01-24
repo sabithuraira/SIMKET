@@ -285,6 +285,7 @@ class Kegiatan extends HelpAr
 
 	public function getKegiatan2017Plus($id)
 	{
+		// $label_where = '';
 		if($id!=1){
             $listbidang=HelpMe::ListBidangCode($id);
 			$label_where=" AND unit_kerja IN({$listbidang})";
