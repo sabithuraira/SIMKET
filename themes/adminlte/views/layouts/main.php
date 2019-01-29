@@ -78,6 +78,10 @@
         <i class="icon fa fa-check"></i> Hai.. kami mengubah ketentuan scoring pada SIMKET, lebih detail unduh <a href="https://laci.bps.go.id/s/LLyRmmnQBbjrD5y">disini</a>
       </div>
 
+      <div class="alert alert-warning alert-dismissible">
+        <i class="icon fa fa-exclamation"></i> UJI COBA SERVER. <p>Terkait upgrade spesifikasi server BPS Prov SUMSEL, mohon bantuan para pengguna untuk melaporkan ke sabit@bps.go.id apabila menemukan "error" atau "bugs" pada SIMKET & SIMRAPOR. Kami akan berusaha secepat mungkin melakukan perbaikan & penyesuaian,  mohon maaf atas ketidaknyamanannya.</p>
+      </div>
+
         <?php echo $content; ?>
     </section>
   </div>
