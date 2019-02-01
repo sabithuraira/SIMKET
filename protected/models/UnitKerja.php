@@ -131,8 +131,17 @@ class UnitKerja extends HelpAr
 			{
 				if($cur->getTarget()!=0)
 				{
-					if(($cur->getPercentageProgress(1)/$cur->getTarget())<1)
-					{
+					// print_r($cur->getTarget());
+					// print_r($cur->getPercentageProgress(1));
+					// die();
+					if(is_numeric($cur->getPercentageProgress(1))){
+						if(($cur->getPercentageProgress(1)/$cur->getTarget())<1)
+						{
+							$daftar[]=$v['id'];
+						}
+					}
+					else{
+						
 						$daftar[]=$v['id'];
 					}
 				}
