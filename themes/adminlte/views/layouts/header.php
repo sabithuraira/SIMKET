@@ -117,6 +117,13 @@
                       <i class="fa fa-file-pdf-o text-aqua"></i> Direktori Buku Pedoman Kegiatan
                     </a>
                   </li>
+
+                  
+                  <li>
+                    <a href="http://s.bps.go.id/ninja_2019">
+                      <i class="fa fa-file-pdf-o text-aqua"></i> Direktori Seksi Niaga dan Jasa
+                    </a>
+                  </li>
                 </ul>
               </li>
 

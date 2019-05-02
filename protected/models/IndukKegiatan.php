@@ -318,7 +318,7 @@ class IndukKegiatan extends HelpAr
 	}
 
 	// show data for tabel anggaran per unit kerja
-	public function getAllAnggaranPerUnitKerja($id){
+	public static function getAllAnggaranPerUnitKerja($id){
 		$s_where = " ";
 
 		if($id!=0){
