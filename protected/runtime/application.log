@@ -7462,3 +7462,11 @@ Stack trace:
 REQUEST_URI=/simket/index.php?r=site/tagihan
 HTTP_REFERER=http://localhost/simket/
 ---
+2019/06/28 09:07:31 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "jadwal". in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('jadwal')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\simket\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/simket/index.php?r=jadwal
+---

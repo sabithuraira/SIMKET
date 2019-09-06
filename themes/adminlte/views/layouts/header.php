@@ -34,12 +34,45 @@
             </a>
           </li> -->
 
+
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-share-alt"></i>
+              Web BPS
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <ul class="menu">
+                  <li>
+                    <a href="https://bps.go.id/">
+                      <i class="fa fa-users text-aqua"></i> BPS RI
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="https://sumsel.bps.go.id/">
+                      <i class="fa fa-users text-aqua"></i> BPS SUMSEL
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+          
           <!-- SIM RAPOR -->
           <li class="dropdown notifications-menu">
             <a href="http://s.bps.go.id/simket">
               SIMKET
             </a>
           </li>
+          
+          <li class="dropdown notifications-menu">
+            <a href="https://laci.bps.go.id/s/aJ0p5ijDCEzEyuh">
+              CV Mitra
+            </a>
+          </li>
+
 
           <!-- SIMKET -->
           <!-- <li class="dropdown notifications-menu">
