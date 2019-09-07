@@ -138,7 +138,7 @@ class Kegiatan_mitraController extends Controller
 		if(strlen($_POST['mitra_from'])>0){
 			if($_POST['mitra_from']==1){
 				//pegawai
-				$data=Pegawai::model()->findAllByAttributes(array('unit_kerja'=>$id));
+				$data=Pegawai::model()->findAllByAttributes(array('unit_kerja'=>$id, 'is_active'=>1));
 				$data=CHtml::listData($data,'nip','nama');
 			
 				foreach($data as $value=>$name)
@@ -148,7 +148,7 @@ class Kegiatan_mitraController extends Controller
 			}
 			else{
 				//mitra
-				$data=MitraBps::model()->findAllByAttributes(array('kab_id'=>$id));
+				$data=MitraBps::model()->findAllByAttributes(array('kab_id'=>$id, 'is_active'=>1));
 				$data=CHtml::listData($data,'id','nama');
 
 				foreach($data as $value=>$name)
