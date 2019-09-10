@@ -468,8 +468,8 @@ class Kegiatan_mitraController extends Controller
 		$model=new KegiatanMitra('search');
 		$model->unsetAttributes();  // clear any default values
 
-		if(isset($_GET['KegiatanMitra']))
-			$model->attributes=$_GET['KegiatanMitra'];
+		if(isset($_POST['KegiatanMitra']))
+			$model->attributes=$_POST['KegiatanMitra'];
 
 		$model->is_active = 1;
 

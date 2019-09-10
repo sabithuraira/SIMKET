@@ -173,8 +173,11 @@ class Pegawai extends HelpAr
 	public function getNilaiAndJumlah(){
 		$idnya = $this->nip;
 		$sql = "SELECT IFNULL(AVG(nilai),0) as rata, COUNT(id) as jumlah 
-					FROM `kegiatan_mitra_petugas` 
-					WHERE id_mitra='$idnya'";
+					FROM `kegiatan_mitra_petugas` kmp, 
+						kegiatan_mitra km 
+					WHERE kmp.id_mitra='$idnya' AND 
+						km.id = kmp.id_kegiatan
+						AND km.is_active=1";
 
 		
 		$sql_result = Yii::app()->db->createCommand($sql)->queryRow();	
@@ -216,7 +219,8 @@ class Pegawai extends HelpAr
 		$sql = "SELECT kmp.id, km.nama, kmp.status, kmp.nilai 
 					FROM kegiatan_mitra_petugas kmp,
 					kegiatan_mitra km
-					WHERE km.id = kmp.id_kegiatan AND id_mitra = '$idnya'";
+					WHERE km.id = kmp.id_kegiatan AND id_mitra = '$idnya' 
+					AND km.is_active=1";
 
 		return Yii::app()->db->createCommand($sql)->queryAll();
 	}

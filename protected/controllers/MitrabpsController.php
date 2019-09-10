@@ -241,7 +241,7 @@ class MitrabpsController extends Controller
 		if(isset($_GET['MitraBps']))
 			$model->attributes=$_GET['MitraBps'];
 
-		$model->is_active = 1;
+		// $model->is_active = 1;
 
 		if(Yii::app()->user->isKabupaten()==1){
 			$model->kab_id = Yii::app()->user->unitKerja;

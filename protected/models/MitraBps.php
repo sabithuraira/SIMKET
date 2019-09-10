@@ -231,7 +231,7 @@ class MitraBps extends HelpAr
 					FROM `kegiatan_mitra_petugas`  kmp, 
 						kegiatan_mitra km 
 					WHERE kmp.id_mitra='$idnya' AND  
-					km.id = kmp.id_kegiatan AND id_mitra = '$idnya' 
+					km.id = kmp.id_kegiatan
 					 AND km.is_active=1";
 
 		

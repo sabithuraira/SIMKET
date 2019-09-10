@@ -7,7 +7,14 @@
 				<?php echo CHtml::link("<i class='fa fa-list'></i> Daftar Pegawai", array('index'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
 				<?php echo CHtml::link("<i class='fa fa-plus'></i> Tambah", array('create'), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
 				<?php echo CHtml::link("<i class='fa fa-pencil'></i> Perbaharui", array('update', 'id'=>$model->nip), array('class'=>'btn btn-default btn-sm toggle-event')) ?>
-				<?php echo '<button id="btn-delete" dataid="'.$model->nip.'" class="btn btn-danger btn-sm toggle-event"> <i class="fa fa-trash"></i> Hapus</button>'; ?>
+				<?php 
+				
+					echo '<button id="btn-delete" dataid="'.$model->nip.'" class="btn btn-danger btn-sm toggle-event">';
+					if($model->is_active==1)
+						echo '<i class="fa fa-trash"></i> Hapus Pegawai</button>';
+					else
+						echo '<i class="fa fa-trash"></i> Aktifkan Pegawai</button>'; 
+				?>
 			</div>
 		</div>
 
