@@ -67,11 +67,6 @@
             </a>
           </li>
           
-          <li class="dropdown notifications-menu">
-            <a href="https://laci.bps.go.id/s/aJ0p5ijDCEzEyuh">
-              CV Mitra
-            </a>
-          </li>
 
 
           <!-- SIMKET -->
@@ -118,11 +113,10 @@
             </ul>
           </li> -->
 
-          <!-- SIM RAPOR -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-file-pdf-o"></i>
-              File Kerja BPS1600
+              SIM RAPOR
             </a>
             <ul class="dropdown-menu">
               <li>
@@ -134,8 +128,51 @@
                   </li>
 
                   <li>
+                    <a href="https://laci.bps.go.id/s/dljVMI9v4xjvvbK">
+                      <i class="fa fa-users text-aqua"></i> Video Panduan SIM Rapor
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="https://laci.bps.go.id/s/3eUufOKiWgz4nmg">
+                      <i class="fa fa-users text-aqua"></i> Video Testimoni SIM Rapor
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="https://laci.bps.go.id/s/aJ0p5ijDCEzEyuh">
+                      <i class="fa fa-users text-aqua"></i> Download CV Mitra
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+
+
+
+          <!-- SIM RAPOR -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-file-pdf-o"></i>
+              File Kerja BPS1600
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <ul class="menu">
+
+                  <li>
                     <a href="https://s.bps.go.id/file_rb1600">
                       <i class="fa fa-gears text-aqua"></i> Direktori Dokumen RB
+                    </a>
+                  </li>
+                  
+                  
+                  <li>
+                    <a href="http://s.bps.go.id/sp2020_1600">
+                      <i class="fa fa-file-pdf-o text-aqua"></i> File SP2020
                     </a>
                   </li>
 
@@ -162,6 +199,8 @@
 
             </ul>
           </li>
+
+
 
           <li class="dropdown user user-menu">
             <?php 

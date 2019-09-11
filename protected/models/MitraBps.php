@@ -286,9 +286,11 @@ class MitraBps extends HelpAr
 					(SELECT o.description FROM mitra_option o WHERE o.id_pertanyaan=pertanyaan_id AND o.skala=4 LIMIT 1) as opt4
 					
 					FROM `mitra_nilai` m, 
-					mitra_pertanyaan p
+					mitra_pertanyaan p, 
+					kegiatan_mitra km 
 					WHERE 
-						m.pertanyaan_id=p.id  AND mitra_id IN (SELECT id FROM kegiatan_mitra_petugas WHERE id_mitra='$idnya') 
+						m.pertanyaan_id=p.id  AND mitra_id IN (SELECT kmp.id FROM kegiatan_mitra_petugas kmp WHERE id_mitra='$idnya') 
+						AND m.kegiatan_id = km.id AND km.is_active = 1
 					GROUP BY pertanyaan_id";
 
 		return Yii::app()->db->createCommand($sql)->queryAll();		
