@@ -36,7 +36,7 @@
 
 						if(Yii::app()->user->name=='guess'){
 							$ket_nilai = '<div class="pull-right">
-								<span class="username">Mengikuti '.$data->total_menjadi_mitra.' kegiatan</span>
+								<span class="username">Mengikuti '.$data->total_menjadi_mitra.' kegiatan, nilai: '.round($data->nilai_menjadi_mitra,2).' ('.$data->predikatLabel.')</span>
 							</div>';
 						}
 
