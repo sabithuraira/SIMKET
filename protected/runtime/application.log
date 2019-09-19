@@ -7550,3 +7550,21 @@ Stack trace:
 REQUEST_URI=/simket/index.php?r=kegiatan_mitra/index
 in C:\xampp\htdocs\simket\protected\controllers\Kegiatan_mitraController.php (471)
 in C:\xampp\htdocs\simket\index.php (13)
+2019/09/10 13:05:21 [warning] [application] Failed to set unsafe attribute "unit_kerja_id" of "MitraBps".
+in C:\xampp\htdocs\simket\protected\controllers\MitrabpsController.php (168)
+in C:\xampp\htdocs\simket\index.php (13)
+2019/09/10 13:05:21 [warning] [application] Failed to set unsafe attribute "pendidikan" of "MitraBps".
+in C:\xampp\htdocs\simket\protected\controllers\MitrabpsController.php (168)
+in C:\xampp\htdocs\simket\index.php (13)
+2019/09/10 13:05:21 [warning] [application] Failed to set unsafe attribute "riwayat" of "MitraBps".
+in C:\xampp\htdocs\simket\protected\controllers\MitrabpsController.php (168)
+in C:\xampp\htdocs\simket\index.php (13)
+2019/09/10 13:05:29 [warning] [application] Failed to set unsafe attribute "unit_kerja_id" of "MitraBps".
+in C:\xampp\htdocs\simket\protected\controllers\MitrabpsController.php (168)
+in C:\xampp\htdocs\simket\index.php (13)
+2019/09/10 13:05:29 [warning] [application] Failed to set unsafe attribute "pendidikan" of "MitraBps".
+in C:\xampp\htdocs\simket\protected\controllers\MitrabpsController.php (168)
+in C:\xampp\htdocs\simket\index.php (13)
+2019/09/10 13:05:29 [warning] [application] Failed to set unsafe attribute "riwayat" of "MitraBps".
+in C:\xampp\htdocs\simket\protected\controllers\MitrabpsController.php (168)
+in C:\xampp\htdocs\simket\index.php (13)

@@ -49,6 +49,7 @@
 						<img class="img-circle" src="'.$data->fotoImage.'" alt="User Image">
 						<span class="comment">'.$data->jabatan.' - '.$data->unitKerja->name.'</span>
 						<span class="username"><a href="'.Yii::app()->createUrl("pegawai/view", array("id"=>$data->nip)).'">'.$data->nama.'</a></span>
+						<span class="username">'.(($data->is_active==1) ? "  <small class='label bg-green'>AKTIF</small>  "  : "  <small class='label bg-gray'>TIDAK AKTIF</small>  ").'</span>
 						<span class="description">'.$data->nip.'</span>
 					  </div>
 					  '; },

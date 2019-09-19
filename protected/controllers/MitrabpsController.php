@@ -116,6 +116,7 @@ class MitrabpsController extends Controller
 			}
 			$model->riwayat=$_POST['MitraBps']['riwayat'];
 			$model->pendidikan=$_POST['MitraBps']['pendidikan'];
+			$model->unit_kerja_id = $_POST['MitraBps']['unit_kerja_id'];
 
 			$temp_file;
 			$ext_name = array('', '');
@@ -171,8 +172,10 @@ class MitrabpsController extends Controller
 			else{
 				$model->kab_id=$_POST['MitraBps']['kab_id'];
 			}
+
 			$model->riwayat=$_POST['MitraBps']['riwayat'];
 			$model->pendidikan=$_POST['MitraBps']['pendidikan'];
+			$model->unit_kerja_id = $_POST['MitraBps']['unit_kerja_id'];
 
 			$temp_file;
 			$ext_name = array('', '');

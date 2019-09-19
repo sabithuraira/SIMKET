@@ -172,7 +172,7 @@ class Pegawai extends HelpAr
 
 	public function getNilaiAndJumlah(){
 		$idnya = $this->nip;
-		$sql = "SELECT IFNULL(AVG(nilai),0) as rata, COUNT(id) as jumlah 
+		$sql = "SELECT IFNULL(AVG(kmp.nilai),0) as rata, COUNT(kmp.id) as jumlah 
 					FROM `kegiatan_mitra_petugas` kmp, 
 						kegiatan_mitra km 
 					WHERE kmp.id_mitra='$idnya' AND 
@@ -210,6 +210,10 @@ class Pegawai extends HelpAr
 
 		$result['labelRata'] = $label;
 		$result['strata'] = $strata;
+		
+		$this->total_menjadi_mitra = $result['jumlah'];
+		$this->nilai_menjadi_mitra = $result['rata'];
+		$this->save();
 
 		return $result;
 	}
