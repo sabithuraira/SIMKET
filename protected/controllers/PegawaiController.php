@@ -173,7 +173,12 @@ class PegawaiController extends Controller
 	public function actionDelete($id)
 	{
 		$model = $this->loadModel($id);
-		$model->is_active = 0;
+
+		if($model->is_active==1)
+			$model->is_active = 0;
+		else
+			$model->is_active = 1;
+			
 		$model->save(false);
 
 		echo CJSON::encode(array

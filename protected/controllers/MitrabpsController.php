@@ -220,7 +220,10 @@ class MitrabpsController extends Controller
 		$model = $this->loadModel($id);
 
 		if(Yii::app()->user->getLevel()==1 || ($model->kab_id==Yii::app()->user->getUnitKerja())){
-			$model->is_active = 0;
+			if($model->is_active==1)
+				$model->is_active = 0;
+			else
+				$model->is_active = 1;
 			$model->save(false);
 		}
 		else{
