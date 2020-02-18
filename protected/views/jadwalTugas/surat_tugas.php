@@ -90,7 +90,6 @@
 
               <div class="row row-print sub-header">
                 <div class="col-xs-3">Pada Tanggal</div>
-
                 <div class="col-xs-1">:</div>
                 <div class="col-xs-8">
                     <?php echo date("d M Y",strtotime($model->tanggal_mulai)); ?> s.d <?php echo date("d M Y",strtotime($model->tanggal_berakhir)); ?>

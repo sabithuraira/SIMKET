@@ -6,8 +6,6 @@
   <title>SIMKET</title>
 	<?php
 	  $baseUrl = Yii::app()->theme->baseUrl; 
-	  // $cs = Yii::app()->getClientScript();
-	  // Yii::app()->clientScript->registerCoreScript('jquery');
 	?>
   <script src="<?php echo $baseUrl;?>/dist/js/jquery-1.9.1.js"></script>
   <script src="<?php echo $baseUrl;?>/dist/js/vue.js"></script>

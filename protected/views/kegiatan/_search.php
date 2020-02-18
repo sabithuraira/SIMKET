@@ -3,7 +3,7 @@
 
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'action'=>Yii::app()->createUrl($this->route),
-		'method'=>'POST',
+		'method'=>'GET',
 	)); ?>
 
 		<div class="form-group">

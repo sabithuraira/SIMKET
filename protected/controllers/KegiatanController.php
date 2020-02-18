@@ -378,12 +378,12 @@ class KegiatanController extends Controller
 		$model=new Kegiatan('search');
 		$model->unsetAttributes(); 
 
-		if(isset($_POST['tahun']))
-			$tahun=$_POST['tahun'];
+		if(isset($_GET['tahun']))
+			$tahun=$_GET['tahun'];
 
 		$model->filter_tahun = $tahun;
-		if(isset($_POST['Kegiatan']))
-			$model->attributes=$_POST['Kegiatan'];
+		if(isset($_GET['Kegiatan']))
+			$model->attributes=$_GET['Kegiatan'];
 
 		$this->render('admin',array(
 			'model'=>$model,
