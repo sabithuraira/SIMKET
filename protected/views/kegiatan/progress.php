@@ -38,13 +38,12 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_progress">
-                            
                             <center>
                                 <?php if(HelpMe::isKabupaten() || HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
                                     <button type="button" class="btn btn-flat btn-primary" data-toggle="modal" data-target="#myModal2">Tambah Pengiriman</button>
                                 <?php }if(HelpMe::isAuthorizeUnitKerja($model->unit_kerja)){ ?>
                                     <a href="#myModal" role="button" class="btn btn-flat btn-primary" data-toggle="modal">Konfirmasi Penerimaan</a>
-                                    <?php echo CHtml::link('Cetak Surat',array('kegiatan/pdfinfo','id'=>$model->id),array('class'=>'btn btn-flat btn-primary')); ?>
+                                    <button class="btn btn-success" onclick="tableToExcel();">Cetak Excel</button>
                                 <?php } ?>
                             </center>
                             <br/>
@@ -76,7 +75,6 @@
                                     foreach (Participant::model()->PerKegiatan($model->id)->data as $key => $value)
                                     {
                                         echo '<tr>';
-
                                             echo '<td>'.($key+1).'</td>';
                                             echo '<td>'.$value->unitkerja0->name.'</td>';
                                             echo '<td>'.$value->target.'</td>';
@@ -101,6 +99,68 @@
                                             <?php
                                         echo '</tr>';
                                         
+                                    }
+
+                                    echo '<tr>';
+
+                                            echo '<td colspan="2"><h4>Total</h4></td>';
+                                            echo '<td><h4>'.$model->getTarget().'</h4></td>';
+                                        
+                                            echo '<td><h4>'.$model->getPercentageProgress(2).'</h4></td>';
+                                            echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+                                            echo '<td><h4> '.($model->getTarget()==0 ? 0 : round($model->getPercentageProgress(2)/$model->getTarget()*100,2)).'% </h4></td>';
+
+                                            echo '<td><h4>'.$model->getPercentageProgress(1).'</h4></td>';
+                                            
+                                            
+                                            // print_r('percentage:'.round($model->getPercentageProgress(1)/$model->getTarget()*100,2));
+                                            // print_r('percentage:'.$model->getPercentageProgress(1));
+                                            // print_r('target:'.$model->getTarget());
+                                            // die();
+                                            
+                                            echo '<td><h4>'.(($model->getTarget()==0 || !is_numeric($model->getPercentageProgress(1))) ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
+                                            
+                                            echo '<td><h4>'.(($model->getTarget()==0 || !is_numeric($model->getPercentageProgress(1))) ? 0 : round($model->getPercentageProgress(1)/$model->getTarget()*100,2)).' % </h4></td>';
+                                        echo '</tr>';
+                                ?>
+                            </table>
+
+                            
+                            <table id="initabel" style="visibility:hidden" class="table table-hover table-bordered table-condensed">
+                                <tr>
+                                    <th rowspan="2">No. </th>
+                                    <th rowspan="2">Unit Kerja </th>
+                                    <th rowspan="2">Target </th>
+                                    <th colspan="3">Pengiriman</th>
+                                    <th colspan="3">Penerimaan</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>RR (%)</th>
+                                    <th>Skor Ketepatan Waktu (maksimal 5)</th>
+                                    <th></th>
+                                    <th>RR (%)</th>
+                                    <th>Skor Ketepatan Waktu (maksimal 5)</th>
+                                </tr>
+                                <?php
+                                    foreach (Participant::model()->PerKegiatan($model->id)->data as $key => $value)
+                                    {
+                                        echo '<tr>';
+                                            echo '<td>'.($key+1).'</td>';
+                                            echo '<td>'.$value->unitkerja0->name.'</td>';
+                                            echo '<td>'.$value->target.'</td>';
+                                        
+                                            echo '<td>'.$value->getListProgressDelivery().'</td>';
+                                            echo '<td class="'.$value->getClassProgress(2).'">'.$value->getPercentageProgress(2).' % </td>';
+                                            ?>
+                                            <td> <?php echo $value->getTimelinesSkor(2); ?></td>
+                                            <?php
+                                            echo '<td>'.$value->getListProgressAcceptance().'</td>';
+                                            echo '<td class="'.$value->getClassProgress(1).'">'.$value->getPercentageProgress(1).' % </td>';
+                                            ?>
+                                            <td><?php echo $value->getTimelinesSkor(1); ?></td>
+                                            <?php
+                                        echo '</tr>';
                                     }
 
                                     echo '<tr>';
@@ -363,4 +423,33 @@
             }
         );
     });
+    
+    var tableToExcel = (function() {   
+        var uri = "data:application/vnd.ms-excel;base64,",
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http:\/\/www.w3.org\/TR\/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}<\/x:Name><x:WorksheetOptions><x:DisplayGridlines\/><\/x:WorksheetOptions><\/x:ExcelWorksheet><\/x:ExcelWorksheets><\/x:ExcelWorkbook><\/xml><![endif]--><\/head><body><table>{table}<\/table><\/body><\/html>',
+            base64 = function(s) {
+                return window.btoa(unescape(encodeURIComponent(s)));
+            },
+            format = function(s, c) {
+                return s.replace(/{(\w+)}/g, function(m, p) {
+                    return c[p];
+                });
+            };
+
+        return function() {
+            table = 'initabel';
+            fileName = 'bps-file.xls';
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {
+                worksheet: fileName || 'Worksheet', 
+                table: table.innerHTML
+            }
+
+            $("<a id='dlink'  style='display:none;'></a>").appendTo("body");
+                document.getElementById("dlink").href = uri + base64(format(template, ctx))
+                document.getElementById("dlink").download = fileName;
+                document.getElementById("dlink").click();
+        }
+
+    })();  
 </script>

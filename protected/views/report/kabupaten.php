@@ -21,6 +21,7 @@
                                     <input type="hidden" id="id" value="<?php echo $model->id ?>" />
                                     <?php echo CHtml::dropDownList('tahun',$tahun,HelpMe::getYearForFilter()); ?>
                                     <?php echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-flat btn-sm  btn-success')); ?>
+                                    <button class="btn btn-success btn-sm btn-flat" onclick="tableToExcel();">Cetak Excel</button>
                                 </div>
 
                             <?php $this->endWidget(); ?>
@@ -33,7 +34,6 @@
                                 $this->beginWidget('zii.widgets.CPortlet', array(
                                     'title'=>"<i class='icon-check'></i> Performa Perbulan",
                                 ));
-                                
                             ?>
 
                             <div class="chart">
@@ -54,25 +54,14 @@
                             </div>
                         
                         <?php } ?>
-
                     </div>
                     <br/>
 
-
                     <?php
                     $this->widget('ext.groupgridview.GroupGridView', array(
-                        'id' => 'grid1',
+                        'id' => 'initabel',
                         'dataProvider' => $data,
-                        'mergeColumns' => array('bulan'),  
-                        
-                    'summaryText'=>Yii::t('penerjemah','Menampilkan {start}-{end} dari {count} hasil'),
-                                                'pager'=>array(
-                                                    'header'=>Yii::t('penerjemah','Ke halaman : '),
-                                                    'prevPageLabel'=>Yii::t('penerjemah','Sebelumnya'),
-                                                    'nextPageLabel'=>Yii::t('penerjemah','Selanjutnya'),
-                                                    'firstPageLabel'=>Yii::t('penerjemah','Pertama'),
-                                                    'lastPageLabel'=>Yii::t('penerjemah','Terakhir'),
-                                                    ),
+                        'mergeColumns' => array('bulan'),
                         'columns' => array(
                             array(
                                 'header'        =>'Bulan',
@@ -112,3 +101,35 @@
 <script src="<?php echo $baseUrl;?>/plugins/knob/jquery.knob.js"></script>
 <script src="<?php echo $baseUrl;?>/plugins/chartjs/Chart.min.js"></script>
 <script src="<?php echo $baseUrl;?>/dist/js/vue_page/report/kabupaten.js"></script>
+
+<script>
+    var tableToExcel = (function() {   
+        
+        var uri = "data:application/vnd.ms-excel;base64,",
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http:\/\/www.w3.org\/TR\/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}<\/x:Name><x:WorksheetOptions><x:DisplayGridlines\/><\/x:WorksheetOptions><\/x:ExcelWorksheet><\/x:ExcelWorksheets><\/x:ExcelWorkbook><\/xml><![endif]--><\/head><body><table>{table}<\/table><\/body><\/html>',
+            base64 = function(s) {
+                return window.btoa(unescape(encodeURIComponent(s)));
+            },
+            format = function(s, c) {
+                return s.replace(/{(\w+)}/g, function(m, p) {
+                    return c[p];
+                });
+            };
+
+        return function() {
+            table = 'initabel';
+            fileName = 'rekap_kab_kota.xls';
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {
+                worksheet: fileName || 'Worksheet', 
+                table: table.innerHTML
+            }
+
+            $("<a id='dlink'  style='display:none;'></a>").appendTo("body");
+                document.getElementById("dlink").href = uri + base64(format(template, ctx))
+                document.getElementById("dlink").download = fileName;
+                document.getElementById("dlink").click();
+        }
+
+    })();  
+</script>

@@ -112,8 +112,6 @@
     </div>
 </div>
 
-
-
 <script>
     var tableToExcel = (function() {   
         

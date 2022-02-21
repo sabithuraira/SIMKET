@@ -1,7 +1,5 @@
 <div class="row">
-
     <div class="col-md-12">
-
         <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Peringkat Kabupaten/Kota hingga saat ini</h3>
@@ -28,12 +26,14 @@
                             <?php echo CHtml::dropDownList('bidang',$bidang,HelpMe::getBidangBosList()); ?>
                             <?php echo CHtml::dropDownList('tahun',$tahun,HelpMe::getYearForFilter()); ?>
                             <?php echo CHtml::submitButton('Tampilkan',array('class'=>'btn btn-success btn-xs btn-flat')); ?>
+                            <button class="btn btn-success btn-xs btn-flat" onclick="tableToExcel();">Cetak Excel</button>
                         </div>
 
                     <?php $this->endWidget(); ?>
                 </div>
 
-                <table class="table table-hover table-striped table-bordered table-condensed">
+                <table id="initabel" class="table table-hover table-striped table-bordered table-condensed">
+                    <caption><?php echo "Peringkat Bulanan Kab/Kota Tahun ".$tahun; ?></caption>  
                     <tr>
                         <th>No. </th>
                         <th>Kabupaten/Kota</th>
@@ -58,3 +58,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    var tableToExcel = (function() {   
+        
+        var uri = "data:application/vnd.ms-excel;base64,",
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http:\/\/www.w3.org\/TR\/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}<\/x:Name><x:WorksheetOptions><x:DisplayGridlines\/><\/x:WorksheetOptions><\/x:ExcelWorksheet><\/x:ExcelWorksheets><\/x:ExcelWorkbook><\/xml><![endif]--><\/head><body><table>{table}<\/table><\/body><\/html>',
+            base64 = function(s) {
+                return window.btoa(unescape(encodeURIComponent(s)));
+            },
+            format = function(s, c) {
+                return s.replace(/{(\w+)}/g, function(m, p) {
+                    return c[p];
+                });
+            };
+
+        return function() {
+            table = 'initabel';
+            fileName = 'peringkat_tahunan.xls';
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {
+                worksheet: fileName || 'Worksheet', 
+                table: table.innerHTML
+            }
+
+            $("<a id='dlink'  style='display:none;'></a>").appendTo("body");
+                document.getElementById("dlink").href = uri + base64(format(template, ctx))
+                document.getElementById("dlink").download = fileName;
+                document.getElementById("dlink").click();
+        }
+
+    })();  
+</script>
